@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 30px 25px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .contenedor-principal {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        /* Estilos de campos y etiquetas */
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        /* Estilos de secciones */
+        fieldset {
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+
+        legend {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #3498db;
+            padding: 0 10px;
+            background: white;
+            border-radius: 5px;
+            border: 2px solid #ecf0f1;
+        }
+
+        /* Estilos de checkboxes */
+        input[type="checkbox"] {
+            width: auto;
+            margin-right: 5px;
+        }
+
+        .grupo-checkbox {
+            margin: 10px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .grupo-checkbox div {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Botones */
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 20px auto;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contenedor-principal {
+                padding: 15px;
+            }
+            
+            fieldset {
+                padding: 15px;
+            }
+            
+            input, select, textarea {
+                font-size: 14px;
+            }
+        }
+
+        /* Estilos específicos para números */
+        input[type="number"], select {
+            max-width: 200px;
+        }
+
+        /* Espaciado y separadores */
+        br {
+            display: none;
+        }
+
+        .separador {
+            margin: 25px 0;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        /* Estilos específicos para sacramentos */
+        .sacramentos {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .sacramentos legend {
+            color: #3498db;
+            font-size: 1em;
+            padding: 5px 10px;
+            background: #e3f2fd;
+            border: none;
+        }
+
+        /* Estilos específicos para servicios */
+        .servicios {
+            background: #fff8f6;
+            border-left: 4px solid #e74c3c;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .servicios legend {
+            color: #e74c3c;
+            font-size: 1em;
+            padding: 5px 10px;
+            background: #ffebee;
+            border: none;
+        }
+
+        /* Estilos para los títulos de sección */
+        .titulo-seccion {
+            display: block;
+            margin: 15px 0 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+        .contenedor-comentarios {
+        margin: 25px 0;
+        }
+
+        #comentarios {
+        width: calc(100% - 4px); /* Compensa el grosor del borde */
+        max-width: 100%;
+        min-height: 150px;
+        padding: 15px;
+        margin: 10px 0;
+        border: 2px solid #e74c3c;
+        border-radius: 8px;
+        resize: vertical;
+        box-sizing: border-box; /* ¡Importante! */
+        font-family: 'Segoe UI', sans-serif;
+        line-height: 1.6;
+        transition: all 0.3s ease;
+        }
+
+        /* Para dispositivos móviles */
+        @media (max-width: 768px) {
+            #comentarios {
+                padding: 12px;
+                min-height: 120px;
+            }
+            
+            .contenedor-principal {
+                padding: 20px 15px;
+            }
+        }
+
+        #comentarios:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+        }
+
+        .contador-caracteres {
+            display: block;
+            text-align: right;
+            font-size: 0.85em;
+            color: #95a5a6;
+            margin-top: 5px;
+        }
+        /* Campos compactos para integrantes */
+        .campo-integrante {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .campo-integrante label {
+            grid-column: 1;
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        .campo-integrante input {
+            grid-column: 2;
+            width: 100%;
+            max-width: 250px;
+            padding: 8px 12px;
+            margin: 0;
+        }
+
+        /* Ajustes para pantallas pequeñas */
+        @media (max-width: 480px) {
+            .campo-integrante {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+            
+            .campo-integrante label,
+            .campo-integrante input {
+                grid-column: 1;
+                max-width: 100%;
+            }
+        }
+        /* Estilos mejorados para el combobox */
+        .contenedor-estado-civil {
+            position: relative;
+            margin: 15px 0;
+        }
+
+        .estado-civil-select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            background-color: #fff;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            font-size: 1em;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233498db' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 18px;
+        }
+
+        .estado-civil-select:hover {
+            border-color: #2980b9;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+        }
+
+        .estado-civil-select:focus {
+            outline: none;
+            border-color: #e74c3c;
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
+        }
+
+        /* Estilos para las opciones */
+        .estado-civil-select option {
+            padding: 12px;
+            background: #fff;
+            color: #2c3e50;
+            transition: background 0.2s ease;
+        }
+
+        .estado-civil-select option:hover {
+            background: #f8f9fa !important;
+        }
+
+        .estado-civil-select option:checked {
+            background: #3498db;
+            color: white;
+        }
+
+        @media (max-width: 480px) {
+            .estado-civil-select {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+        /* Estilos generales para combobox numéricos */
+        .num-select-container {
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .num-select {
+            width: 100%;
+            padding: 12px 40px 12px 15px;
+            border: 2px solid #2ecc71;
+            border-radius: 8px;
+            background-color: #fff;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            font-size: 1em;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232ecc71' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 18px;
+        }
+
+        .num-select:hover {
+            border-color: #27ae60;
+            box-shadow: 0 0 8px rgba(46, 204, 113, 0.2);
+        }
+
+        .num-select:focus {
+            outline: none;
+            border-color: #e67e22;
+            box-shadow: 0 0 10px rgba(230, 126, 34, 0.3);
+        }
+
+        /* Etiquetas mejoradas */
+        .num-select-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #34495e;
+            font-size: 0.95em;
+        }
+
+        /* Mensaje de error */
+        .num-select-error {
+            color: #e74c3c;
+            font-size: 0.85em;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* Versión móvil */
+        @media (max-width: 480px) {
+            .num-select {
+                padding: 10px 35px 10px 12px;
+                font-size: 14px;
+            }
+        }
+        /* Nuevos estilos para sección superior */
+        .seccion-superior {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px solid #ecf0f1;
+        }
+
+        .grupo-datos-principales {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        /* Mejoras para el combobox de cantidad de familias */
+        #numFamilias {
+            width: 100%;
+            padding: 12px 40px 12px 15px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            background-color: #fff;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            font-size: 1em;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233498db' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 18px;
+        }
+
+        #numFamilias:hover {
+            border-color: #2980b9;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+        }
+
+        #numFamilias:focus {
+            outline: none;
+            border-color: #e74c3c;
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
+        }
+    </style>
+    <script>
+        // Función modificada para generar familias
+        function generarFamilias() {
+            const contenedorFamilias = document.getElementById("familias-container");
+            contenedorFamilias.innerHTML = "";
+            const numFamilias = document.getElementById("numFamilias").value;
+            
+            for (let f = 0; f < numFamilias; f++) {
+                const familiaDiv = document.createElement("div");
+                familiaDiv.innerHTML = `
+                    <fieldset>
+                        <legend>Familia N° ${f + 1}</legend>
+
+                        <div class="num-select-container">
+                            <label class="num-select-label" for="numIntegrantesFamilia${f}">
+                                ¿Cuántos integrantes tiene la familia?
+                            </label>
+                            <select class="num-select" 
+                                    id="numIntegrantesFamilia${f}" 
+                                    name="numIntegrantesFamilia${f}" 
+                                    required
+                                    onchange="validarNumerosFamilia(${f})">
+                                ${generarOpcionesNumericas(1, 20)}
+                            </select>
+                            <div class="num-select-error" id="error-total-${f}"></div>
+                        </div>
+
+                        <div class="num-select-container">
+                            <label class="num-select-label" for="numNoCatolicos${f}">
+                                ¿Cuántos integrantes son no católicos?
+                            </label>
+                            <select class="num-select" 
+                                    id="numNoCatolicos${f}" 
+                                    onchange="validarNumerosFamilia(${f})">
+                                ${generarOpcionesNumericas(0, 20)}
+                            </select>
+                        </div>
+
+                        <div class="num-select-container">
+                            <label class="num-select-label" for="numOtrasReligiones${f}">
+                                ¿Cuántos integrantes son de otras religiones?
+                            </label>
+                            <select class="num-select" 
+                                    id="numOtrasReligiones${f}" 
+                                    onchange="validarNumerosFamilia(${f})">
+                                ${generarOpcionesNumericas(0, 20)}
+                            </select>
+                        </div>
+
+                        <div class="num-select-container">
+                            <label class="num-select-label" for="numIntegrantes${f}">
+                                ¿Cuántos integrantes son cristianos católicos?
+                            </label>
+                            <select class="num-select" 
+                                    id="numIntegrantes${f}" 
+                                    onchange="validarNumerosFamilia(${f}); generarFormularios(${f})">
+                                ${generarOpcionesNumericas(0, 20)}
+                            </select>
+                            <div class="num-select-error" id="error-catolicos-${f}"></div>
+                        </div>
+
+                        <div id="formularios-container${f}"></div>
+                    </fieldset>
+                `;
+                contenedorFamilias.appendChild(familiaDiv);
+            }
+        }
+
+        function generarOpcionesNumericas(min, max) {
+            let options = '';
+            for (let i = min; i <= max; i++) {
+                options += `<option value="${i}">${i}</option>`;
+            }
+            return options;
+        }
+
+        // Validación en tiempo real
+        function validarNumerosFamilia(f) {
+            const total = parseInt(document.getElementById(`numIntegrantesFamilia${f}`).value);
+            const catolicos = parseInt(document.getElementById(`numIntegrantes${f}`).value);
+            const noCatolicos = parseInt(document.getElementById(`numNoCatolicos${f}`).value);
+            const otrasReligiones = parseInt(document.getElementById(`numOtrasReligiones${f}`).value);
+            
+            const suma = catolicos + noCatolicos + otrasReligiones;
+            const errorTotal = document.getElementById(`error-total-${f}`);
+            const errorCatolicos = document.getElementById(`error-catolicos-${f}`);
+
+            if (suma > total) {
+                errorTotal.style.display = 'block';
+                errorTotal.textContent = `¡La suma (${suma}) supera el total de integrantes (${total})!`;
+                errorCatolicos.style.display = 'block';
+                errorCatolicos.textContent = "Ajuste los valores para que coincidan";
+            } else {
+                errorTotal.style.display = 'none';
+                errorCatolicos.style.display = 'none';
+            }
+            
+            // Actualizar máximo permitido en tiempo real
+            document.getElementById(`numNoCatolicos${f}`).max = total;
+            document.getElementById(`numOtrasReligiones${f}`).max = total;
+            document.getElementById(`numIntegrantes${f}`).max = total;
+        }
+
+        function generarFormularios(familiaIndex) {
+            const contenedor = document.getElementById(`formularios-container${familiaIndex}`);
+            contenedor.innerHTML = "";
+            const cantidad = document.getElementById(`numIntegrantes${familiaIndex}`).value;
+            
+            for (let i = 0; i < cantidad; i++) {
+                const formulario = document.createElement("div");
+                formulario.innerHTML = `
+                    <fieldset>
+                        <legend>Integrante N° ${i + 1}</legend>
+                        <div class="campo-integrante">
+                            <label for="nombre${familiaIndex}_${i}">Nombre y Apellidos:</label>
+                            <input type="text" id="nombre${familiaIndex}_${i}" required>
+                        </div>
+                        
+                        <div class="campo-integrante">
+                            <label for="edad${familiaIndex}_${i}">Edad:</label>
+                            <input type="number" id="edad${familiaIndex}_${i}" required>
+                        </div>
+
+                        <div class="campo-integrante">
+                            <label for="telefono${familiaIndex}_${i}">Teléfono:</label>
+                            <input type="tel" id="telefono${familiaIndex}_${i}" required>
+                        </div>
+                        
+                        <div class="campo-integrante">
+                            <label for="estadoCivil${familiaIndex}_${i}">Estado Civil:</label>
+                            <div class="contenedor-estado-civil">
+                                <select class="estado-civil-select" id="estadoCivil${familiaIndex}_${i}">
+                                    <option value="" disabled selected>Seleccione su estado</option>
+                                    <option value="soltero">Soltero/a</option>
+                                    <option value="casado">Casado/a</option>
+                                    <option value="viudo">Viudo/a</option>
+                                    <option value="divorciado">Divorciado/a</option>
+                                    <option value="conviviente">Conviviente</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="sacramentos">
+                            <span class="titulo-seccion">Sacramentos</span>
+                            <div class="grupo-checkbox">
+                                <div class="item-checkbox">
+                                    <input type="checkbox" id="bautizo${familiaIndex}_${i}" value="Bautizo">
+                                    <label for="bautizo${familiaIndex}_${i}">Bautizo</label>
+                                </div>
+                                <div class="item-checkbox">
+                                    <input type="checkbox" id="comunion${familiaIndex}_${i}" value="Primera Comunión">
+                                    <label for="comunion${familiaIndex}_${i}">Primera Comunión</label>
+                                </div>
+                                <div class="item-checkbox">
+                                    <input type="checkbox" id="confirmacion${familiaIndex}_${i}" value="Confirmación">
+                                    <label for="confirmacion${familiaIndex}_${i}">Confirmación</label>
+                                </div>
+                                <div class="item-checkbox">
+                                    <input type="checkbox" id="matrimonioCivil${familiaIndex}_${i}" value="Matrimonio Civil">
+                                    <label for="matrimonioCivil${familiaIndex}_${i}">Matrimonio Civil</label>
+                                </div>
+                                <div class="item-checkbox">
+                                    <input type="checkbox" id="matrimonioReligioso${familiaIndex}_${i}" value="Matrimonio Religioso">
+                                    <label for="matrimonioReligioso${familiaIndex}_${i}">Matrimonio Religioso</label>
+                                </div>
+                            </div>    
+                        </div>
+                        
+                        <div class="servicios">
+                            <span class="titulo-seccion">Servicios</span>
+                            <div class="grupo-checkbox">
+                                <div class="item-checkbox">
+                                    <input type="checkbox" id="confesion${familiaIndex}_${i}" value="Confesión">
+                                    <label for="confesion${familiaIndex}_${i}">Confesión</label>
+                                </div>
+                                <div class="item-checkbox">
+                                    <input type="checkbox" id="uncion${familiaIndex}_${i}" value="Unción de los enfermos">
+                                    <label for="uncion${familiaIndex}_${i}">Unción de los enfermos</label>
+                                </div>
+                                <div class="item-checkbox">
+                                    <input type="checkbox" id="acompanamiento${familiaIndex}_${i}" value="Acompañamiento">
+                                    <label for="acompanamiento${familiaIndex}_${i}">Acompañamiento</label>
+                                </div>
+                                <div class="item-checkbox">
+                                    <input type="checkbox" id="alimentos${familiaIndex}_${i}" value="Necesidad de alimentos">
+                                    <label for="alimentos${familiaIndex}_${i}">Necesidad de alimentos</label>
+                                </div>
+                                <div class="item-checkbox">
+                                    <input type="checkbox" id="medicamentos${familiaIndex}_${i}" value="Necesita medicamentos">
+                                    <label for="medicamentos${familiaIndex}_${i}">Necesita medicamentos</label>
+                                </div>
+                            </div>            
+                        </div>
+                    </fieldset>
+                `;
+                contenedor.appendChild(formulario);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="contenedor-principal">
+        <h1 style="text-align: center; color: #2c3e50; margin-bottom: 30px;">Registro de Familias</h1>
+        
+        <!-- Sección nueva: Datos principales -->
+        <div class="seccion-superior">
+            <div class="grupo-datos-principales">
+                <div class="campo-integrante">
+                    <label for="direccion">Dirección completa:</label>
+                    <input type="text" id="direccion" name="direccion" 
+                           placeholder="Ej: Calle Los Pinos 123, Distrito..." 
+                           required>
+                </div>
+
+                <div class="campo-integrante">
+                    <label for="urbanizacion">Urbanización/AAHH:</label>
+                    <input type="text" id="urbanizacion" name="urbanizacion" 
+                           placeholder="Ej: Residencial Las Flores"
+                           required>
+                </div>
+            </div>
+
+            <div class="num-select-container">
+                <label class="num-select-label" for="numFamilias">
+                    Cantidad de familias en la vivienda:
+                </label>
+                <select id="numFamilias" onchange="generarFamilias()">
+                    <option value="1">1 Familia</option>
+                    <option value="2">2 Familias</option>
+                    <option value="3">3 Familias</option>
+                    <option value="4">4 Familias</option>
+                    <option value="5">5 Familias</option>
+                    <option value="6">6 Familias</option>
+                    <option value="7">7 Familias</option>
+                    <option value="8">8 Familias</option>
+                    <option value="9">9 Familias</option>
+                    <option value="10">10 Familias</option>
+                </select>
+            </div>
+        </div>
+    
+    <div class="separador"></div>
+
+        <div id="familias-container"></div>
+
+        <div class="separador"></div>
+
+        <div class="contenedor-comentarios">
+            <label for="comentarios">Comentarios y observaciones:</label>
+            <textarea id="comentarios" name="comentarios" rows="4"></textarea>
+        </div>
+
+        <button type="button" onclick="enviarFormulario()">Enviar Formulario</button>
+    </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            generarFamilias();
+        });
+
+        // Función básica de ejemplo para manejar el envío
+        function enviarFormulario() {
+            alert('Formulario enviado. ¡Gracias por su participación!');
+            // Aquí podrías agregar lógica para procesar los datos
+            // document.querySelector('form').submit(); // Si usaras un formulario tradicional
+        }
+
+        // Contador de caracteres en tiempo real
+        const comentarios = document.getElementById('comentarios');
+        const contador = document.getElementById('contador');
+
+        comentarios.addEventListener('input', function(e) {
+            const longitud = e.target.value.length;
+            contador.textContent = `${longitud}/2000 caracteres`;
+            
+            if(longitud > 1800) {
+                contador.style.color = '#e74c3c';
+            } else {
+                contador.style.color = '#95a5a6';
+            }
+        });
+    </script>
+</body>
+</html>
