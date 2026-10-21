@@ -15,9 +15,8 @@
 
       <p>
         <label for="seguro">Tipo de seguro</label><br>
-        <select id="seguro" name="seguro" required>
-          <option value="">Seleccione una opción</option>
-          <option value="vida">Seguro de vida</option>
+        <select id="seguro" name="seguro">
+          <option value="vida" selected>Seguro de vida</option>
           <option value="desgravamen">Seguro de desgravamen</option>
           <option value="desgravamen-devolucion">
             Seguro de desgravamen con devolución
@@ -98,8 +97,7 @@
     </fieldset>
 
     <p>
-      <!-- Simular valida los campos; aún no realiza cálculos. -->
-      <button type="submit">Simular</button>
+      <button type="button" onclick="simular()">Simular</button>
       <button type="reset">Limpiar</button>
     </p>
   </form>
@@ -108,6 +106,34 @@
     <h2>Resultados</h2>
     <div id="resultados"></div>
   </section>
+
+  <script>
+    function simular() {
+      const tipoSeguro = document.getElementById("seguro").value;
+
+      // Valores expresados en porcentaje.
+      const primas = {
+        "vida": 3.7000,
+        "desgravamen": 0.1995,
+        "desgravamen-devolucion": 0.2594,
+        "sin-seguro": 0,
+        "endosado": 0
+      };
+
+      const seguroPrima = primas[tipoSeguro];
+      const costoCapital = 0.2871;
+
+      console.log(
+        "Seguro prima:",
+        seguroPrima === 0 ? "0%" : seguroPrima.toFixed(4) + "%"
+      );
+
+      console.log(
+        "Costo capital:",
+        costoCapital.toFixed(4) + "%"
+      );
+    }
+  </script>
 
 </body>
 </html>
