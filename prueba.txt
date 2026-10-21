@@ -25,34 +25,56 @@ function simular() {
 
   const campoPlazo = document.getElementById("plazo");
   const campoFecha = document.getElementById("primer-pago");
+  const campoDesembolso = document.getElementById("desembolso");
 
   if (!campoPlazo.reportValidity()) return;
   if (!campoFecha.reportValidity()) return;
+  if (!campoDesembolso.reportValidity()) return;
 
   const cantidadCuotas = Number(campoPlazo.value);
+
   let fechaPago = new Date(campoFecha.value + "T00:00:00");
 
+  const fechaDesembolso = new Date(
+    campoDesembolso.value + "T00:00:00"
+  );
+
+  // Para la primera cuota, la referencia es el desembolso.
+  let fechaAnterior = fechaDesembolso;
+  let diasAcumulados = 0;
   let filas = "";
 
   for (let cuota = 1; cuota <= cantidadCuotas; cuota++) {
-    // Creamos una copia para calcular la fecha de pago principal.
     const fechaPagoPrincipal = new Date(fechaPago);
 
-    // getDay() devuelve 0 cuando la fecha es domingo.
+    // Si cae domingo, pasa al lunes siguiente.
     if (fechaPagoPrincipal.getDay() === 0) {
       fechaPagoPrincipal.setDate(
         fechaPagoPrincipal.getDate() + 1
       );
     }
 
+    const dias = calcularDias(
+      fechaAnterior,
+      fechaPagoPrincipal
+    );
+
+    diasAcumulados += dias;
+
     filas += `
       <tr>
         <td>${cuota}</td>
         <td>${formatearFecha(fechaPago)}</td>
         <td>${formatearFecha(fechaPagoPrincipal)}</td>
+        <td>${dias}</td>
+        <td>${diasAcumulados}</td>
       </tr>
     `;
 
+    // La siguiente cuota se compara con este pago principal.
+    fechaAnterior = fechaPagoPrincipal;
+
+    // La secuencia mensual parte de la fecha de pago original.
     fechaPago = sumarUnMes(fechaPago);
   }
 
@@ -65,6 +87,8 @@ function simular() {
           <th scope="col">N° de cuotas</th>
           <th scope="col">Fecha de pago</th>
           <th scope="col">Fecha de pago principal</th>
+          <th scope="col">Días</th>
+          <th scope="col">Días acumulados</th>
         </tr>
       </thead>
       <tbody>
@@ -72,4 +96,24 @@ function simular() {
       </tbody>
     </table>
   `;
+}
+
+function calcularDias(fechaInicial, fechaFinal) {
+  // Se usan fechas UTC para contar días calendario
+  // sin que los cambios de horario afecten la diferencia.
+  const inicio = Date.UTC(
+    fechaInicial.getFullYear(),
+    fechaInicial.getMonth(),
+    fechaInicial.getDate()
+  );
+
+  const fin = Date.UTC(
+    fechaFinal.getFullYear(),
+    fechaFinal.getMonth(),
+    fechaFinal.getDate()
+  );
+
+  const milisegundosPorDia = 24 * 60 * 60 * 1000;
+
+  return (fin - inicio) / milisegundosPorDia;
 }
