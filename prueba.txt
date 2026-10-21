@@ -9,7 +9,7 @@
 
   <h1>Simulador de préstamos</h1>
 
-  <form onsubmit="return false;">
+  <form onsubmit="return false;" onreset="limpiarResultados()">
     <fieldset>
       <legend>Datos del préstamo</legend>
 
@@ -44,8 +44,7 @@
                min="1" step="1" required>
       </p>
 
-      <!-- El formato visible de las fechas depende
-           de la configuración regional del navegador. -->
+      <!-- El formato visible del calendario depende del navegador. -->
 
       <p>
         <label for="desembolso">
@@ -132,6 +131,82 @@
         "Costo capital:",
         costoCapital.toFixed(4) + "%"
       );
+
+      const campoPlazo = document.getElementById("plazo");
+      const campoFecha = document.getElementById("primer-pago");
+
+      // Para generar la tabla se necesitan estos dos campos.
+      if (!campoPlazo.reportValidity()) return;
+      if (!campoFecha.reportValidity()) return;
+
+      const cantidadCuotas = Number(campoPlazo.value);
+
+      // Se interpreta como fecha local para evitar cambios de día.
+      let fechaPago = new Date(campoFecha.value + "T00:00:00");
+
+      let filas = "";
+
+      for (let cuota = 1; cuota <= cantidadCuotas; cuota++) {
+        filas += `
+          <tr>
+            <td>${cuota}</td>
+            <td>${formatearFecha(fechaPago)}</td>
+          </tr>
+        `;
+
+        fechaPago = sumarUnMes(fechaPago);
+      }
+
+      document.getElementById("resultados").innerHTML = `
+        <h3>Cálculo de prima</h3>
+
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">N° de cuotas</th>
+              <th scope="col">Fecha de pago</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${filas}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function sumarUnMes(fecha) {
+      const siguienteFecha = new Date(fecha);
+      const diaAnterior = siguienteFecha.getDate();
+
+      // Primero se pasa al día 1 para evitar saltarse febrero.
+      siguienteFecha.setDate(1);
+      siguienteFecha.setMonth(siguienteFecha.getMonth() + 1);
+
+      const ultimoDiaDelMes = new Date(
+        siguienteFecha.getFullYear(),
+        siguienteFecha.getMonth() + 1,
+        0
+      ).getDate();
+
+      // Si el día no existe, se usa el último día del mes.
+      // Ese nuevo día se conserva al calcular la siguiente cuota.
+      siguienteFecha.setDate(
+        Math.min(diaAnterior, ultimoDiaDelMes)
+      );
+
+      return siguienteFecha;
+    }
+
+    function formatearFecha(fecha) {
+      const dia = String(fecha.getDate()).padStart(2, "0");
+      const mes = String(fecha.getMonth() + 1).padStart(2, "0");
+      const anio = String(fecha.getFullYear()).padStart(4, "0");
+
+      return `${dia}/${mes}/${anio}`;
+    }
+
+    function limpiarResultados() {
+      document.getElementById("resultados").innerHTML = "";
     }
   </script>
 
