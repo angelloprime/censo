@@ -1,1 +1,113 @@
-pruebaaaaa
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de préstamos</title>
+</head>
+<body>
+
+  <h1>Simulador de préstamos</h1>
+
+  <form onsubmit="return false;">
+    <fieldset>
+      <legend>Datos del préstamo</legend>
+
+      <p>
+        <label for="seguro">Tipo de seguro</label><br>
+        <select id="seguro" name="seguro" required>
+          <option value="">Seleccione una opción</option>
+          <option value="vida">Seguro de vida</option>
+          <option value="desgravamen">Seguro de desgravamen</option>
+          <option value="desgravamen-devolucion">
+            Seguro de desgravamen con devolución
+          </option>
+          <option value="sin-seguro">Sin seguro</option>
+          <option value="endosado">Endosado</option>
+        </select>
+      </p>
+
+      <p>
+        <label for="tea">TEA (%)</label><br>
+        <input type="number" id="tea" name="tea"
+               min="0" step="0.01" required>
+      </p>
+
+      <p>
+        <label for="importe">Importe</label><br>
+        <input type="number" id="importe" name="importe"
+               min="0.01" step="0.01" required>
+      </p>
+
+      <p>
+        <label for="plazo">Plazo (meses)</label><br>
+        <input type="number" id="plazo" name="plazo"
+               min="1" step="1" required>
+      </p>
+
+      <!-- El formato visible de las fechas depende
+           de la configuración regional del navegador. -->
+
+      <p>
+        <label for="desembolso">
+          Fecha de desembolso (dd/mm/yyyy)
+        </label><br>
+        <input type="date" id="desembolso" name="desembolso"
+               lang="es-PE" required>
+      </p>
+
+      <p>
+        <label for="primer-pago">
+          Fecha del primer pago (dd/mm/yyyy)
+        </label><br>
+        <input type="date" id="primer-pago" name="primer_pago"
+               lang="es-PE" required>
+      </p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Opciones</legend>
+
+      <p>
+        <label>
+          <input type="checkbox" name="seguro_desempleo">
+          Seguro de desempleo
+        </label>
+      </p>
+
+      <p>
+        <label>
+          <input type="checkbox" name="cuota_julio">
+          Cuota julio
+        </label>
+      </p>
+
+      <p>
+        <label>
+          <input type="checkbox" name="cuota_diciembre">
+          Cuota diciembre
+        </label>
+      </p>
+
+      <p>
+        <label>
+          <input type="checkbox" name="estado_cuenta">
+          Envío de estado de cuenta
+        </label>
+      </p>
+    </fieldset>
+
+    <p>
+      <!-- Simular valida los campos; aún no realiza cálculos. -->
+      <button type="submit">Simular</button>
+      <button type="reset">Limpiar</button>
+    </p>
+  </form>
+
+  <section>
+    <h2>Resultados</h2>
+    <div id="resultados"></div>
+  </section>
+
+</body>
+</html>
