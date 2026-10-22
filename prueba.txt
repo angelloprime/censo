@@ -76,14 +76,18 @@
 
       <p>
         <label>
-          <input type="checkbox" name="cuota_julio">
+          <input type="checkbox"
+                 id="cuota-julio"
+                 name="cuota_julio">
           Cuota julio
         </label>
       </p>
 
       <p>
         <label>
-          <input type="checkbox" name="cuota_diciembre">
+          <input type="checkbox"
+                 id="cuota-diciembre"
+                 name="cuota_diciembre">
           Cuota diciembre
         </label>
       </p>
@@ -146,7 +150,6 @@
       if (!campoDesembolso.reportValidity()) return;
 
       // Convertimos los porcentajes a tasas.
-      // Ejemplo: 12% se utiliza como 0.12.
       const tea = Number(campoTea.value) / 100;
       const tasaSeguroPrima = seguroPrima / 100;
 
@@ -160,8 +163,6 @@
         12
       ) - 1;
 
-      // La variable conserva la tasa decimal.
-      // En consola se muestra como porcentaje.
       console.log(
         "TEA total prima:",
         (teaTotalPrima * 100) + "%"
@@ -169,6 +170,12 @@
 
       const importe = Number(campoImporte.value);
       const cantidadCuotas = Number(campoPlazo.value);
+
+      const cuotaJulioActiva =
+        document.getElementById("cuota-julio").checked;
+
+      const cuotaDiciembreActiva =
+        document.getElementById("cuota-diciembre").checked;
 
       let fechaPago = new Date(
         campoFecha.value + "T00:00:00"
@@ -181,6 +188,10 @@
       let fechaAnterior = fechaDesembolso;
       let diasAcumulados = 0;
       let saldoFinalAnterior = 0;
+
+      let sumaFactor1 = 0;
+      let sumaFactor2 = 0;
+
       let filas = "";
 
       for (let cuota = 1; cuota <= cantidadCuotas; cuota++) {
@@ -223,22 +234,42 @@
         // Pendiente de fórmula.
         const cuotaConstante = 0;
 
-        // Amortización:
-        // Cuota constante - Seguro de desgravamen - Interés
+        // Amortización.
         const amortizacion =
           cuotaConstante - segDesgravamen - interes;
 
-        // Saldo final:
-        // Saldo inicial - Amortización
+        // Saldo final.
         const saldoFinal = saldoInicial - amortizacion;
 
-        // Pendientes de fórmula.
-        const factor1 = 0;
-        const factor2 = 0;
+        // Se usa el mes de la fecha de pago principal.
+        // Enero = 1, julio = 7, diciembre = 12.
+        const mesPagoPrincipal =
+          fechaPagoPrincipal.getMonth() + 1;
 
-        // Solo se muestran dos decimales al generar las celdas.
-        // Los cálculos utilizan los valores internos sin
-        // redondearlos manualmente a dos decimales.
+        const cuotaDoble =
+          (mesPagoPrincipal === 7 && cuotaJulioActiva) ||
+          (mesPagoPrincipal === 12 && cuotaDiciembreActiva);
+
+        // Denominador común:
+        // (1 + TEA total prima) ^ (Días acumulados / 360)
+        const denominadorFactor = Math.pow(
+          1 + teaTotalPrima,
+          diasAcumulados / 360
+        );
+
+        // Factor1 usa 2 cuando corresponde cuota doble.
+        // En los demás casos usa 1.
+        const factor1 =
+          (cuotaDoble ? 2 : 1) / denominadorFactor;
+
+        // Factor2 siempre usa 1.
+        const factor2 = 1 / denominadorFactor;
+
+        // Se suman los valores internos completos.
+        sumaFactor1 += factor1;
+        sumaFactor2 += factor2;
+
+        // Dos decimales únicamente para mostrar la tabla.
         filas += `
           <tr>
             <td>${cuota}</td>
@@ -257,12 +288,17 @@
           </tr>
         `;
 
+        // Valores internos para la siguiente fila.
         saldoFinalAnterior = saldoFinal;
         fechaAnterior = fechaPagoPrincipal;
 
         // La secuencia mensual usa la fecha de pago original.
         fechaPago = sumarUnMes(fechaPago);
       }
+
+      // Totales sin redondear a dos decimales.
+      console.log("Suma Factor1:", sumaFactor1);
+      console.log("Suma Factor2:", sumaFactor2);
 
       document.getElementById("resultados").innerHTML = `
         <h3>Cálculo de prima</h3>
