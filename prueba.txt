@@ -44,7 +44,7 @@
 
     <p>
       <label for="tea">TEA %:</label>
-      <input type="number" id="tea" min="0" step="any">
+      <input type="number" id="tea" min="0" step="any" required>
     </p>
 
     <p>
@@ -64,6 +64,21 @@
         <tr>
           <th scope="col">N° de cuota</th>
           <th scope="col">Ciclo de facturación</th>
+          <th scope="col">Vencim</th>
+          <th scope="col">Días</th>
+          <th scope="col">Días acum</th>
+          <th scope="col">Factor</th>
+          <th scope="col">Principal pendiente</th>
+          <th scope="col">Amortización</th>
+          <th scope="col">InterésY</th>
+          <th scope="col">CuotaY</th>
+          <th scope="col">Saldo final</th>
+          <th scope="col">Amortización Principal</th>
+          <th scope="col">Interés</th>
+          <th scope="col">Cuota</th>
+          <th scope="col">Seg de desgravamen</th>
+          <th scope="col">Cuota + Seg desgravamen</th>
+          <th scope="col">Último día de Pago (Referencial)</th>
         </tr>
       </thead>
       <tbody id="cuotas"></tbody>
@@ -75,12 +90,22 @@
     const cuotas = document.getElementById('cuotas');
     const resultados = document.getElementById('resultados');
 
+    const MILISEGUNDOS_POR_DIA = 24 * 60 * 60 * 1000;
+
+    // Se usan fechas UTC para evitar diferencias por cambios de horario.
     function formatearFecha(fecha) {
-      const dia = String(fecha.getDate()).padStart(2, '0');
-      const mes = String(fecha.getMonth() + 1).padStart(2, '0');
-      const anio = String(fecha.getFullYear()).padStart(4, '0');
+      const dia = String(fecha.getUTCDate()).padStart(2, '0');
+      const mes = String(fecha.getUTCMonth() + 1).padStart(2, '0');
+      const anio = String(fecha.getUTCFullYear()).padStart(4, '0');
 
       return `${dia}/${mes}/${anio}`;
+    }
+
+    function diferenciaDias(fechaFinal, fechaInicial) {
+      return (
+        (fechaFinal.getTime() - fechaInicial.getTime()) /
+        MILISEGUNDOS_POR_DIA
+      );
     }
 
     formulario.addEventListener('submit', function (evento) {
@@ -88,28 +113,104 @@
 
       const plazo = document.getElementById('plazo').valueAsNumber;
       const ciclo = Number(document.getElementById('ciclo').value);
+
+      // Ejemplo: 10 ingresado equivale a una tasa de 0.10.
+      const tea = document.getElementById('tea').valueAsNumber / 100;
+
       const fechaIngresada = document.getElementById('fecha').value;
+      const fechaDesembolso = new Date(
+        fechaIngresada + 'T00:00:00Z'
+      );
 
-      const [anio, mes, dia] = fechaIngresada.split('-').map(Number);
+      // Primera facturación:
+      // día menor o igual al ciclo: mismo mes;
+      // día mayor al ciclo: mes siguiente.
+      const mesesAdicionales =
+        fechaDesembolso.getUTCDate() <= ciclo ? 0 : 1;
 
-      // Día menor o igual al ciclo: mismo mes.
-      // Día mayor al ciclo: mes siguiente.
-      const mesesAdicionales = dia <= ciclo ? 0 : 1;
-      const mesPrimeraCuota = mes - 1 + mesesAdicionales;
+      const mesPrimeraCuota =
+        fechaDesembolso.getUTCMonth() + mesesAdicionales;
+
+      let vencimientoAnterior = null;
+      let diasAcumulados = 0;
 
       cuotas.replaceChildren();
 
       for (let numero = 1; numero <= plazo; numero++) {
-        const fechaFacturacion = new Date(
-          anio,
-          mesPrimeraCuota + numero - 1,
-          ciclo
+
+        // Ciclo de facturación.
+        const fechaFacturacion = new Date(fechaDesembolso);
+        fechaFacturacion.setUTCDate(ciclo);
+        fechaFacturacion.setUTCMonth(
+          mesPrimeraCuota + numero - 1
         );
+
+        // Vencim: restar 3 días y luego sumar 1 mes.
+        const fechaVencim = new Date(fechaFacturacion);
+
+        fechaVencim.setUTCDate(
+          fechaVencim.getUTCDate() - 3
+        );
+
+        fechaVencim.setUTCMonth(
+          fechaVencim.getUTCMonth() + 1
+        );
+
+        // Días.
+        let dias;
+
+        if (numero === 1) {
+          dias = diferenciaDias(
+            fechaVencim,
+            fechaDesembolso
+          ) + 1;
+        } else {
+          dias = diferenciaDias(
+            fechaVencim,
+            vencimientoAnterior
+          );
+        }
+
+        // Días acum.
+        diasAcumulados += dias;
+
+        // Factor: 1 / ((1 + TEA) ^ (Días acum / 360)).
+        const factorSinRedondear =
+          1 / Math.pow(1 + tea, diasAcumulados / 360);
+
+        // Redondear el valor numérico a 9 decimales.
+        const factor =
+          Math.round(factorSinRedondear * 1e9) / 1e9;
+
+        const vencimTexto = formatearFecha(fechaVencim);
+
+        const datosFila = [
+          numero,
+          formatearFecha(fechaFacturacion),
+          vencimTexto,
+          dias,
+          diasAcumulados,
+          factor.toFixed(9),
+          '0.00', // Principal pendiente
+          '0.00', // Amortización
+          '0.00', // InterésY
+          '0.00', // CuotaY
+          '0.00', // Saldo final
+          '0.00', // Amortización Principal
+          '0.00', // Interés
+          '0.00', // Cuota
+          '0.00', // Seg de desgravamen
+          '0.00', // Cuota + Seg desgravamen
+          vencimTexto // Último día de Pago (Referencial)
+        ];
 
         const fila = cuotas.insertRow();
 
-        fila.insertCell().textContent = numero;
-        fila.insertCell().textContent = formatearFecha(fechaFacturacion);
+        datosFila.forEach(function (valor) {
+          fila.insertCell().textContent = valor;
+        });
+
+        vencimientoAnterior = fechaVencim;
       }
     });
 
