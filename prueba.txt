@@ -28,67 +28,39 @@
 
       <p>
         <label for="tea">TEA (%)</label><br>
-        <input
-          type="number"
-          id="tea"
-          name="tea"
-          min="0"
-          step="any"
-          required
-        >
+        <input type="number" id="tea" name="tea"
+               min="0" step="any" required>
       </p>
 
       <p>
         <label for="importe">Importe</label><br>
-        <input
-          type="number"
-          id="importe"
-          name="importe"
-          min="0.01"
-          step="0.01"
-          required
-        >
+        <input type="number" id="importe" name="importe"
+               min="0.01" step="0.01" required>
       </p>
 
       <p>
         <label for="plazo">Plazo (meses)</label><br>
-        <input
-          type="number"
-          id="plazo"
-          name="plazo"
-          min="1"
-          step="1"
-          required
-        >
+        <input type="number" id="plazo" name="plazo"
+               min="1" step="1" required>
       </p>
 
-      <!-- El formato visible de los calendarios depende
+      <!-- El formato visible del calendario depende
            de la configuración regional del navegador. -->
 
       <p>
         <label for="desembolso">
           Fecha de desembolso (dd/mm/yyyy)
         </label><br>
-        <input
-          type="date"
-          id="desembolso"
-          name="desembolso"
-          lang="es-PE"
-          required
-        >
+        <input type="date" id="desembolso" name="desembolso"
+               lang="es-PE" required>
       </p>
 
       <p>
         <label for="primer-pago">
           Fecha del primer pago (dd/mm/yyyy)
         </label><br>
-        <input
-          type="date"
-          id="primer-pago"
-          name="primer_pago"
-          lang="es-PE"
-          required
-        >
+        <input type="date" id="primer-pago" name="primer_pago"
+               lang="es-PE" required>
       </p>
     </fieldset>
 
@@ -161,16 +133,22 @@
         costoCapital.toFixed(4) + "%"
       );
 
+      const campoTea = document.getElementById("tea");
       const campoImporte = document.getElementById("importe");
       const campoPlazo = document.getElementById("plazo");
       const campoFecha = document.getElementById("primer-pago");
       const campoDesembolso = document.getElementById("desembolso");
 
-      // Validamos los campos utilizados por los cálculos actuales.
+      if (!campoTea.reportValidity()) return;
       if (!campoImporte.reportValidity()) return;
       if (!campoPlazo.reportValidity()) return;
       if (!campoFecha.reportValidity()) return;
       if (!campoDesembolso.reportValidity()) return;
+
+      // Convertimos los porcentajes a tasas.
+      // Ejemplo: TEA de 12% se utiliza como 0.12.
+      const tea = Number(campoTea.value) / 100;
+      const tasaSeguroPrima = seguroPrima / 100;
 
       const importe = Number(campoImporte.value);
       const cantidadCuotas = Number(campoPlazo.value);
@@ -189,9 +167,9 @@
       let filas = "";
 
       for (let cuota = 1; cuota <= cantidadCuotas; cuota++) {
-        // Copia de la fecha para aplicar el ajuste por domingo.
         const fechaPagoPrincipal = new Date(fechaPago);
 
+        // Si cae domingo, pasa al lunes siguiente.
         if (fechaPagoPrincipal.getDay() === 0) {
           fechaPagoPrincipal.setDate(
             fechaPagoPrincipal.getDate() + 1
@@ -207,27 +185,42 @@
 
         diasAcumulados += dias;
 
-        // Primera cuota: importe ingresado.
+        // Primera cuota: importe.
         // Siguientes: saldo final de la cuota anterior.
         const saldoInicial = cuota === 1
           ? importe
           : saldoFinalAnterior;
 
-        // Valores pendientes de fórmula.
-        const interes = 0;
-        const segDesgravamen = 0;
+        // Interés:
+        // ((1 + TEA) ^ (Días / 360) - 1) * Saldo inicial
+        const interes = (
+          Math.pow(1 + tea, dias / 360) - 1
+        ) * saldoInicial;
+
+        // Seguro de desgravamen:
+        // ((1 + Seguro prima) ^ (Días / 30) - 1) * Saldo inicial
+        const segDesgravamen = (
+          Math.pow(1 + tasaSeguroPrima, dias / 30) - 1
+        ) * saldoInicial;
+
+        // Pendiente de fórmula.
         const cuotaConstante = 0;
 
-        // Se calcula sin redondear los resultados intermedios.
+        // Amortización:
+        // Cuota constante - Seguro de desgravamen - Interés
         const amortizacion =
           cuotaConstante - segDesgravamen - interes;
 
-        // Valores pendientes de fórmula.
-        const saldoFinal = 0;
+        // Saldo final:
+        // Saldo inicial - Amortización
+        const saldoFinal = saldoInicial - amortizacion;
+
+        // Pendientes de fórmula.
         const factor1 = 0;
         const factor2 = 0;
 
-        // toFixed(2) se utiliza únicamente para mostrar la tabla.
+        // Los cálculos conservan la precisión interna de Number.
+        // Solo se muestran dos decimales al generar las celdas.
         filas += `
           <tr>
             <td>${cuota}</td>
@@ -246,11 +239,12 @@
           </tr>
         `;
 
-        // Se conservan los valores internos para la siguiente fila.
+        // Se conserva el saldo final sin redondearlo a dos decimales.
         saldoFinalAnterior = saldoFinal;
+
         fechaAnterior = fechaPagoPrincipal;
 
-        // La secuencia mensual usa la fecha original.
+        // La secuencia mensual parte de la fecha de pago original.
         fechaPago = sumarUnMes(fechaPago);
       }
 
@@ -286,7 +280,7 @@
       const siguienteFecha = new Date(fecha);
       const diaAnterior = siguienteFecha.getDate();
 
-      // Pasamos primero al día 1 para evitar saltos de mes.
+      // Pasamos primero al día 1 para evitar saltarnos un mes.
       siguienteFecha.setDate(1);
       siguienteFecha.setMonth(
         siguienteFecha.getMonth() + 1
@@ -299,7 +293,7 @@
       ).getDate();
 
       // Si el día no existe, usamos el último día del mes.
-      // Ejemplo: 30/01 → 28/02 → 28/03.
+      // Ejemplo: 30/01/2026 → 28/02/2026 → 28/03/2026.
       siguienteFecha.setDate(
         Math.min(diaAnterior, ultimoDiaDelMes)
       );
@@ -324,8 +318,8 @@
     }
 
     function calcularDias(fechaInicial, fechaFinal) {
-      // UTC permite contar días calendario sin que
-      // los cambios de horario alteren la diferencia.
+      // Contamos días calendario usando UTC para evitar
+      // diferencias provocadas por cambios de horario.
       const inicio = Date.UTC(
         fechaInicial.getFullYear(),
         fechaInicial.getMonth(),
