@@ -38,7 +38,7 @@
     </p>
 
     <p>
-      <label for="fecha">Fecha (dd/mm/yyyy):</label>
+      <label for="fecha">Fecha de desembolso (dd/mm/yyyy):</label>
       <input type="date" id="fecha" lang="es-PE" required>
     </p>
 
@@ -92,14 +92,14 @@
 
       const [anio, mes, dia] = fechaIngresada.split('-').map(Number);
 
-      // Esta regla se aplica únicamente para obtener el primer mes.
-      const mesesAdicionales = dia <= ciclo ? 1 : 2;
+      // Día menor o igual al ciclo: mismo mes.
+      // Día mayor al ciclo: mes siguiente.
+      const mesesAdicionales = dia <= ciclo ? 0 : 1;
       const mesPrimeraCuota = mes - 1 + mesesAdicionales;
 
       cuotas.replaceChildren();
 
       for (let numero = 1; numero <= plazo; numero++) {
-        // Cada cuota posterior avanza un mes desde la primera.
         const fechaFacturacion = new Date(
           anio,
           mesPrimeraCuota + numero - 1,
