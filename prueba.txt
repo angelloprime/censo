@@ -146,9 +146,26 @@
       if (!campoDesembolso.reportValidity()) return;
 
       // Convertimos los porcentajes a tasas.
-      // Ejemplo: TEA de 12% se utiliza como 0.12.
+      // Ejemplo: 12% se utiliza como 0.12.
       const tea = Number(campoTea.value) / 100;
       const tasaSeguroPrima = seguroPrima / 100;
+
+      // TEA total prima:
+      // (1 + (((1 + TEA) ^ (30 / 360) - 1) + Seguro prima)) ^ 12 - 1
+      const teaTotalPrima = Math.pow(
+        1 + (
+          (Math.pow(1 + tea, 30 / 360) - 1)
+          + tasaSeguroPrima
+        ),
+        12
+      ) - 1;
+
+      // La variable conserva la tasa decimal.
+      // En consola se muestra como porcentaje.
+      console.log(
+        "TEA total prima:",
+        (teaTotalPrima * 100) + "%"
+      );
 
       const importe = Number(campoImporte.value);
       const cantidadCuotas = Number(campoPlazo.value);
@@ -219,8 +236,9 @@
         const factor1 = 0;
         const factor2 = 0;
 
-        // Los cálculos conservan la precisión interna de Number.
         // Solo se muestran dos decimales al generar las celdas.
+        // Los cálculos utilizan los valores internos sin
+        // redondearlos manualmente a dos decimales.
         filas += `
           <tr>
             <td>${cuota}</td>
@@ -239,12 +257,10 @@
           </tr>
         `;
 
-        // Se conserva el saldo final sin redondearlo a dos decimales.
         saldoFinalAnterior = saldoFinal;
-
         fechaAnterior = fechaPagoPrincipal;
 
-        // La secuencia mensual parte de la fecha de pago original.
+        // La secuencia mensual usa la fecha de pago original.
         fechaPago = sumarUnMes(fechaPago);
       }
 
@@ -292,7 +308,6 @@
         0
       ).getDate();
 
-      // Si el día no existe, usamos el último día del mes.
       // Ejemplo: 30/01/2026 → 28/02/2026 → 28/03/2026.
       siguienteFecha.setDate(
         Math.min(diaAnterior, ultimoDiaDelMes)
@@ -318,8 +333,7 @@
     }
 
     function calcularDias(fechaInicial, fechaFinal) {
-      // Contamos días calendario usando UTC para evitar
-      // diferencias provocadas por cambios de horario.
+      // Contamos días calendario usando UTC.
       const inicio = Date.UTC(
         fechaInicial.getFullYear(),
         fechaInicial.getMonth(),
