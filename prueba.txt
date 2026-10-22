@@ -39,7 +39,7 @@
 
     <p>
       <label for="fecha">Fecha (dd/mm/yyyy):</label>
-      <input type="date" id="fecha" lang="es-PE">
+      <input type="date" id="fecha" lang="es-PE" required>
     </p>
 
     <p>
@@ -63,6 +63,7 @@
       <thead>
         <tr>
           <th scope="col">N° de cuota</th>
+          <th scope="col">Ciclo de facturación</th>
         </tr>
       </thead>
       <tbody id="cuotas"></tbody>
@@ -74,17 +75,41 @@
     const cuotas = document.getElementById('cuotas');
     const resultados = document.getElementById('resultados');
 
+    function formatearFecha(fecha) {
+      const dia = String(fecha.getDate()).padStart(2, '0');
+      const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+      const anio = String(fecha.getFullYear()).padStart(4, '0');
+
+      return `${dia}/${mes}/${anio}`;
+    }
+
     formulario.addEventListener('submit', function (evento) {
       evento.preventDefault();
 
       const plazo = document.getElementById('plazo').valueAsNumber;
+      const ciclo = Number(document.getElementById('ciclo').value);
+      const fechaIngresada = document.getElementById('fecha').value;
+
+      const [anio, mes, dia] = fechaIngresada.split('-').map(Number);
+
+      // Esta regla se aplica únicamente para obtener el primer mes.
+      const mesesAdicionales = dia <= ciclo ? 1 : 2;
+      const mesPrimeraCuota = mes - 1 + mesesAdicionales;
 
       cuotas.replaceChildren();
 
       for (let numero = 1; numero <= plazo; numero++) {
+        // Cada cuota posterior avanza un mes desde la primera.
+        const fechaFacturacion = new Date(
+          anio,
+          mesPrimeraCuota + numero - 1,
+          ciclo
+        );
+
         const fila = cuotas.insertRow();
-        const celda = fila.insertCell();
-        celda.textContent = numero;
+
+        fila.insertCell().textContent = numero;
+        fila.insertCell().textContent = formatearFecha(fechaFacturacion);
       }
     });
 
