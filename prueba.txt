@@ -151,10 +151,17 @@
       if (!campoFecha.reportValidity()) return;
       if (!campoDesembolso.reportValidity()) return;
 
-      // Convertimos los porcentajes a tasas.
+      // Porcentajes convertidos a tasas.
       const tea = Number(campoTea.value) / 100;
       const tasaSeguroPrima = seguroPrima / 100;
       const tasaCostoCapital = costoCapital / 100;
+
+      const importe = Number(campoImporte.value);
+
+      const tasaSeguroDesempleo =
+        document.getElementById("seguro-desempleo").checked
+          ? 0.04
+          : 0;
 
       // TEA total prima.
       const teaTotalPrima = Math.pow(
@@ -170,182 +177,50 @@
         (teaTotalPrima * 100) + "%"
       );
 
-      const importe = Number(campoImporte.value);
-      const cantidadCuotas = Number(campoPlazo.value);
+      const datos = {
+        importe,
+        tea,
+        tasaSeguroPrima,
+        tasaCostoCapital,
+        teaTotalPrima,
 
-      const cuotaJulioActiva =
-        document.getElementById("cuota-julio").checked;
+        cantidadCuotas: Number(campoPlazo.value),
 
-      const cuotaDiciembreActiva =
-        document.getElementById("cuota-diciembre").checked;
+        fechaDesembolso: campoDesembolso.value,
+        fechaPrimerPago: campoFecha.value,
 
-      // Seguro de desempleo: 4% si está marcado; de lo contrario, 0%.
-      const tasaSeguroDesempleo =
-        document.getElementById("seguro-desempleo").checked
-          ? 0.04
-          : 0;
+        cuotaJulioActiva:
+          document.getElementById("cuota-julio").checked,
 
-      const fechaDesembolso = new Date(
-        campoDesembolso.value + "T00:00:00"
-      );
+        cuotaDiciembreActiva:
+          document.getElementById("cuota-diciembre").checked
+      };
 
-      let fechaPago = new Date(
-        campoFecha.value + "T00:00:00"
-      );
+      // Cada función genera sus propias filas y cálculos.
+      const resultadoPrima = calcularPrima(datos);
+      const resultadoPrincipal = calcularPrincipal(datos);
 
-      let fechaAnterior = fechaDesembolso;
-      let diasAcumulados = 0;
+      // Los resultados del seguro se obtienen del cálculo de prima.
+      const VPN = resultadoPrima.VPN;
 
-      let sumaFactor1 = 0;
-      let sumaFactor2 = 0;
-
-      const cronograma = [];
-
-      // PRIMER RECORRIDO:
-      // Fechas, días y factores.
-      for (let cuota = 1; cuota <= cantidadCuotas; cuota++) {
-        const fechaPagoPrincipal = new Date(fechaPago);
-
-        // Si cae domingo, pasa al lunes siguiente.
-        if (fechaPagoPrincipal.getDay() === 0) {
-          fechaPagoPrincipal.setDate(
-            fechaPagoPrincipal.getDate() + 1
-          );
-        }
-
-        const dias = calcularDias(
-          fechaAnterior,
-          fechaPagoPrincipal
-        );
-
-        diasAcumulados += dias;
-
-        const mesPagoPrincipal =
-          fechaPagoPrincipal.getMonth() + 1;
-
-        const cuotaDoble =
-          (mesPagoPrincipal === 7 && cuotaJulioActiva) ||
-          (mesPagoPrincipal === 12 && cuotaDiciembreActiva);
-
-        const denominadorFactor = Math.pow(
-          1 + teaTotalPrima,
-          diasAcumulados / 360
-        );
-
-        const factor1 =
-          (cuotaDoble ? 2 : 1) / denominadorFactor;
-
-        const factor2 = 1 / denominadorFactor;
-
-        sumaFactor1 += factor1;
-        sumaFactor2 += factor2;
-
-        cronograma.push({
-          numero: cuota,
-          fechaPago: new Date(fechaPago),
-          fechaPagoPrincipal,
-          dias,
-          diasAcumulados,
-          cuotaDoble,
-          factor1,
-          factor2
-        });
-
-        fechaAnterior = fechaPagoPrincipal;
-        fechaPago = sumarUnMes(fechaPago);
-      }
-
-      // Cuota prima.
-      const cuotaPrima = importe / sumaFactor1;
-
-      console.log("Suma Factor1:", sumaFactor1);
-      console.log("Suma Factor2:", sumaFactor2);
-      console.log("Cuota prima:", cuotaPrima);
-
-      let saldoInicial = importe;
-      let filas = "";
-      let VPN = 0;
-
-      // SEGUNDO RECORRIDO:
-      // Cuotas, saldos y VPN.
-      for (const fila of cronograma) {
-        // Interés.
-        const interes = (
-          Math.pow(1 + tea, fila.dias / 360) - 1
-        ) * saldoInicial;
-
-        // Seguro de desgravamen.
-        const segDesgravamen = (
-          Math.pow(1 + tasaSeguroPrima, fila.dias / 30) - 1
-        ) * saldoInicial;
-
-        // Cuota normal.
-        let cuotaConstante = cuotaPrima;
-
-        // Cuota doble según el mes y los checks.
-        if (fila.cuotaDoble) {
-          cuotaConstante = 2 * cuotaPrima;
-        }
-
-        // La última cuota tiene prioridad.
-        if (fila.numero === cantidadCuotas) {
-          cuotaConstante =
-            saldoInicial + interes + segDesgravamen;
-        }
-
-        // Amortización.
-        const amortizacion =
-          cuotaConstante - segDesgravamen - interes;
-
-        // Saldo final.
-        const saldoFinal = saldoInicial - amortizacion;
-
-        // Equivalente a VNA(costo capital; seguros).
-        // La primera fila se descuenta un período.
-        VPN += segDesgravamen / Math.pow(
-          1 + tasaCostoCapital,
-          fila.numero
-        );
-
-        // Dos decimales únicamente para mostrar la tabla.
-        filas += `
-          <tr>
-            <td>${fila.numero}</td>
-            <td>${formatearFecha(fila.fechaPago)}</td>
-            <td>${formatearFecha(fila.fechaPagoPrincipal)}</td>
-            <td>${fila.dias}</td>
-            <td>${fila.diasAcumulados}</td>
-            <td>${saldoInicial.toFixed(2)}</td>
-            <td>${amortizacion.toFixed(2)}</td>
-            <td>${interes.toFixed(2)}</td>
-            <td>${segDesgravamen.toFixed(2)}</td>
-            <td>${cuotaConstante.toFixed(2)}</td>
-            <td>${saldoFinal.toFixed(2)}</td>
-            <td>${fila.factor1.toFixed(2)}</td>
-            <td>${fila.factor2.toFixed(2)}</td>
-          </tr>
-        `;
-
-        // Se conserva el saldo final sin redondearlo.
-        saldoInicial = saldoFinal;
-      }
-
-      // % Prima se conserva como proporción, sin redondear.
       const porcentajePrima = VPN / importe;
 
-      // Seguro = % Prima * Importe.
+      // Se utiliza el porcentaje interno completo.
       const seguro = porcentajePrima * importe;
 
-      // Monto total a financiar:
-      // (Importe + Seguro)
-      // + (Importe + Seguro) * Seguro de desempleo.
       const baseFinanciamiento = importe + seguro;
 
-      const montoTotalAFinanciar =
-        baseFinanciamiento
-        + baseFinanciamiento * tasaSeguroDesempleo;
+      // Seguro de desempleo: 4% o 0%.
+      const montoSeguroDesempleo =
+        baseFinanciamiento * tasaSeguroDesempleo;
 
-      // Consola: valores internos sin limitar los decimales.
+      const montoTotalAFinanciar =
+        baseFinanciamiento + montoSeguroDesempleo;
+
+      // Consola: valores internos sin redondear a dos decimales.
+      console.log("Suma Factor1:", resultadoPrima.sumaFactor1);
+      console.log("Suma Factor2:", resultadoPrima.sumaFactor2);
+      console.log("Cuota prima:", resultadoPrima.cuotaPrima);
       console.log("VPN:", VPN);
 
       console.log(
@@ -354,6 +229,11 @@
       );
 
       console.log("Seguro:", seguro);
+
+      console.log(
+        "Seguro de desempleo:",
+        montoSeguroDesempleo
+      );
 
       console.log(
         "Monto total a financiar:",
@@ -372,13 +252,265 @@
         </p>
 
         <p>
+          <strong>Seguro de desempleo:</strong>
+          ${montoSeguroDesempleo.toFixed(2)}
+        </p>
+
+        <p>
           <strong>Monto total a financiar:</strong>
           ${montoTotalAFinanciar.toFixed(2)}
         </p>
 
-        <h3>Cálculo de prima</h3>
+        ${crearTabla(
+          "Cálculo principal",
+          "tabla-principal",
+          resultadoPrincipal.filas
+        )}
 
-        <table>
+        ${crearTabla(
+          "Cálculo de prima",
+          "tabla-prima",
+          resultadoPrima.filas
+        )}
+      `;
+    }
+
+    // CÁLCULO DE PRIMA.
+    function calcularPrima(datos) {
+      const filas = crearCalendario(datos);
+
+      let sumaFactor1 = 0;
+      let sumaFactor2 = 0;
+
+      // Factores de la tabla de prima.
+      for (const fila of filas) {
+        const mes = fila.fechaPagoPrincipal.getMonth() + 1;
+
+        fila.cuotaDoble =
+          (mes === 7 && datos.cuotaJulioActiva) ||
+          (mes === 12 && datos.cuotaDiciembreActiva);
+
+        const denominador = Math.pow(
+          1 + datos.teaTotalPrima,
+          fila.diasAcumulados / 360
+        );
+
+        fila.factor1 =
+          (fila.cuotaDoble ? 2 : 1) / denominador;
+
+        fila.factor2 = 1 / denominador;
+
+        sumaFactor1 += fila.factor1;
+        sumaFactor2 += fila.factor2;
+      }
+
+      const cuotaPrima = datos.importe / sumaFactor1;
+
+      let saldoInicial = datos.importe;
+      let VPN = 0;
+
+      // Importes de la tabla de prima.
+      for (const fila of filas) {
+        fila.saldoInicial = saldoInicial;
+
+        fila.interes = (
+          Math.pow(1 + datos.tea, fila.dias / 360) - 1
+        ) * saldoInicial;
+
+        fila.segDesgravamen = (
+          Math.pow(
+            1 + datos.tasaSeguroPrima,
+            fila.dias / 30
+          ) - 1
+        ) * saldoInicial;
+
+        fila.cuotaConstante =
+          cuotaPrima * (fila.cuotaDoble ? 2 : 1);
+
+        // La última cuota tiene prioridad.
+        if (fila.numero === datos.cantidadCuotas) {
+          fila.cuotaConstante =
+            saldoInicial + fila.interes + fila.segDesgravamen;
+        }
+
+        fila.amortizacion =
+          fila.cuotaConstante
+          - fila.segDesgravamen
+          - fila.interes;
+
+        fila.saldoFinal =
+          saldoInicial - fila.amortizacion;
+
+        // Equivalente a VNA(costo capital; seguros).
+        VPN += fila.segDesgravamen / Math.pow(
+          1 + datos.tasaCostoCapital,
+          fila.numero
+        );
+
+        saldoInicial = fila.saldoFinal;
+      }
+
+      return {
+        filas,
+        sumaFactor1,
+        sumaFactor2,
+        cuotaPrima,
+        VPN
+      };
+    }
+
+    // CÁLCULO PRINCIPAL.
+    // Tiene sus propias filas y fórmulas.
+    // Por ahora utiliza el importe original y las mismas reglas.
+    function calcularPrincipal(datos) {
+      const filas = crearCalendario(datos);
+
+      let sumaFactor1 = 0;
+      let sumaFactor2 = 0;
+
+      // Factores de la tabla principal.
+      for (const fila of filas) {
+        const mes = fila.fechaPagoPrincipal.getMonth() + 1;
+
+        fila.cuotaDoble =
+          (mes === 7 && datos.cuotaJulioActiva) ||
+          (mes === 12 && datos.cuotaDiciembreActiva);
+
+        const denominador = Math.pow(
+          1 + datos.teaTotalPrima,
+          fila.diasAcumulados / 360
+        );
+
+        fila.factor1 =
+          (fila.cuotaDoble ? 2 : 1) / denominador;
+
+        fila.factor2 = 1 / denominador;
+
+        sumaFactor1 += fila.factor1;
+        sumaFactor2 += fila.factor2;
+      }
+
+      const cuotaPrincipal = datos.importe / sumaFactor1;
+
+      let saldoInicial = datos.importe;
+
+      // Importes de la tabla principal.
+      for (const fila of filas) {
+        fila.saldoInicial = saldoInicial;
+
+        fila.interes = (
+          Math.pow(1 + datos.tea, fila.dias / 360) - 1
+        ) * saldoInicial;
+
+        fila.segDesgravamen = (
+          Math.pow(
+            1 + datos.tasaSeguroPrima,
+            fila.dias / 30
+          ) - 1
+        ) * saldoInicial;
+
+        fila.cuotaConstante =
+          cuotaPrincipal * (fila.cuotaDoble ? 2 : 1);
+
+        // La última cuota tiene prioridad.
+        if (fila.numero === datos.cantidadCuotas) {
+          fila.cuotaConstante =
+            saldoInicial + fila.interes + fila.segDesgravamen;
+        }
+
+        fila.amortizacion =
+          fila.cuotaConstante
+          - fila.segDesgravamen
+          - fila.interes;
+
+        fila.saldoFinal =
+          saldoInicial - fila.amortizacion;
+
+        saldoInicial = fila.saldoFinal;
+      }
+
+      return {
+        filas,
+        sumaFactor1,
+        sumaFactor2,
+        cuotaPrincipal
+      };
+    }
+
+    // Cada llamada crea un calendario nuevo.
+    function crearCalendario(datos) {
+      const filas = [];
+
+      let fechaPago = new Date(
+        datos.fechaPrimerPago + "T00:00:00"
+      );
+
+      let fechaAnterior = new Date(
+        datos.fechaDesembolso + "T00:00:00"
+      );
+
+      let diasAcumulados = 0;
+
+      for (
+        let numero = 1;
+        numero <= datos.cantidadCuotas;
+        numero++
+      ) {
+        const fechaPagoPrincipal = new Date(fechaPago);
+
+        // Si cae domingo, pasa al lunes siguiente.
+        if (fechaPagoPrincipal.getDay() === 0) {
+          fechaPagoPrincipal.setDate(
+            fechaPagoPrincipal.getDate() + 1
+          );
+        }
+
+        const dias = calcularDias(
+          fechaAnterior,
+          fechaPagoPrincipal
+        );
+
+        diasAcumulados += dias;
+
+        filas.push({
+          numero,
+          fechaPago: new Date(fechaPago),
+          fechaPagoPrincipal,
+          dias,
+          diasAcumulados
+        });
+
+        fechaAnterior = fechaPagoPrincipal;
+        fechaPago = sumarUnMes(fechaPago);
+      }
+
+      return filas;
+    }
+
+    // Solo genera el HTML; no modifica los valores calculados.
+    function crearTabla(titulo, idTabla, filas) {
+      const contenido = filas.map(fila => `
+        <tr>
+          <td>${fila.numero}</td>
+          <td>${formatearFecha(fila.fechaPago)}</td>
+          <td>${formatearFecha(fila.fechaPagoPrincipal)}</td>
+          <td>${fila.dias}</td>
+          <td>${fila.diasAcumulados}</td>
+          <td>${fila.saldoInicial.toFixed(2)}</td>
+          <td>${fila.amortizacion.toFixed(2)}</td>
+          <td>${fila.interes.toFixed(2)}</td>
+          <td>${fila.segDesgravamen.toFixed(2)}</td>
+          <td>${fila.cuotaConstante.toFixed(2)}</td>
+          <td>${fila.saldoFinal.toFixed(2)}</td>
+          <td>${fila.factor1.toFixed(2)}</td>
+          <td>${fila.factor2.toFixed(2)}</td>
+        </tr>
+      `).join("");
+
+      return `
+        <h3>${titulo}</h3>
+
+        <table id="${idTabla}">
           <thead>
             <tr>
               <th scope="col">N° de cuotas</th>
@@ -396,8 +528,9 @@
               <th scope="col">Factor 2</th>
             </tr>
           </thead>
+
           <tbody>
-            ${filas}
+            ${contenido}
           </tbody>
         </table>
       `;
@@ -408,6 +541,7 @@
       const diaAnterior = siguienteFecha.getDate();
 
       siguienteFecha.setDate(1);
+
       siguienteFecha.setMonth(
         siguienteFecha.getMonth() + 1
       );
