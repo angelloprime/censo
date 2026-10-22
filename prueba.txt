@@ -23,14 +23,17 @@ function simular() {
     costoCapital.toFixed(4) + "%"
   );
 
+  const campoImporte = document.getElementById("importe");
   const campoPlazo = document.getElementById("plazo");
   const campoFecha = document.getElementById("primer-pago");
   const campoDesembolso = document.getElementById("desembolso");
 
+  if (!campoImporte.reportValidity()) return;
   if (!campoPlazo.reportValidity()) return;
   if (!campoFecha.reportValidity()) return;
   if (!campoDesembolso.reportValidity()) return;
 
+  const importe = Number(campoImporte.value);
   const cantidadCuotas = Number(campoPlazo.value);
 
   let fechaPago = new Date(campoFecha.value + "T00:00:00");
@@ -39,9 +42,9 @@ function simular() {
     campoDesembolso.value + "T00:00:00"
   );
 
-  // Para la primera cuota, la referencia es el desembolso.
   let fechaAnterior = fechaDesembolso;
   let diasAcumulados = 0;
+  let saldoFinalAnterior = 0;
   let filas = "";
 
   for (let cuota = 1; cuota <= cantidadCuotas; cuota++) {
@@ -61,6 +64,24 @@ function simular() {
 
     diasAcumulados += dias;
 
+    // Primera fila: importe.
+    // Siguientes filas: saldo final de la fila anterior.
+    const saldoInicial = cuota === 1
+      ? importe
+      : saldoFinalAnterior;
+
+    // Columnas pendientes de fórmula: valor numérico cero.
+    const interes = 0;
+    const segDesgravamen = 0;
+    const cuotaConstante = 0;
+    const saldoFinal = 0;
+    const factor1 = 0;
+    const factor2 = 0;
+
+    // Amortización de la fila actual.
+    const amortizacion =
+      cuotaConstante - segDesgravamen - interes;
+
     filas += `
       <tr>
         <td>${cuota}</td>
@@ -68,13 +89,20 @@ function simular() {
         <td>${formatearFecha(fechaPagoPrincipal)}</td>
         <td>${dias}</td>
         <td>${diasAcumulados}</td>
+        <td>${saldoInicial.toFixed(2)}</td>
+        <td>${amortizacion.toFixed(2)}</td>
+        <td>${interes.toFixed(2)}</td>
+        <td>${segDesgravamen.toFixed(2)}</td>
+        <td>${cuotaConstante.toFixed(2)}</td>
+        <td>${saldoFinal.toFixed(2)}</td>
+        <td>${factor1.toFixed(2)}</td>
+        <td>${factor2.toFixed(2)}</td>
       </tr>
     `;
 
-    // La siguiente cuota se compara con este pago principal.
+    // Valores de referencia para la siguiente fila.
+    saldoFinalAnterior = saldoFinal;
     fechaAnterior = fechaPagoPrincipal;
-
-    // La secuencia mensual parte de la fecha de pago original.
     fechaPago = sumarUnMes(fechaPago);
   }
 
@@ -89,6 +117,14 @@ function simular() {
           <th scope="col">Fecha de pago principal</th>
           <th scope="col">Días</th>
           <th scope="col">Días acumulados</th>
+          <th scope="col">Saldo inicial</th>
+          <th scope="col">Amortización</th>
+          <th scope="col">Interés</th>
+          <th scope="col">Seg de desgravamen</th>
+          <th scope="col">Cuota constante</th>
+          <th scope="col">Saldo final</th>
+          <th scope="col">Factor1</th>
+          <th scope="col">Factor 2</th>
         </tr>
       </thead>
       <tbody>
@@ -96,24 +132,4 @@ function simular() {
       </tbody>
     </table>
   `;
-}
-
-function calcularDias(fechaInicial, fechaFinal) {
-  // Se usan fechas UTC para contar días calendario
-  // sin que los cambios de horario afecten la diferencia.
-  const inicio = Date.UTC(
-    fechaInicial.getFullYear(),
-    fechaInicial.getMonth(),
-    fechaInicial.getDate()
-  );
-
-  const fin = Date.UTC(
-    fechaFinal.getFullYear(),
-    fechaFinal.getMonth(),
-    fechaFinal.getDate()
-  );
-
-  const milisegundosPorDia = 24 * 60 * 60 * 1000;
-
-  return (fin - inicio) / milisegundosPorDia;
 }
