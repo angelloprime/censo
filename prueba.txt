@@ -157,7 +157,6 @@
           ? 0.04
           : 0;
 
-      // Cargo por envío de estado de cuenta en cada cuota.
       const portes =
         document.getElementById("estado-cuenta").checked
           ? 11
@@ -280,6 +279,8 @@
           ${cuotaAPagar.toFixed(2)}
         </p>
 
+        ${crearTablaVectorI()}
+
         ${crearTabla(
           "Cálculo principal",
           "tabla-principal",
@@ -295,13 +296,31 @@
       `;
     }
 
+    function crearTablaVectorI() {
+      return `
+        <h3>Cálculo vector i</h3>
+
+        <table id="tabla-vector-i">
+          <thead>
+            <tr>
+              <th scope="col">Vector i, 1 Cuota</th>
+              <th scope="col">Vector i, 2 Días acum</th>
+              <th scope="col">Vector i, 3 Factor</th>
+              <th scope="col">Vector i, 4 Cálculo VA</th>
+            </tr>
+          </thead>
+
+          <tbody></tbody>
+        </table>
+      `;
+    }
+
     function calcularPrincipal(datos) {
       const filas = crearCalendario(datos);
 
       let sumaFactor1 = 0;
       let sumaFactor2 = 0;
 
-      // Primero se calculan los factores y sus sumas.
       for (const fila of filas) {
         // Factor1 y Cuota constante utilizan Fecha de pago.
         const mes = fila.fechaPago.getMonth() + 1;
@@ -329,7 +348,6 @@
         datos.portes * sumaFactor2
       ) / sumaFactor1;
 
-      // Primera fila: monto total a financiar.
       let saldoInicial = datos.montoTotalAFinanciar;
 
       for (const fila of filas) {
@@ -341,11 +359,10 @@
 
         fila.portes = datos.portes;
 
-        // Julio o diciembre con su check activado: cuota doble.
         fila.cuotaConstante =
           cuotaAPagar * (fila.cuotaDoble ? 2 : 1);
 
-        // La última fila siempre utiliza esta fórmula.
+        // Última fila: saldo inicial + interés + portes.
         if (fila.numero === datos.cantidadCuotas) {
           fila.cuotaConstante =
             saldoInicial + fila.interes + fila.portes;
@@ -356,7 +373,6 @@
 
         fila.saldoFinal = saldoInicial - fila.amortizacion;
 
-        // Siguiente fila: saldo final de la anterior.
         saldoInicial = fila.saldoFinal;
       }
 
@@ -375,7 +391,6 @@
       let sumaFactor2 = 0;
 
       for (const fila of filas) {
-        // Cálculo de prima utiliza Fecha de pago principal.
         const mes = fila.fechaPagoPrincipal.getMonth() + 1;
 
         fila.cuotaDoble =
@@ -442,7 +457,6 @@
     }
 
     function crearCalendario(datos) {
-      // Cada llamada genera filas y fechas independientes.
       const filas = [];
 
       let fechaPago = new Date(
@@ -486,7 +500,7 @@
 
         fechaAnterior = fechaPagoPrincipal;
 
-        // Se suma el mes sobre la fecha sin ajuste por domingo.
+        // Sumar un mes sobre la fecha sin ajuste por domingo.
         fechaPago = sumarUnMes(fechaPago);
       }
 
