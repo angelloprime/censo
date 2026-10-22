@@ -142,6 +142,12 @@
         return;
       }
 
+      // Fecha del primer pago ingresada menos fecha de desembolso.
+      const cantidadDias = calcularDias(
+        new Date(campoDesembolso.value + "T00:00:00"),
+        new Date(campoFecha.value + "T00:00:00")
+      );
+
       const primas = {
         "vida": 3.7000,
         "desgravamen": 0.1995,
@@ -193,10 +199,8 @@
       };
 
       const resultadoPrima = calcularPrima(datos);
-
       const VPN = resultadoPrima.VPN;
 
-      // Selección del porcentaje que se utilizará para el seguro.
       const porcentajePrima = obtenerPorcentajePrima(
         tipoSeguro,
         VPN,
@@ -303,6 +307,11 @@
 
       document.getElementById("resultados").innerHTML = `
         <p>
+          <strong>Cantidad de días:</strong>
+          ${cantidadDias}
+        </p>
+
+        <p>
           <strong>% Prima:</strong>
           ${(porcentajePrima * 100).toFixed(4)}%
         </p>
@@ -329,7 +338,7 @@
 
         <p>
           <strong>TCEA:</strong>
-          ${(TCEA * 100).toFixed(4)}%
+          ${(TCEA * 100).toFixed(2)}%
         </p>
 
         ${observacionTCEA}
@@ -363,7 +372,6 @@
         return 0;
       }
 
-      // Seguro de desgravamen y desgravamen con devolución.
       return VPN / importe;
     }
 
@@ -374,7 +382,6 @@
       let sumaFactor2 = 0;
 
       for (const fila of filas) {
-        // Se utiliza Fecha de pago para determinar el mes.
         const mes = fila.fechaPago.getMonth() + 1;
 
         fila.cuotaDoble =
@@ -527,7 +534,7 @@
           diasAcumulados / 360
         );
 
-        // Redondeo real: los cálculos posteriores usan este valor.
+        // Este redondeo sí afecta los cálculos posteriores.
         const calculoVACentimos = redondearACentimos(
           cuota / factor
         );
