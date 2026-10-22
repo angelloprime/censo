@@ -12,7 +12,7 @@
 
     <p>
       <label for="importe">Importe:</label>
-      <input type="number" id="importe" min="0" step="0.01">
+      <input type="number" id="importe" min="0" step="0.01" required>
     </p>
 
     <p>
@@ -92,7 +92,6 @@
 
     const MILISEGUNDOS_POR_DIA = 24 * 60 * 60 * 1000;
 
-    // Se usan fechas UTC para evitar diferencias por cambios de horario.
     function formatearFecha(fecha) {
       const dia = String(fecha.getUTCDate()).padStart(2, '0');
       const mes = String(fecha.getUTCMonth() + 1).padStart(2, '0');
@@ -108,13 +107,27 @@
       );
     }
 
+    function redondear(valor, decimales) {
+      const [base, exponente = '0'] =
+        Math.abs(valor).toString().split('e');
+
+      const desplazado = Number(
+        base + 'e' + (Number(exponente) + decimales)
+      );
+
+      return (
+        Math.sign(valor) *
+        Math.round(desplazado) /
+        (10 ** decimales)
+      );
+    }
+
     formulario.addEventListener('submit', function (evento) {
       evento.preventDefault();
 
+      const importe = document.getElementById('importe').valueAsNumber;
       const plazo = document.getElementById('plazo').valueAsNumber;
       const ciclo = Number(document.getElementById('ciclo').value);
-
-      // Ejemplo: 10 ingresado equivale a una tasa de 0.10.
       const tea = document.getElementById('tea').valueAsNumber / 100;
 
       const fechaIngresada = document.getElementById('fecha').value;
@@ -122,30 +135,28 @@
         fechaIngresada + 'T00:00:00Z'
       );
 
-      // Primera facturación:
-      // día menor o igual al ciclo: mismo mes;
-      // día mayor al ciclo: mes siguiente.
       const mesesAdicionales =
         fechaDesembolso.getUTCDate() <= ciclo ? 0 : 1;
 
       const mesPrimeraCuota =
         fechaDesembolso.getUTCMonth() + mesesAdicionales;
 
+      const cronograma = [];
       let vencimientoAnterior = null;
       let diasAcumulados = 0;
 
       cuotas.replaceChildren();
 
+      // Primero se calculan las fechas, los días y los factores.
       for (let numero = 1; numero <= plazo; numero++) {
 
-        // Ciclo de facturación.
         const fechaFacturacion = new Date(fechaDesembolso);
         fechaFacturacion.setUTCDate(ciclo);
         fechaFacturacion.setUTCMonth(
           mesPrimeraCuota + numero - 1
         );
 
-        // Vencim: restar 3 días y luego sumar 1 mes.
+        // Vencim: restar 3 días y sumar 1 mes.
         const fechaVencim = new Date(fechaFacturacion);
 
         fechaVencim.setUTCDate(
@@ -156,7 +167,6 @@
           fechaVencim.getUTCMonth() + 1
         );
 
-        // Días.
         let dias;
 
         if (numero === 1) {
@@ -171,37 +181,83 @@
           );
         }
 
-        // Días acum.
         diasAcumulados += dias;
 
-        // Factor: 1 / ((1 + TEA) ^ (Días acum / 360)).
         const factorSinRedondear =
           1 / Math.pow(1 + tea, diasAcumulados / 360);
 
-        // Redondear el valor numérico a 9 decimales.
         const factor =
           Math.round(factorSinRedondear * 1e9) / 1e9;
 
-        const vencimTexto = formatearFecha(fechaVencim);
-
-        const datosFila = [
+        cronograma.push({
           numero,
-          formatearFecha(fechaFacturacion),
-          vencimTexto,
+          fechaFacturacion,
+          fechaVencim,
           dias,
           diasAcumulados,
-          factor.toFixed(9),
-          '0.00', // Principal pendiente
-          '0.00', // Amortización
-          '0.00', // InterésY
-          '0.00', // CuotaY
-          '0.00', // Saldo final
+          factor
+        });
+
+        vencimientoAnterior = fechaVencim;
+      }
+
+      // Suma de los factores de la columna, sin redondear la suma.
+      const sumaFactor = cronograma.reduce(function (suma, dato) {
+        return suma + dato.factor;
+      }, 0);
+
+      console.log(
+        'Suma de la columna Factor (sin redondeo adicional):',
+        sumaFactor
+      );
+
+      // CuotaY: importe / suma de Factor, redondeado a 2 decimales.
+      const cuotaY = redondear(importe / sumaFactor, 2);
+
+      // El principal de la primera fila es el importe ingresado.
+      let principalPendiente = importe;
+
+      cronograma.forEach(function (dato, indice) {
+        const esUltimaFila = indice === cronograma.length - 1;
+
+        let amortizacion;
+        let interesY;
+
+        if (esUltimaFila) {
+          // Última fila: amortizar todo el principal pendiente.
+          amortizacion = principalPendiente;
+
+          // Última fila: InterésY redondeado a 2 decimales.
+          interesY = redondear(cuotaY - amortizacion, 2);
+        } else {
+          interesY = principalPendiente * (
+            Math.pow(1 + tea, dato.dias / 360) - 1
+          );
+
+          amortizacion = cuotaY - interesY;
+        }
+
+        const saldoFinal = principalPendiente - amortizacion;
+        const vencimTexto = formatearFecha(dato.fechaVencim);
+
+        const datosFila = [
+          dato.numero,
+          formatearFecha(dato.fechaFacturacion),
+          vencimTexto,
+          dato.dias,
+          dato.diasAcumulados,
+          dato.factor.toFixed(9),
+          principalPendiente.toFixed(2),
+          amortizacion.toFixed(2),
+          interesY.toFixed(2),
+          cuotaY.toFixed(2),
+          saldoFinal.toFixed(2),
           '0.00', // Amortización Principal
           '0.00', // Interés
           '0.00', // Cuota
           '0.00', // Seg de desgravamen
           '0.00', // Cuota + Seg desgravamen
-          vencimTexto // Último día de Pago (Referencial)
+          vencimTexto
         ];
 
         const fila = cuotas.insertRow();
@@ -210,8 +266,9 @@
           fila.insertCell().textContent = valor;
         });
 
-        vencimientoAnterior = fechaVencim;
-      }
+        // La siguiente fila toma el saldo final de esta fila.
+        principalPendiente = saldoFinal;
+      });
     });
 
     formulario.addEventListener('reset', function () {
