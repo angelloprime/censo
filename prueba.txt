@@ -256,8 +256,6 @@
 
       let saldoInicial = importe;
       let filas = "";
-
-      // Acumulador equivalente a VNA de los seguros.
       let VPN = 0;
 
       // SEGUNDO RECORRIDO:
@@ -295,16 +293,13 @@
         const saldoFinal = saldoInicial - amortizacion;
 
         // Equivalente a VNA(costo capital; seguros).
-        // Cada fila representa un período:
-        // Seguro 1 / (1 + tasa)^1
-        // + Seguro 2 / (1 + tasa)^2
-        // + ...
+        // La primera fila se descuenta un período.
         VPN += segDesgravamen / Math.pow(
           1 + tasaCostoCapital,
           fila.numero
         );
 
-        // Los dos decimales se aplican solo a la presentación.
+        // Dos decimales únicamente para mostrar la tabla.
         filas += `
           <tr>
             <td>${fila.numero}</td>
@@ -327,10 +322,23 @@
         saldoInicial = saldoFinal;
       }
 
-      // Resultado completo, sin limitarlo a dos decimales.
       console.log("VPN:", VPN);
 
+      // % Prima: se conserva internamente como proporción.
+      const porcentajePrima = VPN / importe;
+
+      // Para mostrarlo como porcentaje se multiplica por 100.
+      console.log(
+        "% Prima:",
+        (porcentajePrima * 100) + "%"
+      );
+
       document.getElementById("resultados").innerHTML = `
+        <p>
+          <strong>% Prima:</strong>
+          ${(porcentajePrima * 100).toFixed(2)}%
+        </p>
+
         <h3>Cálculo de prima</h3>
 
         <table>
@@ -362,7 +370,6 @@
       const siguienteFecha = new Date(fecha);
       const diaAnterior = siguienteFecha.getDate();
 
-      // Pasamos primero al día 1 para evitar saltarnos un mes.
       siguienteFecha.setDate(1);
       siguienteFecha.setMonth(
         siguienteFecha.getMonth() + 1
@@ -391,7 +398,6 @@
     }
 
     function calcularDias(fechaInicial, fechaFinal) {
-      // Contamos días calendario usando UTC.
       const inicio = Date.UTC(
         fechaInicial.getFullYear(),
         fechaInicial.getMonth(),
