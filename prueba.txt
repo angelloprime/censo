@@ -69,7 +69,9 @@
 
       <p>
         <label>
-          <input type="checkbox" name="seguro_desempleo">
+          <input type="checkbox"
+                 id="seguro-desempleo"
+                 name="seguro_desempleo">
           Seguro de desempleo
         </label>
       </p>
@@ -176,6 +178,12 @@
 
       const cuotaDiciembreActiva =
         document.getElementById("cuota-diciembre").checked;
+
+      // Seguro de desempleo: 4% si está marcado; de lo contrario, 0%.
+      const tasaSeguroDesempleo =
+        document.getElementById("seguro-desempleo").checked
+          ? 0.04
+          : 0;
 
       const fechaDesembolso = new Date(
         campoDesembolso.value + "T00:00:00"
@@ -322,21 +330,50 @@
         saldoInicial = saldoFinal;
       }
 
-      console.log("VPN:", VPN);
-
-      // % Prima: se conserva internamente como proporción.
+      // % Prima se conserva como proporción, sin redondear.
       const porcentajePrima = VPN / importe;
 
-      // Para mostrarlo como porcentaje se multiplica por 100.
+      // Seguro = % Prima * Importe.
+      const seguro = porcentajePrima * importe;
+
+      // Monto total a financiar:
+      // (Importe + Seguro)
+      // + (Importe + Seguro) * Seguro de desempleo.
+      const baseFinanciamiento = importe + seguro;
+
+      const montoTotalAFinanciar =
+        baseFinanciamiento
+        + baseFinanciamiento * tasaSeguroDesempleo;
+
+      // Consola: valores internos sin limitar los decimales.
+      console.log("VPN:", VPN);
+
       console.log(
         "% Prima:",
         (porcentajePrima * 100) + "%"
       );
 
+      console.log("Seguro:", seguro);
+
+      console.log(
+        "Monto total a financiar:",
+        montoTotalAFinanciar
+      );
+
       document.getElementById("resultados").innerHTML = `
         <p>
           <strong>% Prima:</strong>
-          ${(porcentajePrima * 100).toFixed(2)}%
+          ${(porcentajePrima * 100).toFixed(4)}%
+        </p>
+
+        <p>
+          <strong>Seguro:</strong>
+          ${seguro.toFixed(2)}
+        </p>
+
+        <p>
+          <strong>Monto total a financiar:</strong>
+          ${montoTotalAFinanciar.toFixed(2)}
         </p>
 
         <h3>Cálculo de prima</h3>
