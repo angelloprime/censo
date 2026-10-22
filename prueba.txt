@@ -1,135 +1,352 @@
-function simular() {
-  const tipoSeguro = document.getElementById("seguro").value;
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de préstamos</title>
+</head>
+<body>
 
-  // Valores expresados en porcentaje.
-  const primas = {
-    "vida": 3.7000,
-    "desgravamen": 0.1995,
-    "desgravamen-devolucion": 0.2594,
-    "sin-seguro": 0,
-    "endosado": 0
-  };
+  <h1>Simulador de préstamos</h1>
 
-  const seguroPrima = primas[tipoSeguro];
-  const costoCapital = 0.2871;
+  <form onsubmit="return false;" onreset="limpiarResultados()">
+    <fieldset>
+      <legend>Datos del préstamo</legend>
 
-  console.log(
-    "Seguro prima:",
-    seguroPrima === 0 ? "0%" : seguroPrima.toFixed(4) + "%"
-  );
+      <p>
+        <label for="seguro">Tipo de seguro</label><br>
+        <select id="seguro" name="seguro">
+          <option value="vida" selected>Seguro de vida</option>
+          <option value="desgravamen">Seguro de desgravamen</option>
+          <option value="desgravamen-devolucion">
+            Seguro de desgravamen con devolución
+          </option>
+          <option value="sin-seguro">Sin seguro</option>
+          <option value="endosado">Endosado</option>
+        </select>
+      </p>
 
-  console.log(
-    "Costo capital:",
-    costoCapital.toFixed(4) + "%"
-  );
+      <p>
+        <label for="tea">TEA (%)</label><br>
+        <input
+          type="number"
+          id="tea"
+          name="tea"
+          min="0"
+          step="any"
+          required
+        >
+      </p>
 
-  const campoImporte = document.getElementById("importe");
-  const campoPlazo = document.getElementById("plazo");
-  const campoFecha = document.getElementById("primer-pago");
-  const campoDesembolso = document.getElementById("desembolso");
+      <p>
+        <label for="importe">Importe</label><br>
+        <input
+          type="number"
+          id="importe"
+          name="importe"
+          min="0.01"
+          step="0.01"
+          required
+        >
+      </p>
 
-  if (!campoImporte.reportValidity()) return;
-  if (!campoPlazo.reportValidity()) return;
-  if (!campoFecha.reportValidity()) return;
-  if (!campoDesembolso.reportValidity()) return;
+      <p>
+        <label for="plazo">Plazo (meses)</label><br>
+        <input
+          type="number"
+          id="plazo"
+          name="plazo"
+          min="1"
+          step="1"
+          required
+        >
+      </p>
 
-  const importe = Number(campoImporte.value);
-  const cantidadCuotas = Number(campoPlazo.value);
+      <!-- El formato visible de los calendarios depende
+           de la configuración regional del navegador. -->
 
-  let fechaPago = new Date(campoFecha.value + "T00:00:00");
+      <p>
+        <label for="desembolso">
+          Fecha de desembolso (dd/mm/yyyy)
+        </label><br>
+        <input
+          type="date"
+          id="desembolso"
+          name="desembolso"
+          lang="es-PE"
+          required
+        >
+      </p>
 
-  const fechaDesembolso = new Date(
-    campoDesembolso.value + "T00:00:00"
-  );
+      <p>
+        <label for="primer-pago">
+          Fecha del primer pago (dd/mm/yyyy)
+        </label><br>
+        <input
+          type="date"
+          id="primer-pago"
+          name="primer_pago"
+          lang="es-PE"
+          required
+        >
+      </p>
+    </fieldset>
 
-  let fechaAnterior = fechaDesembolso;
-  let diasAcumulados = 0;
-  let saldoFinalAnterior = 0;
-  let filas = "";
+    <fieldset>
+      <legend>Opciones</legend>
 
-  for (let cuota = 1; cuota <= cantidadCuotas; cuota++) {
-    const fechaPagoPrincipal = new Date(fechaPago);
+      <p>
+        <label>
+          <input type="checkbox" name="seguro_desempleo">
+          Seguro de desempleo
+        </label>
+      </p>
 
-    // Si cae domingo, pasa al lunes siguiente.
-    if (fechaPagoPrincipal.getDay() === 0) {
-      fechaPagoPrincipal.setDate(
-        fechaPagoPrincipal.getDate() + 1
+      <p>
+        <label>
+          <input type="checkbox" name="cuota_julio">
+          Cuota julio
+        </label>
+      </p>
+
+      <p>
+        <label>
+          <input type="checkbox" name="cuota_diciembre">
+          Cuota diciembre
+        </label>
+      </p>
+
+      <p>
+        <label>
+          <input type="checkbox" name="estado_cuenta">
+          Envío de estado de cuenta
+        </label>
+      </p>
+    </fieldset>
+
+    <p>
+      <button type="button" onclick="simular()">Simular</button>
+      <button type="reset">Limpiar</button>
+    </p>
+  </form>
+
+  <section>
+    <h2>Resultados</h2>
+    <div id="resultados"></div>
+  </section>
+
+  <script>
+    function simular() {
+      const tipoSeguro = document.getElementById("seguro").value;
+
+      // Valores expresados en porcentaje.
+      const primas = {
+        "vida": 3.7000,
+        "desgravamen": 0.1995,
+        "desgravamen-devolucion": 0.2594,
+        "sin-seguro": 0,
+        "endosado": 0
+      };
+
+      const seguroPrima = primas[tipoSeguro];
+      const costoCapital = 0.2871;
+
+      console.log(
+        "Seguro prima:",
+        seguroPrima === 0 ? "0%" : seguroPrima.toFixed(4) + "%"
       );
+
+      console.log(
+        "Costo capital:",
+        costoCapital.toFixed(4) + "%"
+      );
+
+      const campoImporte = document.getElementById("importe");
+      const campoPlazo = document.getElementById("plazo");
+      const campoFecha = document.getElementById("primer-pago");
+      const campoDesembolso = document.getElementById("desembolso");
+
+      // Validamos los campos utilizados por los cálculos actuales.
+      if (!campoImporte.reportValidity()) return;
+      if (!campoPlazo.reportValidity()) return;
+      if (!campoFecha.reportValidity()) return;
+      if (!campoDesembolso.reportValidity()) return;
+
+      const importe = Number(campoImporte.value);
+      const cantidadCuotas = Number(campoPlazo.value);
+
+      let fechaPago = new Date(
+        campoFecha.value + "T00:00:00"
+      );
+
+      const fechaDesembolso = new Date(
+        campoDesembolso.value + "T00:00:00"
+      );
+
+      let fechaAnterior = fechaDesembolso;
+      let diasAcumulados = 0;
+      let saldoFinalAnterior = 0;
+      let filas = "";
+
+      for (let cuota = 1; cuota <= cantidadCuotas; cuota++) {
+        // Copia de la fecha para aplicar el ajuste por domingo.
+        const fechaPagoPrincipal = new Date(fechaPago);
+
+        if (fechaPagoPrincipal.getDay() === 0) {
+          fechaPagoPrincipal.setDate(
+            fechaPagoPrincipal.getDate() + 1
+          );
+        }
+
+        // Primera cuota: pago principal menos desembolso.
+        // Siguientes: pago principal actual menos el anterior.
+        const dias = calcularDias(
+          fechaAnterior,
+          fechaPagoPrincipal
+        );
+
+        diasAcumulados += dias;
+
+        // Primera cuota: importe ingresado.
+        // Siguientes: saldo final de la cuota anterior.
+        const saldoInicial = cuota === 1
+          ? importe
+          : saldoFinalAnterior;
+
+        // Valores pendientes de fórmula.
+        const interes = 0;
+        const segDesgravamen = 0;
+        const cuotaConstante = 0;
+
+        // Se calcula sin redondear los resultados intermedios.
+        const amortizacion =
+          cuotaConstante - segDesgravamen - interes;
+
+        // Valores pendientes de fórmula.
+        const saldoFinal = 0;
+        const factor1 = 0;
+        const factor2 = 0;
+
+        // toFixed(2) se utiliza únicamente para mostrar la tabla.
+        filas += `
+          <tr>
+            <td>${cuota}</td>
+            <td>${formatearFecha(fechaPago)}</td>
+            <td>${formatearFecha(fechaPagoPrincipal)}</td>
+            <td>${dias}</td>
+            <td>${diasAcumulados}</td>
+            <td>${saldoInicial.toFixed(2)}</td>
+            <td>${amortizacion.toFixed(2)}</td>
+            <td>${interes.toFixed(2)}</td>
+            <td>${segDesgravamen.toFixed(2)}</td>
+            <td>${cuotaConstante.toFixed(2)}</td>
+            <td>${saldoFinal.toFixed(2)}</td>
+            <td>${factor1.toFixed(2)}</td>
+            <td>${factor2.toFixed(2)}</td>
+          </tr>
+        `;
+
+        // Se conservan los valores internos para la siguiente fila.
+        saldoFinalAnterior = saldoFinal;
+        fechaAnterior = fechaPagoPrincipal;
+
+        // La secuencia mensual usa la fecha original.
+        fechaPago = sumarUnMes(fechaPago);
+      }
+
+      document.getElementById("resultados").innerHTML = `
+        <h3>Cálculo de prima</h3>
+
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">N° de cuotas</th>
+              <th scope="col">Fecha de pago</th>
+              <th scope="col">Fecha de pago principal</th>
+              <th scope="col">Días</th>
+              <th scope="col">Días acumulados</th>
+              <th scope="col">Saldo inicial</th>
+              <th scope="col">Amortización</th>
+              <th scope="col">Interés</th>
+              <th scope="col">Seg de desgravamen</th>
+              <th scope="col">Cuota constante</th>
+              <th scope="col">Saldo final</th>
+              <th scope="col">Factor1</th>
+              <th scope="col">Factor 2</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${filas}
+          </tbody>
+        </table>
+      `;
     }
 
-    const dias = calcularDias(
-      fechaAnterior,
-      fechaPagoPrincipal
-    );
+    function sumarUnMes(fecha) {
+      const siguienteFecha = new Date(fecha);
+      const diaAnterior = siguienteFecha.getDate();
 
-    diasAcumulados += dias;
+      // Pasamos primero al día 1 para evitar saltos de mes.
+      siguienteFecha.setDate(1);
+      siguienteFecha.setMonth(
+        siguienteFecha.getMonth() + 1
+      );
 
-    // Primera fila: importe.
-    // Siguientes filas: saldo final de la fila anterior.
-    const saldoInicial = cuota === 1
-      ? importe
-      : saldoFinalAnterior;
+      const ultimoDiaDelMes = new Date(
+        siguienteFecha.getFullYear(),
+        siguienteFecha.getMonth() + 1,
+        0
+      ).getDate();
 
-    // Columnas pendientes de fórmula: valor numérico cero.
-    const interes = 0;
-    const segDesgravamen = 0;
-    const cuotaConstante = 0;
-    const saldoFinal = 0;
-    const factor1 = 0;
-    const factor2 = 0;
+      // Si el día no existe, usamos el último día del mes.
+      // Ejemplo: 30/01 → 28/02 → 28/03.
+      siguienteFecha.setDate(
+        Math.min(diaAnterior, ultimoDiaDelMes)
+      );
 
-    // Amortización de la fila actual.
-    const amortizacion =
-      cuotaConstante - segDesgravamen - interes;
+      return siguienteFecha;
+    }
 
-    filas += `
-      <tr>
-        <td>${cuota}</td>
-        <td>${formatearFecha(fechaPago)}</td>
-        <td>${formatearFecha(fechaPagoPrincipal)}</td>
-        <td>${dias}</td>
-        <td>${diasAcumulados}</td>
-        <td>${saldoInicial.toFixed(2)}</td>
-        <td>${amortizacion.toFixed(2)}</td>
-        <td>${interes.toFixed(2)}</td>
-        <td>${segDesgravamen.toFixed(2)}</td>
-        <td>${cuotaConstante.toFixed(2)}</td>
-        <td>${saldoFinal.toFixed(2)}</td>
-        <td>${factor1.toFixed(2)}</td>
-        <td>${factor2.toFixed(2)}</td>
-      </tr>
-    `;
+    function formatearFecha(fecha) {
+      const dia = String(
+        fecha.getDate()
+      ).padStart(2, "0");
 
-    // Valores de referencia para la siguiente fila.
-    saldoFinalAnterior = saldoFinal;
-    fechaAnterior = fechaPagoPrincipal;
-    fechaPago = sumarUnMes(fechaPago);
-  }
+      const mes = String(
+        fecha.getMonth() + 1
+      ).padStart(2, "0");
 
-  document.getElementById("resultados").innerHTML = `
-    <h3>Cálculo de prima</h3>
+      const anio = String(
+        fecha.getFullYear()
+      ).padStart(4, "0");
 
-    <table>
-      <thead>
-        <tr>
-          <th scope="col">N° de cuotas</th>
-          <th scope="col">Fecha de pago</th>
-          <th scope="col">Fecha de pago principal</th>
-          <th scope="col">Días</th>
-          <th scope="col">Días acumulados</th>
-          <th scope="col">Saldo inicial</th>
-          <th scope="col">Amortización</th>
-          <th scope="col">Interés</th>
-          <th scope="col">Seg de desgravamen</th>
-          <th scope="col">Cuota constante</th>
-          <th scope="col">Saldo final</th>
-          <th scope="col">Factor1</th>
-          <th scope="col">Factor 2</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${filas}
-      </tbody>
-    </table>
-  `;
-}
+      return `${dia}/${mes}/${anio}`;
+    }
+
+    function calcularDias(fechaInicial, fechaFinal) {
+      // UTC permite contar días calendario sin que
+      // los cambios de horario alteren la diferencia.
+      const inicio = Date.UTC(
+        fechaInicial.getFullYear(),
+        fechaInicial.getMonth(),
+        fechaInicial.getDate()
+      );
+
+      const fin = Date.UTC(
+        fechaFinal.getFullYear(),
+        fechaFinal.getMonth(),
+        fechaFinal.getDate()
+      );
+
+      const milisegundosPorDia = 24 * 60 * 60 * 1000;
+
+      return (fin - inicio) / milisegundosPorDia;
+    }
+
+    function limpiarResultados() {
+      document.getElementById("resultados").innerHTML = "";
+    }
+  </script>
+
+</body>
+</html>
