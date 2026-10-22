@@ -152,6 +152,7 @@
       // Convertimos los porcentajes a tasas.
       const tea = Number(campoTea.value) / 100;
       const tasaSeguroPrima = seguroPrima / 100;
+      const tasaCostoCapital = costoCapital / 100;
 
       // TEA total prima.
       const teaTotalPrima = Math.pow(
@@ -193,7 +194,7 @@
       const cronograma = [];
 
       // PRIMER RECORRIDO:
-      // Calculamos las fechas, los días y los factores.
+      // Fechas, días y factores.
       for (let cuota = 1; cuota <= cantidadCuotas; cuota++) {
         const fechaPagoPrincipal = new Date(fechaPago);
 
@@ -211,7 +212,6 @@
 
         diasAcumulados += dias;
 
-        // Se usa el mes de la fecha de pago principal.
         const mesPagoPrincipal =
           fechaPagoPrincipal.getMonth() + 1;
 
@@ -247,10 +247,9 @@
         fechaPago = sumarUnMes(fechaPago);
       }
 
-      // Cuota prima = Importe / Suma Factor1.
+      // Cuota prima.
       const cuotaPrima = importe / sumaFactor1;
 
-      // Valores completos, sin redondearlos a dos decimales.
       console.log("Suma Factor1:", sumaFactor1);
       console.log("Suma Factor2:", sumaFactor2);
       console.log("Cuota prima:", cuotaPrima);
@@ -258,8 +257,11 @@
       let saldoInicial = importe;
       let filas = "";
 
+      // Acumulador equivalente a VNA de los seguros.
+      let VPN = 0;
+
       // SEGUNDO RECORRIDO:
-      // Con la cuota prima calculamos cuotas y saldos.
+      // Cuotas, saldos y VPN.
       for (const fila of cronograma) {
         // Interés.
         const interes = (
@@ -274,12 +276,12 @@
         // Cuota normal.
         let cuotaConstante = cuotaPrima;
 
-        // Cuota doble en julio o diciembre, según los checks.
+        // Cuota doble según el mes y los checks.
         if (fila.cuotaDoble) {
           cuotaConstante = 2 * cuotaPrima;
         }
 
-        // La última cuota tiene prioridad sobre la cuota doble.
+        // La última cuota tiene prioridad.
         if (fila.numero === cantidadCuotas) {
           cuotaConstante =
             saldoInicial + interes + segDesgravamen;
@@ -291,6 +293,16 @@
 
         // Saldo final.
         const saldoFinal = saldoInicial - amortizacion;
+
+        // Equivalente a VNA(costo capital; seguros).
+        // Cada fila representa un período:
+        // Seguro 1 / (1 + tasa)^1
+        // + Seguro 2 / (1 + tasa)^2
+        // + ...
+        VPN += segDesgravamen / Math.pow(
+          1 + tasaCostoCapital,
+          fila.numero
+        );
 
         // Los dos decimales se aplican solo a la presentación.
         filas += `
@@ -311,9 +323,12 @@
           </tr>
         `;
 
-        // La siguiente fila usa el saldo final sin redondear.
+        // Se conserva el saldo final sin redondearlo.
         saldoInicial = saldoFinal;
       }
+
+      // Resultado completo, sin limitarlo a dos decimales.
+      console.log("VPN:", VPN);
 
       document.getElementById("resultados").innerHTML = `
         <h3>Cálculo de prima</h3>
@@ -368,17 +383,9 @@
     }
 
     function formatearFecha(fecha) {
-      const dia = String(
-        fecha.getDate()
-      ).padStart(2, "0");
-
-      const mes = String(
-        fecha.getMonth() + 1
-      ).padStart(2, "0");
-
-      const anio = String(
-        fecha.getFullYear()
-      ).padStart(4, "0");
+      const dia = String(fecha.getDate()).padStart(2, "0");
+      const mes = String(fecha.getMonth() + 1).padStart(2, "0");
+      const anio = String(fecha.getFullYear()).padStart(4, "0");
 
       return `${dia}/${mes}/${anio}`;
     }
