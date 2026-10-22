@@ -44,7 +44,7 @@
                min="1" step="1" required>
       </p>
 
-      <!-- El formato visible del calendario depende del navegador.
+      <!-- El formato del calendario depende del navegador.
            En las tablas se utiliza dd/mm/yyyy. -->
 
       <p>
@@ -146,8 +146,8 @@
         "vida": 3.7000,
         "desgravamen": 0.1995,
         "desgravamen-devolucion": 0.2594,
-        "sin-seguro": 0,
-        "endosado": 0
+        "sin-seguro": 0.0000,
+        "endosado": 0.0000
       };
 
       const tipoSeguro = document.getElementById("seguro").value;
@@ -195,7 +195,14 @@
       const resultadoPrima = calcularPrima(datos);
 
       const VPN = resultadoPrima.VPN;
-      const porcentajePrima = VPN / importe;
+
+      // Selección del porcentaje que se utilizará para el seguro.
+      const porcentajePrima = obtenerPorcentajePrima(
+        tipoSeguro,
+        VPN,
+        importe
+      );
+
       const seguro = porcentajePrima * importe;
 
       const baseFinanciamiento = importe + seguro;
@@ -230,9 +237,7 @@
 
       console.log(
         "Seguro prima:",
-        seguroPrima === 0
-          ? "0%"
-          : seguroPrima.toFixed(4) + "%"
+        seguroPrima.toFixed(4) + "%"
       );
 
       console.log(
@@ -254,7 +259,19 @@
 
       console.log("Cuota prima:", resultadoPrima.cuotaPrima);
       console.log("VPN:", VPN);
-      console.log("% Prima:", porcentajePrima * 100 + "%");
+
+      const primaFija =
+        tipoSeguro === "vida" ||
+        tipoSeguro === "endosado" ||
+        tipoSeguro === "sin-seguro";
+
+      console.log(
+        "% Prima:",
+        primaFija
+          ? (porcentajePrima * 100).toFixed(4) + "%"
+          : porcentajePrima * 100 + "%"
+      );
+
       console.log("Seguro:", seguro);
       console.log("Seguro de desempleo:", montoSeguroDesempleo);
       console.log("Monto total a financiar:", montoTotalAFinanciar);
@@ -334,6 +351,22 @@
       `;
     }
 
+    function obtenerPorcentajePrima(tipoSeguro, VPN, importe) {
+      if (tipoSeguro === "vida") {
+        return 3.7000 / 100;
+      }
+
+      if (
+        tipoSeguro === "endosado" ||
+        tipoSeguro === "sin-seguro"
+      ) {
+        return 0;
+      }
+
+      // Seguro de desgravamen y desgravamen con devolución.
+      return VPN / importe;
+    }
+
     function calcularPrincipal(datos) {
       const filas = crearCalendario(datos);
 
@@ -341,7 +374,7 @@
       let sumaFactor2 = 0;
 
       for (const fila of filas) {
-        // Factor1 y Cuota constante utilizan Fecha de pago.
+        // Se utiliza Fecha de pago para determinar el mes.
         const mes = fila.fechaPago.getMonth() + 1;
 
         fila.cuotaDoble =
@@ -472,9 +505,6 @@
     }
 
     function redondearACentimos(valor) {
-      // Redondea a céntimos y devuelve un entero.
-      // Los empates se redondean alejándose de cero.
-      // Ejemplo: 637.2688271 pasa a 63727 céntimos.
       const [base, exponente = "0"] =
         Math.abs(valor).toString().split("e");
 
@@ -487,21 +517,17 @@
 
     function calcularVectorI(filasPrincipal, tcea) {
       const filas = filasPrincipal.map(fila => {
-        // Vector i, 1 Cuota.
         const cuota =
           fila.amortizacion + fila.interes + fila.portes;
 
-        // Vector i, 2 Días acum.
         const diasAcumulados = fila.diasAcumulados;
 
-        // Vector i, 3 Factor.
         const factor = Math.pow(
           1 + tcea,
           diasAcumulados / 360
         );
 
-        // Vector i, 4 Cálculo VA.
-        // Aquí el redondeo modifica el valor utilizado en cálculos.
+        // Redondeo real: los cálculos posteriores usan este valor.
         const calculoVACentimos = redondearACentimos(
           cuota / factor
         );
@@ -517,7 +543,6 @@
         };
       });
 
-      // Se suman céntimos enteros para conservar los VA redondeados.
       const sumaVACentimos = filas.reduce(
         (suma, fila) => suma + fila.calculoVACentimos,
         0
@@ -531,7 +556,6 @@
     }
 
     function calcularTCEA(importe, filasPrincipal) {
-      // Objetivo: suma de VA redondeados = importe recibido.
       const objetivoCentimos = redondearACentimos(importe);
 
       function evaluar(tcea) {
@@ -545,7 +569,6 @@
         };
       }
 
-      // Búsqueda de una tasa no negativa.
       let inferior = 0;
       let superior = 1;
 
@@ -557,7 +580,6 @@
 
       let extremoSuperior = evaluar(superior);
 
-      // Ampliar el intervalo si la TCEA supera el 100%.
       for (
         let intento = 0;
         extremoSuperior.diferenciaCentimos > 0 && intento < 100;
@@ -584,7 +606,6 @@
         return extremoSuperior;
       }
 
-      // Bisección: probar el punto medio y reducir el intervalo.
       for (let intento = 0; intento < 200; intento++) {
         const medio = (inferior + superior) / 2;
 
@@ -612,8 +633,6 @@
         }
       }
 
-      // El redondeo puede impedir una igualdad exacta.
-      // En ese caso se devuelve el resultado más cercano encontrado.
       return mejor;
     }
 
@@ -747,7 +766,6 @@
     }
 
     function crearTabla(titulo, idTabla, filas, esPrincipal = false) {
-      // En estas dos tablas, toFixed solo modifica la presentación.
       const contenido = filas.map(fila => `
         <tr>
           <td>${fila.numero}</td>
