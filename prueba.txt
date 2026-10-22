@@ -145,7 +145,7 @@
       const seguroPrima = primas[tipoSeguro];
       const costoCapital = 0.2871;
 
-      // Tasas convertidas de porcentaje a decimal.
+      // Conversión de porcentajes a tasas decimales.
       const tea = Number(campoTea.value) / 100;
       const tasaSeguroPrima = seguroPrima / 100;
       const tasaCostoCapital = costoCapital / 100;
@@ -155,6 +155,12 @@
       const tasaSeguroDesempleo =
         document.getElementById("seguro-desempleo").checked
           ? 0.04
+          : 0;
+
+      // Cargo por envío de estado de cuenta en cada cuota.
+      const portes =
+        document.getElementById("estado-cuenta").checked
+          ? 11
           : 0;
 
       const teaTotalPrima = Math.pow(
@@ -180,7 +186,7 @@
           document.getElementById("cuota-diciembre").checked
       };
 
-      // Primero se calcula la prima.
+      // Cálculo de prima.
       const resultadoPrima = calcularPrima(datos);
 
       const VPN = resultadoPrima.VPN;
@@ -195,14 +201,14 @@
       const montoTotalAFinanciar =
         baseFinanciamiento + montoSeguroDesempleo;
 
-      // La tabla principal realiza sus propios cálculos.
+      // Cálculo principal independiente.
       const resultadoPrincipal = calcularPrincipal({
         ...datos,
         montoTotalAFinanciar,
-        portes: document.getElementById("estado-cuenta").checked
-          ? 11
-          : 0
+        portes
       });
+
+      const cuotaAPagar = resultadoPrincipal.cuotaAPagar;
 
       console.log(
         "Seguro prima:",
@@ -235,7 +241,19 @@
       console.log("Seguro de desempleo:", montoSeguroDesempleo);
       console.log("Monto total a financiar:", montoTotalAFinanciar);
 
-      // Redondeo únicamente para mostrar los resultados.
+      console.log(
+        "Suma Factor1 (Cálculo principal):",
+        resultadoPrincipal.sumaFactor1
+      );
+
+      console.log(
+        "Suma Factor2 (Cálculo principal):",
+        resultadoPrincipal.sumaFactor2
+      );
+
+      console.log("Cuota a pagar:", cuotaAPagar);
+
+      // El redondeo se aplica únicamente al mostrar los valores.
       document.getElementById("resultados").innerHTML = `
         <p>
           <strong>% Prima:</strong>
@@ -255,6 +273,11 @@
         <p>
           <strong>Monto total a financiar:</strong>
           ${montoTotalAFinanciar.toFixed(2)}
+        </p>
+
+        <p>
+          <strong>Cuota a pagar:</strong>
+          ${cuotaAPagar.toFixed(2)}
         </p>
 
         ${crearTabla(
@@ -278,36 +301,33 @@
       let sumaFactor1 = 0;
       let sumaFactor2 = 0;
 
+      // Primero se calculan los factores y sus sumas.
       for (const fila of filas) {
-        // Factor1: revisar el mes de Fecha de pago.
-        const mesFactor1 = fila.fechaPago.getMonth() + 1;
+        // Factor1 y Cuota constante utilizan Fecha de pago.
+        const mes = fila.fechaPago.getMonth() + 1;
 
-        const factorDoble =
-          (mesFactor1 === 7 && datos.cuotaJulioActiva) ||
-          (mesFactor1 === 12 && datos.cuotaDiciembreActiva);
+        fila.cuotaDoble =
+          (mes === 7 && datos.cuotaJulioActiva) ||
+          (mes === 12 && datos.cuotaDiciembreActiva);
 
-        // Factor1 y Factor2 utilizan la TEA ingresada.
+        // Ambos factores utilizan la TEA ingresada.
         const denominador = Math.pow(
           1 + datos.tea,
           fila.diasAcumulados / 360
         );
 
-        fila.factor1 = (factorDoble ? 2 : 1) / denominador;
+        fila.factor1 = (fila.cuotaDoble ? 2 : 1) / denominador;
         fila.factor2 = 1 / denominador;
 
         sumaFactor1 += fila.factor1;
         sumaFactor2 += fila.factor2;
-
-        // Cuota constante conserva su regla de mes,
-        // basada en Fecha de pago principal.
-        const mesCuota = fila.fechaPagoPrincipal.getMonth() + 1;
-
-        fila.cuotaDoble =
-          (mesCuota === 7 && datos.cuotaJulioActiva) ||
-          (mesCuota === 12 && datos.cuotaDiciembreActiva);
       }
 
-      const cuotaPrincipal = datos.importe / sumaFactor1;
+      // Envío de estado de cuenta = portes: 11 o 0.
+      const cuotaAPagar = (
+        datos.montoTotalAFinanciar +
+        datos.portes * sumaFactor2
+      ) / sumaFactor1;
 
       // Primera fila: monto total a financiar.
       let saldoInicial = datos.montoTotalAFinanciar;
@@ -319,13 +339,13 @@
           Math.pow(1 + datos.tea, fila.dias / 360) - 1
         ) * saldoInicial;
 
-        // 11 si está activado el envío; de lo contrario, 0.
         fila.portes = datos.portes;
 
+        // Julio o diciembre con su check activado: cuota doble.
         fila.cuotaConstante =
-          cuotaPrincipal * (fila.cuotaDoble ? 2 : 1);
+          cuotaAPagar * (fila.cuotaDoble ? 2 : 1);
 
-        // Última cuota: saldo pendiente, interés y portes.
+        // La última fila siempre utiliza esta fórmula.
         if (fila.numero === datos.cantidadCuotas) {
           fila.cuotaConstante =
             saldoInicial + fila.interes + fila.portes;
@@ -336,24 +356,15 @@
 
         fila.saldoFinal = saldoInicial - fila.amortizacion;
 
+        // Siguiente fila: saldo final de la anterior.
         saldoInicial = fila.saldoFinal;
       }
-
-      console.log(
-        "Suma Factor1 (Cálculo principal):",
-        sumaFactor1
-      );
-
-      console.log(
-        "Suma Factor2 (Cálculo principal):",
-        sumaFactor2
-      );
 
       return {
         filas,
         sumaFactor1,
         sumaFactor2,
-        cuotaPrincipal
+        cuotaAPagar
       };
     }
 
@@ -364,6 +375,7 @@
       let sumaFactor2 = 0;
 
       for (const fila of filas) {
+        // Cálculo de prima utiliza Fecha de pago principal.
         const mes = fila.fechaPagoPrincipal.getMonth() + 1;
 
         fila.cuotaDoble =
@@ -430,7 +442,7 @@
     }
 
     function crearCalendario(datos) {
-      // Cada tabla obtiene sus propias filas y fechas.
+      // Cada llamada genera filas y fechas independientes.
       const filas = [];
 
       let fechaPago = new Date(
@@ -450,7 +462,7 @@
       ) {
         const fechaPagoPrincipal = new Date(fechaPago);
 
-        // Si cae domingo, pasa al lunes siguiente.
+        // Domingo: mover únicamente Fecha de pago principal.
         if (fechaPagoPrincipal.getDay() === 0) {
           fechaPagoPrincipal.setDate(
             fechaPagoPrincipal.getDate() + 1
@@ -474,8 +486,7 @@
 
         fechaAnterior = fechaPagoPrincipal;
 
-        // El siguiente mes parte de la Fecha de pago sin
-        // el ajuste por domingo.
+        // Se suma el mes sobre la fecha sin ajuste por domingo.
         fechaPago = sumarUnMes(fechaPago);
       }
 
@@ -528,8 +539,8 @@
     }
 
     function crearTabla(titulo, idTabla, filas, esPrincipal = false) {
-      // toFixed solo se usa para mostrar los valores.
-      // Los datos internos conservan la precisión de Number.
+      // toFixed solo modifica la presentación.
+      // Los cálculos mantienen la precisión de Number.
       const contenido = filas.map(fila => `
         <tr>
           <td>${fila.numero}</td>
