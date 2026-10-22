@@ -133,6 +133,15 @@
         }
       }
 
+      if (campoFecha.value <= campoDesembolso.value) {
+        campoFecha.setCustomValidity(
+          "La fecha del primer pago debe ser posterior al desembolso."
+        );
+        campoFecha.reportValidity();
+        campoFecha.setCustomValidity("");
+        return;
+      }
+
       const primas = {
         "vida": 3.7000,
         "desgravamen": 0.1995,
@@ -145,11 +154,9 @@
       const seguroPrima = primas[tipoSeguro];
       const costoCapital = 0.2871;
 
-      // Conversión de porcentajes a tasas decimales.
       const tea = Number(campoTea.value) / 100;
       const tasaSeguroPrima = seguroPrima / 100;
       const tasaCostoCapital = costoCapital / 100;
-
       const importe = Number(campoImporte.value);
 
       const tasaSeguroDesempleo =
@@ -185,7 +192,6 @@
           document.getElementById("cuota-diciembre").checked
       };
 
-      // Cálculo de prima.
       const resultadoPrima = calcularPrima(datos);
 
       const VPN = resultadoPrima.VPN;
@@ -200,7 +206,6 @@
       const montoTotalAFinanciar =
         baseFinanciamiento + montoSeguroDesempleo;
 
-      // Cálculo principal independiente.
       const resultadoPrincipal = calcularPrincipal({
         ...datos,
         montoTotalAFinanciar,
@@ -208,6 +213,20 @@
       });
 
       const cuotaAPagar = resultadoPrincipal.cuotaAPagar;
+
+      let resultadoVector;
+
+      try {
+        resultadoVector = calcularTCEA(
+          importe,
+          resultadoPrincipal.filas
+        );
+      } catch (error) {
+        alert(error.message);
+        return;
+      }
+
+      const TCEA = resultadoVector.tcea;
 
       console.log(
         "Seguro prima:",
@@ -251,8 +270,20 @@
       );
 
       console.log("Cuota a pagar:", cuotaAPagar);
+      console.log("TCEA:", TCEA * 100 + "%");
+      console.log("Suma Cálculo VA:", resultadoVector.sumaVA);
 
-      // El redondeo se aplica únicamente al mostrar los valores.
+      const observacionTCEA =
+        resultadoVector.diferenciaCentimos === 0
+          ? ""
+          : `
+            <p>
+              La suma de VA redondeados difiere del importe en
+              ${(resultadoVector.diferenciaCentimos / 100).toFixed(2)}.
+              La TCEA mostrada es una aproximación.
+            </p>
+          `;
+
       document.getElementById("resultados").innerHTML = `
         <p>
           <strong>% Prima:</strong>
@@ -279,7 +310,14 @@
           ${cuotaAPagar.toFixed(2)}
         </p>
 
-        ${crearTablaVectorI()}
+        <p>
+          <strong>TCEA:</strong>
+          ${(TCEA * 100).toFixed(4)}%
+        </p>
+
+        ${observacionTCEA}
+
+        ${crearTablaVectorI(resultadoVector)}
 
         ${crearTabla(
           "Cálculo principal",
@@ -293,25 +331,6 @@
           "tabla-prima",
           resultadoPrima.filas
         )}
-      `;
-    }
-
-    function crearTablaVectorI() {
-      return `
-        <h3>Cálculo vector i</h3>
-
-        <table id="tabla-vector-i">
-          <thead>
-            <tr>
-              <th scope="col">Vector i, 1 Cuota</th>
-              <th scope="col">Vector i, 2 Días acum</th>
-              <th scope="col">Vector i, 3 Factor</th>
-              <th scope="col">Vector i, 4 Cálculo VA</th>
-            </tr>
-          </thead>
-
-          <tbody></tbody>
-        </table>
       `;
     }
 
@@ -329,7 +348,6 @@
           (mes === 7 && datos.cuotaJulioActiva) ||
           (mes === 12 && datos.cuotaDiciembreActiva);
 
-        // Ambos factores utilizan la TEA ingresada.
         const denominador = Math.pow(
           1 + datos.tea,
           fila.diasAcumulados / 360
@@ -342,7 +360,6 @@
         sumaFactor2 += fila.factor2;
       }
 
-      // Envío de estado de cuenta = portes: 11 o 0.
       const cuotaAPagar = (
         datos.montoTotalAFinanciar +
         datos.portes * sumaFactor2
@@ -362,7 +379,6 @@
         fila.cuotaConstante =
           cuotaAPagar * (fila.cuotaDoble ? 2 : 1);
 
-        // Última fila: saldo inicial + interés + portes.
         if (fila.numero === datos.cantidadCuotas) {
           fila.cuotaConstante =
             saldoInicial + fila.interes + fila.portes;
@@ -438,7 +454,6 @@
 
         fila.saldoFinal = saldoInicial - fila.amortizacion;
 
-        // Equivalente a VNA: primer flujo descontado un período.
         VPN += fila.segDesgravamen / Math.pow(
           1 + datos.tasaCostoCapital,
           fila.numero
@@ -454,6 +469,152 @@
         cuotaPrima,
         VPN
       };
+    }
+
+    function redondearACentimos(valor) {
+      // Redondea a céntimos y devuelve un entero.
+      // Los empates se redondean alejándose de cero.
+      // Ejemplo: 637.2688271 pasa a 63727 céntimos.
+      const [base, exponente = "0"] =
+        Math.abs(valor).toString().split("e");
+
+      const desplazado = Number(
+        base + "e" + (Number(exponente) + 2)
+      );
+
+      return Math.sign(valor) * Math.round(desplazado);
+    }
+
+    function calcularVectorI(filasPrincipal, tcea) {
+      const filas = filasPrincipal.map(fila => {
+        // Vector i, 1 Cuota.
+        const cuota =
+          fila.amortizacion + fila.interes + fila.portes;
+
+        // Vector i, 2 Días acum.
+        const diasAcumulados = fila.diasAcumulados;
+
+        // Vector i, 3 Factor.
+        const factor = Math.pow(
+          1 + tcea,
+          diasAcumulados / 360
+        );
+
+        // Vector i, 4 Cálculo VA.
+        // Aquí el redondeo modifica el valor utilizado en cálculos.
+        const calculoVACentimos = redondearACentimos(
+          cuota / factor
+        );
+
+        const calculoVA = calculoVACentimos / 100;
+
+        return {
+          cuota,
+          diasAcumulados,
+          factor,
+          calculoVA,
+          calculoVACentimos
+        };
+      });
+
+      // Se suman céntimos enteros para conservar los VA redondeados.
+      const sumaVACentimos = filas.reduce(
+        (suma, fila) => suma + fila.calculoVACentimos,
+        0
+      );
+
+      return {
+        filas,
+        sumaVACentimos,
+        sumaVA: sumaVACentimos / 100
+      };
+    }
+
+    function calcularTCEA(importe, filasPrincipal) {
+      // Objetivo: suma de VA redondeados = importe recibido.
+      const objetivoCentimos = redondearACentimos(importe);
+
+      function evaluar(tcea) {
+        const vector = calcularVectorI(filasPrincipal, tcea);
+
+        return {
+          tcea,
+          ...vector,
+          diferenciaCentimos:
+            vector.sumaVACentimos - objetivoCentimos
+        };
+      }
+
+      // Búsqueda de una tasa no negativa.
+      let inferior = 0;
+      let superior = 1;
+
+      let mejor = evaluar(inferior);
+
+      if (mejor.diferenciaCentimos <= 0) {
+        return mejor;
+      }
+
+      let extremoSuperior = evaluar(superior);
+
+      // Ampliar el intervalo si la TCEA supera el 100%.
+      for (
+        let intento = 0;
+        extremoSuperior.diferenciaCentimos > 0 && intento < 100;
+        intento++
+      ) {
+        superior = superior * 2 + 1;
+        extremoSuperior = evaluar(superior);
+      }
+
+      if (extremoSuperior.diferenciaCentimos > 0) {
+        throw new Error(
+          "No se pudo encontrar un intervalo para calcular la TCEA."
+        );
+      }
+
+      if (
+        Math.abs(extremoSuperior.diferenciaCentimos) <
+        Math.abs(mejor.diferenciaCentimos)
+      ) {
+        mejor = extremoSuperior;
+      }
+
+      if (extremoSuperior.diferenciaCentimos === 0) {
+        return extremoSuperior;
+      }
+
+      // Bisección: probar el punto medio y reducir el intervalo.
+      for (let intento = 0; intento < 200; intento++) {
+        const medio = (inferior + superior) / 2;
+
+        if (medio === inferior || medio === superior) {
+          break;
+        }
+
+        const resultado = evaluar(medio);
+
+        if (
+          Math.abs(resultado.diferenciaCentimos) <
+          Math.abs(mejor.diferenciaCentimos)
+        ) {
+          mejor = resultado;
+        }
+
+        if (resultado.diferenciaCentimos === 0) {
+          return resultado;
+        }
+
+        if (resultado.diferenciaCentimos > 0) {
+          inferior = medio;
+        } else {
+          superior = medio;
+        }
+      }
+
+      // El redondeo puede impedir una igualdad exacta.
+      // En ese caso se devuelve el resultado más cercano encontrado.
+      return mejor;
     }
 
     function crearCalendario(datos) {
@@ -476,7 +637,6 @@
       ) {
         const fechaPagoPrincipal = new Date(fechaPago);
 
-        // Domingo: mover únicamente Fecha de pago principal.
         if (fechaPagoPrincipal.getDay() === 0) {
           fechaPagoPrincipal.setDate(
             fechaPagoPrincipal.getDate() + 1
@@ -499,8 +659,6 @@
         });
 
         fechaAnterior = fechaPagoPrincipal;
-
-        // Sumar un mes sobre la fecha sin ajuste por domingo.
         fechaPago = sumarUnMes(fechaPago);
       }
 
@@ -520,7 +678,6 @@
         0
       ).getDate();
 
-      // Ejemplo: 30/01 → 28/02 → 28/03.
       siguienteFecha.setDate(
         Math.min(diaAnterior, ultimoDiaDelMes)
       );
@@ -552,9 +709,45 @@
       return `${dia}/${mes}/${anio}`;
     }
 
+    function crearTablaVectorI(resultadoVector) {
+      const contenido = resultadoVector.filas.map(fila => `
+        <tr>
+          <td>${fila.cuota.toFixed(2)}</td>
+          <td>${fila.diasAcumulados}</td>
+          <td>${fila.factor.toFixed(2)}</td>
+          <td>${fila.calculoVA.toFixed(2)}</td>
+        </tr>
+      `).join("");
+
+      return `
+        <h3>Cálculo vector i</h3>
+
+        <table id="tabla-vector-i">
+          <thead>
+            <tr>
+              <th scope="col">Vector i, 1 Cuota</th>
+              <th scope="col">Vector i, 2 Días acum</th>
+              <th scope="col">Vector i, 3 Factor</th>
+              <th scope="col">Vector i, 4 Cálculo VA</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            ${contenido}
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <th scope="row" colspan="3">Suma Cálculo VA</th>
+              <td>${resultadoVector.sumaVA.toFixed(2)}</td>
+            </tr>
+          </tfoot>
+        </table>
+      `;
+    }
+
     function crearTabla(titulo, idTabla, filas, esPrincipal = false) {
-      // toFixed solo modifica la presentación.
-      // Los cálculos mantienen la precisión de Number.
+      // En estas dos tablas, toFixed solo modifica la presentación.
       const contenido = filas.map(fila => `
         <tr>
           <td>${fila.numero}</td>
