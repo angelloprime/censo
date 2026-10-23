@@ -130,6 +130,96 @@
       );
     }
 
+    function formatearPorcentaje(valor) {
+      if (!Number.isFinite(valor)) {
+        return 'No calculable';
+      }
+
+      return redondear(valor * 100, 2).toFixed(2) + '%';
+    }
+
+    /*
+      TIR para un importe inicial negativo seguido de cuotas
+      no negativas, considerando cada cuota como un período mensual.
+
+      La estimación inicial será la TEM.
+      Se busca la tasa que hace que el valor actual de los flujos sea 0.
+    */
+    function calcularTIR(flujos, estimacion) {
+      if (
+        flujos.length < 2 ||
+        !flujos.every(Number.isFinite) ||
+        flujos[0] >= 0 ||
+        flujos.slice(1).some(valor => valor < 0) ||
+        !flujos.slice(1).some(valor => valor > 0)
+      ) {
+        return null;
+      }
+
+      // Normalizar los flujos para mejorar la precisión numérica.
+      const escala = -flujos[0];
+      const normalizados = flujos.map(valor => valor / escala);
+
+      function valorActual(tasa) {
+        let valor = normalizados[normalizados.length - 1];
+
+        for (let i = normalizados.length - 2; i >= 0; i--) {
+          valor = normalizados[i] + valor / (1 + tasa);
+        }
+
+        return valor;
+      }
+
+      let inferior = -1;
+      let superior = Math.max(1, estimacion);
+      let valorSuperior = valorActual(superior);
+
+      // Ampliar el intervalo si la tasa buscada es mayor.
+      for (let i = 0; i < 100 && valorSuperior > 0; i++) {
+        superior = superior * 2 + 1;
+        valorSuperior = valorActual(superior);
+      }
+
+      if (
+        !Number.isFinite(superior) ||
+        Number.isNaN(valorSuperior) ||
+        valorSuperior > 0
+      ) {
+        return null;
+      }
+
+      // Primera evaluación usando la estimación TEM.
+      let tasa = Math.max(0, Math.min(estimacion, superior));
+
+      for (let i = 0; i < 200; i++) {
+        const valor = valorActual(tasa);
+
+        if (Number.isNaN(valor)) {
+          return null;
+        }
+
+        if (Math.abs(valor) <= 1e-12) {
+          return tasa;
+        }
+
+        if (valor > 0) {
+          inferior = tasa;
+        } else {
+          superior = tasa;
+        }
+
+        const siguiente = (inferior + superior) / 2;
+
+        if (siguiente === inferior || siguiente === superior) {
+          return tasa;
+        }
+
+        tasa = siguiente;
+      }
+
+      return null;
+    }
+
     formulario.addEventListener('submit', function (evento) {
       evento.preventDefault();
 
@@ -140,7 +230,6 @@
       // Ejemplo: ingresar 10 equivale a una TEA del 10 %.
       const tea = document.getElementById('tea').valueAsNumber / 100;
 
-      // Convertir el porcentaje del seguro a su valor decimal.
       // 0.40 % = 0.004; 0.30 % = 0.003.
       const seguro = Number(
         document.getElementById('seguro').value
@@ -165,11 +254,12 @@
       let diasAcumulados = 0;
 
       cuotas.replaceChildren();
+      resultados.replaceChildren();
 
       // Calcular fechas, días y factores.
       for (let numero = 1; numero <= plazo; numero++) {
-
         const fechaFacturacion = new Date(fechaDesembolso);
+
         fechaFacturacion.setUTCDate(ciclo);
         fechaFacturacion.setUTCMonth(
           mesPrimeraCuota + numero - 1
@@ -221,7 +311,7 @@
         vencimientoAnterior = fechaVencim;
       }
 
-      // Sumar los factores de la columna sin redondear la suma.
+      // Suma de los factores, sin redondear adicionalmente la suma.
       const sumaFactor = cronograma.reduce(function (suma, dato) {
         return suma + dato.factor;
       }, 0);
@@ -234,6 +324,9 @@
       // CuotaY: importe / suma de Factor, a 2 decimales.
       const cuotaY = redondear(importe / sumaFactor, 2);
 
+      // Primer flujo de la TIR: importe ingresado en negativo.
+      const flujos = [-importe];
+
       let principalPendiente = importe;
       let amortizacionAcumulada = 0;
       let amortizacionPrincipalAcumulada = 0;
@@ -245,10 +338,7 @@
         let interesY;
 
         if (esUltimaFila) {
-          // Última fila: amortizar el principal pendiente.
           amortizacion = principalPendiente;
-
-          // Última fila: InterésY redondeado a 2 decimales.
           interesY = redondear(cuotaY - amortizacion, 2);
         } else {
           interesY = principalPendiente * (
@@ -277,15 +367,13 @@
             ? 1
             : amortizacionAcumulada - amortizacionPrincipalAcumulada;
 
-        // Cuota: copiar el valor de CuotaY.
+        // Cuota: copiar CuotaY.
         const cuota = cuotaY;
 
         // Interés: Cuota - Amortización Principal.
         const interes = cuota - amortizacionPrincipal;
 
-        // Seguro de desgravamen:
-        // Principal pendiente × Seguro, con máximo de 30.00.
-        // El importe se redondea a 2 decimales.
+        // Seguro de desgravamen con máximo de 30.00.
         const segDesgravamen = redondear(
           Math.min(principalPendiente * seguro, 30),
           2
@@ -296,6 +384,9 @@
           cuota + segDesgravamen,
           2
         );
+
+        // Agregar cada cuota con seguro a los flujos de la TIR.
+        flujos.push(cuotaConSeguro);
 
         const vencimTexto = formatearFecha(dato.fechaVencim);
 
@@ -325,12 +416,31 @@
           fila.insertCell().textContent = valor;
         });
 
-        // El saldo final redondeado pasa a la siguiente fila.
         principalPendiente = saldoFinal;
-
-        // Acumular después de calcular la fila actual.
         amortizacionPrincipalAcumulada += amortizacionPrincipal;
       });
+
+      // TEM = (1 + TEA)^(1/12) - 1.
+      const tem = Math.pow(1 + tea, 1 / 12) - 1;
+
+      // TIR usando TEM como estimación inicial.
+      const tirMensual = calcularTIR(flujos, tem);
+
+      // TCEA = (1 + TIR)^12 - 1.
+      const tcea = tirMensual === null
+        ? null
+        : Math.pow(1 + tirMensual, 12) - 1;
+
+      // TCEM = (1 + TCEA)^(1/12) - 1.
+      const tcem = tcea === null
+        ? null
+        : Math.pow(1 + tcea, 1 / 12) - 1;
+
+      resultados.innerHTML = `
+        <p><strong>TEM:</strong> ${formatearPorcentaje(tem)}</p>
+        <p><strong>TCEA:</strong> ${formatearPorcentaje(tcea)}</p>
+        <p><strong>TCEM:</strong> ${formatearPorcentaje(tcem)}</p>
+      `;
     });
 
     formulario.addEventListener('reset', function () {
