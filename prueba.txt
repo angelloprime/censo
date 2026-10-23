@@ -128,6 +128,8 @@
       const importe = document.getElementById('importe').valueAsNumber;
       const plazo = document.getElementById('plazo').valueAsNumber;
       const ciclo = Number(document.getElementById('ciclo').value);
+
+      // Ejemplo: ingresar 10 equivale a una TEA del 10 %.
       const tea = document.getElementById('tea').valueAsNumber / 100;
 
       const fechaIngresada = document.getElementById('fecha').value;
@@ -135,6 +137,9 @@
         fechaIngresada + 'T00:00:00Z'
       );
 
+      // Primera facturación:
+      // día menor o igual al ciclo: mismo mes;
+      // día mayor al ciclo: mes siguiente.
       const mesesAdicionales =
         fechaDesembolso.getUTCDate() <= ciclo ? 0 : 1;
 
@@ -147,7 +152,7 @@
 
       cuotas.replaceChildren();
 
-      // Primero se calculan las fechas, los días y los factores.
+      // Calcular fechas, días y factores.
       for (let numero = 1; numero <= plazo; numero++) {
 
         const fechaFacturacion = new Date(fechaDesembolso);
@@ -156,7 +161,7 @@
           mesPrimeraCuota + numero - 1
         );
 
-        // Vencim: restar 3 días y sumar 1 mes.
+        // Vencim: restar 3 días y luego sumar 1 mes.
         const fechaVencim = new Date(fechaFacturacion);
 
         fechaVencim.setUTCDate(
@@ -183,6 +188,7 @@
 
         diasAcumulados += dias;
 
+        // Factor redondeado a 9 decimales.
         const factorSinRedondear =
           1 / Math.pow(1 + tea, diasAcumulados / 360);
 
@@ -201,7 +207,8 @@
         vencimientoAnterior = fechaVencim;
       }
 
-      // Sumar los factores sin redondear adicionalmente la suma.
+      // Sumar los factores de la columna.
+      // No aplicar un redondeo adicional a esta suma.
       const sumaFactor = cronograma.reduce(function (suma, dato) {
         return suma + dato.factor;
       }, 0);
@@ -211,7 +218,7 @@
         sumaFactor
       );
 
-      // CuotaY redondeada a 2 decimales.
+      // CuotaY: importe / suma de Factor.
       const cuotaY = redondear(importe / sumaFactor, 2);
 
       let principalPendiente = importe;
@@ -225,7 +232,10 @@
         let interesY;
 
         if (esUltimaFila) {
+          // Última fila: amortizar el principal pendiente.
           amortizacion = principalPendiente;
+
+          // Última fila: InterésY redondeado a 2 decimales.
           interesY = redondear(cuotaY - amortizacion, 2);
         } else {
           interesY = principalPendiente * (
@@ -235,16 +245,23 @@
           amortizacion = cuotaY - interesY;
         }
 
-        const saldoFinal = principalPendiente - amortizacion;
+        // Redondear los importes antes de calcular el saldo.
+        principalPendiente = redondear(principalPendiente, 2);
+        amortizacion = redondear(amortizacion, 2);
 
-        // Suma de Amortización desde la primera fila
-        // hasta la fila actual, incluida.
+        // Saldo final: Principal pendiente - Amortización.
+        const saldoFinal = redondear(
+          principalPendiente - amortizacion,
+          2
+        );
+
+        // Acumulado de Amortización, incluida la fila actual.
         amortizacionAcumulada += amortizacion;
 
         // Amortización Principal:
         // si el acumulado de Amortización es <= 0, colocar 1.00;
-        // en caso contrario, restar lo acumulado en las filas
-        // anteriores de Amortización Principal.
+        // de lo contrario, restar la suma de las filas anteriores
+        // de Amortización Principal.
         const amortizacionPrincipal =
           amortizacionAcumulada <= 0
             ? 1
@@ -278,8 +295,10 @@
           fila.insertCell().textContent = valor;
         });
 
-        // Acumulados que se utilizarán en la siguiente fila.
+        // El saldo final redondeado pasa a la siguiente fila.
         principalPendiente = saldoFinal;
+
+        // Acumular después de calcular la fila actual.
         amortizacionPrincipalAcumulada += amortizacionPrincipal;
       });
     });
