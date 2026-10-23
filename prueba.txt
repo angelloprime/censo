@@ -15,21 +15,27 @@
       --border: #e3e8ef;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
       min-height: 100vh;
       border-top: 5px solid var(--red);
       background:
-        radial-gradient(ellipse at top right, #ffe6e8, transparent 45%),
+        radial-gradient(
+          ellipse at top right,
+          #ffe6e8,
+          transparent 45%
+        ),
         #f4f6fa;
       color: var(--dark);
       font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
     }
 
     main {
-      max-width: 760px;
+      max-width: 800px;
       margin: auto;
       padding: 42px 24px;
     }
@@ -68,7 +74,8 @@
       line-height: 1.6;
     }
 
-    .inputs, .card {
+    .inputs,
+    .card {
       background: white;
       border: 1px solid var(--border);
       border-radius: 18px;
@@ -77,7 +84,8 @@
 
     .inputs {
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) auto;
+      align-items: start;
       gap: 20px;
       padding: 25px 28px;
       margin-bottom: 24px;
@@ -90,7 +98,8 @@
       font-weight: 700;
     }
 
-    input, select {
+    input[type="text"],
+    select {
       width: 100%;
       padding: 14px;
       border: 1px solid #d7dfe9;
@@ -102,7 +111,8 @@
       font-weight: 600;
     }
 
-    input:focus, select:focus {
+    input[type="text"]:focus,
+    select:focus {
       outline: 3px solid #ffe0e3;
       border-color: var(--red);
     }
@@ -114,11 +124,48 @@
       line-height: 1.5;
     }
 
+    .cash-option {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 54px;
+      margin: 25px 0 0;
+      padding: 0 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #f8fafc;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .cash-option:has(input:checked) {
+      color: #bf1d2c;
+      background: #fff0f2;
+      border-color: #f4b7bd;
+    }
+
+    .cash-option input {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      accent-color: var(--red);
+      cursor: pointer;
+    }
+
+    .cash-option input:focus-visible {
+      outline: 3px solid #ffb9c0;
+      outline-offset: 3px;
+    }
+
     #error {
       grid-column: 1 / -1;
       margin: 0;
+      padding: 12px 14px;
+      border-radius: 9px;
+      background: #fff0f2;
       color: #bd1d2b;
       font-size: 13px;
+      line-height: 1.7;
     }
 
     .card {
@@ -154,6 +201,7 @@
     }
 
     .line strong {
+      min-width: 0;
       text-align: right;
       overflow-wrap: anywhere;
       font-variant-numeric: tabular-nums;
@@ -181,20 +229,59 @@
       color: #526176;
       font-size: 13px;
       line-height: 1.8;
+      overflow-wrap: anywhere;
     }
 
-    .summary strong { color: var(--dark); }
+    .summary strong {
+      color: var(--dark);
+    }
 
-    [hidden] { display: none !important; }
+    [hidden] {
+      display: none !important;
+    }
 
-    @media (max-width: 540px) {
-      main { padding: 28px 16px; }
-      header { align-items: flex-start; gap: 12px; }
-      .brand { width: 45px; height: 45px; font-size: 26px; }
-      .inputs { grid-template-columns: 1.5fr 1fr; gap: 12px; }
-      .inputs, .card { padding: 20px; }
-      input, select { font-size: 18px; padding: 12px; }
-      .line { font-size: 13px; }
+    @media (max-width: 620px) {
+      main {
+        padding: 28px 16px;
+      }
+
+      header {
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .brand {
+        width: 45px;
+        height: 45px;
+        font-size: 26px;
+      }
+
+      .inputs {
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+        gap: 12px;
+      }
+
+      .inputs,
+      .card {
+        padding: 20px;
+      }
+
+      input[type="text"],
+      select {
+        font-size: 18px;
+        padding: 12px;
+      }
+
+      .cash-option {
+        grid-column: 1 / -1;
+        width: fit-content;
+        min-height: 44px;
+        margin: 0;
+      }
+
+      .line {
+        font-size: 13px;
+      }
     }
   </style>
 </head>
@@ -203,23 +290,28 @@
   <main>
     <header>
       <div class="brand" aria-hidden="true">%</div>
+
       <div>
         <h1>Calculadora de provisión</h1>
-        <p>Ingresa el importe disponible y el porcentaje de provisión.</p>
+        <p>
+          Ingresa el importe disponible y el porcentaje de provisión.
+        </p>
       </div>
     </header>
 
     <section class="inputs" aria-label="Datos del cálculo">
       <div>
         <label for="amount">Importe disponible</label>
+
         <input
           id="amount"
           type="text"
           inputmode="decimal"
-          placeholder="Ej.: 3000.00"
+          placeholder="Ej.: 3500.00"
           autocomplete="off"
           aria-describedby="help error"
         >
+
         <p class="hint" id="help">
           Sin separador de miles. Puedes usar punto o coma decimal.
         </p>
@@ -227,21 +319,33 @@
 
       <div>
         <label for="rate">Provisión</label>
+
         <select id="rate">
           <option value="2" selected>2%</option>
           <option value="4">4%</option>
         </select>
       </div>
 
+      <label class="cash-option" for="cash">
+        <input id="cash" type="checkbox">
+        <span>Con Cash</span>
+      </label>
+
       <p id="error" role="alert" hidden></p>
     </section>
 
-    <section class="card" aria-live="polite" aria-label="Resultado">
+    <section
+      class="card"
+      aria-live="polite"
+      aria-label="Resultado"
+    >
       <h2 class="label">Monto sin provisión</h2>
       <div class="value" id="base">—</div>
 
       <div class="line">
-        <span>Provisión del <span id="percentage">2%</span></span>
+        <span>
+          Provisión del <span id="percentage">2%</span>
+        </span>
         <strong id="fee">—</strong>
       </div>
 
@@ -250,7 +354,7 @@
         <strong id="total">—</strong>
       </div>
 
-      <div class="line remaining">
+      <div class="line remaining" id="remainingRow">
         <span>Importe que queda disponible</span>
         <strong id="remaining">—</strong>
       </div>
@@ -264,10 +368,29 @@
 
     const $ = id => document.getElementById(id);
 
-    // Importes en céntimos, sin errores de punto flotante.
+    // Formatea céntimos con dos decimales exactos.
     function money(cents) {
       return (cents / 100n).toString() + "." +
         (cents % 100n).toString().padStart(2, "0");
+    }
+
+    // Formatea unidades de 0.0001 sin redondear.
+    // Conserva entre dos y cuatro decimales.
+    function precise(units) {
+      const whole = units / 10000n;
+
+      let fraction = (units % 10000n)
+        .toString()
+        .padStart(4, "0");
+
+      while (
+        fraction.length > 2 &&
+        fraction.endsWith("0")
+      ) {
+        fraction = fraction.slice(0, -1);
+      }
+
+      return whole.toString() + "." + fraction;
     }
 
     function parseAmount(value) {
@@ -284,37 +407,95 @@
         BigInt(fraction.padEnd(2, "0"));
     }
 
+    function clearResults() {
+      ["base", "fee", "total", "remaining"].forEach(id => {
+        $(id).textContent = "—";
+      });
+
+      $("summary").textContent = "";
+      $("summary").hidden = true;
+    }
+
     function update() {
       const raw = $("amount").value;
       const amount = parseAmount(raw);
       const rate = BigInt($("rate").value);
+      const cash = $("cash").checked;
 
       $("percentage").textContent = rate + "%";
+      $("error").textContent = "";
       $("error").hidden = true;
-      $("summary").hidden = true;
+      $("remainingRow").hidden = cash;
+
+      clearResults();
 
       if (amount === null) {
-        ["base", "fee", "total", "remaining"].forEach(id => {
-          $(id).textContent = "—";
-        });
-
         if (raw.trim()) {
           $("error").textContent =
             "Ingresa un importe no negativo, sin separador de miles, " +
             "con hasta 15 dígitos enteros y 2 decimales.";
+
           $("error").hidden = false;
         }
 
         return;
       }
 
-      // Al 2%, la base avanza en múltiplos de 0.50.
-      // Al 4%, la base avanza en múltiplos de 0.25.
-      // Así la provisión también es exacta en céntimos.
+      if (cash) {
+        calculateWithCash(amount, rate);
+      } else {
+        calculateWithoutCash(amount, rate);
+      }
+    }
+
+    function calculateWithCash(amount, rate) {
+      const divisor = 100n + rate;
+
+      // Base en céntimos, tomando el siguiente céntimo
+      // cuando la división no sea exacta.
+      const base =
+        (amount * 100n + divisor - 1n) / divisor;
+
+      // Provisión y total en unidades de 0.0001.
+      const feeUnits = base * rate;
+      const totalUnits = base * 100n + feeUnits;
+
+      // Compara enteros y primeros dos decimales,
+      // descartando el resto sin redondear.
+      const totalTruncatedToCents = totalUnits / 100n;
+
+      if (totalTruncatedToCents !== amount) {
+        $("error").textContent =
+          "Este importe no permite una base de dos decimales " +
+          "cuyo total con provisión coincida con el importe ingresado " +
+          "hasta el segundo decimal. Para lograrlo, la base " +
+          "necesitaría más de dos decimales.";
+
+        $("error").hidden = false;
+        return;
+      }
+
+      $("base").textContent = money(base);
+      $("fee").textContent = precise(feeUnits);
+      $("total").textContent = precise(totalUnits);
+
+      $("summary").hidden = false;
+      $("summary").innerHTML =
+        `Monto sin provisión: <strong>${money(base)}</strong>, ` +
+        `más <strong>${precise(feeUnits)}</strong> de provisión. ` +
+        `Total: <strong>${precise(totalUnits)}</strong>. ` +
+        `Tomando solo los primeros dos decimales, sin redondear: ` +
+        `<strong>${money(totalTruncatedToCents)}</strong>.`;
+    }
+
+    function calculateWithoutCash(amount, rate) {
+      // Bases válidas:
+      // 2% → múltiplos de 0.50.
+      // 4% → múltiplos de 0.25.
       const step = rate === 2n ? 50n : 25n;
       const totalStep = step + step * rate / 100n;
 
-      // Mayor base válida cuyo total no supera el importe.
+      // Mayor base válida sin superar el importe disponible.
       const base = (amount / totalStep) * step;
       const fee = base * rate / 100n;
       const total = base + fee;
@@ -331,6 +512,7 @@
         $("summary").textContent =
           "El importe disponible no alcanza para una venta positiva " +
           "con provisión exacta en céntimos.";
+
         return;
       }
 
@@ -342,2110 +524,9 @@
 
     $("amount").addEventListener("input", update);
     $("rate").addEventListener("change", update);
+    $("cash").addEventListener("change", update);
 
     update();
-  </script>
-</body>
-</html>
-
----------------------------------------------------------------------------------------------
-
-<!DOCTYPE html>
-<html lang="es-PE">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Simulador PP/CD</title>
-
-  <!-- Icono de la pestaña -->
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ec111a'/%3E%3Crect x='17' y='10' width='30' height='44' rx='5' fill='white'/%3E%3Crect x='22' y='16' width='20' height='9' rx='2' fill='%23ec111a'/%3E%3Cpath d='M23 32h4m10 0h4M23 40h4m10 0h4M23 48h4m10 0h4' stroke='%23ec111a' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E"
-  >
-
-  <!-- Bootstrap Icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css"
-  >
-
-  <style>
-    :root {
-      --rojo: #ec111a;
-      --rojo-oscuro: #be0d15;
-      --rojo-suave: #fff1f2;
-      --fondo: #f5f6f8;
-      --blanco: #ffffff;
-      --texto: #202632;
-      --texto-secundario: #6b7280;
-      --borde: #e5e7eb;
-      --sombra: 0 6px 24px rgba(28, 35, 48, 0.045);
-      --radio: 16px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    [hidden] {
-      display: none !important;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background: var(--fondo);
-      color: var(--texto);
-      font-family: "Segoe UI", Arial, sans-serif;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    button,
-    input,
-    select {
-      font: inherit;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    button:focus-visible,
-    .table-scroll:focus-visible {
-      outline: 3px solid rgba(236, 17, 26, 0.35);
-      outline-offset: 3px;
-    }
-
-    /* ENCABEZADO */
-
-    .app-header {
-      background: var(--rojo);
-      color: var(--blanco);
-      box-shadow: 0 3px 14px rgba(145, 0, 8, 0.14);
-    }
-
-    .header-inner,
-    .app-main {
-      width: min(1380px, calc(100% - 48px));
-      margin-inline: auto;
-    }
-
-    .header-inner {
-      min-height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-icon {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.12);
-      font-size: 22px;
-    }
-
-    .brand h1 {
-      margin: 0;
-      font-size: 25px;
-      font-weight: 750;
-      letter-spacing: -0.6px;
-    }
-
-    .product-switch {
-      display: flex;
-      gap: 4px;
-      padding: 5px;
-      border-radius: 12px;
-      background: rgba(100, 0, 5, 0.18);
-    }
-
-    .product-button {
-      min-width: 68px;
-      padding: 9px 18px;
-      border: 0;
-      border-radius: 8px;
-      background: transparent;
-      color: rgba(255, 255, 255, 0.85);
-      font-weight: 750;
-      transition: background 0.15s, color 0.15s;
-    }
-
-    .product-button:hover {
-      background: rgba(255, 255, 255, 0.12);
-      color: var(--blanco);
-    }
-
-    .product-button.is-active {
-      background: var(--blanco);
-      color: var(--rojo);
-      box-shadow: 0 2px 6px rgba(90, 0, 0, 0.1);
-    }
-
-    .product-button:focus-visible {
-      outline-color: var(--blanco);
-    }
-
-    /* CONTENIDO */
-
-    .app-main {
-      flex: 1;
-      padding-block: 30px 40px;
-    }
-
-    .page-heading {
-      margin-bottom: 22px;
-    }
-
-    .page-heading h2 {
-      margin: 0 0 5px;
-      font-size: 25px;
-      font-weight: 750;
-      letter-spacing: -0.6px;
-    }
-
-    .page-heading p {
-      margin: 0;
-      color: var(--texto-secundario);
-    }
-
-    .workspace {
-      display: grid;
-      grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
-      gap: 24px;
-      align-items: start;
-    }
-
-    .panel {
-      min-width: 0;
-      background: var(--blanco);
-      border: 1px solid var(--borde);
-      border-radius: var(--radio);
-      box-shadow: var(--sombra);
-    }
-
-    .form-panel,
-    .results-panel {
-      padding: 26px;
-    }
-
-    .panel-heading {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .panel-heading h3 {
-      margin: 0;
-      font-size: 18px;
-      font-weight: 750;
-      letter-spacing: -0.3px;
-    }
-
-    .panel-heading p {
-      margin: 3px 0 0;
-      color: var(--texto-secundario);
-      font-size: 12px;
-    }
-
-    .section-icon {
-      width: 40px;
-      height: 40px;
-      flex: 0 0 40px;
-      display: grid;
-      place-items: center;
-      border-radius: 11px;
-      background: var(--rojo-suave);
-      color: var(--rojo);
-      font-size: 19px;
-    }
-
-    /* FORMULARIO: DOS CAMPOS POR FILA */
-
-    .fields-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .field {
-      min-width: 0;
-    }
-
-    .field label {
-      display: block;
-      margin-bottom: 7px;
-      font-size: 13px;
-      font-weight: 650;
-    }
-
-    .field input,
-    .field select {
-      width: 100%;
-      min-width: 0;
-      min-height: 46px;
-      padding: 11px 12px;
-      border: 1px solid #d9dde4;
-      border-radius: 9px;
-      background: var(--blanco);
-      color: var(--texto);
-      outline: none;
-      color-scheme: light;
-      transition: border-color 0.15s, box-shadow 0.15s;
-    }
-
-    .field select {
-      text-overflow: ellipsis;
-    }
-
-    .field input:hover,
-    .field select:hover {
-      border-color: #b5bbc5;
-    }
-
-    .field input:focus,
-    .field select:focus {
-      border-color: var(--rojo);
-      box-shadow: 0 0 0 3px rgba(236, 17, 26, 0.09);
-    }
-
-    .field input::placeholder {
-      color: #a3a8b2;
-    }
-
-    .field-help {
-      display: block;
-      margin-top: 6px;
-      color: var(--texto-secundario);
-      font-size: 11px;
-      line-height: 1.4;
-    }
-
-    /* OPCIONES */
-
-    .options-fieldset {
-      min-width: 0;
-      margin: 25px 0 0;
-      padding: 18px 0 0;
-      border: 0;
-      border-top: 1px solid var(--borde);
-    }
-
-    .options-fieldset legend {
-      padding: 0 10px 0 0;
-      font-size: 13px;
-      font-weight: 750;
-    }
-
-    .options-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .check-option {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      min-height: 48px;
-      padding: 11px 12px;
-      border: 1px solid var(--borde);
-      border-radius: 9px;
-      background: #fafbfc;
-      cursor: pointer;
-      font-size: 12px;
-      transition: border-color 0.15s, background 0.15s;
-    }
-
-    .check-option:hover,
-    .check-option:has(input:checked) {
-      border-color: #f2a7ac;
-      background: var(--rojo-suave);
-    }
-
-    .check-option input {
-      width: 17px;
-      height: 17px;
-      flex: 0 0 17px;
-      margin: 0;
-      accent-color: var(--rojo);
-      cursor: pointer;
-    }
-
-    /* BOTONES */
-
-    .form-actions {
-      display: flex;
-      gap: 12px;
-      margin-top: 25px;
-    }
-
-    .button {
-      min-height: 46px;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      padding: 11px 22px;
-      border: 1px solid transparent;
-      border-radius: 9px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: background 0.15s, border-color 0.15s;
-    }
-
-    .button-primary {
-      background: var(--rojo);
-      color: var(--blanco);
-    }
-
-    .button-primary:hover {
-      background: var(--rojo-oscuro);
-    }
-
-    .button-secondary {
-      background: var(--blanco);
-      border-color: #d9dde4;
-      color: var(--texto-secundario);
-    }
-
-    .button-secondary:hover {
-      border-color: #b5bbc5;
-      background: #f7f8fa;
-      color: var(--texto);
-    }
-
-    .form-actions .button-primary {
-      flex: 1;
-    }
-
-    .button-schedule {
-      width: 100%;
-      margin-top: 18px;
-      background: var(--rojo-suave);
-      border-color: #ffdadd;
-      color: var(--rojo);
-    }
-
-    .button-schedule:hover {
-      background: #ffe4e6;
-      border-color: #f2a7ac;
-    }
-
-    /* RESULTADOS */
-
-    .empty-state {
-      min-height: 330px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 25px;
-    }
-
-    .empty-icon {
-      width: 78px;
-      height: 78px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 20px;
-      border-radius: 24px;
-      background: var(--rojo-suave);
-      color: var(--rojo);
-      font-size: 34px;
-    }
-
-    .empty-state h4 {
-      margin: 0 0 8px;
-      font-size: 17px;
-    }
-
-    .empty-state p {
-      max-width: 260px;
-      margin: 0;
-      color: var(--texto-secundario);
-      font-size: 13px;
-    }
-
-    .days-strip {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 16px;
-      padding: 15px 17px;
-      border: 1px solid #ffdadd;
-      border-radius: 11px;
-      background: var(--rojo-suave);
-    }
-
-    .days-strip span {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 650;
-    }
-
-    .days-strip i {
-      color: var(--rojo);
-      font-size: 17px;
-    }
-
-    .days-strip strong {
-      color: var(--rojo);
-      font-size: 23px;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .summary-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .result-item {
-      min-width: 0;
-      min-height: 96px;
-      padding: 17px;
-      border: 1px solid var(--borde);
-      border-radius: 11px;
-      background: #fafbfc;
-    }
-
-    .result-label {
-      display: block;
-      margin-bottom: 9px;
-      color: var(--texto-secundario);
-      font-size: 12px;
-      font-weight: 550;
-    }
-
-    .result-value {
-      display: block;
-      font-size: 22px;
-      font-weight: 750;
-      line-height: 1.2;
-      letter-spacing: -0.5px;
-      font-variant-numeric: tabular-nums;
-      overflow-wrap: anywhere;
-    }
-
-    .result-payment {
-      background: var(--rojo);
-      border-color: var(--rojo);
-      color: var(--blanco);
-    }
-
-    .result-payment .result-label {
-      color: rgba(255, 255, 255, 0.88);
-    }
-
-    .result-payment .result-value {
-      font-size: 30px;
-    }
-
-    .result-tcea {
-      background: var(--rojo-suave);
-      border-color: #ffdadd;
-    }
-
-    .result-tcea .result-value {
-      color: var(--rojo);
-      font-size: 30px;
-    }
-
-    .notice {
-      display: flex;
-      align-items: flex-start;
-      gap: 9px;
-      margin-top: 16px;
-      padding: 12px 14px;
-      border: 1px solid #f0dfb8;
-      border-radius: 9px;
-      background: #fff9eb;
-      color: #805c15;
-      font-size: 12px;
-    }
-
-    /* CRONOGRAMA */
-
-    .tables-stack {
-      display: grid;
-      gap: 24px;
-      margin-top: 26px;
-    }
-
-    .tables-stack:empty {
-      display: none;
-    }
-
-    .table-panel {
-      overflow: hidden;
-    }
-
-    .table-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      padding: 20px 24px;
-      border-bottom: 1px solid var(--borde);
-    }
-
-    .table-heading h3 {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 0;
-      font-size: 16px;
-      font-weight: 750;
-    }
-
-    .table-heading h3 i {
-      color: var(--rojo);
-      font-size: 19px;
-    }
-
-    .table-count {
-      padding: 5px 10px;
-      border-radius: 7px;
-      background: #f1f3f6;
-      color: var(--texto-secundario);
-      font-size: 11px;
-      font-weight: 650;
-      white-space: nowrap;
-    }
-
-    .table-scroll {
-      width: 100%;
-      max-height: 500px;
-      overflow: auto;
-      scrollbar-width: thin;
-      scrollbar-color: #c7cbd3 #f3f4f6;
-    }
-
-    .calc-table {
-      width: 100%;
-      min-width: 1250px;
-      border-collapse: separate;
-      border-spacing: 0;
-      font-size: 12px;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .calc-table th,
-    .calc-table td {
-      padding: 13px 16px;
-      text-align: right;
-      white-space: nowrap;
-      border-bottom: 1px solid #edf0f3;
-    }
-
-    .calc-table thead th {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      background: #f7f8fa;
-      color: #535c6a;
-      font-size: 11px;
-      font-weight: 750;
-    }
-
-    .calc-table th:nth-child(-n+3),
-    .calc-table td:nth-child(-n+3) {
-      text-align: center;
-    }
-
-    .calc-table tbody tr:nth-child(even) {
-      background: #fcfcfd;
-    }
-
-    .calc-table tbody tr:hover {
-      background: #fff5f5;
-    }
-
-    .calc-table tbody tr:last-child td {
-      border-bottom: 0;
-    }
-
-    /* CD */
-
-    .construction {
-      min-height: 530px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 45px 25px;
-      text-align: center;
-    }
-
-    .construction-icon {
-      width: 100px;
-      height: 100px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 25px;
-      border-radius: 30px;
-      background: var(--rojo-suave);
-      color: var(--rojo);
-      font-size: 46px;
-    }
-
-    .construction .eyebrow {
-      color: var(--rojo);
-      font-size: 12px;
-      font-weight: 750;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .construction h2 {
-      margin: 9px 0;
-      font-size: 32px;
-      letter-spacing: -0.7px;
-    }
-
-    .construction p {
-      margin: 0 0 27px;
-      color: var(--texto-secundario);
-    }
-
-    /* PIE DE PÁGINA */
-
-    .app-footer {
-      padding: 20px;
-      border-top: 1px solid var(--borde);
-      background: var(--blanco);
-      color: var(--texto-secundario);
-      text-align: center;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    /* RESPONSIVE */
-
-    @media (max-width: 950px) {
-      .workspace {
-        grid-template-columns: 1fr;
-      }
-
-      .empty-state {
-        min-height: 220px;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .header-inner,
-      .app-main {
-        width: calc(100% - 28px);
-      }
-
-      .header-inner {
-        min-height: 72px;
-        gap: 10px;
-      }
-
-      .brand {
-        gap: 8px;
-      }
-
-      .brand-icon {
-        display: none;
-      }
-
-      .brand h1 {
-        font-size: 19px;
-        letter-spacing: -0.5px;
-      }
-
-      .product-button {
-        min-width: 45px;
-        padding: 8px 12px;
-      }
-
-      .app-main {
-        padding-block: 22px 28px;
-      }
-
-      .page-heading h2 {
-        font-size: 23px;
-      }
-
-      .form-panel,
-      .results-panel {
-        padding: 20px;
-      }
-
-      .fields-grid {
-        gap: 16px;
-      }
-
-      .field input,
-      .field select {
-        font-size: 16px;
-      }
-
-      .options-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .table-heading {
-        padding: 17px;
-      }
-
-      .table-heading h3 {
-        font-size: 14px;
-      }
-
-      .result-item {
-        padding: 14px;
-      }
-
-      .result-value {
-        font-size: 20px;
-      }
-
-      .result-payment .result-value,
-      .result-tcea .result-value {
-        font-size: 26px;
-      }
-
-      .construction {
-        min-height: 430px;
-      }
-    }
-
-    @media (max-width: 390px) {
-      .form-actions {
-        flex-direction: column;
-      }
-
-      .brand h1 {
-        font-size: 17px;
-      }
-
-      .fields-grid {
-        gap: 12px;
-      }
-
-      .field input,
-      .field select {
-        padding-inline: 8px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        transition: none !important;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <header class="app-header">
-    <div class="header-inner">
-      <div class="brand">
-        <span class="brand-icon">
-          <i class="bi bi-calculator-fill" aria-hidden="true"></i>
-        </span>
-
-        <h1>Simulador PP/CD</h1>
-      </div>
-
-      <div
-        class="product-switch"
-        role="group"
-        aria-label="Seleccionar producto"
-      >
-        <button
-          type="button"
-          id="boton-pp"
-          class="product-button is-active"
-          aria-pressed="true"
-          aria-controls="panel-pp"
-          onclick="cambiarProducto('PP')"
-        >
-          PP
-        </button>
-
-        <button
-          type="button"
-          id="boton-cd"
-          class="product-button"
-          aria-pressed="false"
-          aria-controls="panel-cd"
-          onclick="cambiarProducto('CD')"
-        >
-          CD
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main class="app-main">
-    <!-- SIMULADOR PP -->
-    <section id="panel-pp" aria-labelledby="titulo-pp">
-      <div class="page-heading">
-        <h2 id="titulo-pp">Simulación PP</h2>
-        <p>Configura tu préstamo y consulta la cuota y el cronograma.</p>
-      </div>
-
-      <div class="workspace">
-        <form
-          id="formulario"
-          class="panel form-panel"
-          onsubmit="event.preventDefault(); simular();"
-          onreset="limpiarResultados()"
-        >
-          <div class="panel-heading">
-            <span class="section-icon">
-              <i class="bi bi-sliders" aria-hidden="true"></i>
-            </span>
-
-            <div>
-              <h3>Datos del préstamo</h3>
-              <p>Completa los campos para realizar la simulación.</p>
-            </div>
-          </div>
-
-          <div class="fields-grid">
-            <div class="field">
-              <label for="seguro">Tipo de seguro</label>
-
-              <select id="seguro" name="seguro">
-                <option value="vida" selected>
-                  Seguro de vida
-                </option>
-
-                <option value="desgravamen">
-                  Seguro de desgravamen
-                </option>
-
-                <option value="desgravamen-devolucion">
-                  Seguro de desgravamen con devolución
-                </option>
-
-                <option value="sin-seguro">
-                  Sin seguro
-                </option>
-
-                <option value="endosado">
-                  Endosado
-                </option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="plazo">Plazo (meses)</label>
-
-              <input
-                type="number"
-                id="plazo"
-                name="plazo"
-                min="1"
-                step="1"
-                placeholder="Cantidad de cuotas"
-                required
-              >
-            </div>
-
-            <div class="field">
-              <label for="tea">TEA (%)</label>
-
-              <input
-                type="number"
-                id="tea"
-                name="tea"
-                min="0"
-                step="any"
-                placeholder="0.00"
-                required
-              >
-            </div>
-
-            <div class="field">
-              <label for="importe">Importe</label>
-
-              <input
-                type="number"
-                id="importe"
-                name="importe"
-                min="0.01"
-                step="0.01"
-                placeholder="0.00"
-                required
-              >
-            </div>
-
-            <div class="field">
-              <label for="desembolso">Fecha de desembolso</label>
-
-              <input
-                type="date"
-                id="desembolso"
-                name="desembolso"
-                lang="es-PE"
-                onchange="validarFechas()"
-                required
-              >
-            </div>
-
-            <div class="field">
-              <label for="primer-pago">Fecha del primer pago</label>
-
-              <input
-                type="date"
-                id="primer-pago"
-                name="primer_pago"
-                lang="es-PE"
-                aria-describedby="ayuda-primer-pago"
-                onchange="validarFechas()"
-                required
-              >
-
-              <small id="ayuda-primer-pago" class="field-help">
-                Entre 30 y 60 días después del desembolso.
-              </small>
-            </div>
-          </div>
-
-          <fieldset class="options-fieldset">
-            <legend>Opciones adicionales</legend>
-
-            <div class="options-grid">
-              <label class="check-option">
-                <input
-                  type="checkbox"
-                  id="seguro-desempleo"
-                  name="seguro_desempleo"
-                >
-                <span>Seguro de desempleo</span>
-              </label>
-
-              <label class="check-option">
-                <input
-                  type="checkbox"
-                  id="estado-cuenta"
-                  name="estado_cuenta"
-                >
-                <span>Envío de estado de cuenta</span>
-              </label>
-
-              <label class="check-option">
-                <input
-                  type="checkbox"
-                  id="cuota-julio"
-                  name="cuota_julio"
-                >
-                <span>Cuota julio</span>
-              </label>
-
-              <label class="check-option">
-                <input
-                  type="checkbox"
-                  id="cuota-diciembre"
-                  name="cuota_diciembre"
-                >
-                <span>Cuota diciembre</span>
-              </label>
-            </div>
-          </fieldset>
-
-          <div class="form-actions">
-            <button type="submit" class="button button-primary">
-              <i class="bi bi-calculator" aria-hidden="true"></i>
-              Simular
-            </button>
-
-            <button type="reset" class="button button-secondary">
-              <i
-                class="bi bi-arrow-counterclockwise"
-                aria-hidden="true"
-              ></i>
-              Limpiar
-            </button>
-          </div>
-        </form>
-
-        <section
-          class="panel results-panel"
-          aria-labelledby="titulo-resultados"
-        >
-          <div class="panel-heading">
-            <span class="section-icon">
-              <i class="bi bi-bar-chart-line" aria-hidden="true"></i>
-            </span>
-
-            <div>
-              <h3 id="titulo-resultados">Resultados</h3>
-              <p>Resumen de la simulación.</p>
-            </div>
-          </div>
-
-          <div id="estado-vacio" class="empty-state">
-            <span class="empty-icon">
-              <i class="bi bi-calculator" aria-hidden="true"></i>
-            </span>
-
-            <h4>Tu simulación comienza aquí</h4>
-
-            <p>
-              Completa los datos del préstamo y presiona Simular.
-            </p>
-          </div>
-
-          <div id="resultados" aria-live="polite" hidden></div>
-
-          <button
-            type="button"
-            id="boton-cronograma"
-            class="button button-schedule"
-            aria-controls="tablas"
-            aria-expanded="false"
-            onclick="alternarCronograma()"
-            hidden
-          >
-            <i
-              id="icono-cronograma"
-              class="bi bi-eye"
-              aria-hidden="true"
-            ></i>
-
-            <span id="texto-cronograma">Ver cronograma</span>
-          </button>
-        </section>
-      </div>
-
-      <!-- Solo contendrá el Cronograma de pagos -->
-      <div id="tablas" class="tables-stack" hidden></div>
-    </section>
-
-    <!-- SIMULADOR CD -->
-    <section
-      id="panel-cd"
-      class="panel construction"
-      aria-labelledby="titulo-cd"
-      hidden
-    >
-      <span class="construction-icon">
-        <i class="bi bi-cone-striped" aria-hidden="true"></i>
-      </span>
-
-      <span class="eyebrow">Simulador CD</span>
-
-      <h2 id="titulo-cd">En construcción</h2>
-
-      <p>Esta sección se encuentra en desarrollo.</p>
-
-      <button
-        type="button"
-        class="button button-primary"
-        onclick="cambiarProducto('PP')"
-      >
-        <i class="bi bi-arrow-left" aria-hidden="true"></i>
-        Ir al simulador PP
-      </button>
-    </section>
-  </main>
-
-  <footer class="app-footer">
-    Validación 2026
-  </footer>
-
-  <script>
-    "use strict";
-
-    /* =========================================================
-       INTERFAZ
-       ========================================================= */
-
-    function cambiarProducto(producto) {
-      const esPP = producto === "PP";
-
-      document.getElementById("panel-pp").hidden = !esPP;
-      document.getElementById("panel-cd").hidden = esPP;
-
-      const botonPP = document.getElementById("boton-pp");
-      const botonCD = document.getElementById("boton-cd");
-
-      botonPP.classList.toggle("is-active", esPP);
-      botonCD.classList.toggle("is-active", !esPP);
-
-      botonPP.setAttribute("aria-pressed", String(esPP));
-      botonCD.setAttribute("aria-pressed", String(!esPP));
-    }
-
-    function establecerCronogramaVisible(mostrar) {
-      document.getElementById("tablas").hidden = !mostrar;
-
-      document.getElementById("boton-cronograma").setAttribute(
-        "aria-expanded",
-        String(mostrar)
-      );
-
-      document.getElementById("texto-cronograma").textContent =
-        mostrar ? "Ocultar cronograma" : "Ver cronograma";
-
-      document.getElementById("icono-cronograma").className =
-        mostrar ? "bi bi-eye-slash" : "bi bi-eye";
-    }
-
-    function alternarCronograma() {
-      const tablas = document.getElementById("tablas");
-
-      establecerCronogramaVisible(tablas.hidden);
-    }
-
-    function limpiarResultados() {
-      const resultados = document.getElementById("resultados");
-
-      resultados.innerHTML = "";
-      resultados.hidden = true;
-
-      document.getElementById("tablas").innerHTML = "";
-
-      establecerCronogramaVisible(false);
-
-      document.getElementById("boton-cronograma").hidden = true;
-      document.getElementById("estado-vacio").hidden = false;
-
-      // Al limpiar, el desembolso vuelve a la fecha del día.
-      establecerFechaDesembolsoActual();
-    }
-
-    /* =========================================================
-       FECHA ACTUAL Y VALIDACIÓN DE FECHAS
-       ========================================================= */
-
-    function establecerFechaDesembolsoActual() {
-      // Se usa la fecha local del navegador.
-      const hoy = new Date();
-
-      const anio = String(hoy.getFullYear()).padStart(4, "0");
-      const mes = String(hoy.getMonth() + 1).padStart(2, "0");
-      const dia = String(hoy.getDate()).padStart(2, "0");
-
-      const fechaActual = `${anio}-${mes}-${dia}`;
-
-      const campoDesembolso =
-        document.getElementById("desembolso");
-
-      // defaultValue permite conservar esta fecha al resetear.
-      campoDesembolso.defaultValue = fechaActual;
-      campoDesembolso.value = fechaActual;
-    }
-
-    function validarFechas() {
-      const campoDesembolso =
-        document.getElementById("desembolso");
-
-      const campoPrimerPago =
-        document.getElementById("primer-pago");
-
-      // Si falta una fecha, todavía no se compara.
-      if (
-        !campoDesembolso.value ||
-        !campoPrimerPago.value
-      ) {
-        return null;
-      }
-
-      const fechaDesembolso = new Date(
-        campoDesembolso.value + "T00:00:00"
-      );
-
-      const fechaPrimerPago = new Date(
-        campoPrimerPago.value + "T00:00:00"
-      );
-
-      const cantidadDias = calcularDias(
-        fechaDesembolso,
-        fechaPrimerPago
-      );
-
-      if (!Number.isFinite(cantidadDias)) {
-        alert(
-          "Fechas inválidas.\n\n" +
-          "No se pudieron interpretar las fechas ingresadas."
-        );
-
-        return null;
-      }
-
-      // 30 y 60 días sí son válidos.
-      if (cantidadDias >= 30 && cantidadDias <= 60) {
-        return cantidadDias;
-      }
-
-      let motivo;
-
-      if (cantidadDias < 0) {
-        motivo =
-          "La fecha del primer pago es anterior " +
-          "a la fecha de desembolso.";
-      } else if (cantidadDias === 0) {
-        motivo =
-          "La fecha del primer pago coincide " +
-          "con la fecha de desembolso.";
-      } else if (cantidadDias < 30) {
-        motivo =
-          "La diferencia entre las fechas es menor " +
-          "al mínimo permitido de 30 días.";
-      } else {
-        motivo =
-          "La diferencia entre las fechas supera " +
-          "el máximo permitido de 60 días.";
-      }
-
-      alert(
-        "Fechas inválidas.\n\n" +
-        motivo +
-        "\n\nDiferencia ingresada: " +
-        cantidadDias +
-        " días." +
-        "\nRango permitido: de 30 a 60 días."
-      );
-
-      return null;
-    }
-
-    /* =========================================================
-       SIMULACIÓN
-       ========================================================= */
-
-    function simular() {
-      const campoTea = document.getElementById("tea");
-      const campoImporte = document.getElementById("importe");
-      const campoPlazo = document.getElementById("plazo");
-
-      const campoDesembolso =
-        document.getElementById("desembolso");
-
-      const campoFecha =
-        document.getElementById("primer-pago");
-
-      const campos = [
-        campoTea,
-        campoImporte,
-        campoPlazo,
-        campoDesembolso,
-        campoFecha
-      ];
-
-      for (const campo of campos) {
-        if (!campo.reportValidity()) {
-          return;
-        }
-      }
-
-      // Se vuelve a validar antes de realizar cualquier cálculo.
-      const cantidadDias = validarFechas();
-
-      if (cantidadDias === null) {
-        campoFecha.focus();
-        return;
-      }
-
-      const primas = {
-        "vida": 3.7000,
-        "desgravamen": 0.1995,
-        "desgravamen-devolucion": 0.2594,
-        "sin-seguro": 0.0000,
-        "endosado": 0.0000
-      };
-
-      const tipoSeguro =
-        document.getElementById("seguro").value;
-
-      const seguroPrima = primas[tipoSeguro];
-      const costoCapital = 0.2871;
-
-      const tea = Number(campoTea.value) / 100;
-      const tasaSeguroPrima = seguroPrima / 100;
-      const tasaCostoCapital = costoCapital / 100;
-
-      const importe = Number(campoImporte.value);
-
-      const tasaSeguroDesempleo =
-        document.getElementById("seguro-desempleo").checked
-          ? 0.04
-          : 0;
-
-      const portes =
-        document.getElementById("estado-cuenta").checked
-          ? 11
-          : 0;
-
-      const teaTotalPrima = Math.pow(
-        1 + (
-          (Math.pow(1 + tea, 30 / 360) - 1) +
-          tasaSeguroPrima
-        ),
-        12
-      ) - 1;
-
-      const datos = {
-        importe,
-        tea,
-        tasaSeguroPrima,
-        tasaCostoCapital,
-        teaTotalPrima,
-
-        cantidadCuotas: Number(campoPlazo.value),
-
-        fechaDesembolso: campoDesembolso.value,
-        fechaPrimerPago: campoFecha.value,
-
-        cuotaJulioActiva:
-          document.getElementById("cuota-julio").checked,
-
-        cuotaDiciembreActiva:
-          document.getElementById("cuota-diciembre").checked
-      };
-
-      // Cálculo de prima: se conserva internamente.
-      const resultadoPrima = calcularPrima(datos);
-
-      const VPN = resultadoPrima.VPN;
-
-      const porcentajePrima = obtenerPorcentajePrima(
-        tipoSeguro,
-        VPN,
-        importe
-      );
-
-      const seguro = porcentajePrima * importe;
-
-      const baseFinanciamiento = importe + seguro;
-
-      const montoSeguroDesempleo =
-        baseFinanciamiento * tasaSeguroDesempleo;
-
-      const montoTotalAFinanciar =
-        baseFinanciamiento + montoSeguroDesempleo;
-
-      // Cálculo principal.
-      const resultadoPrincipal = calcularPrincipal({
-        ...datos,
-        montoTotalAFinanciar,
-        portes
-      });
-
-      const cuotaAPagar =
-        resultadoPrincipal.cuotaAPagar;
-
-      // Vector i: se conserva internamente para calcular la TCEA.
-      let resultadoVector;
-
-      try {
-        resultadoVector = calcularTCEA(
-          importe,
-          resultadoPrincipal.filas
-        );
-      } catch (error) {
-        alert(error.message);
-        return;
-      }
-
-      const TCEA = resultadoVector.tcea;
-
-      /* RESULTADOS EN CONSOLA */
-
-      const primaFija =
-        tipoSeguro === "vida" ||
-        tipoSeguro === "endosado" ||
-        tipoSeguro === "sin-seguro";
-
-      console.log(
-        "Seguro prima:",
-        seguroPrima.toFixed(4) + "%"
-      );
-
-      console.log(
-        "Costo capital:",
-        costoCapital.toFixed(4) + "%"
-      );
-
-      console.log(
-        "TEA total prima:",
-        teaTotalPrima * 100 + "%"
-      );
-
-      console.log(
-        "Suma Factor1 (Cálculo de prima):",
-        resultadoPrima.sumaFactor1
-      );
-
-      console.log(
-        "Suma Factor2 (Cálculo de prima):",
-        resultadoPrima.sumaFactor2
-      );
-
-      console.log(
-        "Cuota prima:",
-        resultadoPrima.cuotaPrima
-      );
-
-      console.log("VPN:", VPN);
-
-      console.log(
-        "% Prima:",
-        primaFija
-          ? (porcentajePrima * 100).toFixed(4) + "%"
-          : porcentajePrima * 100 + "%"
-      );
-
-      console.log("Seguro:", seguro);
-
-      console.log(
-        "Seguro de desempleo:",
-        montoSeguroDesempleo
-      );
-
-      console.log(
-        "Monto total a financiar:",
-        montoTotalAFinanciar
-      );
-
-      console.log(
-        "Suma Factor1 (Cronograma de pagos):",
-        resultadoPrincipal.sumaFactor1
-      );
-
-      console.log(
-        "Suma Factor2 (Cronograma de pagos):",
-        resultadoPrincipal.sumaFactor2
-      );
-
-      console.log("Cuota a pagar:", cuotaAPagar);
-      console.log("TCEA:", TCEA * 100 + "%");
-
-      console.log(
-        "Suma Cálculo VA:",
-        resultadoVector.sumaVA
-      );
-
-      /* RESUMEN VISUAL */
-
-      const observacionTCEA =
-        resultadoVector.diferenciaCentimos === 0
-          ? ""
-          : `
-            <div class="notice">
-              <i class="bi bi-info-circle" aria-hidden="true"></i>
-
-              <span>
-                La suma de VA redondeados difiere del importe en
-                ${(resultadoVector.diferenciaCentimos / 100).toFixed(2)}.
-                La TCEA mostrada es una aproximación.
-              </span>
-            </div>
-          `;
-
-      const resultados =
-        document.getElementById("resultados");
-
-      resultados.innerHTML = `
-        <div class="days-strip">
-          <span>
-            <i class="bi bi-calendar3" aria-hidden="true"></i>
-            Cantidad de días
-          </span>
-
-          <strong>${cantidadDias}</strong>
-        </div>
-
-        <div class="summary-grid">
-          <div class="result-item">
-            <span class="result-label">% Prima</span>
-            <strong class="result-value">
-              ${(porcentajePrima * 100).toFixed(4)}%
-            </strong>
-          </div>
-
-          <div class="result-item">
-            <span class="result-label">Seguro</span>
-            <strong class="result-value">
-              ${seguro.toFixed(2)}
-            </strong>
-          </div>
-
-          <div class="result-item">
-            <span class="result-label">Seguro de desempleo</span>
-            <strong class="result-value">
-              ${montoSeguroDesempleo.toFixed(2)}
-            </strong>
-          </div>
-
-          <div class="result-item">
-            <span class="result-label">Monto total a financiar</span>
-            <strong class="result-value">
-              ${montoTotalAFinanciar.toFixed(2)}
-            </strong>
-          </div>
-
-          <div class="result-item result-payment">
-            <span class="result-label">Cuota a pagar</span>
-            <strong class="result-value">
-              ${cuotaAPagar.toFixed(2)}
-            </strong>
-          </div>
-
-          <div class="result-item result-tcea">
-            <span class="result-label">TCEA</span>
-            <strong class="result-value">
-              ${(TCEA * 100).toFixed(2)}%
-            </strong>
-          </div>
-        </div>
-
-        ${observacionTCEA}
-      `;
-
-      // Solo se genera la tabla visible del cronograma principal.
-      document.getElementById("tablas").innerHTML =
-        crearCronograma(resultadoPrincipal.filas);
-
-      document.getElementById("estado-vacio").hidden = true;
-
-      resultados.hidden = false;
-
-      // Después de simular, el cronograma empieza oculto.
-      establecerCronogramaVisible(false);
-
-      document.getElementById("boton-cronograma").hidden = false;
-    }
-
-    function obtenerPorcentajePrima(
-      tipoSeguro,
-      VPN,
-      importe
-    ) {
-      if (tipoSeguro === "vida") {
-        return 3.7000 / 100;
-      }
-
-      if (
-        tipoSeguro === "endosado" ||
-        tipoSeguro === "sin-seguro"
-      ) {
-        return 0;
-      }
-
-      return VPN / importe;
-    }
-
-    /* =========================================================
-       CÁLCULO PRINCIPAL
-       ========================================================= */
-
-    function calcularPrincipal(datos) {
-      const filas = crearCalendario(datos);
-
-      let sumaFactor1 = 0;
-      let sumaFactor2 = 0;
-
-      for (const fila of filas) {
-        // Usa Fecha de pago original para julio y diciembre.
-        const mes = fila.fechaPago.getMonth() + 1;
-
-        fila.cuotaDoble =
-          (mes === 7 && datos.cuotaJulioActiva) ||
-          (mes === 12 && datos.cuotaDiciembreActiva);
-
-        // Los factores siguen calculándose internamente.
-        const denominador = Math.pow(
-          1 + datos.tea,
-          fila.diasAcumulados / 360
-        );
-
-        fila.factor1 =
-          (fila.cuotaDoble ? 2 : 1) / denominador;
-
-        fila.factor2 = 1 / denominador;
-
-        sumaFactor1 += fila.factor1;
-        sumaFactor2 += fila.factor2;
-      }
-
-      const cuotaAPagar = (
-        datos.montoTotalAFinanciar +
-        datos.portes * sumaFactor2
-      ) / sumaFactor1;
-
-      let saldoInicial = datos.montoTotalAFinanciar;
-
-      for (const fila of filas) {
-        fila.saldoInicial = saldoInicial;
-
-        fila.interes = (
-          Math.pow(
-            1 + datos.tea,
-            fila.dias / 360
-          ) - 1
-        ) * saldoInicial;
-
-        fila.portes = datos.portes;
-
-        fila.cuotaConstante =
-          cuotaAPagar * (fila.cuotaDoble ? 2 : 1);
-
-        if (fila.numero === datos.cantidadCuotas) {
-          fila.cuotaConstante =
-            saldoInicial + fila.interes + fila.portes;
-        }
-
-        fila.amortizacion =
-          fila.cuotaConstante -
-          fila.portes -
-          fila.interes;
-
-        fila.saldoFinal =
-          saldoInicial - fila.amortizacion;
-
-        saldoInicial = fila.saldoFinal;
-      }
-
-      return {
-        filas,
-        sumaFactor1,
-        sumaFactor2,
-        cuotaAPagar
-      };
-    }
-
-    /* =========================================================
-       CÁLCULO DE PRIMA — INTERNO
-       ========================================================= */
-
-    function calcularPrima(datos) {
-      const filas = crearCalendario(datos);
-
-      let sumaFactor1 = 0;
-      let sumaFactor2 = 0;
-
-      for (const fila of filas) {
-        const mes =
-          fila.fechaPagoPrincipal.getMonth() + 1;
-
-        fila.cuotaDoble =
-          (mes === 7 && datos.cuotaJulioActiva) ||
-          (mes === 12 && datos.cuotaDiciembreActiva);
-
-        const denominador = Math.pow(
-          1 + datos.teaTotalPrima,
-          fila.diasAcumulados / 360
-        );
-
-        fila.factor1 =
-          (fila.cuotaDoble ? 2 : 1) / denominador;
-
-        fila.factor2 = 1 / denominador;
-
-        sumaFactor1 += fila.factor1;
-        sumaFactor2 += fila.factor2;
-      }
-
-      const cuotaPrima =
-        datos.importe / sumaFactor1;
-
-      let saldoInicial = datos.importe;
-      let VPN = 0;
-
-      for (const fila of filas) {
-        fila.saldoInicial = saldoInicial;
-
-        fila.interes = (
-          Math.pow(
-            1 + datos.tea,
-            fila.dias / 360
-          ) - 1
-        ) * saldoInicial;
-
-        fila.segDesgravamen = (
-          Math.pow(
-            1 + datos.tasaSeguroPrima,
-            fila.dias / 30
-          ) - 1
-        ) * saldoInicial;
-
-        fila.cuotaConstante =
-          cuotaPrima * (fila.cuotaDoble ? 2 : 1);
-
-        if (fila.numero === datos.cantidadCuotas) {
-          fila.cuotaConstante =
-            saldoInicial +
-            fila.interes +
-            fila.segDesgravamen;
-        }
-
-        fila.amortizacion =
-          fila.cuotaConstante -
-          fila.segDesgravamen -
-          fila.interes;
-
-        fila.saldoFinal =
-          saldoInicial - fila.amortizacion;
-
-        VPN += fila.segDesgravamen / Math.pow(
-          1 + datos.tasaCostoCapital,
-          fila.numero
-        );
-
-        saldoInicial = fila.saldoFinal;
-      }
-
-      return {
-        filas,
-        sumaFactor1,
-        sumaFactor2,
-        cuotaPrima,
-        VPN
-      };
-    }
-
-    /* =========================================================
-       VECTOR I Y TCEA — INTERNOS
-       ========================================================= */
-
-    function redondearACentimos(valor) {
-      const [base, exponente = "0"] =
-        Math.abs(valor).toString().split("e");
-
-      const desplazado = Number(
-        base + "e" + (Number(exponente) + 2)
-      );
-
-      return Math.sign(valor) * Math.round(desplazado);
-    }
-
-    function calcularVectorI(filasPrincipal, tcea) {
-      const filas = filasPrincipal.map(fila => {
-        const cuota =
-          fila.amortizacion +
-          fila.interes +
-          fila.portes;
-
-        const diasAcumulados =
-          fila.diasAcumulados;
-
-        const factor = Math.pow(
-          1 + tcea,
-          diasAcumulados / 360
-        );
-
-        // Cálculo VA sí se redondea a dos decimales internamente.
-        const calculoVACentimos =
-          redondearACentimos(cuota / factor);
-
-        const calculoVA = calculoVACentimos / 100;
-
-        return {
-          cuota,
-          diasAcumulados,
-          factor,
-          calculoVA,
-          calculoVACentimos
-        };
-      });
-
-      const sumaVACentimos = filas.reduce(
-        (suma, fila) => suma + fila.calculoVACentimos,
-        0
-      );
-
-      return {
-        filas,
-        sumaVACentimos,
-        sumaVA: sumaVACentimos / 100
-      };
-    }
-
-    function calcularTCEA(importe, filasPrincipal) {
-      const objetivoCentimos =
-        redondearACentimos(importe);
-
-      function evaluar(tcea) {
-        const vector =
-          calcularVectorI(filasPrincipal, tcea);
-
-        return {
-          tcea,
-          ...vector,
-          diferenciaCentimos:
-            vector.sumaVACentimos - objetivoCentimos
-        };
-      }
-
-      let inferior = 0;
-      let superior = 1;
-      let mejor = evaluar(inferior);
-
-      if (mejor.diferenciaCentimos <= 0) {
-        return mejor;
-      }
-
-      let extremoSuperior = evaluar(superior);
-
-      for (
-        let intento = 0;
-        extremoSuperior.diferenciaCentimos > 0 &&
-        intento < 100;
-        intento++
-      ) {
-        superior = superior * 2 + 1;
-        extremoSuperior = evaluar(superior);
-      }
-
-      if (extremoSuperior.diferenciaCentimos > 0) {
-        throw new Error(
-          "No se pudo encontrar un intervalo para calcular la TCEA."
-        );
-      }
-
-      if (
-        Math.abs(extremoSuperior.diferenciaCentimos) <
-        Math.abs(mejor.diferenciaCentimos)
-      ) {
-        mejor = extremoSuperior;
-      }
-
-      if (extremoSuperior.diferenciaCentimos === 0) {
-        return extremoSuperior;
-      }
-
-      for (let intento = 0; intento < 200; intento++) {
-        const medio = (inferior + superior) / 2;
-
-        if (medio === inferior || medio === superior) {
-          break;
-        }
-
-        const resultado = evaluar(medio);
-
-        if (
-          Math.abs(resultado.diferenciaCentimos) <
-          Math.abs(mejor.diferenciaCentimos)
-        ) {
-          mejor = resultado;
-        }
-
-        if (resultado.diferenciaCentimos === 0) {
-          return resultado;
-        }
-
-        if (resultado.diferenciaCentimos > 0) {
-          inferior = medio;
-        } else {
-          superior = medio;
-        }
-      }
-
-      return mejor;
-    }
-
-    /* =========================================================
-       CALENDARIO Y FECHAS
-       ========================================================= */
-
-    function crearCalendario(datos) {
-      const filas = [];
-
-      let fechaPago = new Date(
-        datos.fechaPrimerPago + "T00:00:00"
-      );
-
-      let fechaAnterior = new Date(
-        datos.fechaDesembolso + "T00:00:00"
-      );
-
-      let diasAcumulados = 0;
-
-      for (
-        let numero = 1;
-        numero <= datos.cantidadCuotas;
-        numero++
-      ) {
-        const fechaPagoPrincipal =
-          new Date(fechaPago);
-
-        if (fechaPagoPrincipal.getDay() === 0) {
-          fechaPagoPrincipal.setDate(
-            fechaPagoPrincipal.getDate() + 1
-          );
-        }
-
-        const dias = calcularDias(
-          fechaAnterior,
-          fechaPagoPrincipal
-        );
-
-        diasAcumulados += dias;
-
-        filas.push({
-          numero,
-          fechaPago: new Date(fechaPago),
-          fechaPagoPrincipal,
-          dias,
-          diasAcumulados
-        });
-
-        fechaAnterior = fechaPagoPrincipal;
-        fechaPago = sumarUnMes(fechaPago);
-      }
-
-      return filas;
-    }
-
-    function sumarUnMes(fecha) {
-      const siguienteFecha = new Date(fecha);
-      const diaAnterior = siguienteFecha.getDate();
-
-      siguienteFecha.setDate(1);
-
-      siguienteFecha.setMonth(
-        siguienteFecha.getMonth() + 1
-      );
-
-      const ultimoDiaDelMes = new Date(
-        siguienteFecha.getFullYear(),
-        siguienteFecha.getMonth() + 1,
-        0
-      ).getDate();
-
-      siguienteFecha.setDate(
-        Math.min(diaAnterior, ultimoDiaDelMes)
-      );
-
-      return siguienteFecha;
-    }
-
-    function calcularDias(fechaInicial, fechaFinal) {
-      const inicio = Date.UTC(
-        fechaInicial.getFullYear(),
-        fechaInicial.getMonth(),
-        fechaInicial.getDate()
-      );
-
-      const fin = Date.UTC(
-        fechaFinal.getFullYear(),
-        fechaFinal.getMonth(),
-        fechaFinal.getDate()
-      );
-
-      return (fin - inicio) / (24 * 60 * 60 * 1000);
-    }
-
-    function formatearFecha(fecha) {
-      const dia = String(
-        fecha.getDate()
-      ).padStart(2, "0");
-
-      const mes = String(
-        fecha.getMonth() + 1
-      ).padStart(2, "0");
-
-      const anio = String(
-        fecha.getFullYear()
-      ).padStart(4, "0");
-
-      return `${dia}/${mes}/${anio}`;
-    }
-
-    /* =========================================================
-       CRONOGRAMA DE PAGOS
-       Solo presenta el cálculo principal, sin Factor1 ni Factor2.
-       ========================================================= */
-
-    function crearCronograma(filas) {
-      const filasHTML = filas.map(fila => `
-        <tr>
-          <td>${fila.numero}</td>
-          <td>${formatearFecha(fila.fechaPago)}</td>
-          <td>${formatearFecha(fila.fechaPagoPrincipal)}</td>
-          <td>${fila.dias}</td>
-          <td>${fila.diasAcumulados}</td>
-          <td>${fila.saldoInicial.toFixed(2)}</td>
-          <td>${fila.amortizacion.toFixed(2)}</td>
-          <td>${fila.interes.toFixed(2)}</td>
-          <td>${fila.portes.toFixed(2)}</td>
-          <td>${fila.cuotaConstante.toFixed(2)}</td>
-          <td>${fila.saldoFinal.toFixed(2)}</td>
-        </tr>
-      `).join("");
-
-      return `
-        <section class="panel table-panel">
-          <div class="table-heading">
-            <h3 id="titulo-cronograma">
-              <i class="bi bi-calendar-check" aria-hidden="true"></i>
-              Cronograma de pagos
-            </h3>
-
-            <span class="table-count">
-              ${filas.length} cuotas
-            </span>
-          </div>
-
-          <div
-            class="table-scroll"
-            tabindex="0"
-            role="region"
-            aria-label="Cronograma de pagos"
-          >
-            <table
-              id="tabla-principal"
-              class="calc-table"
-              aria-labelledby="titulo-cronograma"
-            >
-              <thead>
-                <tr>
-                  <th scope="col">N° de cuotas</th>
-                  <th scope="col">Fecha de pago</th>
-                  <th scope="col">Fecha de pago principal</th>
-                  <th scope="col">Días</th>
-                  <th scope="col">Días acumulados</th>
-                  <th scope="col">Saldo inicial</th>
-                  <th scope="col">Amortización</th>
-                  <th scope="col">Interés</th>
-                  <th scope="col">Portes</th>
-                  <th scope="col">Cuota constante</th>
-                  <th scope="col">Saldo final</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                ${filasHTML}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      `;
-    }
-
-    /* Fecha de desembolso predeterminada al abrir la página */
-    establecerFechaDesembolsoActual();
   </script>
 </body>
 </html>
