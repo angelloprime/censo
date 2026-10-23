@@ -201,7 +201,7 @@
         vencimientoAnterior = fechaVencim;
       }
 
-      // Suma de los factores de la columna, sin redondear la suma.
+      // Sumar los factores sin redondear adicionalmente la suma.
       const sumaFactor = cronograma.reduce(function (suma, dato) {
         return suma + dato.factor;
       }, 0);
@@ -211,11 +211,12 @@
         sumaFactor
       );
 
-      // CuotaY: importe / suma de Factor, redondeado a 2 decimales.
+      // CuotaY redondeada a 2 decimales.
       const cuotaY = redondear(importe / sumaFactor, 2);
 
-      // El principal de la primera fila es el importe ingresado.
       let principalPendiente = importe;
+      let amortizacionAcumulada = 0;
+      let amortizacionPrincipalAcumulada = 0;
 
       cronograma.forEach(function (dato, indice) {
         const esUltimaFila = indice === cronograma.length - 1;
@@ -224,10 +225,7 @@
         let interesY;
 
         if (esUltimaFila) {
-          // Última fila: amortizar todo el principal pendiente.
           amortizacion = principalPendiente;
-
-          // Última fila: InterésY redondeado a 2 decimales.
           interesY = redondear(cuotaY - amortizacion, 2);
         } else {
           interesY = principalPendiente * (
@@ -238,6 +236,20 @@
         }
 
         const saldoFinal = principalPendiente - amortizacion;
+
+        // Suma de Amortización desde la primera fila
+        // hasta la fila actual, incluida.
+        amortizacionAcumulada += amortizacion;
+
+        // Amortización Principal:
+        // si el acumulado de Amortización es <= 0, colocar 1.00;
+        // en caso contrario, restar lo acumulado en las filas
+        // anteriores de Amortización Principal.
+        const amortizacionPrincipal =
+          amortizacionAcumulada <= 0
+            ? 1
+            : amortizacionAcumulada - amortizacionPrincipalAcumulada;
+
         const vencimTexto = formatearFecha(dato.fechaVencim);
 
         const datosFila = [
@@ -252,7 +264,7 @@
           interesY.toFixed(2),
           cuotaY.toFixed(2),
           saldoFinal.toFixed(2),
-          '0.00', // Amortización Principal
+          amortizacionPrincipal.toFixed(2),
           '0.00', // Interés
           '0.00', // Cuota
           '0.00', // Seg de desgravamen
@@ -266,8 +278,9 @@
           fila.insertCell().textContent = valor;
         });
 
-        // La siguiente fila toma el saldo final de esta fila.
+        // Acumulados que se utilizarán en la siguiente fila.
         principalPendiente = saldoFinal;
+        amortizacionPrincipalAcumulada += amortizacionPrincipal;
       });
     });
 
