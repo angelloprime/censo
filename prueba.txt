@@ -1,532 +1,281 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-PE">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Calculadora de provisión</title>
-
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ec111a'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-size='44' fill='white'%3E%25%3C/text%3E%3C/svg%3E">
-
-  <style>
-    :root {
-      --red: #ec111a;
-      --dark: #202d41;
-      --muted: #718096;
-      --border: #e3e8ef;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      border-top: 5px solid var(--red);
-      background:
-        radial-gradient(
-          ellipse at top right,
-          #ffe6e8,
-          transparent 45%
-        ),
-        #f4f6fa;
-      color: var(--dark);
-      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-    }
-
-    main {
-      max-width: 800px;
-      margin: auto;
-      padding: 42px 24px;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      margin-bottom: 28px;
-    }
-
-    .brand {
-      display: grid;
-      place-items: center;
-      width: 58px;
-      height: 58px;
-      flex-shrink: 0;
-      border-radius: 17px;
-      background: var(--red);
-      color: white;
-      font-size: 32px;
-      font-weight: 750;
-      box-shadow: 0 8px 22px #ec111a25;
-    }
-
-    h1 {
-      margin: 0 0 7px;
-      font-size: clamp(24px, 4vw, 32px);
-      letter-spacing: -1px;
-    }
-
-    header p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .inputs,
-    .card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      box-shadow: 0 10px 35px #23354d07;
-    }
-
-    .inputs {
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) auto;
-      align-items: start;
-      gap: 20px;
-      padding: 25px 28px;
-      margin-bottom: 24px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 9px;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    input[type="text"],
-    select {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid #d7dfe9;
-      border-radius: 10px;
-      background: #f8fafc;
-      color: var(--dark);
-      font: inherit;
-      font-size: 20px;
-      font-weight: 600;
-    }
-
-    input[type="text"]:focus,
-    select:focus {
-      outline: 3px solid #ffe0e3;
-      border-color: var(--red);
-    }
-
-    .hint {
-      margin: 8px 0 0;
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.5;
-    }
-
-    .cash-option {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      min-height: 54px;
-      margin: 25px 0 0;
-      padding: 0 12px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: #f8fafc;
-      white-space: nowrap;
-      cursor: pointer;
-    }
-
-    .cash-option:has(input:checked) {
-      color: #bf1d2c;
-      background: #fff0f2;
-      border-color: #f4b7bd;
-    }
-
-    .cash-option input {
-      width: 18px;
-      height: 18px;
-      margin: 0;
-      accent-color: var(--red);
-      cursor: pointer;
-    }
-
-    .cash-option input:focus-visible {
-      outline: 3px solid #ffb9c0;
-      outline-offset: 3px;
-    }
-
-    #error {
-      grid-column: 1 / -1;
-      margin: 0;
-      padding: 12px 14px;
-      border-radius: 9px;
-      background: #fff0f2;
-      color: #bd1d2b;
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .card {
-      padding: 30px;
-      border-top: 3px solid var(--red);
-    }
-
-    .label {
-      margin: 0;
-      color: var(--dark);
-      font-size: 16px;
-      font-weight: 650;
-    }
-
-    .value {
-      margin: 9px 0 27px;
-      color: #d51b30;
-      font-size: clamp(36px, 7vw, 52px);
-      font-weight: 750;
-      letter-spacing: -1.5px;
-      overflow-wrap: anywhere;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .line {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 18px;
-      padding: 18px 0;
-      border-top: 1px solid #edf0f5;
-      font-size: 14px;
-    }
-
-    .line strong {
-      min-width: 0;
-      text-align: right;
-      overflow-wrap: anywhere;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .total {
-      padding: 18px 15px;
-      border: 0;
-      border-radius: 10px;
-      background: #fff0f2;
-      color: #bf1d2c;
-      font-weight: 700;
-    }
-
-    .remaining {
-      margin-top: 4px;
-      border: 0;
-      color: var(--muted);
-    }
-
-    .summary {
-      margin: 14px 0 0;
-      padding-top: 20px;
-      border-top: 1px solid #edf0f5;
-      color: #526176;
-      font-size: 13px;
-      line-height: 1.8;
-      overflow-wrap: anywhere;
-    }
-
-    .summary strong {
-      color: var(--dark);
-    }
-
-    [hidden] {
-      display: none !important;
-    }
-
-    @media (max-width: 620px) {
-      main {
-        padding: 28px 16px;
-      }
-
-      header {
-        align-items: flex-start;
-        gap: 12px;
-      }
-
-      .brand {
-        width: 45px;
-        height: 45px;
-        font-size: 26px;
-      }
-
-      .inputs {
-        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-        gap: 12px;
-      }
-
-      .inputs,
-      .card {
-        padding: 20px;
-      }
-
-      input[type="text"],
-      select {
-        font-size: 18px;
-        padding: 12px;
-      }
-
-      .cash-option {
-        grid-column: 1 / -1;
-        width: fit-content;
-        min-height: 44px;
-        margin: 0;
-      }
-
-      .line {
-        font-size: 13px;
-      }
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario XL</title>
 </head>
-
 <body>
-  <main>
-    <header>
-      <div class="brand" aria-hidden="true">%</div>
 
-      <div>
-        <h1>Calculadora de provisión</h1>
-        <p>
-          Ingresa el importe disponible y el porcentaje de provisión.
-        </p>
-      </div>
-    </header>
+  <form id="formulario">
+    <h2>Datos de entrada</h2>
 
-    <section class="inputs" aria-label="Datos del cálculo">
-      <div>
-        <label for="amount">Importe disponible</label>
+    <p>
+      <label for="importe">Importe:</label>
+      <input type="number" id="importe" min="0" step="0.01" required>
+    </p>
 
-        <input
-          id="amount"
-          type="text"
-          inputmode="decimal"
-          placeholder="Ej.: 3500.00"
-          autocomplete="off"
-          aria-describedby="help error"
-        >
+    <p>
+      <label for="plazo">Plazo (meses):</label>
+      <input type="number" id="plazo" min="1" step="1" required>
+    </p>
 
-        <p class="hint" id="help">
-          Sin separador de miles. Puedes usar punto o coma decimal.
-        </p>
-      </div>
+    <p>
+      <label for="ciclo">Ciclo:</label>
+      <select id="ciclo">
+        <option value="4" selected>4</option>
+        <option value="6">6</option>
+        <option value="9">9</option>
+        <option value="11">11</option>
+        <option value="13">13</option>
+        <option value="16">16</option>
+        <option value="18">18</option>
+        <option value="20">20</option>
+        <option value="22">22</option>
+        <option value="24">24</option>
+        <option value="26">26</option>
+      </select>
+    </p>
 
-      <div>
-        <label for="rate">Provisión</label>
+    <p>
+      <label for="fecha">Fecha de desembolso (dd/mm/yyyy):</label>
+      <input type="date" id="fecha" lang="es-PE" required>
+    </p>
 
-        <select id="rate">
-          <option value="2" selected>2%</option>
-          <option value="4">4%</option>
-        </select>
-      </div>
+    <p>
+      <label for="tea">TEA %:</label>
+      <input type="number" id="tea" min="0" step="any" required>
+    </p>
 
-      <label class="cash-option" for="cash">
-        <input id="cash" type="checkbox">
-        <span>Con Cash</span>
-      </label>
+    <p>
+      <button type="submit">Simular</button>
+      <button type="reset">Limpiar</button>
+    </p>
+  </form>
 
-      <p id="error" role="alert" hidden></p>
-    </section>
+  <section>
+    <h2>Resultados</h2>
+    <div id="resultados"></div>
 
-    <section
-      class="card"
-      aria-live="polite"
-      aria-label="Resultado"
-    >
-      <h2 class="label">Monto sin provisión</h2>
-      <div class="value" id="base">—</div>
+    <h3>Cronograma</h3>
 
-      <div class="line">
-        <span>
-          Provisión del <span id="percentage">2%</span>
-        </span>
-        <strong id="fee">—</strong>
-      </div>
-
-      <div class="line total">
-        <span>Total con provisión</span>
-        <strong id="total">—</strong>
-      </div>
-
-      <div class="line remaining" id="remainingRow">
-        <span>Importe que queda disponible</span>
-        <strong id="remaining">—</strong>
-      </div>
-
-      <p class="summary" id="summary" hidden></p>
-    </section>
-  </main>
+    <table border="1">
+      <thead>
+        <tr>
+          <th scope="col">N° de cuota</th>
+          <th scope="col">Ciclo de facturación</th>
+          <th scope="col">Vencim</th>
+          <th scope="col">Días</th>
+          <th scope="col">Días acum</th>
+          <th scope="col">Factor</th>
+          <th scope="col">Principal pendiente</th>
+          <th scope="col">Amortización</th>
+          <th scope="col">InterésY</th>
+          <th scope="col">CuotaY</th>
+          <th scope="col">Saldo final</th>
+          <th scope="col">Amortización Principal</th>
+          <th scope="col">Interés</th>
+          <th scope="col">Cuota</th>
+          <th scope="col">Seg de desgravamen</th>
+          <th scope="col">Cuota + Seg desgravamen</th>
+          <th scope="col">Último día de Pago (Referencial)</th>
+        </tr>
+      </thead>
+      <tbody id="cuotas"></tbody>
+    </table>
+  </section>
 
   <script>
-    "use strict";
+    const formulario = document.getElementById('formulario');
+    const cuotas = document.getElementById('cuotas');
+    const resultados = document.getElementById('resultados');
 
-    const $ = id => document.getElementById(id);
+    const MILISEGUNDOS_POR_DIA = 24 * 60 * 60 * 1000;
 
-    // Formatea céntimos con dos decimales exactos.
-    function money(cents) {
-      return (cents / 100n).toString() + "." +
-        (cents % 100n).toString().padStart(2, "0");
+    function formatearFecha(fecha) {
+      const dia = String(fecha.getUTCDate()).padStart(2, '0');
+      const mes = String(fecha.getUTCMonth() + 1).padStart(2, '0');
+      const anio = String(fecha.getUTCFullYear()).padStart(4, '0');
+
+      return `${dia}/${mes}/${anio}`;
     }
 
-    // Formatea unidades de 0.0001 sin redondear.
-    // Conserva entre dos y cuatro decimales.
-    function precise(units) {
-      const whole = units / 10000n;
-
-      let fraction = (units % 10000n)
-        .toString()
-        .padStart(4, "0");
-
-      while (
-        fraction.length > 2 &&
-        fraction.endsWith("0")
-      ) {
-        fraction = fraction.slice(0, -1);
-      }
-
-      return whole.toString() + "." + fraction;
+    function diferenciaDias(fechaFinal, fechaInicial) {
+      return (
+        (fechaFinal.getTime() - fechaInicial.getTime()) /
+        MILISEGUNDOS_POR_DIA
+      );
     }
 
-    function parseAmount(value) {
-      value = value.trim();
+    function redondear(valor, decimales) {
+      const [base, exponente = '0'] =
+        Math.abs(valor).toString().split('e');
 
-      if (!/^\d{1,15}([.,]\d{1,2})?$/.test(value)) {
-        return null;
-      }
+      const desplazado = Number(
+        base + 'e' + (Number(exponente) + decimales)
+      );
 
-      const [whole, fraction = ""] =
-        value.replace(",", ".").split(".");
-
-      return BigInt(whole) * 100n +
-        BigInt(fraction.padEnd(2, "0"));
+      return (
+        Math.sign(valor) *
+        Math.round(desplazado) /
+        (10 ** decimales)
+      );
     }
 
-    function clearResults() {
-      ["base", "fee", "total", "remaining"].forEach(id => {
-        $(id).textContent = "—";
-      });
+    formulario.addEventListener('submit', function (evento) {
+      evento.preventDefault();
 
-      $("summary").textContent = "";
-      $("summary").hidden = true;
-    }
+      const importe = document.getElementById('importe').valueAsNumber;
+      const plazo = document.getElementById('plazo').valueAsNumber;
+      const ciclo = Number(document.getElementById('ciclo').value);
+      const tea = document.getElementById('tea').valueAsNumber / 100;
 
-    function update() {
-      const raw = $("amount").value;
-      const amount = parseAmount(raw);
-      const rate = BigInt($("rate").value);
-      const cash = $("cash").checked;
+      const fechaIngresada = document.getElementById('fecha').value;
+      const fechaDesembolso = new Date(
+        fechaIngresada + 'T00:00:00Z'
+      );
 
-      $("percentage").textContent = rate + "%";
-      $("error").textContent = "";
-      $("error").hidden = true;
-      $("remainingRow").hidden = cash;
+      const mesesAdicionales =
+        fechaDesembolso.getUTCDate() <= ciclo ? 0 : 1;
 
-      clearResults();
+      const mesPrimeraCuota =
+        fechaDesembolso.getUTCMonth() + mesesAdicionales;
 
-      if (amount === null) {
-        if (raw.trim()) {
-          $("error").textContent =
-            "Ingresa un importe no negativo, sin separador de miles, " +
-            "con hasta 15 dígitos enteros y 2 decimales.";
+      const cronograma = [];
+      let vencimientoAnterior = null;
+      let diasAcumulados = 0;
 
-          $("error").hidden = false;
+      cuotas.replaceChildren();
+
+      // Primero se calculan las fechas, los días y los factores.
+      for (let numero = 1; numero <= plazo; numero++) {
+
+        const fechaFacturacion = new Date(fechaDesembolso);
+        fechaFacturacion.setUTCDate(ciclo);
+        fechaFacturacion.setUTCMonth(
+          mesPrimeraCuota + numero - 1
+        );
+
+        // Vencim: restar 3 días y sumar 1 mes.
+        const fechaVencim = new Date(fechaFacturacion);
+
+        fechaVencim.setUTCDate(
+          fechaVencim.getUTCDate() - 3
+        );
+
+        fechaVencim.setUTCMonth(
+          fechaVencim.getUTCMonth() + 1
+        );
+
+        let dias;
+
+        if (numero === 1) {
+          dias = diferenciaDias(
+            fechaVencim,
+            fechaDesembolso
+          ) + 1;
+        } else {
+          dias = diferenciaDias(
+            fechaVencim,
+            vencimientoAnterior
+          );
         }
 
-        return;
+        diasAcumulados += dias;
+
+        const factorSinRedondear =
+          1 / Math.pow(1 + tea, diasAcumulados / 360);
+
+        const factor =
+          Math.round(factorSinRedondear * 1e9) / 1e9;
+
+        cronograma.push({
+          numero,
+          fechaFacturacion,
+          fechaVencim,
+          dias,
+          diasAcumulados,
+          factor
+        });
+
+        vencimientoAnterior = fechaVencim;
       }
 
-      if (cash) {
-        calculateWithCash(amount, rate);
-      } else {
-        calculateWithoutCash(amount, rate);
-      }
-    }
+      // Suma de los factores de la columna, sin redondear la suma.
+      const sumaFactor = cronograma.reduce(function (suma, dato) {
+        return suma + dato.factor;
+      }, 0);
 
-    function calculateWithCash(amount, rate) {
-      const divisor = 100n + rate;
+      console.log(
+        'Suma de la columna Factor (sin redondeo adicional):',
+        sumaFactor
+      );
 
-      // Base en céntimos, tomando el siguiente céntimo
-      // cuando la división no sea exacta.
-      const base =
-        (amount * 100n + divisor - 1n) / divisor;
+      // CuotaY: importe / suma de Factor, redondeado a 2 decimales.
+      const cuotaY = redondear(importe / sumaFactor, 2);
 
-      // Provisión y total en unidades de 0.0001.
-      const feeUnits = base * rate;
-      const totalUnits = base * 100n + feeUnits;
+      // El principal de la primera fila es el importe ingresado.
+      let principalPendiente = importe;
 
-      // Compara enteros y primeros dos decimales,
-      // descartando el resto sin redondear.
-      const totalTruncatedToCents = totalUnits / 100n;
+      cronograma.forEach(function (dato, indice) {
+        const esUltimaFila = indice === cronograma.length - 1;
 
-      if (totalTruncatedToCents !== amount) {
-        $("error").textContent =
-          "Este importe no permite una base de dos decimales " +
-          "cuyo total con provisión coincida con el importe ingresado " +
-          "hasta el segundo decimal. Para lograrlo, la base " +
-          "necesitaría más de dos decimales.";
+        let amortizacion;
+        let interesY;
 
-        $("error").hidden = false;
-        return;
-      }
+        if (esUltimaFila) {
+          // Última fila: amortizar todo el principal pendiente.
+          amortizacion = principalPendiente;
 
-      $("base").textContent = money(base);
-      $("fee").textContent = precise(feeUnits);
-      $("total").textContent = precise(totalUnits);
+          // Última fila: InterésY redondeado a 2 decimales.
+          interesY = redondear(cuotaY - amortizacion, 2);
+        } else {
+          interesY = principalPendiente * (
+            Math.pow(1 + tea, dato.dias / 360) - 1
+          );
 
-      $("summary").hidden = false;
-      $("summary").innerHTML =
-        `Monto sin provisión: <strong>${money(base)}</strong>, ` +
-        `más <strong>${precise(feeUnits)}</strong> de provisión. ` +
-        `Total: <strong>${precise(totalUnits)}</strong>. ` +
-        `Tomando solo los primeros dos decimales, sin redondear: ` +
-        `<strong>${money(totalTruncatedToCents)}</strong>.`;
-    }
+          amortizacion = cuotaY - interesY;
+        }
 
-    function calculateWithoutCash(amount, rate) {
-      // Bases válidas:
-      // 2% → múltiplos de 0.50.
-      // 4% → múltiplos de 0.25.
-      const step = rate === 2n ? 50n : 25n;
-      const totalStep = step + step * rate / 100n;
+        const saldoFinal = principalPendiente - amortizacion;
+        const vencimTexto = formatearFecha(dato.fechaVencim);
 
-      // Mayor base válida sin superar el importe disponible.
-      const base = (amount / totalStep) * step;
-      const fee = base * rate / 100n;
-      const total = base + fee;
-      const remaining = amount - total;
+        const datosFila = [
+          dato.numero,
+          formatearFecha(dato.fechaFacturacion),
+          vencimTexto,
+          dato.dias,
+          dato.diasAcumulados,
+          dato.factor.toFixed(9),
+          principalPendiente.toFixed(2),
+          amortizacion.toFixed(2),
+          interesY.toFixed(2),
+          cuotaY.toFixed(2),
+          saldoFinal.toFixed(2),
+          '0.00', // Amortización Principal
+          '0.00', // Interés
+          '0.00', // Cuota
+          '0.00', // Seg de desgravamen
+          '0.00', // Cuota + Seg desgravamen
+          vencimTexto
+        ];
 
-      $("base").textContent = money(base);
-      $("fee").textContent = money(fee);
-      $("total").textContent = money(total);
-      $("remaining").textContent = money(remaining);
+        const fila = cuotas.insertRow();
 
-      $("summary").hidden = false;
+        datosFila.forEach(function (valor) {
+          fila.insertCell().textContent = valor;
+        });
 
-      if (base === 0n) {
-        $("summary").textContent =
-          "El importe disponible no alcanza para una venta positiva " +
-          "con provisión exacta en céntimos.";
+        // La siguiente fila toma el saldo final de esta fila.
+        principalPendiente = saldoFinal;
+      });
+    });
 
-        return;
-      }
-
-      $("summary").innerHTML =
-        `Puedes vender <strong>${money(base)}</strong> sin provisión. ` +
-        `Al sumar <strong>${money(fee)}</strong> de provisión ` +
-        `(${rate}%), el total es <strong>${money(total)}</strong>.`;
-    }
-
-    $("amount").addEventListener("input", update);
-    $("rate").addEventListener("change", update);
-    $("cash").addEventListener("change", update);
-
-    update();
+    formulario.addEventListener('reset', function () {
+      cuotas.replaceChildren();
+      resultados.replaceChildren();
+    });
   </script>
+
 </body>
 </html>
