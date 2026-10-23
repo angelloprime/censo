@@ -48,6 +48,14 @@
     </p>
 
     <p>
+      <label for="seguro">Seguro:</label>
+      <select id="seguro">
+        <option value="0.40" selected>0.40%</option>
+        <option value="0.30">0.30%</option>
+      </select>
+    </p>
+
+    <p>
       <button type="submit">Simular</button>
       <button type="reset">Limpiar</button>
     </p>
@@ -132,6 +140,12 @@
       // Ejemplo: ingresar 10 equivale a una TEA del 10 %.
       const tea = document.getElementById('tea').valueAsNumber / 100;
 
+      // Convertir el porcentaje del seguro a su valor decimal.
+      // 0.40 % = 0.004; 0.30 % = 0.003.
+      const seguro = Number(
+        document.getElementById('seguro').value
+      ) / 100;
+
       const fechaIngresada = document.getElementById('fecha').value;
       const fechaDesembolso = new Date(
         fechaIngresada + 'T00:00:00Z'
@@ -207,8 +221,7 @@
         vencimientoAnterior = fechaVencim;
       }
 
-      // Sumar los factores de la columna.
-      // No aplicar un redondeo adicional a esta suma.
+      // Sumar los factores de la columna sin redondear la suma.
       const sumaFactor = cronograma.reduce(function (suma, dato) {
         return suma + dato.factor;
       }, 0);
@@ -218,7 +231,7 @@
         sumaFactor
       );
 
-      // CuotaY: importe / suma de Factor.
+      // CuotaY: importe / suma de Factor, a 2 decimales.
       const cuotaY = redondear(importe / sumaFactor, 2);
 
       let principalPendiente = importe;
@@ -258,14 +271,31 @@
         // Acumulado de Amortización, incluida la fila actual.
         amortizacionAcumulada += amortizacion;
 
-        // Amortización Principal:
-        // si el acumulado de Amortización es <= 0, colocar 1.00;
-        // de lo contrario, restar la suma de las filas anteriores
-        // de Amortización Principal.
+        // Amortización Principal.
         const amortizacionPrincipal =
           amortizacionAcumulada <= 0
             ? 1
             : amortizacionAcumulada - amortizacionPrincipalAcumulada;
+
+        // Cuota: copiar el valor de CuotaY.
+        const cuota = cuotaY;
+
+        // Interés: Cuota - Amortización Principal.
+        const interes = cuota - amortizacionPrincipal;
+
+        // Seguro de desgravamen:
+        // Principal pendiente × Seguro, con máximo de 30.00.
+        // El importe se redondea a 2 decimales.
+        const segDesgravamen = redondear(
+          Math.min(principalPendiente * seguro, 30),
+          2
+        );
+
+        // Cuota + Seguro de desgravamen.
+        const cuotaConSeguro = redondear(
+          cuota + segDesgravamen,
+          2
+        );
 
         const vencimTexto = formatearFecha(dato.fechaVencim);
 
@@ -282,10 +312,10 @@
           cuotaY.toFixed(2),
           saldoFinal.toFixed(2),
           amortizacionPrincipal.toFixed(2),
-          '0.00', // Interés
-          '0.00', // Cuota
-          '0.00', // Seg de desgravamen
-          '0.00', // Cuota + Seg desgravamen
+          interes.toFixed(2),
+          cuota.toFixed(2),
+          segDesgravamen.toFixed(2),
+          cuotaConSeguro.toFixed(2),
           vencimTexto
         ];
 
