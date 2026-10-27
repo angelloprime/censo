@@ -1,2615 +1,1894 @@
-<!DOCTYPE html>
-<html lang="es-PE">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bitacora Deepening</title>
-
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23d62839'/%3E%3Cpath d='M10 7h13v18H10M7 10h5M7 16h5M7 22h5M15 12h5M15 17h5' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
-
-  <style>
-    :root {
-      --fondo:#edf2f7;
-      --texto:#213149;
-      --borde:#dce4ee;
-      --rojo:#d62839;
-      --azul:#14263f;
-
-      --bs-primary:#d62839;
-      --bs-primary-rgb:214,40,57;
-      --bs-body-color:#213149;
-      --bs-body-bg:#edf2f7;
-
-      color-scheme:light;
-    }
-
-    * { box-sizing:border-box; }
-
-    body {
-      margin:0;
-      background:var(--fondo);
-      color:var(--texto);
-      font-family:"Segoe UI",system-ui,sans-serif;
-    }
-
-    button,input,select { font:inherit; }
-    button { cursor:pointer; }
-
-    .contenedor {
-      max-width:1440px;
-      margin:auto;
-      padding:20px 28px;
-    }
-
-    /* CABECERA */
-
-    .cabecera {
-      background:var(--azul);
-      border-bottom:3px solid var(--rojo);
-      box-shadow:0 4px 18px #14263f16;
-    }
-
-    .cabecera .contenedor,.marca,.acciones {
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-
-    .cabecera .contenedor {
-      justify-content:space-between;
-      flex-wrap:wrap;
-    }
-
-    .marca h1 {
-      margin:0;
-      color:#fff;
-      font-size:1.4rem;
-      font-weight:750;
-      letter-spacing:-.5px;
-    }
-
-    .marca-icono {
-      display:grid;
-      place-items:center;
-      width:44px;
-      height:44px;
-      border-radius:13px;
-      background:var(--rojo);
-      color:#fff;
-      font-size:1.4rem;
-      box-shadow:0 4px 12px #00000018;
-    }
-
-    /* BOTONES */
-
-    .btn {
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:7px;
-      border:1px solid #cbd6e3;
-      border-radius:9px;
-      padding:9px 13px;
-      background:#fff;
-      color:#34465e;
-      font-weight:600;
-      transition:background-color .15s,border-color .15s,box-shadow .15s;
-    }
-
-    .btn:hover {
-      background:#eaf0f7;
-      border-color:#aabbd0;
-      color:#14263f;
-    }
-
-    .btn-rojo {
-      color:#fff;
-      background:var(--rojo);
-      border-color:var(--rojo);
-      box-shadow:0 3px 8px #d6283919;
-    }
-
-    .btn-rojo:hover {
-      color:#fff;
-      background:#b71f30;
-      border-color:#b71f30;
-    }
-
-    .cabecera .acciones .btn {
-      background:#203550;
-      color:#eef4ff;
-      border-color:#40536d;
-    }
-
-    .cabecera .acciones .btn:hover {
-      background:#304866;
-      border-color:#8195af;
-      color:#fff;
-    }
-
-    .cabecera .acciones .btn-rojo {
-      background:var(--rojo);
-      color:#fff;
-      border-color:var(--rojo);
-    }
-
-    .cabecera .acciones .btn-rojo:hover {
-      background:#b71f30;
-      border-color:#b71f30;
-    }
-
-    .btn-eliminar {
-      color:#b42335;
-      background:#fff0f2;
-      border-color:#efbfca;
-    }
-
-    .btn-eliminar:hover {
-      background:#ffe1e6;
-      border-color:#d95b6d;
-      color:#95192c;
-    }
-
-    .btn:focus-visible,input:focus-visible,select:focus-visible {
-      outline:3px solid #60a5fa;
-      outline-offset:3px;
-    }
-
-    /* TABLERO */
-
-    main.contenedor {
-      padding-top:28px;
-      padding-bottom:110px;
-    }
-
-    .tablero {
-      display:grid;
-      grid-template-columns:minmax(0,1fr) minmax(0,2fr);
-      gap:24px;
-      align-items:start;
-    }
-
-    .panel {
-      min-width:0;
-      padding:20px;
-      background:#fff;
-      border:1px solid var(--borde);
-      border-top:4px solid #4b76bf;
-      border-radius:17px;
-      box-shadow:0 6px 22px #14263f08;
-    }
-
-    .panel[aria-labelledby="tituloValidados"] {
-      border-top-color:#168567;
-    }
-
-    .panel-cabecera {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-bottom:18px;
-      padding-bottom:16px;
-      border-bottom:1px solid #e8edf4;
-    }
-
-    .panel h2 {
-      display:flex;
-      align-items:center;
-      gap:9px;
-      margin:0;
-      font-size:1.12rem;
-      font-weight:750;
-      color:#1a2d47;
-    }
-
-    .icono-pendiente { color:#426cb3; }
-    .icono-validado { color:#047857; }
-
-    .lista-estados {
-      display:grid;
-      grid-template-columns:minmax(0,1fr);
-      gap:14px;
-    }
-
-    .lista-validados {
-      grid-template-columns:repeat(2,minmax(0,1fr));
-    }
-
-    /* COLORES SEGÚN SECCIÓN */
-
-    .estado {
-      --acento:#2563eb;
-      --tinte:#edf4ff;
-      --tinte-fuerte:#deebff;
-      --linea:#bfd3f1;
-
-      min-width:0;
-      background:#f8fafd;
-      border:1px solid var(--linea);
-      border-radius:13px;
-      overflow:hidden;
-    }
-
-    #observados,#rechazados {
-      --tinte:#fff0f2;
-      --tinte-fuerte:#ffe1e7;
-      --linea:#efbcc7;
-    }
-
-    #reduccion {
-      --tinte:#f3edff;
-      --tinte-fuerte:#e9ddff;
-      --linea:#d5c1f5;
-    }
-
-    #pendientes {
-      --tinte:#fff7e5;
-      --tinte-fuerte:#ffedc2;
-      --linea:#ebd49c;
-    }
-
-    #corte2,#corte3,#corte4,#corte5,#corte6,#corte1 {
-      --tinte:#eaf8f1;
-      --tinte-fuerte:#d5f0e2;
-      --linea:#b5ddc9;
-    }
-
-    #digital {
-      --tinte:#eaf7fc;
-      --tinte-fuerte:#d7eff9;
-      --linea:#b7ddea;
-    }
-
-    .estado-cabecera {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      padding:13px 12px;
-      background:var(--tinte-fuerte);
-      border-bottom:1px solid var(--linea);
-      overflow-x:auto;
-    }
-
-    .estado-cabecera .contadores {
-      margin-left:auto;
-      flex-wrap:nowrap;
-      flex-shrink:0;
-    }
-
-    .estado h3 {
-      display:flex;
-      align-items:center;
-      gap:8px;
-      margin:0;
-      font-size:.94rem;
-      font-weight:750;
-      white-space:nowrap;
-      flex-shrink:0;
-      color:#23364f;
-    }
-
-    .estado h3 i { color:var(--acento); }
-
-    /* CONTADORES */
-
-    .contadores {
-      display:flex;
-      gap:5px;
-      flex-wrap:wrap;
-    }
-
-    .contador {
-      display:inline-flex;
-      align-items:center;
-      gap:5px;
-      padding:4px 7px;
-      border:1px solid #d4deea;
-      border-radius:7px;
-      font-size:.69rem;
-      font-weight:600;
-      background:#f5f7fb;
-      color:#465772;
-      white-space:nowrap;
-    }
-
-    .contador b {
-      font-weight:800;
-      font-variant-numeric:tabular-nums;
-    }
-
-    .contador-xl {
-      background:#e3edff;
-      color:#234d99;
-      border-color:#bdd1f4;
-    }
-
-    .contador-rg {
-      background:#efe5ff;
-      color:#6931a2;
-      border-color:#d8bff2;
-    }
-
-    .estado-contenido {
-      padding:10px;
-      display:grid;
-      gap:10px;
-    }
-
-    .sin-registros {
-      margin:0;
-      padding:20px 0;
-      text-align:center;
-      color:#65758c;
-      font-size:.8rem;
-    }
-
-    /* TARJETAS */
-
-    .ficha {
-      min-width:0;
-      border:1px solid var(--linea);
-      border-left:4px solid var(--acento);
-      background:var(--tinte);
-      padding:13px;
-      border-radius:11px;
-      box-shadow:0 2px 7px #14263f08;
-      transition:box-shadow .15s,border-color .15s;
-    }
-
-    .ficha:hover {
-      border-color:var(--acento);
-      box-shadow:0 5px 14px #14263f13;
-    }
-
-    .ficha-titulo {
-      display:flex;
-      align-items:start;
-      justify-content:space-between;
-      gap:8px;
-      margin-bottom:11px;
-    }
-
-    .ficha h4 {
-      margin:0;
-      color:#172d49;
-      font-size:.94rem;
-      font-weight:750;
-      line-height:1.4;
-      overflow-wrap:anywhere;
-    }
-
-    .tipo {
-      flex-shrink:0;
-      border:1px solid;
-      font-size:.66rem;
-      font-weight:800;
-      padding:3px 6px;
-      border-radius:6px;
-    }
-
-    .ficha-datos {
-      display:grid;
-      grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);
-      gap:10px;
-      margin:0;
-      font-size:.79rem;
-    }
-
-    .ficha-datos > div {
-      display:flex;
-      flex-wrap:wrap;
-      align-content:start;
-      min-width:0;
-      gap:4px 6px;
-    }
-
-    .ficha-datos > div:nth-child(even) {
-      border-left:1px solid var(--linea);
-      padding-left:10px;
-    }
-
-    .ficha-datos dt {
-      color:#52647c;
-      font-weight:500;
-    }
-
-    .ficha-datos dd {
-      margin:0;
-      color:#213149;
-      font-weight:600;
-      overflow-wrap:anywhere;
-    }
-
-    .ficha-acciones {
-      display:flex;
-      flex-wrap:nowrap;
-      gap:6px;
-      padding-top:12px;
-      padding-bottom:3px;
-      margin-top:12px;
-      border-top:1px solid var(--linea);
-      overflow-x:auto;
-    }
-
-    .ficha-acciones .btn {
-      flex:0 0 auto;
-      padding:7px 8px;
-      min-height:35px;
-      font-size:.71rem;
-      gap:5px;
-      white-space:nowrap;
-      box-shadow:0 1px 2px #14263f05;
-    }
-
-    .ficha-acciones [data-accion="ver"] {
-      color:#2453a6;
-      background:#fff;
-      border-color:#b9cdea;
-    }
-
-    .ficha-acciones [data-accion="ver"]:hover {
-      background:#dceaff;
-      border-color:#6d9ad9;
-    }
-
-    .ficha-acciones [data-accion="editar"] {
-      color:#80520d;
-      background:#fff9e9;
-      border-color:#e7d09c;
-    }
-
-    .ficha-acciones [data-accion="editar"]:hover {
-      background:#ffedc4;
-      border-color:#c39948;
-    }
-
-    .ficha-acciones [data-accion="mover"] {
-      color:#6536a2;
-      background:#f6efff;
-      border-color:#d4bdee;
-    }
-
-    .ficha-acciones [data-accion="mover"]:hover {
-      background:#eadcff;
-      border-color:#a17bcf;
-    }
-
-    .ficha-acciones [data-accion="simular"] {
-      color:#fff;
-      background:var(--rojo);
-      border-color:var(--rojo);
-    }
-
-    .ficha-acciones [data-accion="simular"]:hover {
-      background:#b71f30;
-      border-color:#b71f30;
-    }
-
-    .boton-nueva {
-      position:fixed;
-      right:24px;
-      bottom:24px;
-      z-index:20;
-      min-height:52px;
-      padding:13px 20px;
-      border-radius:16px;
-      box-shadow:0 8px 25px #b71f3038;
-    }
-
-    .boton-nueva i { font-size:1.3rem; }
-
-    #aviso {
-      margin-bottom:18px;
-      padding:12px;
-      border:1px solid #efd28f;
-      border-radius:10px;
-      background:#fff3d6;
-      color:#78520b;
-      font-size:.87rem;
-    }
-
-    #aviso[hidden] { display:none; }
-
-    /* MODALES */
-
-    dialog {
-      width:min(680px,calc(100% - 28px));
-      max-height:90dvh;
-      padding:0;
-      border:1px solid #d3ddeb;
-      border-radius:17px;
-      color:var(--texto);
-      background:#fff;
-      box-shadow:0 24px 90px #0f172a40;
-    }
-
-    dialog::backdrop { background:#12243d99; }
-
-    .modal-cabecera {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      padding:20px 22px;
-      background:#f4f7fb;
-      border-bottom:1px solid var(--borde);
-    }
-
-    .modal-cabecera h2 {
-      margin:0;
-      color:#172d49;
-      font-size:1.15rem;
-      font-weight:750;
-    }
-
-    .modal-cabecera h2 i { color:var(--rojo); }
-
-    .cerrar {
-      display:grid;
-      place-items:center;
-      width:36px;
-      height:36px;
-      padding:0;
-      font-size:1.35rem;
-    }
-
-    .modal-cuerpo { padding:22px; }
-
-    .modal-pie {
-      display:flex;
-      justify-content:flex-end;
-      gap:9px;
-      padding:16px 22px;
-      border-top:1px solid var(--borde);
-      background:#f8fafc;
-    }
-
-    /* FORMULARIOS */
-
-    .formulario-grid {
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:16px;
-    }
-
-    .campo-completo { grid-column:1 / -1; }
-
-    label {
-      display:block;
-      color:#3c506c;
-      font-size:.85rem;
-      font-weight:650;
-      margin-bottom:6px;
-    }
-
-    .form-control,.form-select {
-      display:block;
-      width:100%;
-      min-height:42px;
-      border:1px solid #cbd6e4;
-      border-radius:9px;
-      background-color:#fff;
-      color:var(--texto);
-      padding:9px 11px;
-    }
-
-    .form-control::placeholder { color:#71829a; }
-
-    .form-control:focus,.form-select:focus {
-      border-color:#7097cf;
-      box-shadow:0 0 0 3px #2563eb12;
-      background-color:#fff;
-      color:var(--texto);
-    }
-
-    .fecha-control {
-      position:relative;
-      display:flex;
-      gap:6px;
-    }
-
-    .calendario-nativo {
-      position:absolute;
-      right:0;
-      bottom:0;
-      width:1px;
-      height:1px;
-      opacity:0;
-      pointer-events:none;
-    }
-
-    .detalle {
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:16px;
-      margin:0;
-    }
-
-    .detalle div {
-      padding-bottom:10px;
-      border-bottom:1px solid var(--borde);
-      min-width:0;
-    }
-
-    .detalle dt {
-      color:#60728b;
-      font-size:.8rem;
-      font-weight:500;
-    }
-
-    .detalle dd {
-      margin:5px 0 0;
-      font-weight:600;
-      overflow-wrap:anywhere;
-    }
-
-    .modal-pequeno { max-width:480px; }
-
-    /* SIMULADOR */
-
-    #modalSimulador {
-      width:min(1380px,calc(100% - 24px));
-      max-height:94dvh;
-    }
-
-    #modalSimulador .modal-cabecera {
-      position:sticky;
-      top:0;
-      z-index:3;
-      background:#f4f7fb;
-    }
-
-    .sim-subtitulo {
-      margin:5px 0 0;
-      color:#60728b;
-      font-size:.8rem;
-      overflow-wrap:anywhere;
-    }
-
-    .sim-distribucion {
-      display:grid;
-      grid-template-columns:minmax(300px,.85fr) minmax(0,1.5fr);
-      gap:22px;
-      align-items:start;
-    }
-
-    .sim-bloque {
-      min-width:0;
-      padding:20px;
-      border:1px solid var(--borde);
-      border-radius:13px;
-      background:#f6f8fc;
-    }
-
-    .sim-bloque h3,.sim-cronograma h3 {
-      color:#1d3555;
-      font-size:1rem;
-      font-weight:750;
-      margin:0 0 17px;
-    }
-
-    .sim-formulario {
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:15px;
-    }
-
-    .sim-formulario .form-control,
-    .sim-formulario .form-select,
-    .sim-formulario .fecha-control input {
-      min-width:0;
-    }
-
-    .sim-acciones {
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:19px;
-    }
-
-    .sim-estadisticas {
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:11px;
-    }
-
-    .sim-estadistica {
-      min-width:0;
-      padding:17px 14px;
-      border:1px solid #c5d9f5;
-      border-top:3px solid #3d6eb8;
-      border-radius:11px;
-      background:#eaf2ff;
-    }
-
-    .sim-estadistica:nth-child(2) {
-      background:#fff0f2;
-      border-color:#f0c7d0;
-      border-top-color:var(--rojo);
-    }
-
-    .sim-estadistica:nth-child(3) {
-      background:#e9f7f1;
-      border-color:#bedfce;
-      border-top-color:#168567;
-    }
-
-    .sim-estadistica dt {
-      font-size:.8rem;
-      color:#4c607c;
-      font-weight:650;
-      letter-spacing:.3px;
-    }
-
-    .sim-estadistica dd {
-      margin:7px 0 0;
-      font-size:1.35rem;
-      font-weight:750;
-      color:#2453a6;
-      overflow-wrap:anywhere;
-    }
-
-    .sim-estadistica:nth-child(2) dd { color:#b91f2d; }
-    .sim-estadistica:nth-child(3) dd { color:#08704f; }
-
-    .sim-pagos {
-      display:grid;
-      gap:13px;
-      margin:20px 0 0;
-    }
-
-    .sim-pagos div {
-      display:flex;
-      align-items:baseline;
-      justify-content:space-between;
-      gap:14px;
-      border-bottom:1px solid var(--borde);
-      padding-bottom:11px;
-    }
-
-    .sim-pagos dt {
-      font-size:.85rem;
-      font-weight:500;
-      color:#475a74;
-    }
-
-    .sim-pagos dd {
-      font-size:1rem;
-      font-weight:750;
-      margin:0;
-      text-align:right;
-      color:#1c3555;
-    }
-
-    .sim-pagos div:nth-child(2) dd { color:#b91f2d; }
-
-    .sim-vacio {
-      color:#60728b;
-      padding:25px 0;
-      margin:0;
-      font-size:.9rem;
-    }
-
-    .sim-error {
-      color:#a41c2b;
-      background:#fff0f2;
-      border:1px solid #f2cbd1;
-      padding:12px;
-      border-radius:9px;
-      margin:0 0 16px;
-      font-size:.85rem;
-    }
-
-    .sim-nota {
-      margin:13px 0 0;
-      color:#60728b;
-      font-size:.78rem;
-    }
-
-    /* CRONOGRAMA */
-
-    .sim-cronograma { margin-top:22px; }
-
-    .sim-tabla-contenedor {
-      overflow:auto;
-      max-height:430px;
-      border:1px solid #cdd9e8;
-      border-radius:11px;
-    }
-
-    .sim-tabla {
-      border-collapse:separate;
-      border-spacing:0;
-      font-size:.76rem;
-      width:100%;
-      font-variant-numeric:tabular-nums;
-    }
-
-    .sim-tabla th,.sim-tabla td {
-      padding:11px 12px;
-      border-bottom:1px solid var(--borde);
-      text-align:center;
-      vertical-align:middle;
-      white-space:nowrap;
-    }
-
-    .sim-tabla th {
-      position:sticky;
-      top:0;
-      z-index:1;
-      color:#fff;
-      background:#203a5c;
-      font-weight:650;
-      line-height:1.35;
-    }
-
-    /* Columnas ocultas únicamente en la vista */
-    .sim-tabla tr > :is(
-      :nth-child(3),
-      :nth-child(4),
-      :nth-child(5),
-      :nth-child(6),
-      :nth-child(8),
-      :nth-child(9),
-      :nth-child(10),
-      :nth-child(11)
-    ) {
-      display:none;
-    }
-
-    .sim-tabla tbody tr:nth-child(even) td {
-      background:#f1f5fb;
-    }
-
-    .sim-tabla tbody tr:hover td {
-      background:#e5edf8;
-    }
-
-    .sim-tabla th:nth-child(16) {
-      background:#b91f2d;
-    }
-
-    .sim-tabla td:nth-child(16) {
-      color:#b91f2d;
-      font-weight:750;
-    }
-
-    #modalSimulador [hidden] {
-      display:none !important;
-    }
-
-    /* ADAPTACIÓN A PANTALLAS PEQUEÑAS */
-
-    @media(max-width:991px) {
-      .tablero { grid-template-columns:1fr; }
-    }
-
-    @media(max-width:850px) {
-      .sim-distribucion { grid-template-columns:1fr; }
-    }
-
-    @media(max-width:575px) {
-      .contenedor { padding:16px; }
-      .marca h1 { font-size:1.2rem; }
-
-      .acciones {
-        width:100%;
-        gap:7px;
-      }
-
-      .acciones .btn {
-        flex:1;
-        font-size:.76rem;
-        padding:9px 6px;
-      }
-
-      .panel { padding:12px; }
-      .tablero { gap:16px; }
-      .lista-validados { gap:9px; }
-      .estado-cabecera { padding:10px 8px; }
-      .estado h3 { font-size:.83rem; }
-
-      .contador {
-        padding:3px 5px;
-        font-size:.64rem;
-      }
-
-      .contadores { gap:4px; }
-      .estado-contenido { padding:6px; }
-      .ficha { padding:9px; }
-      .ficha h4 { font-size:.84rem; }
-      .ficha-datos { font-size:.74rem; }
-      .ficha-acciones .btn { font-size:.68rem; }
-
-      .formulario-grid,.detalle {
-        grid-template-columns:1fr;
-      }
-
-      .modal-cabecera,.modal-cuerpo,.modal-pie {
-        padding:16px;
-      }
-
-      .boton-nueva {
-        right:16px;
-        bottom:calc(16px + env(safe-area-inset-bottom));
-      }
-
-      .sim-bloque { padding:14px; }
-      .sim-estadisticas { gap:6px; }
-      .sim-estadistica { padding:12px 8px; }
-      .sim-estadistica dd { font-size:1rem; }
-      .sim-formulario { gap:12px; }
-      .sim-formulario label { font-size:.78rem; }
-
-      .sim-formulario .sim-fecha,
-      .sim-formulario .sim-ciclo {
-        grid-column:1/-1;
-      }
-    }
-
-    @media(prefers-reduced-motion:reduce) {
-      .btn,.ficha { transition:none; }
-    }
-  </style>
-</head>
-
-<body>
-  <header class="cabecera">
-    <div class="contenedor">
-      <div class="marca">
-        <span class="marca-icono">
-          <i class="bi bi-journal-text" aria-hidden="true"></i>
-        </span>
-        <h1>Bitacora Deepening</h1>
-      </div>
-
-      <nav class="acciones" aria-label="Opciones principales">
-        <button class="btn" type="button">
-          <i class="bi bi-people" aria-hidden="true"></i>
-          Asesores
-        </button>
-
-        <button class="btn" type="button">
-          <i class="bi bi-file-earmark-text" aria-hidden="true"></i>
-          Documento
-        </button>
-
-        <button id="btnSimulador" class="btn btn-rojo" type="button">
-          <i class="bi bi-calculator" aria-hidden="true"></i>
-          Simulador
-        </button>
-      </nav>
-    </div>
-  </header>
-
-  <main class="contenedor">
-    <div id="aviso" role="status" hidden></div>
-
-    <div class="tablero">
-      <section class="panel" aria-labelledby="tituloPorValidar">
-        <div class="panel-cabecera">
-          <h2 id="tituloPorValidar">
-            <i class="bi bi-hourglass-split icono-pendiente" aria-hidden="true"></i>
-            Por validar
-          </h2>
-          <div id="contadorPorValidar" class="contadores"></div>
-        </div>
-
-        <div id="porValidar" class="lista-estados"></div>
-      </section>
-
-      <section class="panel" aria-labelledby="tituloValidados">
-        <div class="panel-cabecera">
-          <h2 id="tituloValidados">
-            <i class="bi bi-check2-circle icono-validado" aria-hidden="true"></i>
-            Validados
-          </h2>
-          <div id="contadorValidados" class="contadores"></div>
-        </div>
-
-        <div id="validados" class="lista-estados lista-validados"></div>
-      </section>
-    </div>
-  </main>
-
-  <button id="btnNuevaFicha" class="btn btn-rojo boton-nueva" type="button">
-    <i class="bi bi-plus-lg" aria-hidden="true"></i>
-    Nueva ficha
-  </button>
-
-  <!-- NUEVA FICHA / EDITAR -->
-
-  <dialog id="modalFicha" aria-labelledby="tituloFormulario">
-    <div class="modal-cabecera">
-      <h2 id="tituloFormulario">Nueva ficha</h2>
-      <button class="btn cerrar" type="button"
-              data-cerrar="modalFicha" aria-label="Cerrar">×</button>
-    </div>
-
-    <form id="formFicha">
-      <input id="fichaId" type="hidden">
-
-      <div class="modal-cuerpo formulario-grid">
-        <div class="campo-completo">
-          <label for="nombre">Nombre</label>
-          <input class="form-control" id="nombre" maxlength="150" required>
-        </div>
-
-        <div>
-          <label for="dni">DNI</label>
-          <input class="form-control" id="dni"
-                 inputmode="numeric" pattern="[0-9]{8}"
-                 maxlength="8" title="Ingresa 8 dígitos" required>
-        </div>
-
-        <div>
-          <label for="telefono">Teléfono</label>
-          <input class="form-control" id="telefono"
-                 type="tel" maxlength="25" required>
-        </div>
-
-        <div>
-          <label for="tasa">Tasa (%)</label>
-          <input class="form-control" id="tasa"
-                 type="number" min="0" step="any" required>
-        </div>
-
-        <div>
-          <label for="tasaReducida">Tasa reducida (%)</label>
-          <input class="form-control" id="tasaReducida"
-                 type="number" min="0" step="any" placeholder="Opcional">
-        </div>
-
-        <div>
-          <label for="importe">Importe</label>
-          <input class="form-control" id="importe"
-                 type="number" min="0.01" step="0.01" required>
-        </div>
-
-        <div>
-          <label for="plazo">Plazo (meses)</label>
-          <input class="form-control" id="plazo"
-                 type="number" min="1" step="1" required>
-        </div>
-
-        <div>
-          <label for="fechaDesembolso">Fecha de desembolso</label>
-
-          <div class="fecha-control">
-            <input class="form-control" id="fechaDesembolso"
-                   placeholder="dd/mm/yyyy" inputmode="numeric"
-                   maxlength="10"
-                   pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required>
-
-            <button class="btn" id="abrirCalendario" type="button"
-                    aria-label="Elegir fecha en calendario">
-              <i class="bi bi-calendar3" aria-hidden="true"></i>
-            </button>
-
-            <input id="fechaCalendario" class="calendario-nativo"
-                   type="date" tabindex="-1" aria-hidden="true">
-          </div>
-        </div>
-
-        <div>
-          <label for="ciclo">Ciclo</label>
-          <select class="form-select" id="ciclo" required></select>
-        </div>
-      </div>
-
-      <div class="modal-pie">
-        <button class="btn" type="button" data-cerrar="modalFicha">
-          Cancelar
-        </button>
-        <button class="btn btn-rojo" type="submit">
-          Guardar ficha
-        </button>
-      </div>
-    </form>
-  </dialog>
-
-  <!-- VER TODOS LOS DATOS -->
-
-  <dialog id="modalDetalle" aria-labelledby="tituloDetalle">
-    <div class="modal-cabecera">
-      <h2 id="tituloDetalle">Todos los datos</h2>
-      <button class="btn cerrar" type="button"
-              data-cerrar="modalDetalle" aria-label="Cerrar">×</button>
-    </div>
-
-    <div class="modal-cuerpo">
-      <dl class="detalle" id="datosDetalle"></dl>
-    </div>
-
-    <div class="modal-pie">
-      <button class="btn" type="button" data-cerrar="modalDetalle">
-        Cerrar
-      </button>
-    </div>
-  </dialog>
-
-  <!-- MOVER FICHA -->
-
-  <dialog id="modalMover" class="modal-pequeno" aria-labelledby="tituloMover">
-    <div class="modal-cabecera">
-      <h2 id="tituloMover">Mover ficha</h2>
-      <button class="btn cerrar" type="button"
-              data-cerrar="modalMover" aria-label="Cerrar">×</button>
-    </div>
-
-    <form id="formMover">
-      <input id="moverId" type="hidden">
-
-      <div class="modal-cuerpo">
-        <p id="nombreMover"></p>
-        <label for="destino">Sección de destino</label>
-        <select class="form-select" id="destino" required></select>
-      </div>
-
-      <div class="modal-pie">
-        <button class="btn" type="button" data-cerrar="modalMover">
-          Cancelar
-        </button>
-        <button class="btn btn-rojo" type="submit">
-          Mover ficha
-        </button>
-      </div>
-    </form>
-  </dialog>
-
-  <!-- ELIMINAR FICHA -->
-
-  <dialog id="modalEliminar" class="modal-pequeno" aria-labelledby="tituloEliminar">
-    <div class="modal-cabecera">
-      <h2 id="tituloEliminar">Eliminar ficha</h2>
-      <button class="btn cerrar" type="button"
-              data-cerrar="modalEliminar" aria-label="Cerrar">×</button>
-    </div>
-
-    <form id="formEliminar">
-      <input id="eliminarId" type="hidden">
-
-      <div class="modal-cuerpo">
-        <p>¿Deseas eliminar esta ficha?</p>
-        <strong id="nombreEliminar"></strong>
-      </div>
-
-      <div class="modal-pie">
-        <button class="btn" type="button" data-cerrar="modalEliminar">
-          Cancelar
-        </button>
-        <button class="btn btn-rojo" type="submit">
-          Eliminar ficha
-        </button>
-      </div>
-    </form>
-  </dialog>
-
-  <!-- SIMULADOR -->
-
-  <dialog id="modalSimulador"
-          aria-labelledby="tituloSimulador"
-          aria-describedby="contextoSimulador">
-
-    <div class="modal-cabecera">
-      <div>
-        <h2 id="tituloSimulador">
-          <i class="bi bi-calculator" aria-hidden="true"></i>
-          Simulador XL
-        </h2>
-        <p id="contextoSimulador" class="sim-subtitulo">
-          Simulación independiente
-        </p>
-      </div>
-
-      <button class="btn cerrar" type="button"
-              data-cerrar="modalSimulador"
-              aria-label="Cerrar simulador">×</button>
-    </div>
-
-    <div class="modal-cuerpo">
-      <div id="simError" class="sim-error" role="alert" hidden></div>
-
-      <div class="sim-distribucion">
-        <section class="sim-bloque" aria-labelledby="simTituloDatos">
-          <h3 id="simTituloDatos">Datos de entrada</h3>
-
-          <form id="formSimulador">
-            <div class="sim-formulario">
-              <div>
-                <label for="simImporte">Importe</label>
-                <input id="simImporte" class="form-control"
-                       type="number" min="0.01" step="0.01" required>
-              </div>
-
-              <div>
-                <label for="simPlazo">Plazo (meses)</label>
-                <input id="simPlazo" class="form-control"
-                       type="number" min="1" step="1" required>
-              </div>
-
-              <div class="sim-fecha">
-                <label for="simFecha">Fecha de desembolso</label>
-
-                <div class="fecha-control">
-                  <input id="simFecha" class="form-control"
-                         inputmode="numeric" maxlength="10"
-                         placeholder="dd/mm/yyyy"
-                         pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required>
-
-                  <button id="simAbrirCalendario" class="btn" type="button"
-                          aria-label="Elegir fecha de la simulación">
-                    <i class="bi bi-calendar3" aria-hidden="true"></i>
-                  </button>
-
-                  <input id="simCalendario" class="calendario-nativo"
-                         type="date" tabindex="-1" aria-hidden="true">
-                </div>
-              </div>
-
-              <div class="sim-ciclo">
-                <label for="simCiclo">Ciclo</label>
-                <select id="simCiclo" class="form-select" required></select>
-              </div>
-
-              <div class="campo-completo sim-formulario">
-                <div>
-                  <label for="simTea">TEA (%)</label>
-                  <input id="simTea" class="form-control"
-                         type="number" min="0" step="any" required>
-                </div>
-
-                <div>
-                  <label for="simSeguro">Seguro</label>
-                  <select id="simSeguro" class="form-select">
-                    <option value="0.004">0.40%</option>
-                    <option value="0.003">0.30%</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div class="sim-acciones">
-              <button class="btn btn-rojo" type="submit">
-                <i class="bi bi-calculator" aria-hidden="true"></i>
-                Simular
-              </button>
-
-              <button id="simLimpiar" class="btn" type="button">
-                <i class="bi bi-eraser" aria-hidden="true"></i>
-                Limpiar
-              </button>
-            </div>
-          </form>
-        </section>
-
-        <section class="sim-bloque" aria-labelledby="simTituloResultados">
-          <h3 id="simTituloResultados">Resultados</h3>
-
-          <p id="simVacio" class="sim-vacio" role="status">
-            Ingresa los datos y pulsa Simular.
-          </p>
-
-          <div id="simResultados" hidden>
-            <dl class="sim-estadisticas">
-              <div class="sim-estadistica">
-                <dt>TEM</dt>
-                <dd id="simTem">—</dd>
-              </div>
-              <div class="sim-estadistica">
-                <dt>TCEA</dt>
-                <dd id="simTcea">—</dd>
-              </div>
-              <div class="sim-estadistica">
-                <dt>TCEM</dt>
-                <dd id="simTcem">—</dd>
-              </div>
-            </dl>
-
-            <dl class="sim-pagos">
-              <div>
-                <dt>Cuota a pagar</dt>
-                <dd id="simCuota">—</dd>
-              </div>
-              <div>
-                <dt>Cuota + Seguro</dt>
-                <dd id="simPrimeraCuota">—</dd>
-              </div>
-              <div>
-                <dt>Primer vencimiento</dt>
-                <dd id="simPrimerVencimiento">—</dd>
-              </div>
-            </dl>
-
-            <p id="simNotaTir" class="sim-nota" hidden></p>
-
-            <div class="sim-acciones">
-              <button id="simVerCronograma" class="btn" type="button"
-                      aria-expanded="false" aria-controls="simCronograma">
-                <i class="bi bi-table" aria-hidden="true"></i>
-                <span>Ver cronograma</span>
-              </button>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <section id="simCronograma" class="sim-cronograma"
-               aria-labelledby="simTituloCronograma" hidden>
-        <h3 id="simTituloCronograma">Cronograma de pagos</h3>
-
-        <div class="sim-tabla-contenedor" tabindex="0" role="region"
-             aria-label="Cronograma de pagos con desplazamiento horizontal">
-
-          <table class="sim-tabla">
-            <thead>
-              <tr>
-                <th scope="col">N° de<br>cuota</th>
-                <th scope="col">Ciclo de<br>facturación</th>
-                <th scope="col">Vencim</th>
-                <th scope="col">Días</th>
-                <th scope="col">Días acum</th>
-                <th scope="col">Factor</th>
-                <th scope="col">Principal<br>pendiente</th>
-                <th scope="col">Amortización</th>
-                <th scope="col">InterésY</th>
-                <th scope="col">CuotaY</th>
-                <th scope="col">Saldo final</th>
-                <th scope="col">Amortización<br>principal</th>
-                <th scope="col">Interés</th>
-                <th scope="col">Cuota</th>
-                <th scope="col">Seg de<br>desgravamen</th>
-                <th scope="col">Cuota + Seg<br>desgravamen</th>
-                <th scope="col">Último día de Pago<br>(Referencial)</th>
-              </tr>
-            </thead>
-
-            <tbody id="simFilas"></tbody>
-          </table>
-        </div>
-      </section>
-    </div>
-
-    <div class="modal-pie">
-      <button class="btn" type="button" data-cerrar="modalSimulador">
-        Cerrar
-      </button>
-    </div>
-  </dialog>
-
-  <script>
-    const $ = id => document.getElementById(id);
-
-    const CLAVE = 'bitacora-deepening-fichas-v1';
-
-    const CICLOS = [4,6,9,11,13,16,18,20,22,24,26];
-
-    const ESTADOS = [
-      {
-        id:'enProceso',
-        nombre:'En proceso',
-        grupo:'porValidar',
-        icono:'arrow-repeat',
-        color:'#2563eb'
-      },
-      {
-        id:'observados',
-        nombre:'Observados',
-        grupo:'porValidar',
-        icono:'exclamation-triangle',
-        color:'#c73d4d'
-      },
-      {
-        id:'reduccion',
-        nombre:'Reducción',
-        grupo:'porValidar',
-        icono:'graph-down-arrow',
-        color:'#7c3aed'
-      },
-      {
-        id:'pendientes',
-        nombre:'Pendientes',
-        grupo:'porValidar',
-        icono:'clock-history',
-        color:'#a16207'
-      },
-      {
-        id:'corte2',
-        nombre:'Corte 2',
-        grupo:'validados',
-        icono:'folder-check',
-        color:'#047857'
-      },
-      {
-        id:'corte3',
-        nombre:'Corte 3',
-        grupo:'validados',
-        icono:'folder-check',
-        color:'#047857'
-      },
-      {
-        id:'corte4',
-        nombre:'Corte 4',
-        grupo:'validados',
-        icono:'folder-check',
-        color:'#047857'
-      },
-      {
-        id:'corte5',
-        nombre:'Corte 5',
-        grupo:'validados',
-        icono:'folder-check',
-        color:'#047857'
-      },
-      {
-        id:'corte6',
-        nombre:'Corte 6',
-        grupo:'validados',
-        icono:'folder-check',
-        color:'#047857'
-      },
-      {
-        id:'corte1',
-        nombre:'Corte 1',
-        grupo:'validados',
-        icono:'folder-check',
-        color:'#047857'
-      },
-      {
-        id:'digital',
-        nombre:'Digital',
-        grupo:'validados',
-        icono:'laptop',
-        color:'#2563eb'
-      },
-      {
-        id:'rechazados',
-        nombre:'Rechazados',
-        grupo:'validados',
-        icono:'x-circle',
-        color:'#c73d4d'
-      }
-    ];
-
-    const esRG = nombre =>
-      nombre.trim().toUpperCase().startsWith('RG_');
-
-    const escapar = valor =>
-      String(valor).replace(/[&<>"']/g, c => ({
-        '&':'&amp;',
-        '<':'&lt;',
-        '>':'&gt;',
-        '"':'&quot;',
-        "'":'&#39;'
-      }[c]));
-
-    const numero = valor => Number(valor).toFixed(2);
-
-    const fechaTexto = iso =>
-      iso.split('-').reverse().join('/');
-
-    // Regla de tasa reducida:
-    // Plazos de 1 a 35 meses = 79.99%.
-    // Plazos de 36 meses o más = conserva la tasa registrada.
-    const esPlazoCorto = plazo =>
-      Number.isInteger(plazo) && plazo > 0 && plazo < 36;
-
-    const ajustarTasaReducida = ficha =>
-      esPlazoCorto(ficha.plazo)
-        ? {...ficha,tasaReducida:79.99}
-        : ficha;
-
-    function hoyISO() {
-      const fecha = new Date();
-
-      return (
-        `${fecha.getFullYear()}-` +
-        `${String(fecha.getMonth()+1).padStart(2,'0')}-` +
-        `${String(fecha.getDate()).padStart(2,'0')}`
-      );
-    }
-
-    function fechaISO(texto) {
-      const partes = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(texto);
-
-      if (!partes) return null;
-
-      const dia = Number(partes[1]);
-      const mes = Number(partes[2]);
-      const anio = Number(partes[3]);
-
-      const fecha = new Date(0);
-      fecha.setUTCFullYear(anio,mes-1,dia);
-
-      if (
-        anio < 1 ||
-        fecha.getUTCFullYear() !== anio ||
-        fecha.getUTCMonth() !== mes-1 ||
-        fecha.getUTCDate() !== dia
-      ) {
-        return null;
-      }
-
-      return `${partes[3]}-${partes[2]}-${partes[1]}`;
-    }
-
-    function avisar(texto) {
-      $('aviso').textContent = texto;
-      $('aviso').hidden = false;
-    }
-
-    let persistencia = true;
-
-    function fichaValida(f) {
-      return (
-        f &&
-        typeof f.id === 'string' &&
-        typeof f.nombre === 'string' &&
-        f.nombre.trim() &&
-        typeof f.dni === 'string' &&
-        typeof f.telefono === 'string' &&
-        Number.isFinite(f.tasa) &&
-        f.tasa >= 0 &&
-        (
-          f.tasaReducida === null ||
-          (
-            Number.isFinite(f.tasaReducida) &&
-            f.tasaReducida >= 0
-          )
-        ) &&
-        Number.isFinite(f.importe) &&
-        f.importe > 0 &&
-        Number.isInteger(f.plazo) &&
-        f.plazo > 0 &&
-        CICLOS.includes(f.ciclo) &&
-        typeof f.fechaDesembolso === 'string' &&
-        fechaISO(fechaTexto(f.fechaDesembolso)) === f.fechaDesembolso &&
-        ESTADOS.some(e => e.id === f.seccion)
-      );
-    }
-
-    function cargar() {
-      try {
-        const guardado = localStorage.getItem(CLAVE);
-
-        if (!guardado) return [];
-
-        const datos = JSON.parse(guardado);
-
-        if (
-          !Array.isArray(datos) ||
-          !datos.every(fichaValida) ||
-          new Set(datos.map(f => f.id)).size !== datos.length
-        ) {
-          throw new Error();
-        }
-
-        return datos.map(ajustarTasaReducida);
-      } catch {
-        persistencia = false;
-
-        avisar(
-          'No se pudieron leer los datos guardados. ' +
-          'Los cambios de esta sesión no se guardarán al cerrar.'
-        );
-
-        return [];
-      }
-    }
-
-    let fichas = cargar();
-
-    function guardar(nuevasFichas) {
-      nuevasFichas = nuevasFichas.map(ajustarTasaReducida);
-
-      if (persistencia) {
-        try {
-          localStorage.setItem(
-            CLAVE,
-            JSON.stringify(nuevasFichas)
-          );
-        } catch {
-          persistencia = false;
-
-          avisar(
-            'El navegador no permitió guardar. ' +
-            'Los cambios se conservarán solo durante esta sesión.'
-          );
-        }
-      }
-
-      fichas = nuevasFichas;
-      renderizar();
-    }
-
-    function contadores(lista) {
-      const rg = lista.filter(f => esRG(f.nombre)).length;
-
-      return `
-        <span class="contador">
-          Total <b>${lista.length}</b>
-        </span>
-        <span class="contador contador-xl">
-          XL <b>${lista.length-rg}</b>
-        </span>
-        <span class="contador contador-rg">
-          RG <b>${rg}</b>
-        </span>
-      `;
-    }
-
-    function tarjeta(f) {
-      const tipo = esRG(f.nombre) ? 'RG' : 'XL';
-
-      const tasaTexto =
-        numero(f.tasa) + '%' +
-        (
-          Number.isFinite(f.tasaReducida)
-            ? ` → ${numero(f.tasaReducida)}%`
-            : ''
-        );
-
-      const botones = [
-        ['ver','eye','Ver'],
-        ['editar','pencil-square','Editar'],
-        ['mover','arrow-left-right','Mover'],
-        ['simular','calculator','Simulación'],
-        ['eliminar','trash3','Eliminar']
-      ];
-
-      return `
-        <article class="ficha" data-id="${escapar(f.id)}">
-          <div class="ficha-titulo">
-            <h4>${escapar(f.nombre)}</h4>
-            <span class="tipo contador-${tipo.toLowerCase()}">
-              ${tipo}
-            </span>
-          </div>
-
-          <dl class="ficha-datos">
-            <div>
-              <dt>DNI:</dt>
-              <dd>${escapar(f.dni)}</dd>
-            </div>
-            <div>
-              <dt>Tasa:</dt>
-              <dd>${tasaTexto}</dd>
-            </div>
-            <div>
-              <dt>Teléfono:</dt>
-              <dd>${escapar(f.telefono)}</dd>
-            </div>
-            <div>
-              <dt>Desembolso:</dt>
-              <dd>${fechaTexto(f.fechaDesembolso)}</dd>
-            </div>
-          </dl>
-
-          <div class="ficha-acciones">
-            ${botones.map(([accion,icono,texto]) => `
-              <button
-                type="button"
-                class="btn ${accion === 'eliminar' ? 'btn-eliminar' : ''}"
-                data-accion="${accion}"
-                ${
-                  accion === 'eliminar'
-                    ? 'aria-label="Eliminar ficha" title="Eliminar ficha"'
-                    : ''
-                }
-              >
-                <i class="bi bi-${icono}" aria-hidden="true"></i>
-                ${accion === 'eliminar' ? '' : texto}
-              </button>
-            `).join('')}
-          </div>
-        </article>
-      `;
-    }
-
-    function renderizar() {
-      for (const grupo of ['porValidar','validados']) {
-        const estados = ESTADOS.filter(e => e.grupo === grupo);
-
-        $(grupo).innerHTML = estados.map(estado => {
-          const lista = fichas.filter(f => f.seccion === estado.id);
-
-          return `
-            <section
-              class="estado"
-              id="${estado.id}"
-              style="--acento:${estado.color}"
-              aria-labelledby="titulo-${estado.id}"
-            >
-              <div class="estado-cabecera">
-                <h3 id="titulo-${estado.id}">
-                  <i class="bi bi-${estado.icono}" aria-hidden="true"></i>
-                  ${estado.nombre}
-                </h3>
-
-                <div class="contadores">
-                  ${contadores(lista)}
-                </div>
-              </div>
-
-              <div class="estado-contenido">
-                ${
-                  lista.length
-                    ? lista.map(tarjeta).join('')
-                    : '<p class="sin-registros">Sin registros</p>'
-                }
-              </div>
-            </section>
-          `;
-        }).join('');
-
-        const totalGrupo = fichas.filter(f =>
-          estados.some(e => e.id === f.seccion)
-        );
-
-        $(
-          grupo === 'porValidar'
-            ? 'contadorPorValidar'
-            : 'contadorValidados'
-        ).innerHTML = contadores(totalGrupo);
-      }
-    }
-
-    let tasaReducidaManual = '';
-    let tasaReducidaAutomatica = false;
-
-    function actualizarTasaReducidaPorPlazo() {
-      const campo = $('tasaReducida');
-      const automatica = esPlazoCorto($('plazo').valueAsNumber);
-
-      if (automatica) {
-        if (!tasaReducidaAutomatica) {
-          tasaReducidaManual = campo.value;
-        }
-
-        campo.value = '79.99';
-      } else if (tasaReducidaAutomatica) {
-        campo.value = tasaReducidaManual;
-      }
-
-      campo.readOnly = automatica;
-      tasaReducidaAutomatica = automatica;
-    }
-
-    function abrirFormulario(ficha = null) {
-      $('formFicha').reset();
-      $('nombre').setCustomValidity('');
-      $('fechaDesembolso').setCustomValidity('');
-
-      $('tituloFormulario').textContent =
-        ficha ? 'Editar ficha' : 'Nueva ficha';
-
-      $('fichaId').value = ficha?.id || '';
-
-      for (const campo of [
-        'nombre','dni','telefono','tasa',
-        'tasaReducida','importe','plazo'
-      ]) {
-        $(campo).value = ficha?.[campo] ?? '';
-      }
-
-      tasaReducidaAutomatica = false;
-      tasaReducidaManual = $('tasaReducida').value;
-      actualizarTasaReducidaPorPlazo();
-
-      $('ciclo').value = ficha?.ciclo ?? 4;
-
-      const fecha = ficha?.fechaDesembolso || hoyISO();
-
-      $('fechaDesembolso').value = fechaTexto(fecha);
-      $('fechaCalendario').value = fecha;
-
-      $('modalFicha').showModal();
-      $('nombre').focus();
-    }
-
-    function verFicha(f) {
-      const datos = [
-        ['Nombre',f.nombre],
-        ['DNI',f.dni],
-        ['Tasa',numero(f.tasa)+'%'],
-        [
-          'Tasa reducida',
-          f.tasaReducida === null
-            ? '—'
-            : numero(f.tasaReducida)+'%'
-        ],
-        ['Importe',numero(f.importe)],
-        ['Plazo',f.plazo+' meses'],
-        ['Fecha de desembolso',fechaTexto(f.fechaDesembolso)],
-        ['Ciclo',f.ciclo],
-        ['Teléfono',f.telefono],
-        ['Sección',ESTADOS.find(e => e.id === f.seccion).nombre],
-        ['Tipo',esRG(f.nombre) ? 'RG' : 'XL']
-      ];
-
-      $('datosDetalle').innerHTML = datos.map(([etiqueta,valor]) => `
-        <div>
-          <dt>${etiqueta}</dt>
-          <dd>${escapar(valor)}</dd>
-        </div>
-      `).join('');
-
-      $('modalDetalle').showModal();
-    }
-
-    $('ciclo').innerHTML = CICLOS.map(c =>
-      `<option value="${c}">${c}</option>`
-    ).join('');
-
-    $('destino').innerHTML = [
-      ['porValidar','Por validar'],
-      ['validados','Validados']
-    ].map(([grupo,nombre]) => `
-      <optgroup label="${nombre}">
-        ${
-          ESTADOS
-            .filter(e => e.grupo === grupo)
-            .map(e => `<option value="${e.id}">${e.nombre}</option>`)
-            .join('')
-        }
-      </optgroup>
-    `).join('');
-
-    $('btnNuevaFicha').addEventListener(
-      'click',
-      () => abrirFormulario()
-    );
-
-    $('plazo').addEventListener(
-      'input',
-      actualizarTasaReducidaPorPlazo
-    );
-
-    $('plazo').addEventListener(
-      'change',
-      actualizarTasaReducidaPorPlazo
-    );
-
-    $('nombre').addEventListener('input', () => {
-      $('nombre').setCustomValidity('');
-    });
-
-    $('fechaDesembolso').addEventListener('input', () => {
-      $('fechaDesembolso').setCustomValidity('');
-    });
-
-    $('abrirCalendario').addEventListener('click', () => {
-      $('fechaCalendario').value =
-        fechaISO($('fechaDesembolso').value) || hoyISO();
-
-      if (typeof $('fechaCalendario').showPicker === 'function') {
-        $('fechaCalendario').showPicker();
-      } else {
-        $('fechaDesembolso').focus();
-      }
-    });
-
-    $('fechaCalendario').addEventListener('change', () => {
-      if ($('fechaCalendario').value) {
-        $('fechaDesembolso').value =
-          fechaTexto($('fechaCalendario').value);
-
-        $('fechaDesembolso').setCustomValidity('');
-      }
-    });
-
-    document.addEventListener('click', evento => {
-      const cerrar = evento.target.closest('[data-cerrar]');
-
-      if (cerrar) {
-        $(cerrar.dataset.cerrar).close();
-        return;
-      }
-
-      const boton = evento.target.closest('[data-accion]');
-
-      if (!boton) return;
-
-      const ficha = fichas.find(
-        f => f.id === boton.closest('.ficha').dataset.id
-      );
-
-      if (!ficha) return;
-
-      if (boton.dataset.accion === 'ver') {
-        verFicha(ficha);
-      }
-
-      if (boton.dataset.accion === 'editar') {
-        abrirFormulario(ficha);
-      }
-
-      if (boton.dataset.accion === 'mover') {
-        $('moverId').value = ficha.id;
-        $('nombreMover').textContent = ficha.nombre;
-        $('destino').value = ficha.seccion;
-        $('modalMover').showModal();
-      }
-
-      if (boton.dataset.accion === 'eliminar') {
-        $('eliminarId').value = ficha.id;
-        $('nombreEliminar').textContent = ficha.nombre;
-        $('modalEliminar').showModal();
-      }
-
-      if (boton.dataset.accion === 'simular') {
-        abrirSimulador(ficha);
-      }
-    });
-
-    $('formFicha').addEventListener('submit', evento => {
-      evento.preventDefault();
-
-      actualizarTasaReducidaPorPlazo();
-
-      const nombre = $('nombre').value.trim();
-      const fecha = fechaISO($('fechaDesembolso').value);
-
-      $('nombre').setCustomValidity(
-        nombre ? '' : 'Ingresa un nombre.'
-      );
-
-      $('fechaDesembolso').setCustomValidity(
-        fecha
-          ? ''
-          : 'Ingresa una fecha válida en formato dd/mm/yyyy.'
-      );
-
-      if (!$('formFicha').reportValidity()) return;
-
-      const anterior = fichas.find(
-        f => f.id === $('fichaId').value
-      );
-
-      const id = anterior?.id || (
-        typeof crypto.randomUUID === 'function'
-          ? crypto.randomUUID()
-          : Date.now()+'-'+Math.random().toString(36).slice(2)
-      );
-
-      const ficha = {
-        id,
-        nombre,
-        dni:$('dni').value.trim(),
-        telefono:$('telefono').value.trim(),
-        tasa:$('tasa').valueAsNumber,
-        tasaReducida:$('tasaReducida').value === ''
-          ? null
-          : $('tasaReducida').valueAsNumber,
-        importe:$('importe').valueAsNumber,
-        plazo:$('plazo').valueAsNumber,
-        fechaDesembolso:fecha,
-        ciclo:Number($('ciclo').value),
-        seccion:anterior?.seccion || 'enProceso'
-      };
-
-      guardar(
-        anterior
-          ? fichas.map(f => f.id === id ? ficha : f)
-          : [...fichas,ficha]
-      );
-
-      $('modalFicha').close();
-    });
-
-    $('formMover').addEventListener('submit', evento => {
-      evento.preventDefault();
-
-      guardar(fichas.map(f =>
-        f.id === $('moverId').value
-          ? {...f,seccion:$('destino').value}
-          : f
-      ));
-
-      $('modalMover').close();
-    });
-
-    $('formEliminar').addEventListener('submit', evento => {
-      evento.preventDefault();
-
-      guardar(fichas.filter(
-        f => f.id !== $('eliminarId').value
-      ));
-
-      $('modalEliminar').close();
-    });
-
-    renderizar();
-  </script>
-
-  <script id="motorSimuladorXL">
-    // Los importes se operan en céntimos para mantener
-    // consistencia entre los valores mostrados y los saldos.
-    const SimuladorXL = (() => {
-      const DIA_MS = 86400000;
-
-      function redondear(valor, decimales = 2) {
-        if (!Number.isFinite(valor)) {
-          throw new Error(
-            'Los datos generan un resultado fuera de rango.'
-          );
-        }
-
-        const desplazar = (n,lugares) => {
-          const [base,exponente = '0'] = String(n).split('e');
-          return Number(`${base}e${Number(exponente)+lugares}`);
-        };
-
-        const resultado =
-          Math.sign(valor) *
-          desplazar(
-            Math.round(desplazar(Math.abs(valor),decimales)),
-            -decimales
-          );
-
-        if (!Number.isFinite(resultado)) {
-          throw new Error(
-            'Los datos generan un resultado fuera de rango.'
-          );
-        }
-
-        return resultado === 0 ? 0 : resultado;
-      }
-
-      function centimos(valor) {
-        const c = Math.round(redondear(valor,2)*100);
-
-        if (!Number.isSafeInteger(c)) {
-          throw new Error(
-            'El importe excede la precisión admitida.'
-          );
-        }
-
-        return c;
-      }
-
-      function fechaUTC(anio,mes,dia) {
-        const fecha = new Date(0);
-        fecha.setUTCFullYear(anio,mes,dia);
-        return fecha;
-      }
-
-      function aISO(fecha) {
-        const anio = fecha.getUTCFullYear();
-
-        if (
-          !Number.isFinite(fecha.getTime()) ||
-          anio < 1 ||
-          anio > 9999
-        ) {
-          throw new Error(
-            'El cronograma supera el rango de fechas admitido.'
-          );
-        }
-
-        return (
-          `${String(anio).padStart(4,'0')}-` +
-          `${String(fecha.getUTCMonth()+1).padStart(2,'0')}-` +
-          `${String(fecha.getUTCDate()).padStart(2,'0')}`
-        );
-      }
-
-      // TIR periódica con flujos mensuales.
-      function tirPeriodica(importe,pagos,estimacion) {
-        if (
-          !(importe > 0) ||
-          pagos.some(p => !Number.isFinite(p) || p < 0) ||
-          !pagos.some(p => p > 0)
-        ) {
-          return null;
-        }
-
-        const valorActual = x => {
-          let suma = -importe;
-
-          for (let i=0; i<pagos.length; i++) {
-            if (pagos[i] !== 0) {
-              suma += pagos[i]*Math.exp(-(i+1)*x);
-            }
-          }
-
-          return suma;
-        };
-
-        let inferior = -1;
-        let superior = Math.max(1,Math.log1p(estimacion));
-        let limite = 0;
-
-        while (valorActual(inferior) < 0 && limite++ < 20) {
-          inferior *= 2;
-        }
-
-        limite = 0;
-
-        while (valorActual(superior) > 0 && limite++ < 20) {
-          superior *= 2;
-        }
-
-        if (!(
-          valorActual(inferior) >= 0 &&
-          valorActual(superior) <= 0
-        )) {
-          return null;
-        }
-
-        let centro = Math.min(
-          superior,
-          Math.max(inferior,Math.log1p(estimacion))
-        );
-
-        for (let i=0; i<200; i++) {
-          const valor = valorActual(centro);
-
-          if (
-            Math.abs(valor) <= Math.max(importe*1e-13,1e-12)
-          ) {
-            break;
-          }
-
-          if (valor > 0) {
-            inferior = centro;
-          } else {
-            superior = centro;
-          }
-
-          centro = (inferior+superior)/2;
-        }
-
-        const tir = Math.expm1(centro);
-
-        return Number.isFinite(tir) && tir > -1 ? tir : null;
-      }
-
-      function calcular({importe,plazo,fecha,ciclo,tea,seguro}) {
-        if (
-          !Number.isFinite(importe) ||
-          importe <= 0 ||
-          !Number.isSafeInteger(plazo) ||
-          plazo <= 0 ||
-          !Number.isFinite(tea) ||
-          tea < 0 ||
-          ![4,6,9,11,13,16,18,20,22,24,26].includes(ciclo) ||
-          ![0.004,0.003].includes(seguro)
-        ) {
-          throw new Error(
-            'Revisa el importe, plazo, TEA, ciclo y seguro.'
-          );
-        }
-
-        if (plazo > 10000) {
-          throw new Error(
-            'Ingresa un plazo de hasta 10000 meses.'
-          );
-        }
-
-        if (
-          typeof fecha !== 'string' ||
-          !/^\d{4}-\d{2}-\d{2}$/.test(fecha)
-        ) {
-          throw new Error('Ingresa una fecha válida.');
-        }
-
-        const [anio,mes,dia] = fecha.split('-').map(Number);
-        const desembolso = fechaUTC(anio,mes-1,dia);
-
-        if (aISO(desembolso) !== fecha) {
-          throw new Error('Ingresa una fecha válida.');
-        }
-
-        const importeCt = centimos(importe);
-
-        if (importeCt <= 0) {
-          throw new Error('El importe mínimo es 0.01.');
-        }
-
-        const filas = [];
-
-        // Si el día del desembolso es igual o menor al ciclo:
-        // se utiliza el mismo mes. En caso contrario, el siguiente.
-        const primerMes = mes-1+(dia <= ciclo ? 0 : 1);
-
-        let anterior = desembolso;
-        let diasAcum = 0;
-
-        for (let i=0; i<plazo; i++) {
-          const facturacion = fechaUTC(anio,primerMes+i,ciclo);
-
-          // Vencimiento: ciclo de facturación - 3 días + 1 mes.
-          const vencimiento = fechaUTC(
-            facturacion.getUTCFullYear(),
-            facturacion.getUTCMonth()+1,
-            ciclo-3
-          );
-
-          const dias =
-            Math.round((vencimiento-anterior)/DIA_MS) +
-            (i === 0 ? 1 : 0);
-
-          diasAcum += dias;
-
-          const factor = redondear(
-            1/Math.pow(1+tea,diasAcum/360),
-            9
-          );
-
-          filas.push({
-            numero:i+1,
-            facturacion:aISO(facturacion),
-            vencimiento:aISO(vencimiento),
-            dias,
-            diasAcum,
-            factor
-          });
-
-          anterior = vencimiento;
-        }
-
-        // Cada factor se redondea a 9 decimales.
-        // La suma de los factores no se redondea.
-        const sumaFactor = filas.reduce(
-          (suma,f) => suma+f.factor,
-          0
-        );
-
-        if (!(sumaFactor > 0)) {
-          throw new Error(
-            'No se puede calcular la cuota con estos datos.'
-          );
-        }
-
-        const cuotaCt = centimos((importeCt/100)/sumaFactor);
-
-        let pendienteCt = importeCt;
-        let amortAcumCt = 0;
-        let amortPrincipalAcumCt = 0;
-        let totalCt = 0;
-
-        for (let i=0; i<filas.length; i++) {
-          const f = filas[i];
-          const ultima = i === filas.length-1;
-
-          let interesYCt = ultima
-            ? 0
-            : centimos(
-                (pendienteCt/100) *
-                Math.expm1(Math.log1p(tea)*f.dias/360)
-              );
-
-          const amortizacionCt = ultima
-            ? pendienteCt
-            : cuotaCt-interesYCt;
-
-          if (ultima) {
-            interesYCt = cuotaCt-amortizacionCt;
-          }
-
-          const saldoCt = pendienteCt-amortizacionCt;
-
-          amortAcumCt += amortizacionCt;
-
-          const amortPrincipalCt = amortAcumCt <= 0
-            ? 100
-            : amortAcumCt-amortPrincipalAcumCt;
-
-          amortPrincipalAcumCt += amortPrincipalCt;
-
-          const interesCt = cuotaCt-amortPrincipalCt;
-
-          const seguroCt = centimos(
-            Math.min(30,(pendienteCt/100)*seguro)
-          );
-
-          const cuotaSeguroCt = cuotaCt+seguroCt;
-
-          totalCt += cuotaSeguroCt;
-
-          if (![
-            saldoCt,
-            amortAcumCt,
-            amortPrincipalAcumCt,
-            totalCt
-          ].every(Number.isSafeInteger)) {
-            throw new Error(
-              'Los resultados exceden la precisión admitida.'
-            );
-          }
-
-          Object.assign(f,{
-            principal:pendienteCt/100,
-            amortizacion:amortizacionCt/100,
-            interesY:interesYCt/100,
-            cuotaY:cuotaCt/100,
-            saldo:saldoCt/100,
-            amortPrincipal:amortPrincipalCt/100,
-            interes:interesCt/100,
-            cuota:cuotaCt/100,
-            seguro:seguroCt/100,
-            cuotaSeguro:cuotaSeguroCt/100
-          });
-
-          pendienteCt = saldoCt;
-        }
-
-        const tem = Math.expm1(Math.log1p(tea)/12);
-
-        const flujos = [
-          -(importeCt/100),
-          ...filas.map(f => f.cuotaSeguro)
-        ];
-
-        const tir = tirPeriodica(
-          importeCt/100,
-          flujos.slice(1),
-          tem
-        );
-
-        const anual = tir === null
-          ? null
-          : Math.expm1(12*Math.log1p(tir));
-
-        const tcea = Number.isFinite(anual) ? anual : null;
-
-        const tcem = tcea === null
-          ? null
-          : Math.expm1(Math.log1p(tcea)/12);
-
-        return {
-          filas,
-          sumaFactor,
-          cuota:cuotaCt/100,
-          tem,
-          tcea,
-          tcem,
-          total:totalCt/100,
-          flujos
-        };
-      }
-
-      return {
-        calcular,
-        redondear,
-        tirPeriodica
-      };
-    })();
-  </script>
-
-  <script>
-    // El simulador utiliza los datos sin modificar las fichas.
-
-    const simMoneda = n =>
-      Number(n).toLocaleString('es-PE',{
-        minimumFractionDigits:2,
-        maximumFractionDigits:2
-      });
-
-    const simPorcentaje = n =>
-      n === null ? '—' : (n*100).toFixed(2)+'%';
-
-    function vaciarResultadosSimulador(
-      mensaje = 'Ingresa los datos y pulsa Simular.'
-    ) {
-      $('simResultados').hidden = true;
-      $('simCronograma').hidden = true;
-      $('simFilas').innerHTML = '';
-      $('simVacio').textContent = mensaje;
-      $('simVacio').hidden = false;
-      $('simError').hidden = true;
-      $('simNotaTir').hidden = true;
-
-      $('simVerCronograma').setAttribute(
-        'aria-expanded',
-        'false'
-      );
-
-      $('simVerCronograma').querySelector('span').textContent =
-        'Ver cronograma';
-    }
-
-    function reiniciarSimulador() {
-      $('formSimulador').reset();
-      $('simFecha').setCustomValidity('');
-      $('simFecha').value = fechaTexto(hoyISO());
-      $('simCalendario').value = hoyISO();
-      $('simCiclo').value = '4';
-      $('simSeguro').value = '0.004';
-
-      vaciarResultadosSimulador();
-    }
-
-    function abrirSimulador(ficha = null) {
-      reiniciarSimulador();
-
-      $('contextoSimulador').textContent = ficha
-        ? `Ficha: ${ficha.nombre} · DNI ${ficha.dni}`
-        : 'Simulación independiente';
-
-      if (ficha) {
-        $('simImporte').value = ficha.importe;
-        $('simPlazo').value = ficha.plazo;
-
-        // Utiliza la tasa reducida si está registrada.
-        // Si no existe, utiliza la tasa normal.
-        $('simTea').value = Number.isFinite(ficha.tasaReducida)
-          ? ficha.tasaReducida
-          : ficha.tasa;
-
-        $('simFecha').value = fechaTexto(ficha.fechaDesembolso);
-        $('simCalendario').value = ficha.fechaDesembolso;
-        $('simCiclo').value = ficha.ciclo;
-      }
-
-      $('modalSimulador').showModal();
-      $('modalSimulador').scrollTop = 0;
-      $('simImporte').focus({preventScroll:true});
-
-      // Al abrir desde una tarjeta, calcula automáticamente.
-      if (ficha) {
-        $('formSimulador').requestSubmit();
-      }
-    }
-
-    $('simCiclo').innerHTML = CICLOS.map(c =>
-      `<option value="${c}">${c}</option>`
-    ).join('');
-
-    $('btnSimulador').addEventListener(
-      'click',
-      () => abrirSimulador()
-    );
-
-    $('simLimpiar').addEventListener('click', () => {
-      reiniciarSimulador();
-      $('simImporte').focus();
-    });
-
-    $('formSimulador').addEventListener('input', () => {
-      $('simFecha').setCustomValidity('');
-
-      const habiaResultados = !$('simResultados').hidden;
-
-      vaciarResultadosSimulador(
-        habiaResultados
-          ? 'Datos modificados. Pulsa Simular para actualizar los resultados.'
-          : 'Ingresa los datos y pulsa Simular.'
-      );
-    });
-
-    $('simAbrirCalendario').addEventListener('click', () => {
-      $('simCalendario').value =
-        fechaISO($('simFecha').value) || hoyISO();
-
-      if (typeof $('simCalendario').showPicker === 'function') {
-        $('simCalendario').showPicker();
-      } else {
-        $('simFecha').focus();
-      }
-    });
-
-    $('simCalendario').addEventListener('change', () => {
-      if ($('simCalendario').value) {
-        $('simFecha').value =
-          fechaTexto($('simCalendario').value);
-
-        $('simFecha').setCustomValidity('');
-
-        vaciarResultadosSimulador(
-          'Fecha actualizada. Pulsa Simular para calcular.'
-        );
-      }
-    });
-
-    $('simVerCronograma').addEventListener('click', () => {
-      const mostrar = $('simCronograma').hidden;
-
-      $('simCronograma').hidden = !mostrar;
-
-      $('simVerCronograma').setAttribute(
-        'aria-expanded',
-        String(mostrar)
-      );
-
-      $('simVerCronograma').querySelector('span').textContent =
-        mostrar ? 'Ocultar cronograma' : 'Ver cronograma';
-    });
-
-    $('formSimulador').addEventListener('submit', evento => {
-      evento.preventDefault();
-
-      const fecha = fechaISO($('simFecha').value);
-
-      $('simFecha').setCustomValidity(
-        fecha
-          ? ''
-          : 'Ingresa una fecha válida en formato dd/mm/yyyy.'
-      );
-
-      if (!$('formSimulador').reportValidity()) return;
-
-      vaciarResultadosSimulador();
-
-      try {
-        const resultado = SimuladorXL.calcular({
-          importe:$('simImporte').valueAsNumber,
-          plazo:$('simPlazo').valueAsNumber,
-          fecha,
-          ciclo:Number($('simCiclo').value),
-          tea:$('simTea').valueAsNumber/100,
-          seguro:Number($('simSeguro').value)
-        });
-
-        console.log(
-          'Suma de la columna Factor (sin redondear la suma):',
-          resultado.sumaFactor
-        );
-
-        $('simTem').textContent = simPorcentaje(resultado.tem);
-        $('simTcea').textContent = simPorcentaje(resultado.tcea);
-        $('simTcem').textContent = simPorcentaje(resultado.tcem);
-
-        $('simCuota').textContent =
-          simMoneda(resultado.cuota);
-
-        $('simPrimeraCuota').textContent =
-          simMoneda(resultado.filas[0].cuotaSeguro);
-
-        $('simPrimerVencimiento').textContent =
-          fechaTexto(resultado.filas[0].vencimiento);
-
-        $('simFilas').innerHTML = resultado.filas.map(f => `
-          <tr>
-            ${
-              [
-                f.numero,
-                fechaTexto(f.facturacion),
-                fechaTexto(f.vencimiento),
-                f.dias,
-                f.diasAcum,
-                f.factor.toFixed(9),
-                ...[
-                  f.principal,
-                  f.amortizacion,
-                  f.interesY,
-                  f.cuotaY,
-                  f.saldo,
-                  f.amortPrincipal,
-                  f.interes,
-                  f.cuota,
-                  f.seguro,
-                  f.cuotaSeguro
-                ].map(simMoneda),
-                fechaTexto(f.vencimiento)
-              ].map(v => `<td>${escapar(v)}</td>`).join('')
-            }
-          </tr>
-        `).join('');
-
-        if (resultado.tcea === null) {
-          $('simNotaTir').textContent =
-            'No fue posible calcular TCEA y TCEM con estos flujos redondeados.';
-
-          $('simNotaTir').hidden = false;
-        }
-
-        $('simVacio').hidden = true;
-        $('simResultados').hidden = false;
-      } catch (error) {
-        $('simError').textContent =
-          error.message || 'No se pudo calcular la simulación.';
-
-        $('simError').hidden = false;
-      }
-    });
-  </script>
-</body>
-</html>
+Departamento
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Amazonas
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Áncash
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Apurímac
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Arequipa
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Ayacucho
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Cajamarca
+Callao
+Callao
+Callao
+Callao
+Callao
+Callao
+Callao
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Cusco
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huancavelica
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Huánuco
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Ica
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+Junín
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+La Libertad
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lambayeque
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Lima
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Loreto
+Madre de Dios
+Madre de Dios
+Madre de Dios
+Madre de Dios
+Madre de Dios
+Madre de Dios
+Madre de Dios
+Madre de Dios
+Madre de Dios
+Madre de Dios
+Madre de Dios
+Moquegua
+Moquegua
+Moquegua
+Moquegua
+Moquegua
+Moquegua
+Moquegua
+Moquegua
+Moquegua
+Moquegua
+Moquegua
+Moquegua
+Moquegua
+Moquegua
+Moquegua
+Moquegua
+Moquegua
+Moquegua
+Moquegua
+Moquegua
+Moquegua
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Pasco
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Piura
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+Puno
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+San Martín
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tacna
+Tumbes
+Tumbes
+Tumbes
+Tumbes
+Tumbes
+Tumbes
+Tumbes
+Tumbes
+Tumbes
+Tumbes
+Tumbes
+Tumbes
+Tumbes
+Ucayali
+Ucayali
+Ucayali
+Ucayali
+Ucayali
+Ucayali
+Ucayali
+Ucayali
+Ucayali
+Ucayali
+Ucayali
+Ucayali
+Ucayali
+Ucayali
+Ucayali
+Ucayali
+Ucayali
+Ucayali
+Ucayali
