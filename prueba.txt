@@ -1,1894 +1,1894 @@
-Provincia
+Distrito
+Aramango
 Bagua
-Bagua
-Bagua
-Bagua
-Bagua
-Bagua
-Bongará
-Bongará
-Bongará
-Bongará
-Bongará
-Bongará
-Bongará
-Bongará
-Bongará
-Bongará
-Bongará
-Bongará
-Chachapoyas
-Chachapoyas
-Chachapoyas
-Chachapoyas
-Chachapoyas
-Chachapoyas
-Chachapoyas
-Chachapoyas
-Chachapoyas
-Chachapoyas
-Chachapoyas
-Chachapoyas
-Chachapoyas
-Chachapoyas
-Chachapoyas
-Chachapoyas
-Chachapoyas
-Chachapoyas
-Chachapoyas
-Chachapoyas
-Chachapoyas
-Condorcanqui
-Condorcanqui
-Condorcanqui
-Luya
-Luya
-Luya
-Luya
-Luya
-Luya
-Luya
-Luya
-Luya
-Luya
-Luya
-Luya
-Luya
-Luya
-Luya
-Luya
-Luya
-Luya
-Luya
-Luya
-Luya
-Luya
-Luya
-Rodríguez de Mendoza
-Rodríguez de Mendoza
-Rodríguez de Mendoza
-Rodríguez de Mendoza
-Rodríguez de Mendoza
-Rodríguez de Mendoza
-Rodríguez de Mendoza
-Rodríguez de Mendoza
-Rodríguez de Mendoza
-Rodríguez de Mendoza
-Rodríguez de Mendoza
-Rodríguez de Mendoza
-Utcubamba
-Utcubamba
-Utcubamba
-Utcubamba
-Utcubamba
-Utcubamba
-Utcubamba
-Aija
-Aija
-Aija
-Aija
-Aija
-Antonio Raymondi
-Antonio Raymondi
-Antonio Raymondi
-Antonio Raymondi
-Antonio Raymondi
-Antonio Raymondi
+Copallin
+El Parco
+Imaza
+La Peca
+Chisquilla
+Churuja
+Corosha
+Cuispes
+Florida
+Jazan
+Jumbilla
+Recta
+San Carlos
+Shipasbamba
+Valera
+Yambrasbamba
 Asunción
+Balsas
+Chachapoyas
+Cheto
+Chiliquin
+Chuquibamba
+Granada
+Huancas
+La Jalca
+Leimebamba
+Levanto
+Magdalena
+Mariscal Castilla
+Molinopampa
+Montevideo
+Olleros
+Quinjalca
+San Francisco de Daguas
+San Isidro de Maino
+Soloco
+Sonche
+El Cenepa
+Nieva
+Río Santiago
+Camporredondo
+Cocabamba
+Colcamar
+Conila
+Inguilpata
+Lamud
+Longuita
+Lonya Chico
+Luya
+Luya Viejo
+María
+Ocalli
+Ocumal
+Pisuquia
+Providencia
+San Cristóbal
+San Francisco de Yeso
+San Jerónimo
+San Juan de Lopecancha
+Santa Catalina
+Santo Tomas
+Tingo
+Trita
+Chirimoto
+Cochamal
+Huambo
+Limabamba
+Longar
+Mariscal Benavides
+Milpuc
+Omia
+San Nicolás
+Santa Rosa
+Totora
+Vista Alegre
+Bagua Grande
+Cajaruro
+Cumba
+El Milagro
+Jamalca
+Lonya Grande
+Yamon
+Aija
+Coris
+Huacllan
+La Merced
+Succha
+Aczo
+Chaccho
+Chingas
+Llamellin
+Mirgas
+San Juan de Rontoy
+Acochaca
+Chacas
+Abelardo Pardo Lezameta
+Antonio Raymondi
+Aquia
+Cajacay
+Canis
+Chiquian
+Colquioc
+Huallanca
+Huasta
+Huayllacayan
+La Primavera
+Mangas
+Pacllon
+San Miguel de Corpanqui
+Ticllos
+Acopampa
+Amashca
+Anta
+Ataquero
+Carhuaz
+Marcara
+Pariahuanca
+San Miguel de Aco
+Shilla
+Tinco
+Yungar
+San Luis
+San Nicolás
+Yauya
+Buena Vista Alta
+Casma
+Comandante Noel
+Yautan
+Aco
+Bambas
+Corongo
+Cusca
+La Pampa
+Yanac
+Yupan
+Cochabamba
+Colcabamba
+Huanchay
+Huaraz
+Independencia
+Jangas
+La Libertad
+Olleros
+Pampas Grande
+Pariacoto
+Pira
+Tarica
+Anra
+Cajay
+Chavin de Huantar
+Huacachi
+Huacchis
+Huachis
+Huantar
+Huari
+Masin
+Paucas
+Ponto
+Rahuapampa
+Rapayan
+San Marcos
+San Pedro de Chana
+Uco
+Cochapeti
+Culebras
+Huarmey
+Huayan
+Malvas
+Caraz
+Huallanca
+Huata
+Huaylas
+Mato
+Pamparomas
+Pueblo Libre
+Santa Cruz
+Santo Toribio
+Yuracmarca
+Casca
+Eleazar Guzmán Barron
+Fidel Olivas Escudero
+Llama
+Llumpa
+Lucma
+Musga
+Piscobamba
+Acas
+Cajamarquilla
+Carhuapampa
+Cochas
+Congas
+Llipa
+Ocros
+San Cristóbal de Rajan
+San Pedro
+Santiago de Chilcas
+Bolognesi
+Cabana
+Conchucos
+Huacaschuque
+Huandoval
+Lacabamba
+Llapo
+Pallasca
+Pampas
+Santa Rosa
+Tauca
+Huayllan
+Parobamba
+Pomabamba
+Quinuabamba
+Catac
+Cotaparaco
+Huayllapampa
+Llacllin
+Marca
+Pampas Chico
+Pararin
+Recuay
+Tapacocha
+Ticapampa
+Cáceres del Perú
+Chimbote
+Coishco
+Macate
+Moro
+Nepeña
+Nuevo Chimbote
+Samanco
+Santa
+Acobamba
+Alfonso Ugarte
+Cashapampa
+Chingalpo
+Huayllabamba
+Quiches
+Ragash
+San Juan
+Sicsibamba
+Sihuas
+Cascapara
+Mancos
+Matacoto
+Quillo
+Ranrahirca
+Shupluy
+Yanama
+Yungay
+Abancay
+Chacoche
+Circa
+Curahuasi
+Huanipaca
+Lambrama
+Pichirhua
+San Pedro de Cachora
+Tamburco
+Andahuaylas
+Andarapa
+Chiara
+Huancarama
+Huancaray
+Huayana
+José María Arguedas
+Kaquiabamba
+Kishuara
+Pacobamba
+Pacucha
+Pampachiri
+Pomacocha
+San Antonio de Cachi
+San Jerónimo
+San Miguel de Chaccrampa
+Santa María de Chicmo
+Talavera
+Tumay Huaraca
+Turpo
+Antabamba
+El Oro
+Huaquirca
+Juan Espinoza Medrano
+Oropesa
+Pachaconas
+Sabaino
+Capaya
+Caraybamba
+Chalhuanca
+Chapimarca
+Colcabamba
+Cotaruse
+Ihuayllo
+Justo Apu Sahuaraura
+Lucre
+Pocohuanca
+San Juan de Chacña
+Sañayca
+Soraya
+Tapairihua
+Tintay
+Toraya
+Yanaca
+Ahuayro
+Anco_Huallo
+Chincheros
+Cocharcas
+El Porvenir
+Huaccana
+Los Chankas
+Ocobamba
+Ongoy
+Ranracancha
+Rocchacc
+Uranmarca
+Challhuahuacho
+Cotabambas
+Coyllurqui
+Haquira
+Mara
+Tambobamba
+Chuquibambilla
+Curasco
+Curpahuasi
+Gamarra
+Huayllati
+Mamara
+Micaela Bastidas
+Pataypampa
+Progreso
+San Antonio
+Santa Rosa
+Turpay
+Vilcabamba
+Virundo
+Alto Selva Alegre
+Arequipa
+Cayma
+Cerro Colorado
+Characato
+Chiguata
+Jacobo Hunter
+José Luis Bustamante Y Rivero
+La Joya
+Mariano Melgar
+Miraflores
+Mollebaya
+Paucarpata
+Pocsi
+Polobaya
+Quequeña
+Sabandia
+Sachaca
+San Juan de Siguas
+San Juan de Tarucani
+Santa Isabel de Siguas
+Santa Rita de Siguas
+Socabaya
+Tiabaya
+Uchumayo
+Vitor
+Yanahuara
+Yarabamba
+Yura
+Camaná
+José María Quimper
+Mariano Nicolás Valcárcel
+Mariscal Cáceres
+Nicolás de Pierola
+Ocoña
+Quilca
+Samuel Pastor
+Acarí
+Atico
+Atiquipa
+Bella Unión
+Cahuacho
+Caravelí
+Chala
+Chaparra
+Huanuhuanu
+Jaqui
+Lomas
+Quicacha
+Yauca
+Andagua
+Aplao
+Ayo
+Chachas
+Chilcaymarca
+Choco
+Huancarqui
+Machaguay
+Orcopampa
+Pampacolca
+Tipan
+Uñon
+Uraca
+Viraco
+Achoma
+Cabanaconde
+Callalli
+Caylloma
+Chivay
+Coporaque
+Huambo
+Huanca
+Ichupampa
+Lari
+Lluta
+Maca
+Madrigal
+Majes
+San Antonio de Chuca
+Sibayo
+Tapay
+Tisco
+Tuti
+Yanque
+Andaray
+Cayarani
+Chichas
+Chuquibamba
+Iray
+Río Grande
+Salamanca
+Yanaquihua
+Cocachacra
+Dean Valdivia
+Islay
+Mejia
+Mollendo
+Punta de Bombón
+Alca
+Charcana
+Cotahuasi
+Huaynacotas
+Pampamarca
+Puyca
+Quechualla
+Sayla
+Tauria
+Tomepampa
+Toro
+Cangallo
+Chuschi
+Los Morochucos
+María Parado de Bellido
+Paras
+Totos
+Acocro
+Acos Vinchos
+Andrés Avelino Cáceres Dorregaray
+Ayacucho
+Carmen Alto
+Chiara
+Jesús Nazareno
+Ocros
+Pacaycasa
+Quinua
+San José de Ticllas
+San Juan Bautista
+Santiago de Pischa
+Socos
+Tambillo
+Vinchos
+Carapo
+Sacsamarca
+Sancos
+Santiago de Lucanamarca
+Ayahuanco
+Canayre
+Chaca
+Huamanguilla
+Huanta
+Iguain
+Llochegua
+Luricocha
+Pucacolpa
+Putis
+Santillana
+Sivia
+Uchuraccay
+Anchihuay
+Anco
+Ayna
+Chilcas
+Chungui
+Luis Carranza
+Ninabamba
+Oronccoy
+Patibamba
+Rio Magdalena
+Samugari
+San Miguel
+Santa Rosa
+Tambo
+Unión Progreso
+Aucara
+Cabana
+Carmen Salcedo
+Chaviña
+Chipao
+Huac-Huas
+Laramate
+Leoncio Prado
+Llauta
+Lucanas
+Ocaña
+Otoca
+Puquio
+Saisa
+San Cristóbal
+San Juan
+San Pedro
+San Pedro de Palco
+Sancos
+Santa Ana de Huaycahuacho
+Santa Lucia
+Chumpi
+Coracora
+Coronel Castañeda
+Pacapausa
+Pullo
+Puyusca
+San Francisco de Rivacayco
+Upahuacho
+Colta
+Corculla
+Lampa
+Marcabamba
+Oyolo
+Pararca
+Pausa
+San Javier de Alpabamba
+San José de Ushua
+Sara Sara
+Belén
+Chalcos
+Chilcayoc
+Huacaña
+Morcolla
+Paico
+Querobamba
+San Pedro de Larcay
+San Salvador de Quije
+Santiago de Paucaray
+Soras
+Alcamenca
+Apongo
+Asquipata
+Canaria
+Cayara
+Colca
+Hualla
+Huamanquiquia
+Huancapi
+Huancaraylla
+Sarhua
+Vilcanchos
+Accomarca
+Carhuanca
+Concepción
+Huambalpa
+Independencia
+Saurama
+Vilcas Huaman
+Vischongo
+Cachachi
+Cajabamba
+Condebamba
+Sitacocha
 Asunción
-Bolognesi
-Bolognesi
-Bolognesi
-Bolognesi
-Bolognesi
-Bolognesi
-Bolognesi
-Bolognesi
-Bolognesi
-Bolognesi
-Bolognesi
-Bolognesi
-Bolognesi
-Bolognesi
-Bolognesi
-Carhuaz
-Carhuaz
-Carhuaz
-Carhuaz
-Carhuaz
-Carhuaz
-Carhuaz
-Carhuaz
-Carhuaz
-Carhuaz
-Carhuaz
-Carlos Fermín Fitzcarrald
-Carlos Fermín Fitzcarrald
-Carlos Fermín Fitzcarrald
-Casma
-Casma
-Casma
-Casma
-Corongo
-Corongo
-Corongo
-Corongo
-Corongo
-Corongo
-Corongo
-Huaraz
-Huaraz
-Huaraz
-Huaraz
-Huaraz
-Huaraz
-Huaraz
-Huaraz
-Huaraz
-Huaraz
-Huaraz
-Huaraz
-Huari
-Huari
-Huari
-Huari
-Huari
-Huari
-Huari
-Huari
-Huari
-Huari
-Huari
-Huari
-Huari
-Huari
-Huari
-Huari
-Huarmey
-Huarmey
-Huarmey
-Huarmey
-Huarmey
-Huaylas
-Huaylas
-Huaylas
-Huaylas
-Huaylas
-Huaylas
-Huaylas
-Huaylas
-Huaylas
-Huaylas
-Mariscal Luzuriaga
-Mariscal Luzuriaga
-Mariscal Luzuriaga
-Mariscal Luzuriaga
-Mariscal Luzuriaga
-Mariscal Luzuriaga
-Mariscal Luzuriaga
-Mariscal Luzuriaga
-Ocros
-Ocros
-Ocros
-Ocros
-Ocros
-Ocros
-Ocros
-Ocros
-Ocros
-Ocros
-Pallasca
-Pallasca
-Pallasca
-Pallasca
-Pallasca
-Pallasca
-Pallasca
-Pallasca
-Pallasca
-Pallasca
-Pallasca
-Pomabamba
-Pomabamba
-Pomabamba
-Pomabamba
-Recuay
-Recuay
-Recuay
-Recuay
-Recuay
-Recuay
-Recuay
-Recuay
-Recuay
-Recuay
-Santa
-Santa
-Santa
-Santa
-Santa
-Santa
-Santa
-Santa
-Santa
-Sihuas
-Sihuas
-Sihuas
-Sihuas
-Sihuas
-Sihuas
-Sihuas
-Sihuas
-Sihuas
-Sihuas
-Yungay
-Yungay
-Yungay
-Yungay
-Yungay
-Yungay
-Yungay
-Yungay
-Abancay
-Abancay
-Abancay
-Abancay
-Abancay
-Abancay
-Abancay
-Abancay
-Abancay
-Andahuaylas
-Andahuaylas
-Andahuaylas
-Andahuaylas
-Andahuaylas
-Andahuaylas
-Andahuaylas
-Andahuaylas
-Andahuaylas
-Andahuaylas
-Andahuaylas
-Andahuaylas
-Andahuaylas
-Andahuaylas
-Andahuaylas
-Andahuaylas
-Andahuaylas
-Andahuaylas
-Andahuaylas
-Andahuaylas
-Antabamba
-Antabamba
-Antabamba
-Antabamba
-Antabamba
-Antabamba
-Antabamba
-Aymaraes
-Aymaraes
-Aymaraes
-Aymaraes
-Aymaraes
-Aymaraes
-Aymaraes
-Aymaraes
-Aymaraes
-Aymaraes
-Aymaraes
-Aymaraes
-Aymaraes
-Aymaraes
-Aymaraes
-Aymaraes
-Aymaraes
-Chincheros
-Chincheros
-Chincheros
-Chincheros
-Chincheros
-Chincheros
-Chincheros
-Chincheros
-Chincheros
-Chincheros
-Chincheros
-Chincheros
-Cotabambas
-Cotabambas
-Cotabambas
-Cotabambas
-Cotabambas
-Cotabambas
-Grau
-Grau
-Grau
-Grau
-Grau
-Grau
-Grau
-Grau
-Grau
-Grau
-Grau
-Grau
-Grau
-Grau
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Arequipa
-Camaná
-Camaná
-Camaná
-Camaná
-Camaná
-Camaná
-Camaná
-Camaná
-Caravelí
-Caravelí
-Caravelí
-Caravelí
-Caravelí
-Caravelí
-Caravelí
-Caravelí
-Caravelí
-Caravelí
-Caravelí
-Caravelí
-Caravelí
-Castilla
-Castilla
-Castilla
-Castilla
-Castilla
-Castilla
-Castilla
-Castilla
-Castilla
-Castilla
-Castilla
-Castilla
-Castilla
-Castilla
-Caylloma
-Caylloma
-Caylloma
-Caylloma
-Caylloma
-Caylloma
-Caylloma
-Caylloma
-Caylloma
-Caylloma
-Caylloma
-Caylloma
-Caylloma
-Caylloma
-Caylloma
-Caylloma
-Caylloma
-Caylloma
-Caylloma
-Caylloma
-Condesuyos
-Condesuyos
-Condesuyos
-Condesuyos
-Condesuyos
-Condesuyos
-Condesuyos
-Condesuyos
-Islay
-Islay
-Islay
-Islay
-Islay
-Islay
-La Uniòn
-La Uniòn
-La Uniòn
-La Uniòn
-La Uniòn
-La Uniòn
-La Uniòn
-La Uniòn
-La Uniòn
-La Uniòn
-La Uniòn
-Cangallo
-Cangallo
-Cangallo
-Cangallo
-Cangallo
-Cangallo
-Huamanga
-Huamanga
-Huamanga
-Huamanga
-Huamanga
-Huamanga
-Huamanga
-Huamanga
-Huamanga
-Huamanga
-Huamanga
-Huamanga
-Huamanga
-Huamanga
-Huamanga
-Huamanga
-Huanca Sancos
-Huanca Sancos
-Huanca Sancos
-Huanca Sancos
-Huanta
-Huanta
-Huanta
-Huanta
-Huanta
-Huanta
-Huanta
-Huanta
-Huanta
-Huanta
-Huanta
-Huanta
-Huanta
-La Mar
-La Mar
-La Mar
-La Mar
-La Mar
-La Mar
-La Mar
-La Mar
-La Mar
-La Mar
-La Mar
-La Mar
-La Mar
-La Mar
-La Mar
-Lucanas
-Lucanas
-Lucanas
-Lucanas
-Lucanas
-Lucanas
-Lucanas
-Lucanas
-Lucanas
-Lucanas
-Lucanas
-Lucanas
-Lucanas
-Lucanas
-Lucanas
-Lucanas
-Lucanas
-Lucanas
-Lucanas
-Lucanas
-Lucanas
-Parinacochas
-Parinacochas
-Parinacochas
-Parinacochas
-Parinacochas
-Parinacochas
-Parinacochas
-Parinacochas
-Pàucar del Sara Sara
-Pàucar del Sara Sara
-Pàucar del Sara Sara
-Pàucar del Sara Sara
-Pàucar del Sara Sara
-Pàucar del Sara Sara
-Pàucar del Sara Sara
-Pàucar del Sara Sara
-Pàucar del Sara Sara
-Pàucar del Sara Sara
+Cajamarca
+Chetilla
+Cospan
+Encañada
+Jesús
+Llacanora
+Los Baños del Inca
+Magdalena
+Matara
+Namora
+San Juan
+Celendín
+Chumuch
+Cortegana
+Huasmin
+Jorge Chávez
+José Gálvez
+La Libertad de Pallan
+Miguel Iglesias
+Oxamarca
+Sorochuco
 Sucre
-Sucre
-Sucre
-Sucre
-Sucre
-Sucre
-Sucre
-Sucre
-Sucre
-Sucre
-Sucre
-Víctor Fajardo
-Víctor Fajardo
-Víctor Fajardo
-Víctor Fajardo
-Víctor Fajardo
-Víctor Fajardo
-Víctor Fajardo
-Víctor Fajardo
-Víctor Fajardo
-Víctor Fajardo
-Víctor Fajardo
-Víctor Fajardo
-Vilcas Huamán
-Vilcas Huamán
-Vilcas Huamán
-Vilcas Huamán
-Vilcas Huamán
-Vilcas Huamán
-Vilcas Huamán
-Vilcas Huamán
-Cajabamba
-Cajabamba
-Cajabamba
-Cajabamba
-Cajamarca
-Cajamarca
-Cajamarca
-Cajamarca
-Cajamarca
-Cajamarca
-Cajamarca
-Cajamarca
-Cajamarca
-Cajamarca
-Cajamarca
-Cajamarca
-Celendín
-Celendín
-Celendín
-Celendín
-Celendín
-Celendín
-Celendín
-Celendín
-Celendín
-Celendín
-Celendín
-Celendín
+Utco
+Anguia
+Chadin
+Chalamarca
+Chiguirip
+Chimban
+Choropampa
 Chota
-Chota
-Chota
-Chota
-Chota
-Chota
-Chota
-Chota
-Chota
-Chota
-Chota
-Chota
-Chota
-Chota
-Chota
-Chota
-Chota
-Chota
-Chota
-Contumazá
-Contumazá
-Contumazá
-Contumazá
-Contumazá
-Contumazá
-Contumazá
-Contumazá
+Cochabamba
+Conchan
+Huambos
+Lajas
+Llama
+Miracosta
+Paccha
+Pion
+Querocoto
+San Juan de Licupis
+Tacabamba
+Tocmoche
+Chilete
+Contumaza
+Cupisnique
+Guzmango
+San Benito
+Santa Cruz de Toledo
+Tantarica
+Yonan
+Callayuc
+Choros
+Cujillo
 Cutervo
-Cutervo
-Cutervo
-Cutervo
-Cutervo
-Cutervo
-Cutervo
-Cutervo
-Cutervo
-Cutervo
-Cutervo
-Cutervo
-Cutervo
-Cutervo
-Cutervo
+La Ramada
+Pimpingos
+Querocotillo
+San Andrés de Cutervo
+San Juan de Cutervo
+San Luis de Lucma
+Santa Cruz
+Santo Domingo de la Capilla
+Santo Tomas
+Socota
+Toribio Casanova
+Bambamarca
+Chugur
 Hualgayoc
-Hualgayoc
-Hualgayoc
+Bellavista
+Chontali
+Colasay
+Huabal
 Jaén
-Jaén
-Jaén
-Jaén
-Jaén
-Jaén
-Jaén
-Jaén
-Jaén
-Jaén
-Jaén
-Jaén
+Las Pirias
+Pomahuaca
+Pucara
+Sallique
+San Felipe
+San José del Alto
+Santa Rosa
+Chirinos
+Huarango
+La Coipa
+Namballe
 San Ignacio
-San Ignacio
-San Ignacio
-San Ignacio
-San Ignacio
-San Ignacio
-San Ignacio
-San Marcos
-San Marcos
-San Marcos
-San Marcos
-San Marcos
-San Marcos
-San Marcos
+San José de Lourdes
+Tabaconas
+Chancay
+Eduardo Villanueva
+Gregorio Pita
+Ichocan
+José Manuel Quiroz
+José Sabogal
+Pedro Gálvez
+Bolívar
+Calquis
+Catilluc
+El Prado
+La Florida
+Llapa
+Nanchoc
+Niepos
+San Gregorio
 San Miguel
-San Miguel
-San Miguel
-San Miguel
-San Miguel
-San Miguel
-San Miguel
-San Miguel
-San Miguel
-San Miguel
-San Miguel
-San Miguel
-San Miguel
+San Silvestre de Cochan
+Tongod
+Unión Agua Blanca
+San Bernardino
+San Luis
 San Pablo
+Tumbaden
+Andabamba
+Catache
+Chancaybaños
+La Esperanza
+Ninabamba
+Pulan
+Santa Cruz
+Saucepampa
+Sexi
+Uticyacu
+Yauyucan
+Bellavista
+Callao
+Carmen de la Legua Reynoso
+La Perla
+La Punta
+Mi Perú
+Ventanilla
+Acomayo
+Acopia
+Acos
+Mosoc Llacta
+Pomacanchi
+Rondocan
+Sangarara
+Ancahuasi
+Anta
+Cachimayo
+Chinchaypujio
+Huarocondo
+Limatambo
+Mollepata
+Pucyura
+Zurite
+Calca
+Coya
+Lamay
+Lares
+Pisac
+San Salvador
+Taray
+Yanatile
+Checca
+Kunturkanki
+Langui
+Layo
+Pampamarca
+Quehue
+Tupac Amaru
+Yanaoca
+Checacupe
+Combapata
+Marangani
+Pitumarca
 San Pablo
+San Pedro
+Sicuani
+Tinta
+Capacmarca
+Chamaca
+Colquemarca
+Livitaca
+Llusco
+Quiñota
+Santo Tomas
+Velille
+Ccorca
+Cusco
+Poroy
+San Jerónimo
+San Sebastian
+Santiago
+Saylla
+Wanchaq
+Alto Pichigua
+Condoroma
+Coporaque
+Espinar
+Ocoruro
+Pallpata
+Pichigua
+Suyckutambo
+Cielo Punco
+Echarate
+Huayopata
+Inkawasi
+Kimbiri
+Kumpirushiato
+Manitea
+Maranura
+Megantoni
+Ocobamba
+Pichari
+Quellouno
+Santa Ana
+Santa Teresa
+Unión Ashaninka
+Vilcabamba
+Villa Kintiarina
+Villa Virgen
+Accha
+Ccapi
+Colcha
+Huanoquite
+Omacha
+Paccaritambo
+Paruro
+Pillpinto
+Yaurisque
+Caicay
+Challabamba
+Colquepata
+Huancarani
+Kosñipata
+Paucartambo
+Andahuaylillas
+Camanti
+Ccarhuayo
+Ccatca
+Cusipata
+Huaro
+Lucre
+Marcapata
+Ocongate
+Oropesa
+Quiquijana
+Urcos
+Chinchero
+Huayllabamba
+Machupicchu
+Maras
+Ollantaytambo
+Urubamba
+Yucay
+Acobamba
+Andabamba
+Anta
+Caja
+Marcas
+Paucara
+Pomacocha
+Rosario
+Anchonga
+Callanmarca
+Ccochaccasa
+Chincho
+Congalla
+Huanca-Huanca
+Huayllay Grande
+Julcamarca
+Lircay
+San Antonio de Antaparco
+Santo Tomas de Pata
+Secclla
+Arma
+Aurahua
+Capillas
+Castrovirreyna
+Chupamarca
+Cocas
+Huachos
+Huamatambo
+Mollepampa
+San Juan
+Santa Ana
+Tantara
+Ticrapo
+Anco
+Chinchihuasi
+Churcampa
+Cosme
+El Carmen
+La Merced
+Locroja
+Pachamarca
+Paucarbamba
+San Miguel de Mayocc
+San Pedro de Coris
+Acobambilla
+Acoria
+Ascensión
+Conayca
+Cuenca
+Huachocolpa
+Huancavelica
+Huando
+Huayllahuara
+Izcuchaca
+Laria
+Manta
+Mariscal Cáceres
+Moya
+Nuevo Occoro
+Palca
+Pilchaca
+Vilca
+Yauli
+Ayavi
+Córdova
+Huayacundo Arma
+Huaytara
+Laramarca
+Ocoyo
+Pilpichaca
+Querco
+Quito-Arma
+San Antonio de Cusicancha
+San Francisco de Sangayaico
+San Isidro
+Santiago de Chocorvos
+Santiago de Quirahuara
+Santo Domingo de Capillas
+Tambo
+Acostambo
+Acraquia
+Ahuaycha
+Andaymarca
+Cochabamba
+Colcabamba
+Daniel Hernández
+Huachocolpa
+Huaribamba
+Lambras
+Ñahuimpuquio
+Pampas
+Pazos
+Pichos
+Quichuas
+Quishuar
+Roble
+Salcabamba
+Salcahuasi
+San Marcos de Rocchac
+Santiago de Tucuma
+Surcubamba
+Tintay Puncu
+Ambo
+Cayna
+Colpas
+Conchamarca
+Huacar
+San Francisco
+San Rafael
+Tomay Kichwa
+Chuquis
+La Unión
+Marías
+Pachas
+Quivilla
+Ripan
+Shunqui
+Sillapata
+Yanas
+Canchabamba
+Cochabamba
+Huacaybamba
+Pinra
+Arancay
+Chavín de Pariarca
+Jacas Grande
+Jircan
+Llata
+Miraflores
+Monzón
+Punchao
+Puños
+Singa
+Tantamayo
+Amarilis
+Chinchao
+Churubamba
+Huanuco
+Margos
+Pillco Marca
+Quisqui (Kichki)
+San Francisco de Cayran
+San Pablo de Pillao
+San Pedro de Chaulan
+Santa María del Valle
+Yacus
+Yarumayo
+Baños
+Jesús
+Jivia
+Queropalca
+Rondos
+San Francisco de Asís
+San Miguel de Cauri
+Castillo Grande
+Daniel Alomía Robles
+Hermílio Valdizan
+José Crespo y Castillo
+Luyando
+Mariano Damaso Beraun
+Pucayacu
+Pueblo Nuevo
+Rupa-Rupa
+Santo Domingo de Anda
+Cholon
+Huacrachuco
+La Morada
+San Buenaventura
+Santa Rosa de Alto Yanajanca
+Chaglla
+Molino
+Panao
+Umari
+Codo del Pozuzo
+Honoria
+Puerto Inca
+Tournavista
+Yuyapichis
+Aparicio Pomares
+Cahuac
+Chacabamba
+Chavinillo
+Choras
+Jacas Chico
+Obas
+Pampamarca
+Alto Laran
+Chavin
+Chincha Alta
+Chincha Baja
+El Carmen
+Grocio Prado
+Pueblo Nuevo
+San Juan de Yanac
+San Pedro de Huacarpana
+Sunampe
+Tambo de Mora
+Ica
+La Tinguiña
+Los Aquijes
+Ocucaje
+Pachacutec
+Parcona
+Pueblo Nuevo
+Salas
+San José de Los Molinos
+San Juan Bautista
+Santiago
+Subtanjalla
+Tate
+Yauca del Rosario
+Changuillo
+El Ingenio
+Marcona
+Nasca
+Vista Alegre
+Llipata
+Palpa
+Río Grande
+Santa Cruz
+Tibillo
+Huancano
+Humay
+Independencia
+Paracas
+Pisco
+San Andrés
+San Clemente
+Tupac Amaru Inca
+Chanchamayo
+Perene
+Pichanaqui
+San Luis de Shuaro
+San Ramón
+Sangani
+Vitoc
+Ahuac
+Chongos Bajo
+Chupaca
+Huachac
+Huamancaca Chico
+San Juan de Iscos
+San Juan de Jarpa
+Tres de Diciembre
+Yanacancha
+Aco
+Andamarca
+Chambara
+Cochas
+Comas
+Concepción
+Heroínas Toledo
+Manzanares
+Mariscal Castilla
+Matahuasi
+Mito
+Nueve de Julio
+Orcotuna
+San José de Quero
+Santa Rosa de Ocopa
+Carhuacallanga
+Chacapampa
+Chicche
+Chilca
+Chongos Alto
+Chupuro
+Colca
+Cullhuas
+El Tambo
+Huacrapuquio
+Hualhuas
+Huancan
+Huancayo
+Huasicancha
+Huayucachi
+Ingenio
+Pariahuanca
+Pilcomayo
+Pucara
+Quichuay
+Quilcas
+San Agustín
+San Jerónimo de Tunan
+Santo Domingo de Acobamba
+Saño
+Sapallanga
+Sicaya
+Viques
+Acolla
+Apata
+Ataura
+Canchayllo
+Curicaca
+El Mantaro
+Huamali
+Huaripampa
+Huertas
+Janjaillo
+Jauja
+Julcán
+Leonor Ordóñez
+Llocllapampa
+Marco
+Masma
+Masma Chicche
+Molinos
+Monobamba
+Muqui
+Muquiyauyo
+Paca
+Paccha
+Pancan
+Parco
+Pomacancha
+Ricran
+San Lorenzo
+San Pedro de Chunan
+Sausa
+Sincos
+Tunan Marca
+Yauli
+Yauyos
+Carhuamayo
+Junin
+Ondores
+Ulcumayo
+Coviriali
+Llaylla
+Mazamari
+Pampa Hermosa
+Pangoa
+Río Negro
+Río Tambo
+Satipo
+Vizcatán del Ene
+Acobamba
+Huaricolca
+Huasahuasi
+La Unión
+Palca
+Palcamayo
+San Pedro de Cajas
+Tapo
+Tarma
+Chacapalpa
+Huay-Huay
+La Oroya
+Marcapomacocha
+Morococha
+Paccha
+Santa Bárbara de Carhuacayan
+Santa Rosa de Sacco
+Suitucancha
+Yauli
+Ascope
+Casa Grande
+Chicama
+Chocope
+Magdalena de Cao
+Paijan
+Rázuri
+Santiago de Cao
+Bambamarca
+Bolívar
+Condormarca
+Longotea
+Uchumarca
+Ucuncha
+Chepen
+Pacanga
+Pueblo Nuevo
+Cascas
+Lucma
+Marmot
+Sayapullo
+Calamarca
+Carabamba
+Huaso
+Julcan
+Agallpampa
+Charat
+Huaranchal
+La Cuesta
+Mache
+Otuzco
+Paranday
+Salpo
+Sinsicap
+Usquil
+Guadalupe
+Jequetepeque
+Pacasmayo
+San José
+San Pedro de Lloc
+Buldibuyo
+Chillia
+Huancaspata
+Huaylillas
+Huayo
+Ongon
+Parcoy
+Pataz
+Pias
+Santiago de Challas
+Taurija
+Tayabamba
+Urpay
+Chugay
+Cochorco
+Curgos
+Huamachuco
+Marcabal
+Sanagoran
+Sarin
+Sartimbamba
+Angasmarca
+Cachicadan
+Mollebamba
+Mollepata
+Quiruvilca
+Santa Cruz de Chuca
+Santiago de Chuco
+Sitabamba
+Alto Trujillo
+El Porvenir
+Florencia de Mora
+Huanchaco
+La Esperanza
+Laredo
+Moche
+Poroto
+Salaverry
+Simbal
+Trujillo
+Victor Larco Herrera
+Chao
+Guadalupito
+Viru
+Cayalti
+Chiclayo
+Chongoyape
+Eten
+Eten Puerto
+José Leonardo Ortiz
+La Victoria
+Lagunas
+Monsefu
+Nueva Arica
+Oyotun
+Patapo
+Picsi
+Pimentel
+Pomalca
+Pucala
+Reque
+Santa Rosa
+Saña
+Tuman
+Cañaris
+Ferreñafe
+Incahuasi
+Manuel Antonio Mesones Muro
+Pitipo
+Pueblo Nuevo
+Chochope
+Illimo
+Jayanca
+Lambayeque
+Mochumi
+Morrope
+Motupe
+Olmos
+Pacora
+Salas
+San José
+Tucume
+Barranca
+Paramonga
+Pativilca
+Supe
+Supe Puerto
+Cajatambo
+Copa
+Gorgor
+Huancapon
+Manas
+Arahuay
+Canta
+Huamantanga
+Huaros
+Lachaqui
+San Buenaventura
+Santa Rosa de Quives
+Asia
+Calango
+Cerro Azul
+Chilca
+Coayllo
+Imperial
+Lunahuana
+Mala
+Nuevo Imperial
+Pacaran
+Quilmana
+San Antonio
+San Luis
+San Vicente de Cañete
+Santa Cruz de Flores
+Zúñiga
+Atavillos Alto
+Atavillos Bajo
+Aucallama
+Chancay
+Huaral
+Ihuari
+Lampian
+Pacaraos
+San Miguel de Acos
+Santa Cruz de Andamarca
+Sumbilca
+Veintisiete de Noviembre
+Antioquia
+Callahuanca
+Carampoma
+Chicla
+Cuenca
+Huachupampa
+Huanza
+Huarochiri
+Lahuaytambo
+Langa
+Laraos
+Mariatana
+Matucana
+Ricardo Palma
+San Andrés de Tupicocha
+San Antonio
+San Bartolomé
+San Damian
+San Juan de Iris
+San Juan de Tantaranche
+San Lorenzo de Quinti
+San Mateo
+San Mateo de Otao
+San Pedro de Casta
+San Pedro de Huancayre
+Sangallaya
+Santa Cruz de Cocachacra
+Santa Eulalia
+Santiago de Anchucaya
+Santiago de Tuna
+Santo Domingo de Los Olleros
+Surco
+Ambar
+Caleta de Carquin
+Checras
+Huacho
+Hualmay
+Huaura
+Leoncio Prado
+Paccho
+Santa Leonor
+Santa María
+Sayan
+Vegueta
+Ancón
+Ate
+Barranco
+Breña
+Carabayllo
+Chaclacayo
+Chorrillos
+Cieneguilla
+Comas
+El Agustino
+Independencia
+Jesús María
+La Molina
+La Victoria
+Lima
+Lince
+Los Olivos
+Lurigancho
+Lurin
+Magdalena del Mar
+Miraflores
+Pachacamac
+Pucusana
+Pueblo Libre
+Puente Piedra
+Punta Hermosa
+Punta Negra
+Rímac
+San Bartolo
+San Borja
+San Isidro
+San Juan de Lurigancho
+San Juan de Miraflores
+San Luis
+San Martín de Porres
+San Miguel
+Santa Anita
+Santa María del Mar
+Santa Rosa
+Santiago de Surco
+Surquillo
+Villa El Salvador
+Villa María del Triunfo
+Andajes
+Caujul
+Cochamarca
+Navan
+Oyon
+Pachangara
+Alis
+Allauca
+Ayaviri
+Azángaro
+Cacra
+Carania
+Catahuasi
+Chocos
+Cochas
+Colonia
+Hongos
+Huampara
+Huancaya
+Huangascar
+Huantan
+Huañec
+Laraos
+Lincha
+Madean
+Miraflores
+Omas
+Putinza
+Quinches
+Quinocay
+San Joaquín
+San Pedro de Pilas
+Tanta
+Tauripampa
+Tomas
+Tupe
+Viñac
+Vitis
+Yauyos
+Balsapuerto
+Jeberos
+Lagunas
+Santa Cruz
+Teniente Cesar López Rojas
+Yurimaguas
+Andoas
+Barranca
+Cahuapanas
+Manseriche
+Morona
+Pastaza
+Nauta
+Parinari
+Tigre
+Trompeteros
+Urarinas
+Pebas
+Ramón Castilla
 San Pablo
-San Pablo
-Santa Cruz
-Santa Cruz
-Santa Cruz
-Santa Cruz
-Santa Cruz
-Santa Cruz
-Santa Cruz
-Santa Cruz
-Santa Cruz
-Santa Cruz
-Santa Cruz
-Prov. Const. del Callao
-Prov. Const. del Callao
-Prov. Const. del Callao
-Prov. Const. del Callao
-Prov. Const. del Callao
-Prov. Const. del Callao
-Prov. Const. del Callao
-Acomayo
-Acomayo
-Acomayo
-Acomayo
-Acomayo
-Acomayo
-Acomayo
-Anta
-Anta
-Anta
-Anta
-Anta
-Anta
-Anta
-Anta
-Anta
-Calca
-Calca
-Calca
-Calca
-Calca
-Calca
-Calca
-Calca
-Canas
-Canas
-Canas
-Canas
-Canas
-Canas
-Canas
-Canas
-Canchis
-Canchis
-Canchis
-Canchis
-Canchis
-Canchis
-Canchis
-Canchis
-Chumbivilcas
-Chumbivilcas
-Chumbivilcas
-Chumbivilcas
-Chumbivilcas
-Chumbivilcas
-Chumbivilcas
-Chumbivilcas
-Cusco
-Cusco
-Cusco
-Cusco
-Cusco
-Cusco
-Cusco
-Cusco
-Espinar
-Espinar
-Espinar
-Espinar
-Espinar
-Espinar
-Espinar
-Espinar
-La Convención
-La Convención
-La Convención
-La Convención
-La Convención
-La Convención
-La Convención
-La Convención
-La Convención
-La Convención
-La Convención
-La Convención
-La Convención
-La Convención
-La Convención
-La Convención
-La Convención
-La Convención
-Paruro
-Paruro
-Paruro
-Paruro
-Paruro
-Paruro
-Paruro
-Paruro
-Paruro
-Paucartambo
-Paucartambo
-Paucartambo
-Paucartambo
-Paucartambo
-Paucartambo
-Quispicanchi
-Quispicanchi
-Quispicanchi
-Quispicanchi
-Quispicanchi
-Quispicanchi
-Quispicanchi
-Quispicanchi
-Quispicanchi
-Quispicanchi
-Quispicanchi
-Quispicanchi
-Urubamba
-Urubamba
-Urubamba
-Urubamba
-Urubamba
-Urubamba
-Urubamba
-Acobamba
-Acobamba
-Acobamba
-Acobamba
-Acobamba
-Acobamba
-Acobamba
-Acobamba
-Angaraes
-Angaraes
-Angaraes
-Angaraes
-Angaraes
-Angaraes
-Angaraes
-Angaraes
-Angaraes
-Angaraes
-Angaraes
-Angaraes
-Castrovirreyna
-Castrovirreyna
-Castrovirreyna
-Castrovirreyna
-Castrovirreyna
-Castrovirreyna
-Castrovirreyna
-Castrovirreyna
-Castrovirreyna
-Castrovirreyna
-Castrovirreyna
-Castrovirreyna
-Castrovirreyna
-Churcampa
-Churcampa
-Churcampa
-Churcampa
-Churcampa
-Churcampa
-Churcampa
-Churcampa
-Churcampa
-Churcampa
-Churcampa
-Huancavelica
-Huancavelica
-Huancavelica
-Huancavelica
-Huancavelica
-Huancavelica
-Huancavelica
-Huancavelica
-Huancavelica
-Huancavelica
-Huancavelica
-Huancavelica
-Huancavelica
-Huancavelica
-Huancavelica
-Huancavelica
-Huancavelica
-Huancavelica
-Huancavelica
-Huaytará
-Huaytará
-Huaytará
-Huaytará
-Huaytará
-Huaytará
-Huaytará
-Huaytará
-Huaytará
-Huaytará
-Huaytará
-Huaytará
-Huaytará
-Huaytará
-Huaytará
-Huaytará
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Tayacaja
-Ambo
-Ambo
-Ambo
-Ambo
-Ambo
-Ambo
-Ambo
-Ambo
-Dos de Mayo
-Dos de Mayo
-Dos de Mayo
-Dos de Mayo
-Dos de Mayo
-Dos de Mayo
-Dos de Mayo
-Dos de Mayo
-Dos de Mayo
-Huacaybamba
-Huacaybamba
-Huacaybamba
-Huacaybamba
-Huamalíes
-Huamalíes
-Huamalíes
-Huamalíes
-Huamalíes
-Huamalíes
-Huamalíes
-Huamalíes
-Huamalíes
-Huamalíes
-Huamalíes
-Huánuco
-Huánuco
-Huánuco
-Huánuco
-Huánuco
-Huánuco
-Huánuco
-Huánuco
-Huánuco
-Huánuco
-Huánuco
-Huánuco
-Huánuco
-Lauricocha
-Lauricocha
-Lauricocha
-Lauricocha
-Lauricocha
-Lauricocha
-Lauricocha
-Leoncio Prado
-Leoncio Prado
-Leoncio Prado
-Leoncio Prado
-Leoncio Prado
-Leoncio Prado
-Leoncio Prado
-Leoncio Prado
-Leoncio Prado
-Leoncio Prado
-Marañón
-Marañón
-Marañón
-Marañón
-Marañón
-Pachitea
-Pachitea
-Pachitea
-Pachitea
-Puerto Inca
-Puerto Inca
-Puerto Inca
-Puerto Inca
-Puerto Inca
-Yarowilca
-Yarowilca
-Yarowilca
-Yarowilca
-Yarowilca
-Yarowilca
-Yarowilca
-Yarowilca
-Chincha
-Chincha
-Chincha
-Chincha
-Chincha
-Chincha
-Chincha
-Chincha
-Chincha
-Chincha
-Chincha
-Ica
-Ica
-Ica
-Ica
-Ica
-Ica
-Ica
-Ica
-Ica
-Ica
-Ica
-Ica
-Ica
-Ica
-Nasca
-Nasca
-Nasca
-Nasca
-Nasca
-Palpa
-Palpa
-Palpa
-Palpa
-Palpa
-Pisco
-Pisco
-Pisco
-Pisco
-Pisco
-Pisco
-Pisco
-Pisco
-Chanchamayo
-Chanchamayo
-Chanchamayo
-Chanchamayo
-Chanchamayo
-Chanchamayo
-Chanchamayo
-Chupaca
-Chupaca
-Chupaca
-Chupaca
-Chupaca
-Chupaca
-Chupaca
-Chupaca
-Chupaca
-Concepción
-Concepción
-Concepción
-Concepción
-Concepción
-Concepción
-Concepción
-Concepción
-Concepción
-Concepción
-Concepción
-Concepción
-Concepción
-Concepción
-Concepción
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Huancayo
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Jauja
-Junín
-Junín
-Junín
-Junín
-Satipo
-Satipo
-Satipo
-Satipo
-Satipo
-Satipo
-Satipo
-Satipo
-Satipo
-Tarma
-Tarma
-Tarma
-Tarma
-Tarma
-Tarma
-Tarma
-Tarma
-Tarma
-Yauli
-Yauli
-Yauli
-Yauli
-Yauli
-Yauli
-Yauli
-Yauli
-Yauli
-Yauli
-Ascope
-Ascope
-Ascope
-Ascope
-Ascope
-Ascope
-Ascope
-Ascope
-Bolívar
-Bolívar
-Bolívar
-Bolívar
-Bolívar
-Bolívar
-Chepén
-Chepén
-Chepén
-Gran Chimú
-Gran Chimú
-Gran Chimú
-Gran Chimú
-Julcán
-Julcán
-Julcán
-Julcán
-Otuzco
-Otuzco
-Otuzco
-Otuzco
-Otuzco
-Otuzco
-Otuzco
-Otuzco
-Otuzco
-Otuzco
-Pacasmayo
-Pacasmayo
-Pacasmayo
-Pacasmayo
-Pacasmayo
-Pataz
-Pataz
-Pataz
-Pataz
-Pataz
-Pataz
-Pataz
-Pataz
-Pataz
-Pataz
-Pataz
-Pataz
-Pataz
-Sánchez Carrión
-Sánchez Carrión
-Sánchez Carrión
-Sánchez Carrión
-Sánchez Carrión
-Sánchez Carrión
-Sánchez Carrión
-Sánchez Carrión
-Santiago de Chuco
-Santiago de Chuco
-Santiago de Chuco
-Santiago de Chuco
-Santiago de Chuco
-Santiago de Chuco
-Santiago de Chuco
-Santiago de Chuco
-Trujillo
-Trujillo
-Trujillo
-Trujillo
-Trujillo
-Trujillo
-Trujillo
-Trujillo
-Trujillo
-Trujillo
-Trujillo
-Trujillo
-Virú
-Virú
-Virú
-Chiclayo
-Chiclayo
-Chiclayo
-Chiclayo
-Chiclayo
-Chiclayo
-Chiclayo
-Chiclayo
-Chiclayo
-Chiclayo
-Chiclayo
-Chiclayo
-Chiclayo
-Chiclayo
-Chiclayo
-Chiclayo
-Chiclayo
-Chiclayo
-Chiclayo
-Chiclayo
-Ferreñafe
-Ferreñafe
-Ferreñafe
-Ferreñafe
-Ferreñafe
-Ferreñafe
-Lambayeque
-Lambayeque
-Lambayeque
-Lambayeque
-Lambayeque
-Lambayeque
-Lambayeque
-Lambayeque
-Lambayeque
-Lambayeque
-Lambayeque
-Lambayeque
-Barranca
-Barranca
-Barranca
-Barranca
-Barranca
-Cajatambo
-Cajatambo
-Cajatambo
-Cajatambo
-Cajatambo
-Canta
-Canta
-Canta
-Canta
-Canta
-Canta
-Canta
-Cañete
-Cañete
-Cañete
-Cañete
-Cañete
-Cañete
-Cañete
-Cañete
-Cañete
-Cañete
-Cañete
-Cañete
-Cañete
-Cañete
-Cañete
-Cañete
-Huaral
-Huaral
-Huaral
-Huaral
-Huaral
-Huaral
-Huaral
-Huaral
-Huaral
-Huaral
-Huaral
-Huaral
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huarochirí
-Huaura
-Huaura
-Huaura
-Huaura
-Huaura
-Huaura
-Huaura
-Huaura
-Huaura
-Huaura
-Huaura
-Huaura
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Lima
-Oyón
-Oyón
-Oyón
-Oyón
-Oyón
-Oyón
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Yauyos
-Alto Amazonas
-Alto Amazonas
-Alto Amazonas
-Alto Amazonas
-Alto Amazonas
-Alto Amazonas
-Datem del Marañón
-Datem del Marañón
-Datem del Marañón
-Datem del Marañón
-Datem del Marañón
-Datem del Marañón
-Loreto
-Loreto
-Loreto
-Loreto
-Loreto
-Mariscal Ramón Castilla
-Mariscal Ramón Castilla
-Mariscal Ramón Castilla
-Mariscal Ramón Castilla
-Mariscal Ramón Castilla
-Maynas
-Maynas
-Maynas
-Maynas
-Maynas
-Maynas
-Maynas
-Maynas
-Maynas
-Maynas
-Maynas
+Santa Rosa de Loreto
+Yavari
+Alto Nanay
+Belén
+Fernando Lores
+Indiana
+Iquitos
+Las Amazonas
+Mazan
+Napo
+Punchana
+San Juan Bautista
+Torres Causana
 Putumayo
-Putumayo
-Putumayo
-Putumayo
+Rosa Panduro
+Teniente Manuel Clavero
+Yaguas
+Alto Tapiche
+Capelo
+Emilio San Martín
+Jenaro Herrera
+Maquia
+Puinahua
 Requena
-Requena
-Requena
-Requena
-Requena
-Requena
-Requena
-Requena
-Requena
-Requena
-Requena
-Ucayali
-Ucayali
-Ucayali
-Ucayali
-Ucayali
-Ucayali
+Saquena
+Soplin
+Tapiche
+Yaquerana
+Contamana
+Inahuaya
+Padre Márquez
+Pampa Hermosa
+Sarayacu
+Vargas Guerra
+Fitzcarrald
+Huepetuhe
+Madre de Dios
 Manu
-Manu
-Manu
-Manu
+Iberia
+Iñapari
 Tahuamanu
-Tahuamanu
-Tahuamanu
+Inambari
+Laberinto
+Las Piedras
 Tambopata
-Tambopata
-Tambopata
-Tambopata
-General Sánchez Cerro
-General Sánchez Cerro
-General Sánchez Cerro
-General Sánchez Cerro
-General Sánchez Cerro
-General Sánchez Cerro
-General Sánchez Cerro
-General Sánchez Cerro
-General Sánchez Cerro
-General Sánchez Cerro
-General Sánchez Cerro
+Chojata
+Coalaque
+Ichuña
+La Capilla
+Lloque
+Matalaque
+Omate
+Puquina
+Quinistaquillas
+Ubinas
+Yunga
+El Algarrobal
 Ilo
-Ilo
-Ilo
-Mariscal Nieto
-Mariscal Nieto
-Mariscal Nieto
-Mariscal Nieto
-Mariscal Nieto
-Mariscal Nieto
-Mariscal Nieto
-Daniel Alcides Carrión
-Daniel Alcides Carrión
-Daniel Alcides Carrión
-Daniel Alcides Carrión
-Daniel Alcides Carrión
-Daniel Alcides Carrión
-Daniel Alcides Carrión
-Daniel Alcides Carrión
-Oxapampa
-Oxapampa
-Oxapampa
-Oxapampa
-Oxapampa
-Oxapampa
-Oxapampa
-Oxapampa
-Pasco
-Pasco
-Pasco
-Pasco
-Pasco
-Pasco
-Pasco
-Pasco
-Pasco
-Pasco
-Pasco
-Pasco
-Pasco
-Ayabaca
-Ayabaca
-Ayabaca
-Ayabaca
-Ayabaca
-Ayabaca
-Ayabaca
-Ayabaca
-Ayabaca
-Ayabaca
+Pacocha
+Carumas
+Cuchumbaya
+Moquegua
+Samegua
+San Antonio
+San Cristóbal
+Torata
+Chacayan
+Goyllarisquizga
+Paucar
+San Pedro de Pillao
+Santa Ana de Tusi
+Tapuc
+Vilcabamba
+Yanahuanca
+Chontabamba
+Constitución
 Huancabamba
+Oxapampa
+Palcazu
+Pozuzo
+Puerto Bermúdez
+Villa Rica
+Chaupimarca
+Huachon
+Huariaca
+Huayllay
+Ninacaca
+Pallanchacra
+Paucartambo
+San Francisco de Asís de Yarusyacan
+Simon Bolívar
+Ticlacayan
+Tinyahuarco
+Vicco
+Yanacancha
+Ayabaca
+Frias
+Jilili
+Lagunas
+Montero
+Pacaipampa
+Paimas
+Sapillica
+Sicchez
+Suyo
+Canchaque
+El Carmen de la Frontera
 Huancabamba
-Huancabamba
-Huancabamba
-Huancabamba
-Huancabamba
-Huancabamba
-Huancabamba
-Morropón
-Morropón
-Morropón
-Morropón
-Morropón
-Morropón
-Morropón
-Morropón
-Morropón
-Morropón
+Huarmaca
+Lalaquiz
+San Miguel de El Faique
+Sondor
+Sondorillo
+Buenos Aires
+Chalaco
+Chulucanas
+La Matanza
+Morropon
+Salitral
+San Juan de Bigote
+Santa Catalina de Mossa
+Santo Domingo
+Yamango
+Amotape
+Arenal
+Colan
+La Huaca
 Paita
-Paita
-Paita
-Paita
-Paita
-Paita
-Paita
+Tamarindo
+Vichayal
+Castilla
+Catacaos
+Cura Mori
+El Tallan
+La Arena
+La Unión
+Las Lomas
 Piura
-Piura
-Piura
-Piura
-Piura
-Piura
-Piura
-Piura
-Piura
-Piura
+Tambo Grande
+Veintiseis de Octubre
+Bellavista de la Unión
+Bernal
+Cristo Nos Valga
+Rinconada Llicuar
 Sechura
-Sechura
-Sechura
-Sechura
-Sechura
-Sechura
+Vice
+Bellavista
+Ignacio Escudero
+Lancones
+Marcavelica
+Miguel Checa
+Querecotillo
+Salitral
 Sullana
-Sullana
-Sullana
-Sullana
-Sullana
-Sullana
-Sullana
-Sullana
-Talara
-Talara
-Talara
-Talara
-Talara
-Talara
+El Alto
+La Brea
+Lobitos
+Los Organos
+Mancora
+Pariñas
+Achaya
+Arapa
+Asillo
 Azángaro
-Azángaro
-Azángaro
-Azángaro
-Azángaro
-Azángaro
-Azángaro
-Azángaro
-Azángaro
-Azángaro
-Azángaro
-Azángaro
-Azángaro
-Azángaro
-Azángaro
-Carabaya
-Carabaya
-Carabaya
-Carabaya
-Carabaya
-Carabaya
-Carabaya
-Carabaya
-Carabaya
-Carabaya
-Chucuito
-Chucuito
-Chucuito
-Chucuito
-Chucuito
-Chucuito
-Chucuito
-El Collao
-El Collao
-El Collao
-El Collao
-El Collao
-Huancané
-Huancané
-Huancané
-Huancané
-Huancané
-Huancané
-Huancané
-Huancané
+Caminaca
+Chupa
+José Domingo Choquehuanca
+Muñani
+Potoni
+Saman
+San Anton
+San José
+San Juan de Salinas
+Santiago de Pupuja
+Tirapata
+Ajoyani
+Ayapata
+Coasa
+Corani
+Crucero
+Ituata
+Macusani
+Ollachea
+San Gaban
+Usicayos
+Desaguadero
+Huacullani
+Juli
+Kelluyo
+Pisacoma
+Pomata
+Zepita
+Capazo
+Conduriri
+Ilave
+Pilcuyo
+Santa Rosa
+Cojata
+Huancane
+Huatasani
+Inchupalla
+Pusi
+Rosaspata
+Taraco
+Vilque Chico
+Cabanilla
+Calapuja
 Lampa
-Lampa
-Lampa
-Lampa
-Lampa
-Lampa
-Lampa
-Lampa
-Lampa
-Lampa
-Melgar
-Melgar
-Melgar
-Melgar
-Melgar
-Melgar
-Melgar
-Melgar
-Melgar
+Nicasio
+Ocuviri
+Palca
+Paratia
+Pucara
+Santa Lucia
+Vilavila
+Antauta
+Ayaviri
+Cupi
+Llalli
+Macari
+Nuñoa
+Orurillo
+Santa Rosa
+Umachiri
+Conima
+Huayrapata
 Moho
-Moho
-Moho
-Moho
+Tilali
+Acora
+Amantani
+Atuncolla
+Capachica
+Chucuito
+Coata
+Huata
+Mañazo
+Paucarcolla
+Pichacani
+Plateria
 Puno
-Puno
-Puno
-Puno
-Puno
-Puno
-Puno
-Puno
-Puno
-Puno
-Puno
-Puno
-Puno
-Puno
-Puno
-San Antonio de Putina
-San Antonio de Putina
-San Antonio de Putina
-San Antonio de Putina
-San Antonio de Putina
-San Román
-San Román
-San Román
-San Román
-San Román
+San Antonio
+Tiquillaca
+Vilque
+Ananea
+Pedro Vilca Apaza
+Putina
+Quilcapuncu
+Sina
+Cabana
+Cabanillas
+Caracoto
+Juliaca
+San Miguel
+Alto Inambari
+Cuyocuyo
+Limbani
+Patambuco
+Phara
+Quiaca
+San Juan del Oro
+San Pedro de Putina Punco
 Sandia
-Sandia
-Sandia
-Sandia
-Sandia
-Sandia
-Sandia
-Sandia
-Sandia
-Sandia
+Yanahuaya
+Anapia
+Copani
+Cuturapi
+Ollaraya
+Tinicachi
+Unicachi
 Yunguyo
-Yunguyo
-Yunguyo
-Yunguyo
-Yunguyo
-Yunguyo
-Yunguyo
+Alto Biavo
+Bajo Biavo
 Bellavista
-Bellavista
-Bellavista
-Bellavista
-Bellavista
-Bellavista
-El Dorado
-El Dorado
-El Dorado
-El Dorado
-El Dorado
 Huallaga
-Huallaga
-Huallaga
-Huallaga
-Huallaga
-Huallaga
+San Pablo
+San Rafael
+Agua Blanca
+San José de Sisa
+San Martín
+Santa Rosa
+Shatoja
+Alto Saposoa
+El Eslabón
+Piscoyacu
+Sacanche
+Saposoa
+Tingo de Saposoa
+Alonso de Alvarado
+Barranquita
+Caynarachi
+Cuñumbuqui
 Lamas
-Lamas
-Lamas
-Lamas
-Lamas
-Lamas
-Lamas
-Lamas
-Lamas
-Lamas
-Lamas
-Mariscal Cáceres
-Mariscal Cáceres
-Mariscal Cáceres
-Mariscal Cáceres
-Mariscal Cáceres
+Pinto Recodo
+Rumisapa
+San Roque de Cumbaza
+Shanao
+Tabalosos
+Zapatero
+Campanilla
+Huicungo
+Juanjuí
+Pachiza
+Pajarillo
+Calzada
+Habana
+Jepelacio
 Moyobamba
-Moyobamba
-Moyobamba
-Moyobamba
-Moyobamba
-Moyobamba
+Soritor
+Yantalo
+Buenos Aires
+Caspisapa
 Picota
-Picota
-Picota
-Picota
-Picota
-Picota
-Picota
-Picota
-Picota
-Picota
+Pilluana
+Pucacaca
+San Cristóbal
+San Hilarión
+Shamboyacu
+Tingo de Ponasa
+Tres Unidos
+Awajun
+Elías Soplin Vargas
+Nueva Cajamarca
+Pardo Miguel
+Posic
 Rioja
-Rioja
-Rioja
-Rioja
-Rioja
-Rioja
-Rioja
-Rioja
-Rioja
-San Martín
-San Martín
-San Martín
-San Martín
-San Martín
-San Martín
-San Martín
-San Martín
-San Martín
-San Martín
-San Martín
-San Martín
-San Martín
-San Martín
+San Fernando
+Yorongos
+Yuracyacu
+Alberto Leveau
+Cacatachi
+Chazuta
+Chipurana
+El Porvenir
+Huimbayoc
+Juan Guerra
+La Banda de Shilcayo
+Morales
+Papaplaya
+San Antonio
+Sauce
+Shapaja
+Tarapoto
+Nuevo Progreso
+Polvora
+Santa Lucia
+Shunte
 Tocache
-Tocache
-Tocache
-Tocache
-Tocache
-Tocache
+Uchiza
+Cairani
+Camilaca
 Candarave
-Candarave
-Candarave
-Candarave
-Candarave
-Candarave
-Jorge Basadre
-Jorge Basadre
-Jorge Basadre
+Curibaya
+Huanuara
+Quilahuani
+Ilabaya
+Ite
+Locumba
+Alto de la Alianza
+Calana
+Ciudad Nueva
+Coronel Gregorio Albarracín Lanchipa
+Inclan
+La Yarada los Palos
+Pachia
+Palca
+Pocollay
+Sama
 Tacna
-Tacna
-Tacna
-Tacna
-Tacna
-Tacna
-Tacna
-Tacna
-Tacna
-Tacna
-Tacna
+Estique
+Estique-Pampa
+Héroes Albarracín
+Sitajara
+Susapaya
 Tarata
-Tarata
-Tarata
-Tarata
-Tarata
-Tarata
-Tarata
-Tarata
-Contralmirante Villar
-Contralmirante Villar
-Contralmirante Villar
+Tarucachi
+Ticaco
+Canoas de Punta Sal
+Casitas
+Zorritos
+Corrales
+La Cruz
+Pampas de Hospital
+San Jacinto
+San Juan de la Virgen
 Tumbes
-Tumbes
-Tumbes
-Tumbes
-Tumbes
-Tumbes
+Aguas Verdes
+Matapalo
+Papayal
 Zarumilla
-Zarumilla
-Zarumilla
-Zarumilla
-Atalaya
-Atalaya
-Atalaya
-Atalaya
-Coronel Portillo
-Coronel Portillo
-Coronel Portillo
-Coronel Portillo
-Coronel Portillo
-Coronel Portillo
-Coronel Portillo
+Raymondi
+Sepahua
+Tahuania
+Yurua
+Calleria
+Campoverde
+Iparia
+Manantay
+Masisea
+Nueva Requena
+Yarinacocha
+Alexander Von Humboldt
+Boqueron
+Curimana
+Huipoca
+Irazola
+Neshuya
 Padre Abad
-Padre Abad
-Padre Abad
-Padre Abad
-Padre Abad
-Padre Abad
-Padre Abad
-Purús
+Purus
