@@ -1,1894 +1,2916 @@
-Distrito
-Aramango
-Bagua
-Copallin
-El Parco
-Imaza
-La Peca
-Chisquilla
-Churuja
-Corosha
-Cuispes
-Florida
-Jazan
-Jumbilla
-Recta
-San Carlos
-Shipasbamba
-Valera
-Yambrasbamba
-Asunción
-Balsas
-Chachapoyas
-Cheto
-Chiliquin
-Chuquibamba
-Granada
-Huancas
-La Jalca
-Leimebamba
-Levanto
-Magdalena
-Mariscal Castilla
-Molinopampa
-Montevideo
-Olleros
-Quinjalca
-San Francisco de Daguas
-San Isidro de Maino
-Soloco
-Sonche
-El Cenepa
-Nieva
-Río Santiago
-Camporredondo
-Cocabamba
-Colcamar
-Conila
-Inguilpata
-Lamud
-Longuita
-Lonya Chico
-Luya
-Luya Viejo
-María
-Ocalli
-Ocumal
-Pisuquia
-Providencia
-San Cristóbal
-San Francisco de Yeso
-San Jerónimo
-San Juan de Lopecancha
-Santa Catalina
-Santo Tomas
-Tingo
-Trita
-Chirimoto
-Cochamal
-Huambo
-Limabamba
-Longar
-Mariscal Benavides
-Milpuc
-Omia
-San Nicolás
-Santa Rosa
-Totora
-Vista Alegre
-Bagua Grande
-Cajaruro
-Cumba
-El Milagro
-Jamalca
-Lonya Grande
-Yamon
-Aija
-Coris
-Huacllan
-La Merced
-Succha
-Aczo
-Chaccho
-Chingas
-Llamellin
-Mirgas
-San Juan de Rontoy
-Acochaca
-Chacas
-Abelardo Pardo Lezameta
-Antonio Raymondi
-Aquia
-Cajacay
-Canis
-Chiquian
-Colquioc
-Huallanca
-Huasta
-Huayllacayan
-La Primavera
-Mangas
-Pacllon
-San Miguel de Corpanqui
-Ticllos
-Acopampa
-Amashca
-Anta
-Ataquero
-Carhuaz
-Marcara
-Pariahuanca
-San Miguel de Aco
-Shilla
-Tinco
-Yungar
-San Luis
-San Nicolás
-Yauya
-Buena Vista Alta
-Casma
-Comandante Noel
-Yautan
-Aco
-Bambas
-Corongo
-Cusca
-La Pampa
-Yanac
-Yupan
-Cochabamba
-Colcabamba
-Huanchay
-Huaraz
-Independencia
-Jangas
-La Libertad
-Olleros
-Pampas Grande
-Pariacoto
-Pira
-Tarica
-Anra
-Cajay
-Chavin de Huantar
-Huacachi
-Huacchis
-Huachis
-Huantar
-Huari
-Masin
-Paucas
-Ponto
-Rahuapampa
-Rapayan
-San Marcos
-San Pedro de Chana
-Uco
-Cochapeti
-Culebras
-Huarmey
-Huayan
-Malvas
-Caraz
-Huallanca
-Huata
-Huaylas
-Mato
-Pamparomas
-Pueblo Libre
-Santa Cruz
-Santo Toribio
-Yuracmarca
-Casca
-Eleazar Guzmán Barron
-Fidel Olivas Escudero
-Llama
-Llumpa
-Lucma
-Musga
-Piscobamba
-Acas
-Cajamarquilla
-Carhuapampa
-Cochas
-Congas
-Llipa
-Ocros
-San Cristóbal de Rajan
-San Pedro
-Santiago de Chilcas
-Bolognesi
-Cabana
-Conchucos
-Huacaschuque
-Huandoval
-Lacabamba
-Llapo
-Pallasca
-Pampas
-Santa Rosa
-Tauca
-Huayllan
-Parobamba
-Pomabamba
-Quinuabamba
-Catac
-Cotaparaco
-Huayllapampa
-Llacllin
-Marca
-Pampas Chico
-Pararin
-Recuay
-Tapacocha
-Ticapampa
-Cáceres del Perú
-Chimbote
-Coishco
-Macate
-Moro
-Nepeña
-Nuevo Chimbote
-Samanco
-Santa
-Acobamba
-Alfonso Ugarte
-Cashapampa
-Chingalpo
-Huayllabamba
-Quiches
-Ragash
-San Juan
-Sicsibamba
-Sihuas
-Cascapara
-Mancos
-Matacoto
-Quillo
-Ranrahirca
-Shupluy
-Yanama
-Yungay
-Abancay
-Chacoche
-Circa
-Curahuasi
-Huanipaca
-Lambrama
-Pichirhua
-San Pedro de Cachora
-Tamburco
-Andahuaylas
-Andarapa
-Chiara
-Huancarama
-Huancaray
-Huayana
-José María Arguedas
-Kaquiabamba
-Kishuara
-Pacobamba
-Pacucha
-Pampachiri
-Pomacocha
-San Antonio de Cachi
-San Jerónimo
-San Miguel de Chaccrampa
-Santa María de Chicmo
-Talavera
-Tumay Huaraca
-Turpo
-Antabamba
-El Oro
-Huaquirca
-Juan Espinoza Medrano
-Oropesa
-Pachaconas
-Sabaino
-Capaya
-Caraybamba
-Chalhuanca
-Chapimarca
-Colcabamba
-Cotaruse
-Ihuayllo
-Justo Apu Sahuaraura
-Lucre
-Pocohuanca
-San Juan de Chacña
-Sañayca
-Soraya
-Tapairihua
-Tintay
-Toraya
-Yanaca
-Ahuayro
-Anco_Huallo
-Chincheros
-Cocharcas
-El Porvenir
-Huaccana
-Los Chankas
-Ocobamba
-Ongoy
-Ranracancha
-Rocchacc
-Uranmarca
-Challhuahuacho
-Cotabambas
-Coyllurqui
-Haquira
-Mara
-Tambobamba
-Chuquibambilla
-Curasco
-Curpahuasi
-Gamarra
-Huayllati
-Mamara
-Micaela Bastidas
-Pataypampa
-Progreso
-San Antonio
-Santa Rosa
-Turpay
-Vilcabamba
-Virundo
-Alto Selva Alegre
-Arequipa
-Cayma
-Cerro Colorado
-Characato
-Chiguata
-Jacobo Hunter
-José Luis Bustamante Y Rivero
-La Joya
-Mariano Melgar
-Miraflores
-Mollebaya
-Paucarpata
-Pocsi
-Polobaya
-Quequeña
-Sabandia
-Sachaca
-San Juan de Siguas
-San Juan de Tarucani
-Santa Isabel de Siguas
-Santa Rita de Siguas
-Socabaya
-Tiabaya
-Uchumayo
-Vitor
-Yanahuara
-Yarabamba
-Yura
-Camaná
-José María Quimper
-Mariano Nicolás Valcárcel
-Mariscal Cáceres
-Nicolás de Pierola
-Ocoña
-Quilca
-Samuel Pastor
-Acarí
-Atico
-Atiquipa
-Bella Unión
-Cahuacho
-Caravelí
-Chala
-Chaparra
-Huanuhuanu
-Jaqui
-Lomas
-Quicacha
-Yauca
-Andagua
-Aplao
-Ayo
-Chachas
-Chilcaymarca
-Choco
-Huancarqui
-Machaguay
-Orcopampa
-Pampacolca
-Tipan
-Uñon
-Uraca
-Viraco
-Achoma
-Cabanaconde
-Callalli
-Caylloma
-Chivay
-Coporaque
-Huambo
-Huanca
-Ichupampa
-Lari
-Lluta
-Maca
-Madrigal
-Majes
-San Antonio de Chuca
-Sibayo
-Tapay
-Tisco
-Tuti
-Yanque
-Andaray
-Cayarani
-Chichas
-Chuquibamba
-Iray
-Río Grande
-Salamanca
-Yanaquihua
-Cocachacra
-Dean Valdivia
-Islay
-Mejia
-Mollendo
-Punta de Bombón
-Alca
-Charcana
-Cotahuasi
-Huaynacotas
-Pampamarca
-Puyca
-Quechualla
-Sayla
-Tauria
-Tomepampa
-Toro
-Cangallo
-Chuschi
-Los Morochucos
-María Parado de Bellido
-Paras
-Totos
-Acocro
-Acos Vinchos
-Andrés Avelino Cáceres Dorregaray
-Ayacucho
-Carmen Alto
-Chiara
-Jesús Nazareno
-Ocros
-Pacaycasa
-Quinua
-San José de Ticllas
-San Juan Bautista
-Santiago de Pischa
-Socos
-Tambillo
-Vinchos
-Carapo
-Sacsamarca
-Sancos
-Santiago de Lucanamarca
-Ayahuanco
-Canayre
-Chaca
-Huamanguilla
-Huanta
-Iguain
-Llochegua
-Luricocha
-Pucacolpa
-Putis
-Santillana
-Sivia
-Uchuraccay
-Anchihuay
-Anco
-Ayna
-Chilcas
-Chungui
-Luis Carranza
-Ninabamba
-Oronccoy
-Patibamba
-Rio Magdalena
-Samugari
-San Miguel
-Santa Rosa
-Tambo
-Unión Progreso
-Aucara
-Cabana
-Carmen Salcedo
-Chaviña
-Chipao
-Huac-Huas
-Laramate
-Leoncio Prado
-Llauta
-Lucanas
-Ocaña
-Otoca
-Puquio
-Saisa
-San Cristóbal
-San Juan
-San Pedro
-San Pedro de Palco
-Sancos
-Santa Ana de Huaycahuacho
-Santa Lucia
-Chumpi
-Coracora
-Coronel Castañeda
-Pacapausa
-Pullo
-Puyusca
-San Francisco de Rivacayco
-Upahuacho
-Colta
-Corculla
-Lampa
-Marcabamba
-Oyolo
-Pararca
-Pausa
-San Javier de Alpabamba
-San José de Ushua
-Sara Sara
-Belén
-Chalcos
-Chilcayoc
-Huacaña
-Morcolla
-Paico
-Querobamba
-San Pedro de Larcay
-San Salvador de Quije
-Santiago de Paucaray
-Soras
-Alcamenca
-Apongo
-Asquipata
-Canaria
-Cayara
-Colca
-Hualla
-Huamanquiquia
-Huancapi
-Huancaraylla
-Sarhua
-Vilcanchos
-Accomarca
-Carhuanca
-Concepción
-Huambalpa
-Independencia
-Saurama
-Vilcas Huaman
-Vischongo
-Cachachi
-Cajabamba
-Condebamba
-Sitacocha
-Asunción
-Cajamarca
-Chetilla
-Cospan
-Encañada
-Jesús
-Llacanora
-Los Baños del Inca
-Magdalena
-Matara
-Namora
-San Juan
-Celendín
-Chumuch
-Cortegana
-Huasmin
-Jorge Chávez
-José Gálvez
-La Libertad de Pallan
-Miguel Iglesias
-Oxamarca
-Sorochuco
-Sucre
-Utco
-Anguia
-Chadin
-Chalamarca
-Chiguirip
-Chimban
-Choropampa
-Chota
-Cochabamba
-Conchan
-Huambos
-Lajas
-Llama
-Miracosta
-Paccha
-Pion
-Querocoto
-San Juan de Licupis
-Tacabamba
-Tocmoche
-Chilete
-Contumaza
-Cupisnique
-Guzmango
-San Benito
-Santa Cruz de Toledo
-Tantarica
-Yonan
-Callayuc
-Choros
-Cujillo
-Cutervo
-La Ramada
-Pimpingos
-Querocotillo
-San Andrés de Cutervo
-San Juan de Cutervo
-San Luis de Lucma
-Santa Cruz
-Santo Domingo de la Capilla
-Santo Tomas
-Socota
-Toribio Casanova
-Bambamarca
-Chugur
-Hualgayoc
-Bellavista
-Chontali
-Colasay
-Huabal
-Jaén
-Las Pirias
-Pomahuaca
-Pucara
-Sallique
-San Felipe
-San José del Alto
-Santa Rosa
-Chirinos
-Huarango
-La Coipa
-Namballe
-San Ignacio
-San José de Lourdes
-Tabaconas
-Chancay
-Eduardo Villanueva
-Gregorio Pita
-Ichocan
-José Manuel Quiroz
-José Sabogal
-Pedro Gálvez
-Bolívar
-Calquis
-Catilluc
-El Prado
-La Florida
-Llapa
-Nanchoc
-Niepos
-San Gregorio
-San Miguel
-San Silvestre de Cochan
-Tongod
-Unión Agua Blanca
-San Bernardino
-San Luis
-San Pablo
-Tumbaden
-Andabamba
-Catache
-Chancaybaños
-La Esperanza
-Ninabamba
-Pulan
-Santa Cruz
-Saucepampa
-Sexi
-Uticyacu
-Yauyucan
-Bellavista
-Callao
-Carmen de la Legua Reynoso
-La Perla
-La Punta
-Mi Perú
-Ventanilla
-Acomayo
-Acopia
-Acos
-Mosoc Llacta
-Pomacanchi
-Rondocan
-Sangarara
-Ancahuasi
-Anta
-Cachimayo
-Chinchaypujio
-Huarocondo
-Limatambo
-Mollepata
-Pucyura
-Zurite
-Calca
-Coya
-Lamay
-Lares
-Pisac
-San Salvador
-Taray
-Yanatile
-Checca
-Kunturkanki
-Langui
-Layo
-Pampamarca
-Quehue
-Tupac Amaru
-Yanaoca
-Checacupe
-Combapata
-Marangani
-Pitumarca
-San Pablo
-San Pedro
-Sicuani
-Tinta
-Capacmarca
-Chamaca
-Colquemarca
-Livitaca
-Llusco
-Quiñota
-Santo Tomas
-Velille
-Ccorca
-Cusco
-Poroy
-San Jerónimo
-San Sebastian
-Santiago
-Saylla
-Wanchaq
-Alto Pichigua
-Condoroma
-Coporaque
-Espinar
-Ocoruro
-Pallpata
-Pichigua
-Suyckutambo
-Cielo Punco
-Echarate
-Huayopata
-Inkawasi
-Kimbiri
-Kumpirushiato
-Manitea
-Maranura
-Megantoni
-Ocobamba
-Pichari
-Quellouno
-Santa Ana
-Santa Teresa
-Unión Ashaninka
-Vilcabamba
-Villa Kintiarina
-Villa Virgen
-Accha
-Ccapi
-Colcha
-Huanoquite
-Omacha
-Paccaritambo
-Paruro
-Pillpinto
-Yaurisque
-Caicay
-Challabamba
-Colquepata
-Huancarani
-Kosñipata
-Paucartambo
-Andahuaylillas
-Camanti
-Ccarhuayo
-Ccatca
-Cusipata
-Huaro
-Lucre
-Marcapata
-Ocongate
-Oropesa
-Quiquijana
-Urcos
-Chinchero
-Huayllabamba
-Machupicchu
-Maras
-Ollantaytambo
-Urubamba
-Yucay
-Acobamba
-Andabamba
-Anta
-Caja
-Marcas
-Paucara
-Pomacocha
-Rosario
-Anchonga
-Callanmarca
-Ccochaccasa
-Chincho
-Congalla
-Huanca-Huanca
-Huayllay Grande
-Julcamarca
-Lircay
-San Antonio de Antaparco
-Santo Tomas de Pata
-Secclla
-Arma
-Aurahua
-Capillas
-Castrovirreyna
-Chupamarca
-Cocas
-Huachos
-Huamatambo
-Mollepampa
-San Juan
-Santa Ana
-Tantara
-Ticrapo
-Anco
-Chinchihuasi
-Churcampa
-Cosme
-El Carmen
-La Merced
-Locroja
-Pachamarca
-Paucarbamba
-San Miguel de Mayocc
-San Pedro de Coris
-Acobambilla
-Acoria
-Ascensión
-Conayca
-Cuenca
-Huachocolpa
-Huancavelica
-Huando
-Huayllahuara
-Izcuchaca
-Laria
-Manta
-Mariscal Cáceres
-Moya
-Nuevo Occoro
-Palca
-Pilchaca
-Vilca
-Yauli
-Ayavi
-Córdova
-Huayacundo Arma
-Huaytara
-Laramarca
-Ocoyo
-Pilpichaca
-Querco
-Quito-Arma
-San Antonio de Cusicancha
-San Francisco de Sangayaico
-San Isidro
-Santiago de Chocorvos
-Santiago de Quirahuara
-Santo Domingo de Capillas
-Tambo
-Acostambo
-Acraquia
-Ahuaycha
-Andaymarca
-Cochabamba
-Colcabamba
-Daniel Hernández
-Huachocolpa
-Huaribamba
-Lambras
-Ñahuimpuquio
-Pampas
-Pazos
-Pichos
-Quichuas
-Quishuar
-Roble
-Salcabamba
-Salcahuasi
-San Marcos de Rocchac
-Santiago de Tucuma
-Surcubamba
-Tintay Puncu
-Ambo
-Cayna
-Colpas
-Conchamarca
-Huacar
-San Francisco
-San Rafael
-Tomay Kichwa
-Chuquis
-La Unión
-Marías
-Pachas
-Quivilla
-Ripan
-Shunqui
-Sillapata
-Yanas
-Canchabamba
-Cochabamba
-Huacaybamba
-Pinra
-Arancay
-Chavín de Pariarca
-Jacas Grande
-Jircan
-Llata
-Miraflores
-Monzón
-Punchao
-Puños
-Singa
-Tantamayo
-Amarilis
-Chinchao
-Churubamba
-Huanuco
-Margos
-Pillco Marca
-Quisqui (Kichki)
-San Francisco de Cayran
-San Pablo de Pillao
-San Pedro de Chaulan
-Santa María del Valle
-Yacus
-Yarumayo
-Baños
-Jesús
-Jivia
-Queropalca
-Rondos
-San Francisco de Asís
-San Miguel de Cauri
-Castillo Grande
-Daniel Alomía Robles
-Hermílio Valdizan
-José Crespo y Castillo
-Luyando
-Mariano Damaso Beraun
-Pucayacu
-Pueblo Nuevo
-Rupa-Rupa
-Santo Domingo de Anda
-Cholon
-Huacrachuco
-La Morada
-San Buenaventura
-Santa Rosa de Alto Yanajanca
-Chaglla
-Molino
-Panao
-Umari
-Codo del Pozuzo
-Honoria
-Puerto Inca
-Tournavista
-Yuyapichis
-Aparicio Pomares
-Cahuac
-Chacabamba
-Chavinillo
-Choras
-Jacas Chico
-Obas
-Pampamarca
-Alto Laran
-Chavin
-Chincha Alta
-Chincha Baja
-El Carmen
-Grocio Prado
-Pueblo Nuevo
-San Juan de Yanac
-San Pedro de Huacarpana
-Sunampe
-Tambo de Mora
-Ica
-La Tinguiña
-Los Aquijes
-Ocucaje
-Pachacutec
-Parcona
-Pueblo Nuevo
-Salas
-San José de Los Molinos
-San Juan Bautista
-Santiago
-Subtanjalla
-Tate
-Yauca del Rosario
-Changuillo
-El Ingenio
-Marcona
-Nasca
-Vista Alegre
-Llipata
-Palpa
-Río Grande
-Santa Cruz
-Tibillo
-Huancano
-Humay
-Independencia
-Paracas
-Pisco
-San Andrés
-San Clemente
-Tupac Amaru Inca
-Chanchamayo
-Perene
-Pichanaqui
-San Luis de Shuaro
-San Ramón
-Sangani
-Vitoc
-Ahuac
-Chongos Bajo
-Chupaca
-Huachac
-Huamancaca Chico
-San Juan de Iscos
-San Juan de Jarpa
-Tres de Diciembre
-Yanacancha
-Aco
-Andamarca
-Chambara
-Cochas
-Comas
-Concepción
-Heroínas Toledo
-Manzanares
-Mariscal Castilla
-Matahuasi
-Mito
-Nueve de Julio
-Orcotuna
-San José de Quero
-Santa Rosa de Ocopa
-Carhuacallanga
-Chacapampa
-Chicche
-Chilca
-Chongos Alto
-Chupuro
-Colca
-Cullhuas
-El Tambo
-Huacrapuquio
-Hualhuas
-Huancan
-Huancayo
-Huasicancha
-Huayucachi
-Ingenio
-Pariahuanca
-Pilcomayo
-Pucara
-Quichuay
-Quilcas
-San Agustín
-San Jerónimo de Tunan
-Santo Domingo de Acobamba
-Saño
-Sapallanga
-Sicaya
-Viques
-Acolla
-Apata
-Ataura
-Canchayllo
-Curicaca
-El Mantaro
-Huamali
-Huaripampa
-Huertas
-Janjaillo
-Jauja
-Julcán
-Leonor Ordóñez
-Llocllapampa
-Marco
-Masma
-Masma Chicche
-Molinos
-Monobamba
-Muqui
-Muquiyauyo
-Paca
-Paccha
-Pancan
-Parco
-Pomacancha
-Ricran
-San Lorenzo
-San Pedro de Chunan
-Sausa
-Sincos
-Tunan Marca
-Yauli
-Yauyos
-Carhuamayo
-Junin
-Ondores
-Ulcumayo
-Coviriali
-Llaylla
-Mazamari
-Pampa Hermosa
-Pangoa
-Río Negro
-Río Tambo
-Satipo
-Vizcatán del Ene
-Acobamba
-Huaricolca
-Huasahuasi
-La Unión
-Palca
-Palcamayo
-San Pedro de Cajas
-Tapo
-Tarma
-Chacapalpa
-Huay-Huay
-La Oroya
-Marcapomacocha
-Morococha
-Paccha
-Santa Bárbara de Carhuacayan
-Santa Rosa de Sacco
-Suitucancha
-Yauli
-Ascope
-Casa Grande
-Chicama
-Chocope
-Magdalena de Cao
-Paijan
-Rázuri
-Santiago de Cao
-Bambamarca
-Bolívar
-Condormarca
-Longotea
-Uchumarca
-Ucuncha
-Chepen
-Pacanga
-Pueblo Nuevo
-Cascas
-Lucma
-Marmot
-Sayapullo
-Calamarca
-Carabamba
-Huaso
-Julcan
-Agallpampa
-Charat
-Huaranchal
-La Cuesta
-Mache
-Otuzco
-Paranday
-Salpo
-Sinsicap
-Usquil
-Guadalupe
-Jequetepeque
-Pacasmayo
-San José
-San Pedro de Lloc
-Buldibuyo
-Chillia
-Huancaspata
-Huaylillas
-Huayo
-Ongon
-Parcoy
-Pataz
-Pias
-Santiago de Challas
-Taurija
-Tayabamba
-Urpay
-Chugay
-Cochorco
-Curgos
-Huamachuco
-Marcabal
-Sanagoran
-Sarin
-Sartimbamba
-Angasmarca
-Cachicadan
-Mollebamba
-Mollepata
-Quiruvilca
-Santa Cruz de Chuca
-Santiago de Chuco
-Sitabamba
-Alto Trujillo
-El Porvenir
-Florencia de Mora
-Huanchaco
-La Esperanza
-Laredo
-Moche
-Poroto
-Salaverry
-Simbal
-Trujillo
-Victor Larco Herrera
-Chao
-Guadalupito
-Viru
-Cayalti
-Chiclayo
-Chongoyape
-Eten
-Eten Puerto
-José Leonardo Ortiz
-La Victoria
-Lagunas
-Monsefu
-Nueva Arica
-Oyotun
-Patapo
-Picsi
-Pimentel
-Pomalca
-Pucala
-Reque
-Santa Rosa
-Saña
-Tuman
-Cañaris
-Ferreñafe
-Incahuasi
-Manuel Antonio Mesones Muro
-Pitipo
-Pueblo Nuevo
-Chochope
-Illimo
-Jayanca
-Lambayeque
-Mochumi
-Morrope
-Motupe
-Olmos
-Pacora
-Salas
-San José
-Tucume
-Barranca
-Paramonga
-Pativilca
-Supe
-Supe Puerto
-Cajatambo
-Copa
-Gorgor
-Huancapon
-Manas
-Arahuay
-Canta
-Huamantanga
-Huaros
-Lachaqui
-San Buenaventura
-Santa Rosa de Quives
-Asia
-Calango
-Cerro Azul
-Chilca
-Coayllo
-Imperial
-Lunahuana
-Mala
-Nuevo Imperial
-Pacaran
-Quilmana
-San Antonio
-San Luis
-San Vicente de Cañete
-Santa Cruz de Flores
-Zúñiga
-Atavillos Alto
-Atavillos Bajo
-Aucallama
-Chancay
-Huaral
-Ihuari
-Lampian
-Pacaraos
-San Miguel de Acos
-Santa Cruz de Andamarca
-Sumbilca
-Veintisiete de Noviembre
-Antioquia
-Callahuanca
-Carampoma
-Chicla
-Cuenca
-Huachupampa
-Huanza
-Huarochiri
-Lahuaytambo
-Langa
-Laraos
-Mariatana
-Matucana
-Ricardo Palma
-San Andrés de Tupicocha
-San Antonio
-San Bartolomé
-San Damian
-San Juan de Iris
-San Juan de Tantaranche
-San Lorenzo de Quinti
-San Mateo
-San Mateo de Otao
-San Pedro de Casta
-San Pedro de Huancayre
-Sangallaya
-Santa Cruz de Cocachacra
-Santa Eulalia
-Santiago de Anchucaya
-Santiago de Tuna
-Santo Domingo de Los Olleros
-Surco
-Ambar
-Caleta de Carquin
-Checras
-Huacho
-Hualmay
-Huaura
-Leoncio Prado
-Paccho
-Santa Leonor
-Santa María
-Sayan
-Vegueta
-Ancón
-Ate
-Barranco
-Breña
-Carabayllo
-Chaclacayo
-Chorrillos
-Cieneguilla
-Comas
-El Agustino
-Independencia
-Jesús María
-La Molina
-La Victoria
-Lima
-Lince
-Los Olivos
-Lurigancho
-Lurin
-Magdalena del Mar
-Miraflores
-Pachacamac
-Pucusana
-Pueblo Libre
-Puente Piedra
-Punta Hermosa
-Punta Negra
-Rímac
-San Bartolo
-San Borja
-San Isidro
-San Juan de Lurigancho
-San Juan de Miraflores
-San Luis
-San Martín de Porres
-San Miguel
-Santa Anita
-Santa María del Mar
-Santa Rosa
-Santiago de Surco
-Surquillo
-Villa El Salvador
-Villa María del Triunfo
-Andajes
-Caujul
-Cochamarca
-Navan
-Oyon
-Pachangara
-Alis
-Allauca
-Ayaviri
-Azángaro
-Cacra
-Carania
-Catahuasi
-Chocos
-Cochas
-Colonia
-Hongos
-Huampara
-Huancaya
-Huangascar
-Huantan
-Huañec
-Laraos
-Lincha
-Madean
-Miraflores
-Omas
-Putinza
-Quinches
-Quinocay
-San Joaquín
-San Pedro de Pilas
-Tanta
-Tauripampa
-Tomas
-Tupe
-Viñac
-Vitis
-Yauyos
-Balsapuerto
-Jeberos
-Lagunas
-Santa Cruz
-Teniente Cesar López Rojas
-Yurimaguas
-Andoas
-Barranca
-Cahuapanas
-Manseriche
-Morona
-Pastaza
-Nauta
-Parinari
-Tigre
-Trompeteros
-Urarinas
-Pebas
-Ramón Castilla
-San Pablo
-Santa Rosa de Loreto
-Yavari
-Alto Nanay
-Belén
-Fernando Lores
-Indiana
-Iquitos
-Las Amazonas
-Mazan
-Napo
-Punchana
-San Juan Bautista
-Torres Causana
-Putumayo
-Rosa Panduro
-Teniente Manuel Clavero
-Yaguas
-Alto Tapiche
-Capelo
-Emilio San Martín
-Jenaro Herrera
-Maquia
-Puinahua
-Requena
-Saquena
-Soplin
-Tapiche
-Yaquerana
-Contamana
-Inahuaya
-Padre Márquez
-Pampa Hermosa
-Sarayacu
-Vargas Guerra
-Fitzcarrald
-Huepetuhe
-Madre de Dios
-Manu
-Iberia
-Iñapari
-Tahuamanu
-Inambari
-Laberinto
-Las Piedras
-Tambopata
-Chojata
-Coalaque
-Ichuña
-La Capilla
-Lloque
-Matalaque
-Omate
-Puquina
-Quinistaquillas
-Ubinas
-Yunga
-El Algarrobal
-Ilo
-Pacocha
-Carumas
-Cuchumbaya
-Moquegua
-Samegua
-San Antonio
-San Cristóbal
-Torata
-Chacayan
-Goyllarisquizga
-Paucar
-San Pedro de Pillao
-Santa Ana de Tusi
-Tapuc
-Vilcabamba
-Yanahuanca
-Chontabamba
-Constitución
-Huancabamba
-Oxapampa
-Palcazu
-Pozuzo
-Puerto Bermúdez
-Villa Rica
-Chaupimarca
-Huachon
-Huariaca
-Huayllay
-Ninacaca
-Pallanchacra
-Paucartambo
-San Francisco de Asís de Yarusyacan
-Simon Bolívar
-Ticlacayan
-Tinyahuarco
-Vicco
-Yanacancha
-Ayabaca
-Frias
-Jilili
-Lagunas
-Montero
-Pacaipampa
-Paimas
-Sapillica
-Sicchez
-Suyo
-Canchaque
-El Carmen de la Frontera
-Huancabamba
-Huarmaca
-Lalaquiz
-San Miguel de El Faique
-Sondor
-Sondorillo
-Buenos Aires
-Chalaco
-Chulucanas
-La Matanza
-Morropon
-Salitral
-San Juan de Bigote
-Santa Catalina de Mossa
-Santo Domingo
-Yamango
-Amotape
-Arenal
-Colan
-La Huaca
-Paita
-Tamarindo
-Vichayal
-Castilla
-Catacaos
-Cura Mori
-El Tallan
-La Arena
-La Unión
-Las Lomas
-Piura
-Tambo Grande
-Veintiseis de Octubre
-Bellavista de la Unión
-Bernal
-Cristo Nos Valga
-Rinconada Llicuar
-Sechura
-Vice
-Bellavista
-Ignacio Escudero
-Lancones
-Marcavelica
-Miguel Checa
-Querecotillo
-Salitral
-Sullana
-El Alto
-La Brea
-Lobitos
-Los Organos
-Mancora
-Pariñas
-Achaya
-Arapa
-Asillo
-Azángaro
-Caminaca
-Chupa
-José Domingo Choquehuanca
-Muñani
-Potoni
-Saman
-San Anton
-San José
-San Juan de Salinas
-Santiago de Pupuja
-Tirapata
-Ajoyani
-Ayapata
-Coasa
-Corani
-Crucero
-Ituata
-Macusani
-Ollachea
-San Gaban
-Usicayos
-Desaguadero
-Huacullani
-Juli
-Kelluyo
-Pisacoma
-Pomata
-Zepita
-Capazo
-Conduriri
-Ilave
-Pilcuyo
-Santa Rosa
-Cojata
-Huancane
-Huatasani
-Inchupalla
-Pusi
-Rosaspata
-Taraco
-Vilque Chico
-Cabanilla
-Calapuja
-Lampa
-Nicasio
-Ocuviri
-Palca
-Paratia
-Pucara
-Santa Lucia
-Vilavila
-Antauta
-Ayaviri
-Cupi
-Llalli
-Macari
-Nuñoa
-Orurillo
-Santa Rosa
-Umachiri
-Conima
-Huayrapata
-Moho
-Tilali
-Acora
-Amantani
-Atuncolla
-Capachica
-Chucuito
-Coata
-Huata
-Mañazo
-Paucarcolla
-Pichacani
-Plateria
-Puno
-San Antonio
-Tiquillaca
-Vilque
-Ananea
-Pedro Vilca Apaza
-Putina
-Quilcapuncu
-Sina
-Cabana
-Cabanillas
-Caracoto
-Juliaca
-San Miguel
-Alto Inambari
-Cuyocuyo
-Limbani
-Patambuco
-Phara
-Quiaca
-San Juan del Oro
-San Pedro de Putina Punco
-Sandia
-Yanahuaya
-Anapia
-Copani
-Cuturapi
-Ollaraya
-Tinicachi
-Unicachi
-Yunguyo
-Alto Biavo
-Bajo Biavo
-Bellavista
-Huallaga
-San Pablo
-San Rafael
-Agua Blanca
-San José de Sisa
-San Martín
-Santa Rosa
-Shatoja
-Alto Saposoa
-El Eslabón
-Piscoyacu
-Sacanche
-Saposoa
-Tingo de Saposoa
-Alonso de Alvarado
-Barranquita
-Caynarachi
-Cuñumbuqui
-Lamas
-Pinto Recodo
-Rumisapa
-San Roque de Cumbaza
-Shanao
-Tabalosos
-Zapatero
-Campanilla
-Huicungo
-Juanjuí
-Pachiza
-Pajarillo
-Calzada
-Habana
-Jepelacio
-Moyobamba
-Soritor
-Yantalo
-Buenos Aires
-Caspisapa
-Picota
-Pilluana
-Pucacaca
-San Cristóbal
-San Hilarión
-Shamboyacu
-Tingo de Ponasa
-Tres Unidos
-Awajun
-Elías Soplin Vargas
-Nueva Cajamarca
-Pardo Miguel
-Posic
-Rioja
-San Fernando
-Yorongos
-Yuracyacu
-Alberto Leveau
-Cacatachi
-Chazuta
-Chipurana
-El Porvenir
-Huimbayoc
-Juan Guerra
-La Banda de Shilcayo
-Morales
-Papaplaya
-San Antonio
-Sauce
-Shapaja
-Tarapoto
-Nuevo Progreso
-Polvora
-Santa Lucia
-Shunte
-Tocache
-Uchiza
-Cairani
-Camilaca
-Candarave
-Curibaya
-Huanuara
-Quilahuani
-Ilabaya
-Ite
-Locumba
-Alto de la Alianza
-Calana
-Ciudad Nueva
-Coronel Gregorio Albarracín Lanchipa
-Inclan
-La Yarada los Palos
-Pachia
-Palca
-Pocollay
-Sama
-Tacna
-Estique
-Estique-Pampa
-Héroes Albarracín
-Sitajara
-Susapaya
-Tarata
-Tarucachi
-Ticaco
-Canoas de Punta Sal
-Casitas
-Zorritos
-Corrales
-La Cruz
-Pampas de Hospital
-San Jacinto
-San Juan de la Virgen
-Tumbes
-Aguas Verdes
-Matapalo
-Papayal
-Zarumilla
-Raymondi
-Sepahua
-Tahuania
-Yurua
-Calleria
-Campoverde
-Iparia
-Manantay
-Masisea
-Nueva Requena
-Yarinacocha
-Alexander Von Humboldt
-Boqueron
-Curimana
-Huipoca
-Irazola
-Neshuya
-Padre Abad
-Purus
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulador PP/CD</title>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ec111a'/%3E%3Crect x='17' y='10' width='30' height='44' rx='5' fill='white'/%3E%3Crect x='22' y='16' width='20' height='9' rx='2' fill='%23ec111a'/%3E%3Cpath d='M23 32h4m10 0h4M23 40h4m10 0h4M23 48h4m10 0h4' stroke='%23ec111a' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+
+  <style>
+    :root {
+      --rojo: #ec111a;
+      --rojo-oscuro: #be0d15;
+      --rojo-suave: #fff1f2;
+      --fondo: #f5f6f8;
+      --texto: #202632;
+      --texto-secundario: #6b7280;
+      --borde: #e5e7eb;
+    }
+
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font: 14px "Segoe UI", Arial, sans-serif;
+      color: var(--texto);
+      background: var(--fondo);
+    }
+
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    button:disabled { cursor: not-allowed; opacity: .4; }
+
+    button:focus-visible,
+    summary:focus-visible {
+      outline: 3px solid #ff9ca1;
+      outline-offset: 3px;
+    }
+
+    header {
+      background: var(--rojo);
+      color: white;
+    }
+
+    .header-inner, main {
+      width: min(1380px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .header-inner {
+      min-height: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 23px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .product-switch {
+      display: flex;
+      gap: 4px;
+      padding: 4px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, .13);
+    }
+
+    .product-switch button {
+      border: 0;
+      border-radius: 7px;
+      padding: 10px 20px;
+      color: white;
+      background: transparent;
+      font-weight: 700;
+    }
+
+    .product-switch button.is-active {
+      background: white;
+      color: var(--rojo);
+    }
+
+    main {
+      flex: 1;
+      padding: 28px 0;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .panel {
+      min-width: 0;
+      padding: 26px;
+      background: white;
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      box-shadow: 0 6px 24px rgba(28, 35, 48, .045);
+    }
+
+    h2, h3 {
+      margin: 0 0 7px;
+      font-size: 19px;
+    }
+
+    .panel-description {
+      margin: 0 0 23px;
+      color: var(--texto-secundario);
+      line-height: 1.5;
+    }
+
+    .fields-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .field { min-width: 0; }
+
+    .field label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      min-width: 0;
+      min-height: 46px;
+      padding: 10px 11px;
+      border: 1px solid #d6dbe2;
+      border-radius: 8px;
+      background: white;
+      color: var(--texto);
+    }
+
+    .field input:focus,
+    .field select:focus {
+      outline: 0;
+      border-color: var(--rojo);
+      box-shadow: 0 0 0 3px rgba(236, 17, 26, .08);
+    }
+
+    .field select:disabled {
+      background: #f1f2f4;
+      color: #969ca5;
+    }
+
+    .field small {
+      display: block;
+      margin-top: 7px;
+      color: var(--texto-secundario);
+      line-height: 1.4;
+      font-size: 11px;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .check-option {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 12px;
+      border: 1px solid var(--borde);
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .check-option input {
+      margin: 0;
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+      accent-color: var(--rojo);
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 11px 19px;
+      border: 1px solid var(--borde);
+      border-radius: 9px;
+      background: white;
+      color: var(--texto);
+      font-weight: 650;
+    }
+
+    .button-primary {
+      background: var(--rojo);
+      color: white;
+      border-color: var(--rojo);
+    }
+
+    .button-primary:hover {
+      background: var(--rojo-oscuro);
+    }
+
+    .button-schedule {
+      width: 100%;
+      margin-top: 22px;
+      color: var(--rojo);
+      border-color: #f1b8bc;
+    }
+
+    .empty-state {
+      padding: 55px 12px;
+      text-align: center;
+      color: var(--texto-secundario);
+    }
+
+    .empty-state > i {
+      display: block;
+      margin-bottom: 16px;
+      font-size: 38px;
+      color: #d5d9df;
+    }
+
+    .empty-state strong {
+      display: block;
+      color: var(--texto);
+      margin-bottom: 8px;
+    }
+
+    .empty-state p {
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Resultados */
+
+    .days-strip {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--borde);
+      color: var(--texto-secundario);
+      font-size: 13px;
+    }
+
+    .days-strip strong {
+      margin-left: auto;
+      color: var(--texto);
+    }
+
+    .resultados-destacados {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .resultado-destacado {
+      min-width: 0;
+      padding: 18px;
+      border-radius: 12px;
+    }
+
+    .resultado-destacado span {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .resultado-destacado strong {
+      display: block;
+      font-size: clamp(22px, 3vw, 30px);
+      line-height: 1.2;
+      font-weight: 750;
+      font-variant-numeric: tabular-nums;
+      overflow-wrap: anywhere;
+    }
+
+    .resultado-cuota {
+      background: var(--rojo);
+      color: white;
+    }
+
+    .resultado-tcea {
+      background: var(--rojo-suave);
+    }
+
+    .resultado-tcea span {
+      color: var(--texto-secundario);
+    }
+
+    .resultado-tcea strong {
+      color: var(--rojo);
+    }
+
+    .resultado-lineas { margin: 0; }
+
+    .resultado-lineas > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      padding: 8px 0;
+    }
+
+    .resultado-lineas dt {
+      min-width: 0;
+      margin: 0;
+      color: var(--texto-secundario);
+      font-size: 13px;
+    }
+
+    .resultado-lineas dd {
+      margin: 0;
+      color: var(--texto);
+      font-size: 14px;
+      font-weight: 650;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      overflow-wrap: anywhere;
+    }
+
+    .resultado-lineas > .resultado-subtotal,
+    .resultado-lineas > .resultado-total {
+      margin-top: 6px;
+      padding-top: 14px;
+      border-top: 1px solid var(--borde);
+    }
+
+    .resultado-subtotal dt,
+    .resultado-total dt {
+      color: var(--texto);
+      font-weight: 700;
+    }
+
+    .resultado-total dd {
+      color: var(--rojo);
+      font-size: 19px;
+      font-weight: 750;
+    }
+
+    .detalle-resultados {
+      margin-top: 18px;
+      padding-top: 4px;
+      border-top: 1px solid var(--borde);
+    }
+
+    .detalle-resultados > summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 0;
+      font-size: 13px;
+      font-weight: 650;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .detalle-resultados > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .detalle-resultados > summary::marker {
+      content: "";
+    }
+
+    .detalle-resultados > summary > span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .detalle-flecha {
+      flex-shrink: 0;
+      color: var(--texto-secundario);
+    }
+
+    .detalle-resultados[open] > summary .detalle-flecha {
+      transform: rotate(180deg);
+    }
+
+    .detalle-resultados-contenido {
+      padding-bottom: 4px;
+    }
+
+    .cd-info-scroll {
+      width: 100%;
+      overflow-x: auto;
+      margin-top: 16px;
+    }
+
+    .cd-info-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .cd-info-table caption {
+      padding-bottom: 12px;
+      color: var(--texto-secundario);
+      font-size: 13px;
+      font-weight: 650;
+      text-align: left;
+    }
+
+    .cd-info-table th {
+      padding: 0 10px 10px;
+      border-bottom: 1px solid var(--borde);
+      color: var(--texto-secundario);
+      text-align: right;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .cd-info-table td {
+      padding: 12px 10px;
+      text-align: right;
+      white-space: nowrap;
+      border-bottom: 1px solid #edf0f3;
+    }
+
+    .cd-info-table th:first-child,
+    .cd-info-table td:first-child {
+      padding-left: 0;
+      text-align: left;
+    }
+
+    .cd-info-table th:last-child,
+    .cd-info-table td:last-child {
+      padding-right: 0;
+    }
+
+    .cd-info-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .resultados-aviso {
+      margin: 14px 0 0;
+      color: var(--texto-secundario);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* Montos CD: todo en una sola fila */
+
+    .montos-fieldset {
+      grid-column: 1 / -1;
+      min-width: 0;
+      margin: 0;
+      padding: 14px;
+      border: 1px solid var(--borde);
+      border-radius: 12px;
+      background: #fafbfc;
+    }
+
+    .montos-fieldset legend {
+      padding: 0 7px;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .montos-list {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .monto-row {
+      display: grid;
+
+      grid-template-columns:
+        minmax(90px, 140px)
+        80px
+        86px
+        64px
+        74px;
+
+      justify-content: space-between;
+      min-width: 450px;
+      gap: 8px;
+      align-items: end;
+      padding: 10px;
+      border: 1px solid var(--borde);
+      border-radius: 10px;
+      background: white;
+    }
+
+    .monto-row label {
+      font-size: 12px;
+      line-height: 16px;
+      white-space: nowrap;
+    }
+
+    .monto-row input,
+    .monto-row select {
+      padding-inline: 8px;
+    }
+
+    .monto-row .field input,
+    .monto-row .field select {
+      height: 42px;
+      min-height: 42px;
+    }
+
+    .monto-row-footer {
+      display: contents;
+    }
+
+    .totalidad-option {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 16px 42px;
+      gap: 7px;
+      align-items: center;
+      justify-items: center;
+      cursor: pointer;
+    }
+
+    .totalidad-option span {
+      grid-area: 1 / 1;
+      font-weight: 650;
+    }
+
+    .totalidad-option input {
+      grid-area: 2 / 1;
+      margin: 0;
+      padding: 0;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--rojo);
+    }
+
+    .totalidad-option.is-disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .monto-actions {
+      display: flex;
+      gap: 6px;
+      height: 42px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .row-button {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      border: 1px solid var(--borde);
+      border-radius: 8px;
+      background: white;
+      font-size: 17px;
+    }
+
+    .row-button-add {
+      background: var(--rojo-suave);
+      color: var(--rojo);
+    }
+
+    /* Cronograma */
+
+    .tables-stack {
+      margin-top: 24px;
+    }
+
+    .schedule-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .schedule-heading h3 {
+      margin: 0;
+    }
+
+    .schedule-heading span {
+      color: var(--texto-secundario);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .table-scroll {
+      max-height: 500px;
+      overflow: auto;
+      border: 1px solid var(--borde);
+      border-radius: 9px;
+    }
+
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .schedule-table th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: #f5f6f8;
+      padding: 13px 12px;
+      text-align: right;
+      border-bottom: 1px solid var(--borde);
+      white-space: nowrap;
+    }
+
+    .schedule-table td {
+      padding: 12px;
+      border-bottom: 1px solid #edf0f3;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .schedule-table th:nth-child(-n+3),
+    .schedule-table td:nth-child(-n+3) {
+      text-align: center;
+    }
+
+    .schedule-table tbody tr:hover {
+      background: #fff8f8;
+    }
+
+    footer {
+      padding: 20px;
+      text-align: center;
+      color: var(--texto-secundario);
+      border-top: 1px solid var(--borde);
+      font-size: 12px;
+    }
+
+    @media (max-width: 1050px) {
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .header-inner, main {
+        width: calc(100% - 28px);
+      }
+
+      .header-inner {
+        min-height: 72px;
+        gap: 8px;
+      }
+
+      h1 {
+        font-size: 18px;
+        gap: 6px;
+      }
+
+      .product-switch button {
+        padding: 9px 13px;
+      }
+
+      main {
+        padding: 18px 0;
+      }
+
+      .panel {
+        padding: 18px;
+      }
+
+      .fields-grid {
+        gap: 14px;
+      }
+
+      .field input,
+      .field select {
+        font-size: 16px;
+      }
+
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .montos-fieldset {
+        padding: 10px;
+      }
+
+      .resultado-destacado {
+        padding: 14px;
+      }
+
+      .resultado-lineas > div {
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>
+        <i class="bi bi-calculator" aria-hidden="true"></i>
+        Simulador PP/CD
+      </h1>
+
+      <nav class="product-switch" aria-label="Tipo de simulador">
+        <button
+          type="button"
+          id="boton-pp"
+          class="is-active"
+          aria-pressed="true"
+          onclick="cambiarProducto('PP')"
+        >
+          PP
+        </button>
+
+        <button
+          type="button"
+          id="boton-cd"
+          aria-pressed="false"
+          onclick="cambiarProducto('CD')"
+        >
+          CD
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="aplicacion"></main>
+
+  <footer>Validación 2026</footer>
+
+  <script>
+    "use strict";
+
+    let contadorFilasCD = 0;
+
+    const ESCALA_IMPORTES_CD = 1000000n;
+    const UNIDADES_POR_CENTIMO_CD = ESCALA_IMPORTES_CD / 100n;
+
+    const COSTO_CAPITAL = 0.2871;
+
+    const PRIMAS_SEGURO = {
+      vida: 3.7000,
+      desgravamen: 0.1995,
+      "desgravamen-devolucion": 0.2594,
+      "sin-seguro": 0,
+      endosado: 0
+    };
+
+    // =====================================================
+    // FORMULARIOS
+    // =====================================================
+
+    function crearPanel(producto) {
+      const esCD = producto === "CD";
+      const p = esCD ? "cd-" : "";
+
+      const opciones = [
+        ["seguro-desempleo", "Seguro de desempleo"],
+        ["estado-cuenta", "Envío de estado de cuenta"],
+        ["cuota-julio", "Cuota julio"],
+        ["cuota-diciembre", "Cuota diciembre"]
+      ];
+
+      return `
+        <section
+          id="panel-${producto.toLowerCase()}"
+          ${esCD ? "hidden" : ""}
+        >
+          <div class="workspace">
+            <form
+              id="${esCD ? "formulario-cd" : "formulario"}"
+              class="panel"
+              onsubmit="event.preventDefault(); ${esCD ? "simularCD" : "simular"}();"
+              onreset="${esCD ? "limpiarCD" : "limpiarResultados"}();"
+              oninput="limpiarSalida('${p}')"
+              onchange="limpiarSalida('${p}')"
+            >
+              <h2>Datos del préstamo · ${producto}</h2>
+
+              <p class="panel-description">
+                Ingresa los datos para realizar la simulación.
+              </p>
+
+              <div class="fields-grid">
+                <div class="field">
+                  <label for="${p}seguro">Tipo de seguro</label>
+
+                  <select id="${p}seguro">
+                    <option value="vida" selected>
+                      Seguro de vida
+                    </option>
+                    <option value="desgravamen">
+                      Seguro de desgravamen
+                    </option>
+                    <option value="desgravamen-devolucion">
+                      Seguro de desgravamen con devolución
+                    </option>
+                    <option value="sin-seguro">
+                      Sin seguro
+                    </option>
+                    <option value="endosado">
+                      Endosado
+                    </option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="${p}plazo">Plazo (meses)</label>
+
+                  <input
+                    id="${p}plazo"
+                    type="number"
+                    min="1"
+                    step="1"
+                    required
+                  >
+                </div>
+
+                <div class="field">
+                  <label for="${p}tea">TEA (%)</label>
+
+                  <input
+                    id="${p}tea"
+                    type="number"
+                    min="0"
+                    step="any"
+                    required
+                  >
+                </div>
+
+                ${esCD ? `
+                  <fieldset class="montos-fieldset">
+                    <legend>Montos</legend>
+                    <div id="cd-montos" class="montos-list"></div>
+                  </fieldset>
+                ` : `
+                  <div class="field">
+                    <label for="importe">Importe</label>
+
+                    <input
+                      id="importe"
+                      type="number"
+                      min="0.01"
+                      step="0.01"
+                      required
+                    >
+                  </div>
+                `}
+
+                <div class="field">
+                  <label for="${p}desembolso">
+                    Fecha de desembolso
+                  </label>
+
+                  <input
+                    id="${p}desembolso"
+                    type="date"
+                    lang="es-PE"
+                    required
+                    onchange="validarFechas('${p}')"
+                  >
+                </div>
+
+                <div class="field">
+                  <label for="${p}primer-pago">
+                    Fecha del primer pago
+                  </label>
+
+                  <input
+                    id="${p}primer-pago"
+                    type="date"
+                    lang="es-PE"
+                    required
+                    onchange="validarFechas('${p}')"
+                  >
+
+                  <small>
+                    Entre 30 y 60 días después del desembolso.
+                  </small>
+                </div>
+              </div>
+
+              <div class="options-grid">
+                ${opciones.map(([id, texto]) => `
+                  <label class="check-option">
+                    <input id="${p}${id}" type="checkbox">
+                    <span>${texto}</span>
+                  </label>
+                `).join("")}
+              </div>
+
+              <div class="form-actions">
+                <button class="button button-primary" type="submit">
+                  <i
+                    class="bi bi-calculator"
+                    aria-hidden="true"
+                  ></i>
+                  Simular
+                </button>
+
+                <button class="button" type="reset">
+                  <i
+                    class="bi bi-arrow-counterclockwise"
+                    aria-hidden="true"
+                  ></i>
+                  Limpiar
+                </button>
+              </div>
+            </form>
+
+            <section
+              class="panel"
+              aria-labelledby="${p}titulo-resultados"
+            >
+              <h2 id="${p}titulo-resultados">Resultados</h2>
+
+              <p class="panel-description">
+                Resumen de la simulación ${producto}.
+              </p>
+
+              <div id="${p}estado-vacio" class="empty-state">
+                <i
+                  class="bi bi-calculator"
+                  aria-hidden="true"
+                ></i>
+
+                <strong>Tu simulación comienza aquí</strong>
+                <p>Completa los datos y presiona Simular.</p>
+              </div>
+
+              <div
+                id="${p}resultados"
+                aria-live="polite"
+                hidden
+              ></div>
+
+              <button
+                type="button"
+                id="${p}boton-cronograma"
+                class="button button-schedule"
+                aria-controls="${p}tablas"
+                aria-expanded="false"
+                onclick="alternarCronograma('${p}')"
+                hidden
+              >
+                <i
+                  id="${p}icono-cronograma"
+                  class="bi bi-eye"
+                  aria-hidden="true"
+                ></i>
+
+                <span id="${p}texto-cronograma">
+                  Ver cronograma
+                </span>
+              </button>
+            </section>
+          </div>
+
+          <div
+            id="${p}tablas"
+            class="tables-stack"
+            hidden
+          ></div>
+        </section>
+      `;
+    }
+
+    function cambiarProducto(producto) {
+      for (const tipo of ["PP", "CD"]) {
+        const activo = tipo === producto;
+
+        document.getElementById(
+          "panel-" + tipo.toLowerCase()
+        ).hidden = !activo;
+
+        const boton = document.getElementById(
+          "boton-" + tipo.toLowerCase()
+        );
+
+        boton.classList.toggle("is-active", activo);
+        boton.setAttribute("aria-pressed", String(activo));
+      }
+    }
+
+    function establecerCronogramaVisible(mostrar, prefijo = "") {
+      document.getElementById(
+        prefijo + "tablas"
+      ).hidden = !mostrar;
+
+      document.getElementById(
+        prefijo + "boton-cronograma"
+      ).setAttribute("aria-expanded", String(mostrar));
+
+      document.getElementById(
+        prefijo + "texto-cronograma"
+      ).textContent = mostrar
+        ? "Ocultar cronograma"
+        : "Ver cronograma";
+
+      document.getElementById(
+        prefijo + "icono-cronograma"
+      ).className = mostrar
+        ? "bi bi-eye-slash"
+        : "bi bi-eye";
+    }
+
+    function alternarCronograma(prefijo = "") {
+      establecerCronogramaVisible(
+        document.getElementById(prefijo + "tablas").hidden,
+        prefijo
+      );
+    }
+
+    function limpiarSalida(prefijo = "") {
+      const resultados = document.getElementById(
+        prefijo + "resultados"
+      );
+
+      resultados.innerHTML = "";
+      resultados.hidden = true;
+
+      document.getElementById(
+        prefijo + "estado-vacio"
+      ).hidden = false;
+
+      document.getElementById(
+        prefijo + "tablas"
+      ).innerHTML = "";
+
+      establecerCronogramaVisible(false, prefijo);
+
+      document.getElementById(
+        prefijo + "boton-cronograma"
+      ).hidden = true;
+    }
+
+    function limpiarResultados() {
+      limpiarSalida();
+      establecerFechaDesembolsoActual();
+    }
+
+    function limpiarResultadosCD() {
+      limpiarSalida("cd-");
+    }
+
+    function limpiarCD() {
+      document.getElementById("cd-montos").replaceChildren();
+      agregarFilaCD(null, false);
+      establecerFechaDesembolsoActual("cd-");
+      limpiarResultadosCD();
+    }
+
+    // =====================================================
+    // FILAS CD
+    // =====================================================
+
+    function agregarFilaCD(boton = null, enfocar = true) {
+      const id = ++contadorFilasCD;
+
+      const fila = document.createElement("div");
+      fila.className = "monto-row";
+
+      fila.innerHTML = `
+        <div class="field">
+          <label for="cd-monto-${id}">Monto</label>
+
+          <input
+            id="cd-monto-${id}"
+            class="cd-monto"
+            name="cd_monto[]"
+            type="number"
+            min="0.01"
+            step="0.01"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label for="cd-tipo-${id}">Tipo</label>
+
+          <select
+            id="cd-tipo-${id}"
+            class="cd-tipo"
+            name="cd_tipo[]"
+            onchange="actualizarPorcentajeCD(this)"
+          >
+            <option value="PP">PP</option>
+            <option value="TC">TC</option>
+            <option value="CASH">CASH</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="cd-porcentaje-${id}">Porcentaje</label>
+
+          <select
+            id="cd-porcentaje-${id}"
+            class="cd-porcentaje"
+            name="cd_porcentaje[]"
+          >
+            <option value="2" selected>2%</option>
+            <option value="4">4%</option>
+          </select>
+        </div>
+
+        <div class="monto-row-footer">
+          <label
+            class="totalidad-option"
+            for="cd-totalidad-${id}"
+          >
+            <input
+              id="cd-totalidad-${id}"
+              class="cd-totalidad"
+              name="cd_totalidad[]"
+              type="checkbox"
+              checked
+            >
+
+            <span>Totalidad</span>
+          </label>
+
+          <div class="monto-actions">
+            <button
+              type="button"
+              class="row-button row-button-add"
+              title="Agregar monto"
+              aria-label="Agregar monto"
+              onclick="agregarFilaCD(this)"
+            >+</button>
+
+            <button
+              type="button"
+              class="row-button row-button-remove"
+              title="Eliminar monto"
+              aria-label="Eliminar monto"
+              onclick="eliminarFilaCD(this)"
+            >−</button>
+          </div>
+        </div>
+      `;
+
+      if (boton) {
+        boton.closest(".monto-row").after(fila);
+      } else {
+        document.getElementById("cd-montos").append(fila);
+      }
+
+      actualizarPorcentajeCD(
+        fila.querySelector(".cd-tipo")
+      );
+
+      actualizarBotonesEliminarCD();
+
+      if (enfocar) {
+        fila.querySelector(".cd-monto").focus();
+      }
+    }
+
+    function actualizarPorcentajeCD(selector) {
+      const fila = selector.closest(".monto-row");
+      const deshabilitado = selector.value !== "PP";
+
+      fila.querySelector(
+        ".cd-porcentaje"
+      ).disabled = deshabilitado;
+
+      fila.querySelector(
+        ".cd-totalidad"
+      ).disabled = deshabilitado;
+
+      fila.querySelector(
+        ".totalidad-option"
+      ).classList.toggle("is-disabled", deshabilitado);
+
+      limpiarResultadosCD();
+    }
+
+    function actualizarBotonesEliminarCD() {
+      const filas = document.querySelectorAll(
+        "#cd-montos .monto-row"
+      );
+
+      filas.forEach(fila => {
+        const boton = fila.querySelector(
+          ".row-button-remove"
+        );
+
+        boton.disabled = filas.length === 1;
+
+        boton.title = filas.length === 1
+          ? "Debe existir al menos una fila."
+          : "Eliminar monto";
+      });
+    }
+
+    function eliminarFilaCD(boton) {
+      if (
+        document.querySelectorAll(
+          "#cd-montos .monto-row"
+        ).length <= 1
+      ) {
+        return;
+      }
+
+      const fila = boton.closest(".monto-row");
+
+      const siguiente =
+        fila.nextElementSibling ||
+        fila.previousElementSibling;
+
+      fila.remove();
+
+      actualizarBotonesEliminarCD();
+      limpiarResultadosCD();
+
+      siguiente.querySelector(".cd-monto").focus();
+    }
+
+    // =====================================================
+    // PRECISIÓN DE IMPORTES CD
+    // =====================================================
+
+    function convertirACentimosCD(texto) {
+      const partes = String(texto).trim().match(
+        /^\+?(\d+(?:\.\d*)?|\.\d+)(?:[eE]([+-]?\d+))?$/
+      );
+
+      if (!partes) {
+        throw new Error("Ingresa un monto válido.");
+      }
+
+      const [entero, decimales = ""] =
+        partes[1].split(".");
+
+      const exponente = Number(partes[2] || "0");
+
+      if (
+        !Number.isInteger(exponente) ||
+        Math.abs(exponente) > 1000
+      ) {
+        throw new Error(
+          "El monto ingresado está fuera de rango."
+        );
+      }
+
+      const digitos = BigInt(
+        (entero || "0") + decimales
+      );
+
+      const escala =
+        2 + exponente - decimales.length;
+
+      if (escala >= 0) {
+        return digitos * 10n ** BigInt(escala);
+      }
+
+      const divisor = 10n ** BigInt(-escala);
+
+      if (digitos % divisor !== 0n) {
+        throw new Error(
+          "El monto ingresado debe tener como máximo dos decimales."
+        );
+      }
+
+      return digitos / divisor;
+    }
+
+    function formatearCentimosCD(centimos) {
+      const negativo = centimos < 0n;
+      const valor = negativo ? -centimos : centimos;
+
+      return (
+        `${negativo ? "-" : ""}${valor / 100n}.` +
+        String(valor % 100n).padStart(2, "0")
+      );
+    }
+
+    function mostrarImporteCD(unidades) {
+      return formatearCentimosCD(
+        unidades / UNIDADES_POR_CENTIMO_CD
+      );
+    }
+
+    function mostrarImporteExactoCD(unidades) {
+      const negativo = unidades < 0n;
+      const valor = negativo ? -unidades : unidades;
+
+      const decimales = String(
+        valor % ESCALA_IMPORTES_CD
+      )
+        .padStart(6, "0")
+        .replace(/0+$/, "")
+        .padEnd(2, "0");
+
+      return (
+        `${negativo ? "-" : ""}` +
+        `${valor / ESCALA_IMPORTES_CD}.` +
+        decimales
+      );
+    }
+
+    function maximoComunDivisorCD(a, b) {
+      while (b !== 0n) {
+        [a, b] = [b, a % b];
+      }
+
+      return a;
+    }
+
+    // =====================================================
+    // PROVISIÓN DE LOS PP DENTRO DE CD
+    // =====================================================
+
+    function calcularMontoPPCD(
+      montoIngresado,
+      porcentaje,
+      conCash = false,
+      totalidad = true
+    ) {
+      if (montoIngresado <= 0n) {
+        throw new Error(
+          "El monto debe ser mayor que cero."
+        );
+      }
+
+      if (
+        porcentaje !== "2" &&
+        porcentaje !== "4"
+      ) {
+        throw new Error(
+          "Selecciona un porcentaje de 2% o 4%."
+        );
+      }
+
+      const tasa = BigInt(porcentaje);
+
+      /*
+        Totalidad desmarcada:
+        el monto ingresado es el importe sin provisión.
+        CASH no modifica esta fórmula.
+      */
+      if (!totalidad) {
+        const montoBase =
+          montoIngresado * UNIDADES_POR_CENTIMO_CD;
+
+        const montoPorcentaje =
+          montoBase * tasa / 100n;
+
+        return {
+          montoIngresado,
+          porcentaje,
+          conCash,
+          totalidad,
+          montoBase,
+          montoPorcentaje,
+          total: montoBase + montoPorcentaje,
+          disponibleInicial: 0n,
+          ajustePrecision: false
+        };
+      }
+
+      /*
+        Totalidad marcada:
+        se conserva el cálculo anterior.
+      */
+      const pasoBase =
+        100n / maximoComunDivisorCD(tasa, 100n);
+
+      const pasoTotal =
+        pasoBase * (100n + tasa) / 100n;
+
+      const baseOriginal =
+        (montoIngresado / pasoTotal) * pasoBase;
+
+      const totalOriginal =
+        baseOriginal +
+        baseOriginal * tasa / 100n;
+
+      const disponibleInicial =
+        montoIngresado - totalOriginal;
+
+      const baseCentimos =
+        baseOriginal +
+        (conCash ? disponibleInicial : 0n);
+
+      let montoBase =
+        baseCentimos * UNIDADES_POR_CENTIMO_CD;
+
+      let montoPorcentaje =
+        montoBase * tasa / 100n;
+
+      let total =
+        montoBase + montoPorcentaje;
+
+      let ajustePrecision = false;
+
+      /*
+        Con CASH y Totalidad marcada,
+        el total truncado a dos decimales
+        debe coincidir con el monto ingresado.
+      */
+      if (
+        conCash &&
+        total / UNIDADES_POR_CENTIMO_CD !==
+          montoIngresado
+      ) {
+        const baseMilesimas =
+          (
+            (montoIngresado + 1n) * 1000n - 1n
+          ) / (100n + tasa);
+
+        montoBase = baseMilesimas * 1000n;
+        montoPorcentaje = montoBase * tasa / 100n;
+        total = montoBase + montoPorcentaje;
+        ajustePrecision = true;
+      }
+
+      return {
+        montoIngresado,
+        porcentaje,
+        conCash,
+        totalidad,
+        montoBase,
+        montoPorcentaje,
+        total,
+        disponibleInicial,
+        ajustePrecision
+      };
+    }
+
+    function leerMontosCD() {
+      const filas = Array.from(
+        document.querySelectorAll(
+          "#cd-montos .monto-row"
+        )
+      );
+
+      const montos = [];
+
+      for (let i = 0; i < filas.length; i++) {
+        const fila = filas[i];
+        const campo = fila.querySelector(".cd-monto");
+
+        if (!campo.reportValidity()) {
+          return null;
+        }
+
+        try {
+          const centimos =
+            convertirACentimosCD(campo.value);
+
+          if (centimos <= 0n) {
+            throw new Error(
+              "El monto debe ser mayor que cero."
+            );
+          }
+
+          montos.push({
+            tipo:
+              fila.querySelector(".cd-tipo").value,
+
+            porcentaje:
+              fila.querySelector(".cd-porcentaje").value,
+
+            totalidad:
+              fila.querySelector(".cd-totalidad").checked,
+
+            centimos
+          });
+        } catch (error) {
+          alert(`Monto ${i + 1}: ${error.message}`);
+          campo.focus();
+          return null;
+        }
+      }
+
+      return montos;
+    }
+
+    function calcularImportesCD(montos) {
+      const conCash = montos.some(
+        monto => monto.tipo === "CASH"
+      );
+
+      const detallesPP = [];
+
+      let totalComprarPP = 0n;
+      let totalTC = 0n;
+      let totalCash = 0n;
+
+      for (const monto of montos) {
+        if (monto.tipo === "PP") {
+          const detalle = calcularMontoPPCD(
+            monto.centimos,
+            monto.porcentaje,
+            conCash,
+            monto.totalidad
+          );
+
+          detallesPP.push(detalle);
+
+          totalComprarPP +=
+            detalle.total / UNIDADES_POR_CENTIMO_CD;
+
+        } else if (monto.tipo === "TC") {
+          totalTC += monto.centimos;
+
+        } else if (monto.tipo === "CASH") {
+          totalCash += monto.centimos;
+
+        } else {
+          throw new Error(
+            "Se encontró un tipo de monto no válido."
+          );
+        }
+      }
+
+      const importeTotalCD =
+        totalComprarPP + totalTC;
+
+      const importePrestamo =
+        importeTotalCD + totalCash;
+
+      if (importePrestamo <= 0n) {
+        throw new Error(
+          "El importe para el préstamo debe ser mayor que cero."
+        );
+      }
+
+      if (
+        importePrestamo >
+        BigInt(Number.MAX_SAFE_INTEGER)
+      ) {
+        throw new Error(
+          "El importe total es demasiado grande para calcular el préstamo."
+        );
+      }
+
+      return {
+        conCash,
+        detallesPP,
+        totalComprarPP,
+        totalTC,
+        totalCash,
+        importeTotalCD,
+        importePrestamo
+      };
+    }
+
+    // =====================================================
+    // FECHAS Y VALIDACIÓN
+    // =====================================================
+
+    function establecerFechaDesembolsoActual(prefijo = "") {
+      const hoy = new Date();
+
+      const valor = [
+        String(hoy.getFullYear()).padStart(4, "0"),
+        String(hoy.getMonth() + 1).padStart(2, "0"),
+        String(hoy.getDate()).padStart(2, "0")
+      ].join("-");
+
+      const campo = document.getElementById(
+        prefijo + "desembolso"
+      );
+
+      campo.defaultValue = valor;
+      campo.value = valor;
+    }
+
+    function calcularDias(desde, hasta) {
+      const a = Date.UTC(
+        desde.getFullYear(),
+        desde.getMonth(),
+        desde.getDate()
+      );
+
+      const b = Date.UTC(
+        hasta.getFullYear(),
+        hasta.getMonth(),
+        hasta.getDate()
+      );
+
+      return (b - a) / 86400000;
+    }
+
+    function validarFechas(prefijo = "") {
+      const desembolso = document.getElementById(
+        prefijo + "desembolso"
+      ).value;
+
+      const primerPago = document.getElementById(
+        prefijo + "primer-pago"
+      ).value;
+
+      if (!desembolso || !primerPago) {
+        return null;
+      }
+
+      const dias = calcularDias(
+        new Date(desembolso + "T00:00:00"),
+        new Date(primerPago + "T00:00:00")
+      );
+
+      if (!Number.isFinite(dias)) {
+        alert(
+          "Fechas inválidas.\n\n" +
+          "No se pudieron interpretar las fechas ingresadas."
+        );
+
+        return null;
+      }
+
+      if (dias >= 30 && dias <= 60) {
+        return dias;
+      }
+
+      let motivo;
+
+      if (dias < 0) {
+        motivo =
+          "La fecha del primer pago es anterior al desembolso.";
+
+      } else if (dias === 0) {
+        motivo = "Las dos fechas son iguales.";
+
+      } else if (dias < 30) {
+        motivo =
+          "El primer pago debe ser al menos 30 días después del desembolso.";
+
+      } else {
+        motivo =
+          "El primer pago no puede superar los 60 días desde el desembolso.";
+      }
+
+      alert(
+        `Fechas inválidas.\n\n${motivo}\n\n` +
+        `Diferencia ingresada: ${dias} días.\n` +
+        "Rango permitido: de 30 a 60 días."
+      );
+
+      return null;
+    }
+
+    function leerDatosPrestamo(prefijo = "") {
+      for (
+        const id of [
+          "tea",
+          "plazo",
+          "desembolso",
+          "primer-pago"
+        ]
+      ) {
+        if (
+          !document.getElementById(
+            prefijo + id
+          ).reportValidity()
+        ) {
+          return null;
+        }
+      }
+
+      const cantidadDias =
+        validarFechas(prefijo);
+
+      if (cantidadDias === null) {
+        return null;
+      }
+
+      return {
+        tipoSeguro:
+          document.getElementById(
+            prefijo + "seguro"
+          ).value,
+
+        tea:
+          Number(
+            document.getElementById(
+              prefijo + "tea"
+            ).value
+          ) / 100,
+
+        cantidadCuotas:
+          Number(
+            document.getElementById(
+              prefijo + "plazo"
+            ).value
+          ),
+
+        fechaDesembolso:
+          document.getElementById(
+            prefijo + "desembolso"
+          ).value,
+
+        fechaPrimerPago:
+          document.getElementById(
+            prefijo + "primer-pago"
+          ).value,
+
+        cantidadDias,
+
+        tasaSeguroDesempleo:
+          document.getElementById(
+            prefijo + "seguro-desempleo"
+          ).checked ? 0.04 : 0,
+
+        portes:
+          document.getElementById(
+            prefijo + "estado-cuenta"
+          ).checked ? 11 : 0,
+
+        cuotaJulioActiva:
+          document.getElementById(
+            prefijo + "cuota-julio"
+          ).checked,
+
+        cuotaDiciembreActiva:
+          document.getElementById(
+            prefijo + "cuota-diciembre"
+          ).checked
+      };
+    }
+
+    function sumarUnMes(fecha) {
+      const siguiente = new Date(fecha);
+      const dia = siguiente.getDate();
+
+      siguiente.setDate(1);
+      siguiente.setMonth(
+        siguiente.getMonth() + 1
+      );
+
+      const ultimoDia = new Date(
+        siguiente.getFullYear(),
+        siguiente.getMonth() + 1,
+        0
+      ).getDate();
+
+      siguiente.setDate(
+        Math.min(dia, ultimoDia)
+      );
+
+      return siguiente;
+    }
+
+    function crearCalendario(datos) {
+      const filas = [];
+
+      let fechaPago = new Date(
+        datos.fechaPrimerPago + "T00:00:00"
+      );
+
+      let anterior = new Date(
+        datos.fechaDesembolso + "T00:00:00"
+      );
+
+      let diasAcumulados = 0;
+
+      for (
+        let numero = 1;
+        numero <= datos.cantidadCuotas;
+        numero++
+      ) {
+        const fechaPagoPrincipal =
+          new Date(fechaPago);
+
+        if (fechaPagoPrincipal.getDay() === 0) {
+          fechaPagoPrincipal.setDate(
+            fechaPagoPrincipal.getDate() + 1
+          );
+        }
+
+        const dias = calcularDias(
+          anterior,
+          fechaPagoPrincipal
+        );
+
+        diasAcumulados += dias;
+
+        filas.push({
+          numero,
+          fechaPago: new Date(fechaPago),
+          fechaPagoPrincipal,
+          dias,
+          diasAcumulados,
+          saldoInicial: 0,
+          amortizacion: 0,
+          interes: 0,
+          segDesgravamen: 0,
+          portes: 0,
+          cuotaConstante: 0,
+          saldoFinal: 0,
+          factor1: 0,
+          factor2: 0
+        });
+
+        anterior = fechaPagoPrincipal;
+        fechaPago = sumarUnMes(fechaPago);
+      }
+
+      return filas;
+    }
+
+    function esCuotaDoble(fecha, datos) {
+      const mes = fecha.getMonth() + 1;
+
+      return (
+        (mes === 7 && datos.cuotaJulioActiva) ||
+        (mes === 12 && datos.cuotaDiciembreActiva)
+      );
+    }
+
+    // =====================================================
+    // CÁLCULO DE PRIMA
+    // =====================================================
+
+    function calcularPrima(datos) {
+      const filas = crearCalendario(datos);
+
+      let sumaFactor1 = 0;
+      let sumaFactor2 = 0;
+
+      for (const fila of filas) {
+        const denominador = Math.pow(
+          1 + datos.teaTotalPrima,
+          fila.diasAcumulados / 360
+        );
+
+        fila.factor1 = (
+          esCuotaDoble(
+            fila.fechaPagoPrincipal,
+            datos
+          ) ? 2 : 1
+        ) / denominador;
+
+        fila.factor2 = 1 / denominador;
+
+        sumaFactor1 += fila.factor1;
+        sumaFactor2 += fila.factor2;
+      }
+
+      const cuotaPrima =
+        datos.importe / sumaFactor1;
+
+      let saldo = datos.importe;
+      let VPN = 0;
+
+      filas.forEach((fila, indice) => {
+        fila.saldoInicial = saldo;
+
+        fila.interes = (
+          Math.pow(
+            1 + datos.tea,
+            fila.dias / 360
+          ) - 1
+        ) * saldo;
+
+        fila.segDesgravamen = (
+          Math.pow(
+            1 + datos.tasaSeguroPrima,
+            fila.dias / 30
+          ) - 1
+        ) * saldo;
+
+        fila.cuotaConstante =
+          cuotaPrima * (
+            esCuotaDoble(
+              fila.fechaPagoPrincipal,
+              datos
+            ) ? 2 : 1
+          );
+
+        if (indice === filas.length - 1) {
+          fila.cuotaConstante =
+            saldo +
+            fila.interes +
+            fila.segDesgravamen;
+        }
+
+        fila.amortizacion =
+          fila.cuotaConstante -
+          fila.segDesgravamen -
+          fila.interes;
+
+        fila.saldoFinal =
+          saldo - fila.amortizacion;
+
+        saldo = fila.saldoFinal;
+
+        VPN += fila.segDesgravamen / Math.pow(
+          1 + datos.tasaCostoCapital,
+          fila.numero
+        );
+      });
+
+      return {
+        filas,
+        sumaFactor1,
+        sumaFactor2,
+        cuotaPrima,
+        VPN
+      };
+    }
+
+    // =====================================================
+    // CÁLCULO PRINCIPAL
+    // =====================================================
+
+    function calcularPrincipal(datos) {
+      const filas = crearCalendario(datos);
+
+      let sumaFactor1 = 0;
+      let sumaFactor2 = 0;
+
+      for (const fila of filas) {
+        const denominador = Math.pow(
+          1 + datos.tea,
+          fila.diasAcumulados / 360
+        );
+
+        fila.factor1 = (
+          esCuotaDoble(
+            fila.fechaPago,
+            datos
+          ) ? 2 : 1
+        ) / denominador;
+
+        fila.factor2 = 1 / denominador;
+
+        sumaFactor1 += fila.factor1;
+        sumaFactor2 += fila.factor2;
+      }
+
+      const cuotaAPagar = (
+        datos.montoTotalAFinanciar +
+        datos.portes * sumaFactor2
+      ) / sumaFactor1;
+
+      let saldo =
+        datos.montoTotalAFinanciar;
+
+      filas.forEach((fila, indice) => {
+        fila.saldoInicial = saldo;
+
+        fila.interes = (
+          Math.pow(
+            1 + datos.tea,
+            fila.dias / 360
+          ) - 1
+        ) * saldo;
+
+        fila.portes = datos.portes;
+
+        fila.cuotaConstante =
+          cuotaAPagar * (
+            esCuotaDoble(
+              fila.fechaPago,
+              datos
+            ) ? 2 : 1
+          );
+
+        if (indice === filas.length - 1) {
+          fila.cuotaConstante =
+            saldo +
+            fila.interes +
+            fila.portes;
+        }
+
+        fila.amortizacion =
+          fila.cuotaConstante -
+          fila.portes -
+          fila.interes;
+
+        fila.saldoFinal =
+          saldo - fila.amortizacion;
+
+        saldo = fila.saldoFinal;
+      });
+
+      return {
+        filas,
+        sumaFactor1,
+        sumaFactor2,
+        cuotaAPagar
+      };
+    }
+
+    function obtenerPorcentajePrima(tipo, VPN, importe) {
+      if (tipo === "vida") {
+        return 0.037;
+      }
+
+      if (
+        tipo === "endosado" ||
+        tipo === "sin-seguro"
+      ) {
+        return 0;
+      }
+
+      return VPN / importe;
+    }
+
+    // =====================================================
+    // VECTOR I Y TCEA
+    // =====================================================
+
+    function redondearACentimos(valor) {
+      const [base, exponente = "0"] =
+        Math.abs(valor).toString().split("e");
+
+      const desplazado = Number(
+        base + "e" + (Number(exponente) + 2)
+      );
+
+      return (
+        Math.sign(valor) *
+        Math.round(desplazado)
+      );
+    }
+
+    function calcularVectorI(filasPrincipal, tcea) {
+      const filas = filasPrincipal.map(fila => {
+        const cuota =
+          fila.amortizacion +
+          fila.interes +
+          fila.portes;
+
+        const diasAcumulados =
+          fila.diasAcumulados;
+
+        const factor = Math.pow(
+          1 + tcea,
+          diasAcumulados / 360
+        );
+
+        const calculoVACentimos =
+          redondearACentimos(cuota / factor);
+
+        return {
+          cuota,
+          diasAcumulados,
+          factor,
+          calculoVACentimos,
+          calculoVA: calculoVACentimos / 100
+        };
+      });
+
+      const sumaVACentimos = filas.reduce(
+        (suma, fila) =>
+          suma + fila.calculoVACentimos,
+        0
+      );
+
+      return {
+        filas,
+        sumaVACentimos,
+        sumaVA: sumaVACentimos / 100
+      };
+    }
+
+    function calcularTCEA(importe, filasPrincipal) {
+      const objetivo =
+        redondearACentimos(importe);
+
+      function evaluar(tcea) {
+        const vector = calcularVectorI(
+          filasPrincipal,
+          tcea
+        );
+
+        return {
+          tcea,
+          ...vector,
+          diferenciaCentimos:
+            vector.sumaVACentimos - objetivo
+        };
+      }
+
+      let inferior = 0;
+      let superior = 1;
+      let mejor = evaluar(inferior);
+
+      if (mejor.diferenciaCentimos <= 0) {
+        return mejor;
+      }
+
+      let extremo = evaluar(superior);
+
+      for (
+        let i = 0;
+        extremo.diferenciaCentimos > 0 && i < 100;
+        i++
+      ) {
+        superior = superior * 2 + 1;
+        extremo = evaluar(superior);
+      }
+
+      if (extremo.diferenciaCentimos > 0) {
+        throw new Error(
+          "No se pudo encontrar un intervalo para calcular la TCEA."
+        );
+      }
+
+      if (
+        Math.abs(extremo.diferenciaCentimos) <
+        Math.abs(mejor.diferenciaCentimos)
+      ) {
+        mejor = extremo;
+      }
+
+      if (extremo.diferenciaCentimos === 0) {
+        return extremo;
+      }
+
+      for (let i = 0; i < 200; i++) {
+        const medio =
+          (inferior + superior) / 2;
+
+        if (
+          medio === inferior ||
+          medio === superior
+        ) {
+          break;
+        }
+
+        const resultado = evaluar(medio);
+
+        if (
+          Math.abs(resultado.diferenciaCentimos) <
+          Math.abs(mejor.diferenciaCentimos)
+        ) {
+          mejor = resultado;
+        }
+
+        if (resultado.diferenciaCentimos === 0) {
+          return resultado;
+        }
+
+        if (resultado.diferenciaCentimos > 0) {
+          inferior = medio;
+        } else {
+          superior = medio;
+        }
+      }
+
+      return mejor;
+    }
+
+    // =====================================================
+    // MOTOR COMPARTIDO PP / CD
+    // =====================================================
+
+    function calcularPrestamo(datos) {
+      if (
+        !Number.isFinite(datos.importe) ||
+        datos.importe <= 0 ||
+        !Number.isFinite(datos.tea) ||
+        datos.tea < 0 ||
+        !Number.isSafeInteger(datos.cantidadCuotas) ||
+        datos.cantidadCuotas < 1
+      ) {
+        throw new Error(
+          "Revisa el importe, la TEA y el plazo ingresados."
+        );
+      }
+
+      const seguroPrima =
+        PRIMAS_SEGURO[datos.tipoSeguro];
+
+      const costoCapital = COSTO_CAPITAL;
+
+      const tasaSeguroPrima =
+        seguroPrima / 100;
+
+      const tasaCostoCapital =
+        costoCapital / 100;
+
+      const teaTotalPrima = Math.pow(
+        1 + (
+          (
+            Math.pow(
+              1 + datos.tea,
+              30 / 360
+            ) - 1
+          ) + tasaSeguroPrima
+        ),
+        12
+      ) - 1;
+
+      const datosCalculo = {
+        ...datos,
+        tasaSeguroPrima,
+        tasaCostoCapital,
+        teaTotalPrima
+      };
+
+      const resultadoPrima =
+        calcularPrima(datosCalculo);
+
+      const VPN = resultadoPrima.VPN;
+
+      const porcentajePrima =
+        obtenerPorcentajePrima(
+          datos.tipoSeguro,
+          VPN,
+          datos.importe
+        );
+
+      const seguro =
+        porcentajePrima * datos.importe;
+
+      const baseFinanciamiento =
+        datos.importe + seguro;
+
+      const montoSeguroDesempleo =
+        baseFinanciamiento *
+        datos.tasaSeguroDesempleo;
+
+      const montoTotalAFinanciar =
+        baseFinanciamiento +
+        montoSeguroDesempleo;
+
+      const resultadoPrincipal =
+        calcularPrincipal({
+          ...datosCalculo,
+          montoTotalAFinanciar
+        });
+
+      const cuotaAPagar =
+        resultadoPrincipal.cuotaAPagar;
+
+      if (
+        ![
+          porcentajePrima,
+          seguro,
+          montoSeguroDesempleo,
+          montoTotalAFinanciar,
+          cuotaAPagar
+        ].every(Number.isFinite)
+      ) {
+        throw new Error(
+          "Los datos superan el rango de cálculo. " +
+          "Revisa la TEA, el importe y el plazo."
+        );
+      }
+
+      const resultadoVector =
+        calcularTCEA(
+          datos.importe,
+          resultadoPrincipal.filas
+        );
+
+      return {
+        ...datosCalculo,
+        seguroPrima,
+        costoCapital,
+        VPN,
+        porcentajePrima,
+        seguro,
+        montoSeguroDesempleo,
+        montoTotalAFinanciar,
+        cuotaAPagar,
+        TCEA: resultadoVector.tcea,
+        resultadoPrima,
+        resultadoPrincipal,
+        resultadoVector
+      };
+    }
+
+    function simular() {
+      const campo =
+        document.getElementById("importe");
+
+      if (!campo.reportValidity()) {
+        return;
+      }
+
+      const datos = leerDatosPrestamo();
+
+      if (!datos) {
+        return;
+      }
+
+      try {
+        const resultado = calcularPrestamo({
+          ...datos,
+          importe: Number(campo.value)
+        });
+
+        mostrarSimulacion(resultado);
+        registrarResultadosPrestamo(resultado, "PP");
+
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    function simularCD() {
+      limpiarResultadosCD();
+
+      const datos =
+        leerDatosPrestamo("cd-");
+
+      if (!datos) {
+        return;
+      }
+
+      const montos = leerMontosCD();
+
+      if (!montos) {
+        return;
+      }
+
+      try {
+        const importes =
+          calcularImportesCD(montos);
+
+        const importe = Number(
+          formatearCentimosCD(
+            importes.importePrestamo
+          )
+        );
+
+        const resultado = calcularPrestamo({
+          ...datos,
+          importe
+        });
+
+        mostrarSimulacion(
+          resultado,
+          "cd-",
+          importes
+        );
+
+        registrarImportesCD(importes);
+        registrarResultadosPrestamo(resultado, "CD");
+
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    // =====================================================
+    // PRESENTACIÓN DE RESULTADOS
+    // =====================================================
+
+    function crearCantidadDiasHTML(dias) {
+      return `
+        <div class="days-strip">
+          <i
+            class="bi bi-calendar3"
+            aria-hidden="true"
+          ></i>
+
+          <span>Cantidad de días</span>
+          <strong>${dias}</strong>
+        </div>
+      `;
+    }
+
+    function crearResumenPrestamoHTML(
+      resultado,
+      importesCD = null
+    ) {
+      return `
+        <div class="resultados-destacados">
+          <div class="resultado-destacado resultado-cuota">
+            <span>Cuota a pagar</span>
+            <strong>${resultado.cuotaAPagar.toFixed(2)}</strong>
+          </div>
+
+          <div class="resultado-destacado resultado-tcea">
+            <span>TCEA</span>
+            <strong>${(resultado.TCEA * 100).toFixed(2)}%</strong>
+          </div>
+        </div>
+
+        <dl class="resultado-lineas">
+          ${importesCD ? `
+            <div>
+              <dt>Importe para el préstamo</dt>
+
+              <dd>
+                ${formatearCentimosCD(
+                  importesCD.importePrestamo
+                )}
+              </dd>
+            </div>
+          ` : ""}
+
+          <div>
+            <dt>% Prima</dt>
+
+            <dd>
+              ${(resultado.porcentajePrima * 100).toFixed(4)}%
+            </dd>
+          </div>
+
+          <div>
+            <dt>Seguro</dt>
+            <dd>${resultado.seguro.toFixed(2)}</dd>
+          </div>
+
+          <div>
+            <dt>Seguro de desempleo</dt>
+            <dd>${resultado.montoSeguroDesempleo.toFixed(2)}</dd>
+          </div>
+
+          <div class="resultado-total">
+            <dt>Monto total a financiar</dt>
+            <dd>${resultado.montoTotalAFinanciar.toFixed(2)}</dd>
+          </div>
+        </dl>
+
+        ${
+          resultado.resultadoVector.diferenciaCentimos !== 0
+            ? `
+              <p class="resultados-aviso">
+                La suma de VA redondeados difiere del importe en
+                ${(
+                  Math.abs(
+                    resultado.resultadoVector.diferenciaCentimos
+                  ) / 100
+                ).toFixed(2)}.
+                La TCEA mostrada es una aproximación.
+              </p>
+            `
+            : ""
+        }
+      `;
+    }
+
+    function crearDesgloseCD(importes) {
+      const mostrarPP =
+        importes.detallesPP.length > 0;
+
+      const mostrarTC =
+        importes.totalTC > 0n;
+
+      return `
+        <details class="detalle-resultados">
+          <summary>
+            <span>
+              <i
+                class="bi bi-list-ul"
+                aria-hidden="true"
+              ></i>
+
+              Composición del importe
+            </span>
+
+            <i
+              class="bi bi-chevron-down detalle-flecha"
+              aria-hidden="true"
+            ></i>
+          </summary>
+
+          <div class="detalle-resultados-contenido">
+            <dl class="resultado-lineas">
+              ${mostrarPP ? `
+                <div>
+                  <dt>Total a comprar (PP)</dt>
+
+                  <dd>
+                    ${formatearCentimosCD(
+                      importes.totalComprarPP
+                    )}
+                  </dd>
+                </div>
+              ` : ""}
+
+              ${mostrarTC ? `
+                <div>
+                  <dt>Total TC</dt>
+
+                  <dd>
+                    ${formatearCentimosCD(
+                      importes.totalTC
+                    )}
+                  </dd>
+                </div>
+              ` : ""}
+
+              <div class="resultado-subtotal">
+                <dt>Importe total CD</dt>
+
+                <dd>
+                  ${formatearCentimosCD(
+                    importes.importeTotalCD
+                  )}
+                </dd>
+              </div>
+
+              ${importes.conCash ? `
+                <div>
+                  <dt>CASH</dt>
+
+                  <dd>
+                    ${formatearCentimosCD(
+                      importes.totalCash
+                    )}
+                  </dd>
+                </div>
+              ` : ""}
+            </dl>
+
+            ${mostrarPP ? `
+              <div
+                class="cd-info-scroll"
+                tabindex="0"
+                role="region"
+                aria-label="Detalle de montos PP"
+              >
+                <table class="cd-info-table">
+                  <caption>Detalle de PP</caption>
+
+                  <thead>
+                    <tr>
+                      <th scope="col">Importe sin provisión</th>
+                      <th scope="col">Provisión</th>
+                      <th scope="col">Total a comprar</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    ${importes.detallesPP.map(detalle => `
+                      <tr>
+                        <td>
+                          ${mostrarImporteCD(
+                            detalle.montoBase
+                          )}
+                        </td>
+
+                        <td>
+                          ${mostrarImporteCD(
+                            detalle.montoPorcentaje
+                          )}
+                        </td>
+
+                        <td>
+                          ${mostrarImporteCD(
+                            detalle.total
+                          )}
+                        </td>
+                      </tr>
+                    `).join("")}
+                  </tbody>
+                </table>
+              </div>
+            ` : ""}
+          </div>
+        </details>
+      `;
+    }
+
+    // =====================================================
+    // CRONOGRAMA
+    // =====================================================
+
+    function formatearFecha(fecha) {
+      return [
+        String(fecha.getDate()).padStart(2, "0"),
+        String(fecha.getMonth() + 1).padStart(2, "0"),
+        String(fecha.getFullYear()).padStart(4, "0")
+      ].join("/");
+    }
+
+    function mostrarDosDecimales(valor) {
+      const texto = valor.toFixed(2);
+
+      return texto === "-0.00"
+        ? "0.00"
+        : texto;
+    }
+
+    function crearCronograma(filas, prefijo = "") {
+      return `
+        <section
+          class="panel"
+          aria-labelledby="${prefijo}titulo-cronograma"
+        >
+          <div class="schedule-heading">
+            <h3 id="${prefijo}titulo-cronograma">
+              <i
+                class="bi bi-calendar-check"
+                aria-hidden="true"
+              ></i>
+
+              Cronograma de pagos
+            </h3>
+
+            <span>${filas.length} cuotas</span>
+          </div>
+
+          <div
+            class="table-scroll"
+            tabindex="0"
+            role="region"
+            aria-label="Cronograma de pagos"
+          >
+            <table
+              id="${prefijo}tabla-principal"
+              class="schedule-table"
+            >
+              <thead>
+                <tr>
+                  <th scope="col">N° de cuotas</th>
+                  <th scope="col">Fecha de pago</th>
+                  <th scope="col">Fecha de pago principal</th>
+                  <th scope="col">Días</th>
+                  <th scope="col">Días acumulados</th>
+                  <th scope="col">Saldo inicial</th>
+                  <th scope="col">Amortización</th>
+                  <th scope="col">Interés</th>
+                  <th scope="col">Portes</th>
+                  <th scope="col">Cuota constante</th>
+                  <th scope="col">Saldo final</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                ${filas.map(fila => `
+                  <tr>
+                    <td>${fila.numero}</td>
+
+                    <td>
+                      ${formatearFecha(fila.fechaPago)}
+                    </td>
+
+                    <td>
+                      ${formatearFecha(fila.fechaPagoPrincipal)}
+                    </td>
+
+                    <td>${fila.dias}</td>
+                    <td>${fila.diasAcumulados}</td>
+
+                    ${[
+                      "saldoInicial",
+                      "amortizacion",
+                      "interes",
+                      "portes",
+                      "cuotaConstante",
+                      "saldoFinal"
+                    ].map(clave => `
+                      <td>
+                        ${mostrarDosDecimales(fila[clave])}
+                      </td>
+                    `).join("")}
+                  </tr>
+                `).join("")}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      `;
+    }
+
+    function mostrarSimulacion(
+      resultado,
+      prefijo = "",
+      importesCD = null
+    ) {
+      const contenedor = document.getElementById(
+        prefijo + "resultados"
+      );
+
+      contenedor.innerHTML = `
+        ${crearCantidadDiasHTML(
+          resultado.cantidadDias
+        )}
+
+        ${crearResumenPrestamoHTML(
+          resultado,
+          importesCD
+        )}
+
+        ${importesCD ? crearDesgloseCD(importesCD) : ""}
+      `;
+
+      document.getElementById(
+        prefijo + "estado-vacio"
+      ).hidden = true;
+
+      contenedor.hidden = false;
+
+      document.getElementById(
+        prefijo + "tablas"
+      ).innerHTML = crearCronograma(
+        resultado.resultadoPrincipal.filas,
+        prefijo
+      );
+
+      establecerCronogramaVisible(false, prefijo);
+
+      document.getElementById(
+        prefijo + "boton-cronograma"
+      ).hidden = false;
+    }
+
+    // =====================================================
+    // CONSOLA
+    // =====================================================
+
+    function registrarImportesCD(importes) {
+      console.group("CD · Importes de la operación");
+
+      if (importes.detallesPP.length) {
+        console.table(
+          importes.detallesPP.map(detalle => ({
+            "Monto ingresado":
+              formatearCentimosCD(
+                detalle.montoIngresado
+              ),
+
+            "Porcentaje":
+              detalle.porcentaje + "%",
+
+            "Totalidad":
+              detalle.totalidad ? "Sí" : "No",
+
+            "Con CASH":
+              detalle.conCash ? "Sí" : "No",
+
+            "Importe sin provisión":
+              mostrarImporteExactoCD(
+                detalle.montoBase
+              ),
+
+            "Provisión":
+              mostrarImporteExactoCD(
+                detalle.montoPorcentaje
+              ),
+
+            "Total interno":
+              mostrarImporteExactoCD(
+                detalle.total
+              ),
+
+            "Total a comprar utilizado":
+              mostrarImporteCD(
+                detalle.total
+              )
+          }))
+        );
+
+        console.log(
+          "Total a comprar (PP):",
+          formatearCentimosCD(
+            importes.totalComprarPP
+          )
+        );
+      }
+
+      if (importes.totalTC > 0n) {
+        console.log(
+          "Total TC:",
+          formatearCentimosCD(
+            importes.totalTC
+          )
+        );
+      }
+
+      console.log(
+        "Importe total CD:",
+        formatearCentimosCD(
+          importes.importeTotalCD
+        )
+      );
+
+      if (importes.conCash) {
+        console.log(
+          "CASH:",
+          formatearCentimosCD(
+            importes.totalCash
+          )
+        );
+      }
+
+      console.log(
+        "Importe para el préstamo:",
+        formatearCentimosCD(
+          importes.importePrestamo
+        )
+      );
+
+      console.groupEnd();
+    }
+
+    function registrarResultadosPrestamo(r, producto) {
+      console.group("Simulación " + producto);
+
+      console.log("Importe:", r.importe);
+      console.log("Cantidad de días:", r.cantidadDias);
+
+      console.log(
+        "Seguro prima:",
+        r.seguroPrima.toFixed(4) + "%"
+      );
+
+      console.log(
+        "Costo capital:",
+        r.costoCapital.toFixed(4) + "%"
+      );
+
+      console.log(
+        "Tea total prima:",
+        r.teaTotalPrima * 100 + "%"
+      );
+
+      console.log(
+        "Suma Factor1 (Cálculo de prima):",
+        r.resultadoPrima.sumaFactor1
+      );
+
+      console.log(
+        "Suma Factor2 (Cálculo de prima):",
+        r.resultadoPrima.sumaFactor2
+      );
+
+      console.log(
+        "Cuota prima:",
+        r.resultadoPrima.cuotaPrima
+      );
+
+      console.log("VPN:", r.VPN);
+
+      console.log(
+        "% Prima:",
+        r.porcentajePrima * 100 + "%"
+      );
+
+      console.log("Seguro:", r.seguro);
+
+      console.log(
+        "Seguro de desempleo:",
+        r.montoSeguroDesempleo
+      );
+
+      console.log(
+        "Monto total a financiar:",
+        r.montoTotalAFinanciar
+      );
+
+      console.log(
+        "Suma Factor1 (Cronograma de pagos):",
+        r.resultadoPrincipal.sumaFactor1
+      );
+
+      console.log(
+        "Suma Factor2 (Cronograma de pagos):",
+        r.resultadoPrincipal.sumaFactor2
+      );
+
+      console.log(
+        "Cuota a pagar:",
+        r.cuotaAPagar
+      );
+
+      console.log(
+        "TCEA:",
+        r.TCEA * 100 + "%"
+      );
+
+      console.log(
+        "Suma Cálculo VA:",
+        r.resultadoVector.sumaVA
+      );
+
+      console.groupEnd();
+    }
+
+    // =====================================================
+    // INICIALIZACIÓN
+    // =====================================================
+
+    document.getElementById("aplicacion").innerHTML =
+      crearPanel("PP") +
+      crearPanel("CD");
+
+    establecerFechaDesembolsoActual();
+    establecerFechaDesembolsoActual("cd-");
+
+    agregarFilaCD(null, false);
+  </script>
+</body>
+</html>
