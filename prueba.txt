@@ -84,12 +84,18 @@
 
     <section aria-labelledby="titulo-cronograma">
         <h2 id="titulo-cronograma">Cronograma</h2>
-
         <table>
             <thead>
                 <tr>
                     <th scope="col">N°</th>
                     <th scope="col">Fecha de pago</th>
+                    <th scope="col">Saldo inicial</th>
+                    <th scope="col">Interés</th>
+                    <th scope="col">Capital</th>
+                    <th scope="col">Comisiones</th>
+                    <th scope="col">Cuota</th>
+                    <th scope="col">Saldo final</th>
+                    <th scope="col">Tipo de Cuota</th>
                 </tr>
             </thead>
             <tbody id="cronograma"></tbody>
@@ -114,7 +120,6 @@
             finDeMes.setUTCMonth(finDeMes.getUTCMonth() + 1, 0);
 
             fecha.setUTCDate(Math.min(diaOriginal, finDeMes.getUTCDate()));
-
             return fecha;
         }
 
@@ -132,18 +137,28 @@
 
             const plazo = Number(document.getElementById("plazo").value);
             const primerPago = document.getElementById("primer-pago").valueAsDate;
+            const cuotaJulio = formulario.elements["cuota_julio"].checked;
+            const cuotaDiciembre = formulario.elements["cuota_diciembre"].checked;
 
-            // Vacía el cronograma anterior antes de generar uno nuevo.
+            // Si ambos checks están desmarcados, la cuota es Simple.
+            // Con alguno marcado, el tipo queda vacío por ahora.
+            const tipoCuota = !cuotaJulio && !cuotaDiciembre ? "Simple" : "";
+
             cronograma.textContent = "";
 
             for (let i = 0; i < plazo; i++) {
-                // La primera fila utiliza la fecha de primer pago.
-                // Las siguientes suman 1, 2, 3... meses a esa fecha.
                 const fechaPago = sumarMeses(primerPago, i);
                 const fila = cronograma.insertRow();
 
                 fila.insertCell().textContent = i + 1;
                 fila.insertCell().textContent = formatearFecha(fechaPago);
+                fila.insertCell().textContent = "0.00"; // Saldo inicial
+                fila.insertCell().textContent = "0.00"; // Interés
+                fila.insertCell().textContent = "0.00"; // Capital
+                fila.insertCell().textContent = "0.00"; // Comisiones
+                fila.insertCell().textContent = "0.00"; // Cuota
+                fila.insertCell().textContent = "0.00"; // Saldo final
+                fila.insertCell().textContent = tipoCuota;
             }
         });
 
