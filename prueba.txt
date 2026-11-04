@@ -82,18 +82,74 @@
         <div id="resultados"></div>
     </section>
 
+    <section aria-labelledby="titulo-cronograma">
+        <h2 id="titulo-cronograma">Cronograma</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">N°</th>
+                    <th scope="col">Fecha de pago</th>
+                </tr>
+            </thead>
+            <tbody id="cronograma"></tbody>
+        </table>
+    </section>
+
     <script>
         const formulario = document.getElementById("formulario");
         const resultados = document.getElementById("resultados");
+        const cronograma = document.getElementById("cronograma");
+
+        // Suma meses conservando el día de la primera fecha de pago.
+        // Si ese día no existe en el mes, usa el último día de ese mes.
+        function sumarMeses(fechaInicial, meses) {
+            const fecha = new Date(fechaInicial);
+            const diaOriginal = fecha.getUTCDate();
+
+            fecha.setUTCDate(1);
+            fecha.setUTCMonth(fecha.getUTCMonth() + meses);
+
+            const finDeMes = new Date(fecha);
+            finDeMes.setUTCMonth(finDeMes.getUTCMonth() + 1, 0);
+
+            fecha.setUTCDate(Math.min(diaOriginal, finDeMes.getUTCDate()));
+
+            return fecha;
+        }
+
+        // Muestra la fecha en formato dd/mm/aaaa.
+        function formatearFecha(fecha) {
+            const dia = String(fecha.getUTCDate()).padStart(2, "0");
+            const mes = String(fecha.getUTCMonth() + 1).padStart(2, "0");
+            const anio = String(fecha.getUTCFullYear()).padStart(4, "0");
+
+            return dia + "/" + mes + "/" + anio;
+        }
 
         formulario.addEventListener("submit", function (evento) {
             evento.preventDefault();
 
-            // Aquí se agregarán los cálculos del simulador.
+            const plazo = Number(document.getElementById("plazo").value);
+            const primerPago = document.getElementById("primer-pago").valueAsDate;
+
+            // Vacía el cronograma anterior antes de generar uno nuevo.
+            cronograma.textContent = "";
+
+            for (let i = 0; i < plazo; i++) {
+                // La primera fila utiliza la fecha de primer pago.
+                // Las siguientes suman 1, 2, 3... meses a esa fecha.
+                const fechaPago = sumarMeses(primerPago, i);
+                const fila = cronograma.insertRow();
+
+                fila.insertCell().textContent = i + 1;
+                fila.insertCell().textContent = formatearFecha(fechaPago);
+            }
         });
 
         formulario.addEventListener("reset", function () {
             resultados.textContent = "";
+            cronograma.textContent = "";
         });
     </script>
 </body>
