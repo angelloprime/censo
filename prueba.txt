@@ -15,29 +15,60 @@
       <p>
         <label for="producto">Producto:</label>
         <select id="producto" name="producto">
-          <option value="pp" selected>Prestabono / Libre Disponibilidad</option>
-          <option value="convenio">Descuento por Planilla (Convenios)</option>
+          <option value="pp" selected>
+            Prestabono / Libre Disponibilidad
+          </option>
+          <option value="convenio">
+            Descuento por Planilla (Convenios)
+          </option>
         </select>
       </p>
 
       <p>
         <label for="monto">¿Cuánto necesitas? (S/):</label>
-        <input id="monto" name="monto" type="number" min="0.01" step="any" required>
+        <input
+          id="monto"
+          name="monto"
+          type="number"
+          min="0.01"
+          step="any"
+          required
+        >
       </p>
 
       <p>
         <label for="plazo">¿En cuántos meses?</label>
-        <input id="plazo" name="plazo" type="number" min="1" max="72" step="1" required>
+        <input
+          id="plazo"
+          name="plazo"
+          type="number"
+          min="1"
+          max="72"
+          step="1"
+          required
+        >
       </p>
 
       <p>
         <label for="tea">¿Qué TEA te ofrecen? (%):</label>
-        <input id="tea" name="tea" type="number" min="0" step="any" required>
+        <input
+          id="tea"
+          name="tea"
+          type="number"
+          min="0"
+          step="any"
+          required
+        >
       </p>
 
       <p>
         <label for="desembolso">Fecha de desembolso:</label>
-        <input id="desembolso" name="desembolso" type="date" required>
+        <input
+          id="desembolso"
+          name="desembolso"
+          type="date"
+          required
+        >
       </p>
 
       <p>
@@ -45,7 +76,9 @@
         <select id="seguro" name="seguro">
           <option value="Vida" selected>Vida</option>
           <option value="Desgravamen">Desgravamen</option>
-          <option value="Desgravamen con Devolución">Desgravamen con Devolución</option>
+          <option value="Desgravamen con Devolución">
+            Desgravamen con Devolución
+          </option>
           <option value="Exonerado">Exonerado</option>
           <option value="Sin Seguro">Sin Seguro</option>
         </select>
@@ -60,38 +93,52 @@
       </p>
 
       <p>
-        <label for="estadoCuenta">Estado de cuenta:</label>
-        <select id="estadoCuenta" name="estadoCuenta">
-          <option value="digital" selected>Digital (S/0)</option>
-          <option value="fisico">Físico (S/11)</option>
-        </select>
+        <input
+          id="estadoCuenta"
+          name="estadoCuenta"
+          type="checkbox"
+        >
+        <label for="estadoCuenta">
+          Estado de cuenta físico (S/11)
+        </label>
+        <small>Desmarcado: virtual (S/0).</small>
       </p>
 
       <p>
-        <label for="julio">Cuota de julio:</label>
-        <select id="julio" name="julio">
-          <option value="1" selected>Simple</option>
-          <option value="2">Doble</option>
-        </select>
+        <input
+          id="julio"
+          name="julio"
+          type="checkbox"
+        >
+        <label for="julio">Cuota doble en julio</label>
       </p>
 
       <p>
-        <label for="diciembre">Cuota de diciembre:</label>
-        <select id="diciembre" name="diciembre">
-          <option value="1" selected>Simple</option>
-          <option value="2">Doble</option>
-        </select>
+        <input
+          id="diciembre"
+          name="diciembre"
+          type="checkbox"
+        >
+        <label for="diciembre">Cuota doble en diciembre</label>
       </p>
 
       <p>
         <label for="primerPago">Primer pago:</label>
-        <input id="primerPago" name="primerPago" type="date" required>
+        <input
+          id="primerPago"
+          name="primerPago"
+          type="date"
+          required
+        >
       </p>
 
       <p>
-        <label for="desempleo">Seguro de desempleo (%):</label>
-        <input id="desempleo" name="desempleo" type="number" min="0" step="any">
-        <small>Déjalo vacío o ingresa 0 si no aplica.</small>
+        <input
+          id="desempleo"
+          name="desempleo"
+          type="checkbox"
+        >
+        <label for="desempleo">Seguro de desempleo (4%)</label>
       </p>
 
       <button type="submit">Calcular</button>
@@ -103,23 +150,52 @@
 
   <section aria-labelledby="tituloResultados">
     <h2 id="tituloResultados">Resultados</h2>
+
     <table border="1">
       <tbody>
-        <tr><th scope="row">Cuota estimada</th><td><output id="cuotaEstimada">—</output></td></tr>
-        <tr><th scope="row">Monto solicitado</th><td><output id="montoSolicitado">—</output></td></tr>
-        <tr><th scope="row">Primas de seguros</th><td><output id="primasSeguros">—</output></td></tr>
-        <tr><th scope="row">Monto total financiado</th><td><output id="montoFinanciado">—</output></td></tr>
-        <tr><th scope="row">Intereses estimados del préstamo</th><td><output id="intereses">—</output></td></tr>
-        <tr><th scope="row">Comisiones</th><td><output id="comisiones">—</output></td></tr>
-        <tr><th scope="row">Total a pagar</th><td><output id="totalPagar">—</output></td></tr>
-        <tr><th scope="row">TCEA estimada</th><td><output id="tcea">—</output></td></tr>
-        <tr><th scope="row">Monto adicional desempleo</th><td><output id="adicionalDesempleo">—</output></td></tr>
+        <tr>
+          <th scope="row">Cuota estimada</th>
+          <td><output id="cuotaEstimada">—</output></td>
+        </tr>
+        <tr>
+          <th scope="row">Monto solicitado</th>
+          <td><output id="montoSolicitado">—</output></td>
+        </tr>
+        <tr>
+          <th scope="row">Primas de seguros</th>
+          <td><output id="primasSeguros">—</output></td>
+        </tr>
+        <tr>
+          <th scope="row">Monto total financiado</th>
+          <td><output id="montoFinanciado">—</output></td>
+        </tr>
+        <tr>
+          <th scope="row">Intereses estimados del préstamo</th>
+          <td><output id="intereses">—</output></td>
+        </tr>
+        <tr>
+          <th scope="row">Comisiones</th>
+          <td><output id="comisiones">—</output></td>
+        </tr>
+        <tr>
+          <th scope="row">Total a pagar</th>
+          <td><output id="totalPagar">—</output></td>
+        </tr>
+        <tr>
+          <th scope="row">TCEA estimada</th>
+          <td><output id="tcea">—</output></td>
+        </tr>
+        <tr>
+          <th scope="row">Monto adicional desempleo</th>
+          <td><output id="adicionalDesempleo">—</output></td>
+        </tr>
       </tbody>
     </table>
   </section>
 
   <section aria-labelledby="tituloCronograma">
     <h2 id="tituloCronograma">Cronograma</h2>
+
     <table border="1">
       <thead>
         <tr>
@@ -141,13 +217,15 @@
   <script>
     "use strict";
 
-    // Parámetros del archivo Simulador_pp.xlsx. Las tasas se guardan
-    // como decimales: por ejemplo, 0.001995 equivale a 0.1995%.
+    // Parámetros del archivo Simulador_pp.xlsx.
+    // Las tasas se guardan como decimales:
+    // 0.001995 equivale a 0.1995%.
     const PARAMETROS = {
       costoCapitalMensual: 0.002871,
       comisionFisica: 11,
 
-      // Cada fila: [desde días, hasta días, tarifa titular, tarifa con cónyuge].
+      // Cada fila contiene:
+      // [desde días, hasta días, tarifa titular, tarifa con cónyuge].
       vida: {
         pp: [
           [0, 365, 0.00005930, 0.00011864],
@@ -165,7 +243,8 @@
         ]
       },
 
-      // Cada lista: [tarifa titular, tarifa con cónyuge].
+      // Cada lista contiene:
+      // [tarifa titular, tarifa con cónyuge].
       desgravamen: {
         pp: {
           "Desgravamen": [0.001995, 0.003990],
@@ -185,12 +264,18 @@
       maximumFractionDigits: 2
     });
 
-    const sumar = valores => valores.reduce((total, valor) => total + valor, 0);
-    const numero = valor => formatoNumero.format(Math.abs(valor) < 0.005 ? 0 : valor);
-    const moneda = valor => "S/ " + numero(valor);
-    const diasEntre = (final, inicial) => Math.round((final - inicial) / DIA);
+    const sumar = valores =>
+      valores.reduce((total, valor) => total + valor, 0);
 
-    // UTC evita que la zona horaria cambie las fechas o la cantidad de días.
+    const numero = valor =>
+      formatoNumero.format(Math.abs(valor) < 0.005 ? 0 : valor);
+
+    const moneda = valor => "S/ " + numero(valor);
+
+    const diasEntre = (final, inicial) =>
+      Math.round((final - inicial) / DIA);
+
+    // UTC evita cambios de fecha por la zona horaria.
     function leerFecha(texto) {
       return new Date(texto + "T00:00:00Z");
     }
@@ -198,17 +283,27 @@
     function mostrarFecha(fecha) {
       const dia = String(fecha.getUTCDate()).padStart(2, "0");
       const mes = String(fecha.getUTCMonth() + 1).padStart(2, "0");
+
       return dia + "/" + mes + "/" + fecha.getUTCFullYear();
     }
 
-    // Equivalente a FECHA.MES: siempre parte de la primera fecha original.
+    // Equivalente a FECHA.MES.
+    // Siempre parte de la primera fecha original.
     function sumarMeses(fecha, meses) {
       const primero = new Date(
-        Date.UTC(fecha.getUTCFullYear(), fecha.getUTCMonth() + meses, 1)
+        Date.UTC(
+          fecha.getUTCFullYear(),
+          fecha.getUTCMonth() + meses,
+          1
+        )
       );
 
       const ultimoDia = new Date(
-        Date.UTC(primero.getUTCFullYear(), primero.getUTCMonth() + 1, 0)
+        Date.UTC(
+          primero.getUTCFullYear(),
+          primero.getUTCMonth() + 1,
+          0
+        )
       ).getUTCDate();
 
       return new Date(
@@ -226,7 +321,7 @@
       );
     }
 
-    // REDONDEAR(...; 2), usado únicamente en el seguro de desempleo.
+    // REDONDEAR(...; 2), utilizado en el seguro de desempleo.
     function redondearDos(valor) {
       const [mantisa, exponente = "0"] = String(valor).split("e");
 
@@ -234,26 +329,34 @@
         Number(mantisa + "e" + (Number(exponente) + 2))
       );
 
-      const [mantisaFinal, exponenteFinal = "0"] = String(entero).split("e");
+      const [mantisaFinal, exponenteFinal = "0"] =
+        String(entero).split("e");
 
       return Number(
         mantisaFinal + "e" + (Number(exponenteFinal) - 2)
       );
     }
 
-    // Equivalente numérico de TIR.NO.PER (base 365) y del ajuste
-    // (1 + TIR.NO.PER)^(360/365) - 1 que utiliza J9.
+    // Equivalente numérico de TIR.NO.PER, con base 365,
+    // seguido del ajuste a base 360 utilizado en el Excel.
     function calcularTcea(monto, pagos, diasAcumulados) {
-      const valorPresente = tasa => sumar(
-        pagos.map((pago, i) =>
-          pago / Math.pow(1 + tasa, diasAcumulados[i] / 365)
-        )
-      ) - monto;
+      const valorPresente = tasa =>
+        sumar(
+          pagos.map((pago, i) =>
+            pago / Math.pow(
+              1 + tasa,
+              diasAcumulados[i] / 365
+            )
+          )
+        ) - monto;
 
       let inferior = -0.999999999;
       let superior = 1;
 
-      while (valorPresente(superior) > 0 && superior < 1e16) {
+      while (
+        valorPresente(superior) > 0 &&
+        superior < 1e16
+      ) {
         superior = superior * 2 + 1;
       }
 
@@ -296,7 +399,7 @@
         desempleo
       } = datos;
 
-      // O: fecha nominal. M: fecha con domingo trasladado al lunes.
+      // Fechas nominales y fechas ajustadas por domingo.
       const fechas = Array.from(
         { length: plazo },
         (_, i) => sumarMeses(primerPago, i)
@@ -317,7 +420,12 @@
 
       const factores = fechas.map(fecha => {
         const mes = fecha.getUTCMonth() + 1;
-        return mes === 7 ? julio : mes === 12 ? diciembre : 1;
+
+        return mes === 7
+          ? julio
+          : mes === 12
+            ? diciembre
+            : 1;
       });
 
       const esDesgravamen =
@@ -333,12 +441,12 @@
         const tarifa = sumar(
           PARAMETROS.vida[producto]
             .filter(fila =>
-              duracion >= fila[0] && duracion <= fila[1]
+              duracion >= fila[0] &&
+              duracion <= fila[1]
             )
             .map(fila => fila[indice])
         );
 
-        // J2 y J3: porcentaje de prima y monto del seguro Vida.
         primaPrincipal = monto * (tarifa * duracion);
 
       } else if (esDesgravamen) {
@@ -349,7 +457,7 @@
 
         const tem = Math.pow(1 + tea, 1 / 12) - 1;
 
-        // Q25: cuota auxiliar usada para obtener las primas mensuales.
+        // Cuota auxiliar para calcular las primas mensuales.
         const cuotaAuxiliar = monto / sumar(
           factores.map((factor, i) =>
             factor / Math.pow(
@@ -363,7 +471,6 @@
         const primasMensuales = [];
 
         for (let i = 0; i < plazo; i++) {
-          // P: saldo inicial auxiliar. Q: prima del período.
           const interesAuxiliar =
             Math.pow(1 + tea, dias[i] / 360) - 1;
 
@@ -382,7 +489,8 @@
           );
         }
 
-        // J2 = VNA(...)/monto; J3 = monto*J2. Se conserva este orden.
+        // Se conserva el orden de cálculo del Excel:
+        // porcentaje = VNA / monto; prima = monto * porcentaje.
         const valorPresentePrimas = sumar(
           primasMensuales.map((prima, i) =>
             prima / Math.pow(
@@ -392,10 +500,10 @@
           )
         );
 
-        primaPrincipal = monto * (valorPresentePrimas / monto);
+        primaPrincipal =
+          monto * (valorPresentePrimas / monto);
       }
 
-      // H17 y J4: seguro de desempleo y monto total financiado.
       const adicionalDesempleo = redondearDos(
         (monto + primaPrincipal) * desempleo
       );
@@ -404,9 +512,10 @@
         monto + primaPrincipal + adicionalDesempleo;
 
       const comision =
-        estadoCuenta === "fisico" ? PARAMETROS.comisionFisica : 0;
+        estadoCuenta === "fisico"
+          ? PARAMETROS.comisionFisica
+          : 0;
 
-      // J6: cuota base, considerando los factores de julio y diciembre.
       const cuotaBase = montoFinanciado / sumar(
         factores.map((factor, i) =>
           factor / Math.pow(
@@ -417,6 +526,7 @@
       );
 
       let saldo = montoFinanciado;
+
       const cronograma = [];
       const flujosTcea = [];
 
@@ -451,7 +561,8 @@
           tipo: factores[i] === 2 ? "Doble" : "Simple"
         });
 
-        // N usa la cuota teórica, tal como en el archivo de referencia.
+        // Se utiliza la cuota teórica para la TCEA,
+        // tal como en el archivo de referencia.
         flujosTcea.push(
           cuotaBase * factores[i] + comision
         );
@@ -464,20 +575,25 @@
         montoSolicitado: monto,
         primasSeguros: primaPrincipal + adicionalDesempleo,
         montoFinanciado,
+
         intereses: sumar(
           cronograma.map(fila => fila.interes)
         ),
+
         comisiones: sumar(
           cronograma.map(fila => fila.comisiones)
         ),
+
         totalPagar: sumar(
           cronograma.map(fila => fila.cuota)
         ),
+
         tcea: calcularTcea(
           monto,
           flujosTcea,
           acumulados
         ),
+
         adicionalDesempleo,
         cronograma
       };
@@ -486,7 +602,12 @@
     const formulario = document.getElementById("formulario");
     const mensaje = document.getElementById("mensaje");
     const cuerpoCronograma = document.getElementById("cronograma");
-    const valor = id => document.getElementById(id).value;
+
+    const valor = id =>
+      document.getElementById(id).value;
+
+    const marcado = id =>
+      document.getElementById(id).checked;
 
     function leerDatos() {
       return {
@@ -498,10 +619,18 @@
         primerPago: leerFecha(valor("primerPago")),
         seguro: valor("seguro"),
         cobertura: valor("cobertura"),
-        estadoCuenta: valor("estadoCuenta"),
-        julio: Number(valor("julio")),
-        diciembre: Number(valor("diciembre")),
-        desempleo: Number(valor("desempleo")) / 100
+
+        // Marcado: físico. Desmarcado: virtual.
+        estadoCuenta: marcado("estadoCuenta")
+          ? "fisico"
+          : "digital",
+
+        // Marcado: doble. Desmarcado: simple.
+        julio: marcado("julio") ? 2 : 1,
+        diciembre: marcado("diciembre") ? 2 : 1,
+
+        // Marcado: 4%. Desmarcado: no aplica.
+        desempleo: marcado("desempleo") ? 0.04 : 0
       };
     }
 
@@ -525,21 +654,27 @@
 
       if (datos.primerPago <= datos.desembolso) {
         limpiarResultados();
+
         mensaje.textContent =
           "El primer pago debe ser posterior a la fecha de desembolso.";
+
         return;
       }
 
       const resultado = simular(datos);
 
-      if (
+      const tieneValoresInvalidos =
         Object.entries(resultado).some(([clave, dato]) =>
-          clave !== "cronograma" && !Number.isFinite(dato)
-        )
-      ) {
+          clave !== "cronograma" &&
+          !Number.isFinite(dato)
+        );
+
+      if (tieneValoresInvalidos) {
         limpiarResultados();
+
         mensaje.textContent =
           "No se pudo calcular con los valores ingresados. Revisa los datos.";
+
         return;
       }
 
@@ -589,6 +724,8 @@
     formulario.addEventListener("input", actualizar);
     formulario.addEventListener("change", actualizar);
 
+    // El reset deja los campos vacíos, las listas en su primera
+    // opción y las cuatro casillas desmarcadas.
     formulario.addEventListener("reset", () => {
       setTimeout(actualizar, 0);
     });
