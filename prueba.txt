@@ -13,18 +13,6 @@
       <legend>Datos del préstamo</legend>
 
       <p>
-        <label for="producto">Producto:</label>
-        <select id="producto" name="producto">
-          <option value="pp" selected>
-            Prestabono / Libre Disponibilidad
-          </option>
-          <option value="convenio">
-            Descuento por Planilla (Convenios)
-          </option>
-        </select>
-      </p>
-
-      <p>
         <label for="monto">¿Cuánto necesitas? (S/):</label>
         <input
           id="monto"
@@ -69,6 +57,14 @@
           type="date"
           required
         >
+
+        <label for="primerPago">Primer pago:</label>
+        <input
+          id="primerPago"
+          name="primerPago"
+          type="date"
+          required
+        >
       </p>
 
       <p>
@@ -85,59 +81,26 @@
       </p>
 
       <p>
-        <label for="cobertura">Cobertura:</label>
-        <select id="cobertura" name="cobertura">
-          <option value="titular" selected>Titular</option>
-          <option value="conyuge">Titular + cónyuge</option>
-        </select>
-      </p>
-
-      <p>
         <input
           id="estadoCuenta"
           name="estadoCuenta"
           type="checkbox"
         >
-        <label for="estadoCuenta">
-          Estado de cuenta físico (S/11)
-        </label>
-        <small>Desmarcado: virtual (S/0).</small>
+        <label for="estadoCuenta">Envío de Estado cuenta</label>
       </p>
 
       <p>
-        <input
-          id="julio"
-          name="julio"
-          type="checkbox"
-        >
+        <input id="julio" name="julio" type="checkbox">
         <label for="julio">Cuota doble en julio</label>
       </p>
 
       <p>
-        <input
-          id="diciembre"
-          name="diciembre"
-          type="checkbox"
-        >
+        <input id="diciembre" name="diciembre" type="checkbox">
         <label for="diciembre">Cuota doble en diciembre</label>
       </p>
 
       <p>
-        <label for="primerPago">Primer pago:</label>
-        <input
-          id="primerPago"
-          name="primerPago"
-          type="date"
-          required
-        >
-      </p>
-
-      <p>
-        <input
-          id="desempleo"
-          name="desempleo"
-          type="checkbox"
-        >
+        <input id="desempleo" name="desempleo" type="checkbox">
         <label for="desempleo">Seguro de desempleo (4%)</label>
       </p>
 
@@ -151,52 +114,56 @@
   <section aria-labelledby="tituloResultados">
     <h2 id="tituloResultados">Resultados</h2>
 
-    <table border="1">
-      <tbody>
-        <tr>
-          <th scope="row">Cuota estimada</th>
-          <td><output id="cuotaEstimada">—</output></td>
-        </tr>
-        <tr>
-          <th scope="row">Monto solicitado</th>
-          <td><output id="montoSolicitado">—</output></td>
-        </tr>
-        <tr>
-          <th scope="row">Primas de seguros</th>
-          <td><output id="primasSeguros">—</output></td>
-        </tr>
-        <tr>
-          <th scope="row">Monto total financiado</th>
-          <td><output id="montoFinanciado">—</output></td>
-        </tr>
-        <tr>
-          <th scope="row">Intereses estimados del préstamo</th>
-          <td><output id="intereses">—</output></td>
-        </tr>
-        <tr>
-          <th scope="row">Comisiones</th>
-          <td><output id="comisiones">—</output></td>
-        </tr>
-        <tr>
-          <th scope="row">Total a pagar</th>
-          <td><output id="totalPagar">—</output></td>
-        </tr>
-        <tr>
-          <th scope="row">TCEA estimada</th>
-          <td><output id="tcea">—</output></td>
-        </tr>
-        <tr>
-          <th scope="row">Monto adicional desempleo</th>
-          <td><output id="adicionalDesempleo">—</output></td>
-        </tr>
-      </tbody>
-    </table>
+    <p>
+      <strong>Cuota estimada:</strong>
+      <output id="cuotaEstimada">—</output>
+    </p>
+
+    <p>
+      <strong>Monto solicitado:</strong>
+      <output id="montoSolicitado">—</output>
+    </p>
+
+    <p>
+      <strong>Primas de seguros:</strong>
+      <output id="primasSeguros">—</output>
+    </p>
+
+    <p>
+      <strong>Monto total financiado:</strong>
+      <output id="montoFinanciado">—</output>
+    </p>
+
+    <p>
+      <strong>Intereses estimados del préstamo:</strong>
+      <output id="intereses">—</output>
+    </p>
+
+    <p>
+      <strong>Comisiones:</strong>
+      <output id="comisiones">—</output>
+    </p>
+
+    <p>
+      <strong>Total a pagar:</strong>
+      <output id="totalPagar">—</output>
+    </p>
+
+    <p>
+      <strong>TCEA estimada:</strong>
+      <output id="tcea">—</output>
+    </p>
+
+    <p>
+      <strong>Monto adicional desempleo:</strong>
+      <output id="adicionalDesempleo">—</output>
+    </p>
   </section>
 
   <section aria-labelledby="tituloCronograma">
     <h2 id="tituloCronograma">Cronograma</h2>
 
-    <table border="1">
+    <table id="tablaCronograma" border="1" hidden>
       <thead>
         <tr>
           <th scope="col">N°</th>
@@ -217,14 +184,13 @@
   <script>
     "use strict";
 
-    // Parámetros del archivo Simulador_pp.xlsx.
-    // Las tasas se guardan como decimales:
+    // Las tasas se expresan en forma decimal:
     // 0.001995 equivale a 0.1995%.
     const PARAMETROS = {
       costoCapitalMensual: 0.002871,
       comisionFisica: 11,
 
-      // Cada fila contiene:
+      // Cada fila:
       // [desde días, hasta días, tarifa titular, tarifa con cónyuge].
       vida: {
         pp: [
@@ -243,7 +209,7 @@
         ]
       },
 
-      // Cada lista contiene:
+      // Cada lista:
       // [tarifa titular, tarifa con cónyuge].
       desgravamen: {
         pp: {
@@ -275,7 +241,8 @@
     const diasEntre = (final, inicial) =>
       Math.round((final - inicial) / DIA);
 
-    // UTC evita cambios de fecha por la zona horaria.
+    // UTC evita que la zona horaria cambie las fechas
+    // o la cantidad de días entre ellas.
     function leerFecha(texto) {
       return new Date(texto + "T00:00:00Z");
     }
@@ -287,8 +254,8 @@
       return dia + "/" + mes + "/" + fecha.getUTCFullYear();
     }
 
-    // Equivalente a FECHA.MES.
-    // Siempre parte de la primera fecha original.
+    // Suma meses a la fecha base y limita el día
+    // al último disponible del mes.
     function sumarMeses(fecha, meses) {
       const primero = new Date(
         Date.UTC(
@@ -315,13 +282,14 @@
       );
     }
 
+    // Si el vencimiento cae domingo, utiliza el lunes siguiente.
     function ajustarDomingo(fecha) {
       return new Date(
         fecha.getTime() + (fecha.getUTCDay() === 0 ? DIA : 0)
       );
     }
 
-    // REDONDEAR(...; 2), utilizado en el seguro de desempleo.
+    // Redondea a dos decimales el importe del seguro de desempleo.
     function redondearDos(valor) {
       const [mantisa, exponente = "0"] = String(valor).split("e");
 
@@ -337,8 +305,9 @@
       );
     }
 
-    // Equivalente numérico de TIR.NO.PER, con base 365,
-    // seguido del ajuste a base 360 utilizado en el Excel.
+    // Busca la tasa anual r que cumple:
+    // monto = suma(pago_i / (1 + r)^(días acumulados_i / 365)).
+    // Luego la convierte a base 360: (1 + r)^(360/365) - 1.
     function calcularTcea(monto, pagos, diasAcumulados) {
       const valorPresente = tasa =>
         sumar(
@@ -399,7 +368,8 @@
         desempleo
       } = datos;
 
-      // Fechas nominales y fechas ajustadas por domingo.
+      // Genera las fechas mensuales y traslada los domingos
+      // al lunes para el cálculo.
       const fechas = Array.from(
         { length: plazo },
         (_, i) => sumarMeses(primerPago, i)
@@ -407,6 +377,10 @@
 
       const fechasAjustadas = fechas.map(ajustarDomingo);
 
+      // Primer período:
+      // días = primer vencimiento ajustado - desembolso.
+      // Siguientes períodos:
+      // días = vencimiento actual - vencimiento anterior.
       const dias = fechasAjustadas.map((fecha, i) =>
         diasEntre(
           fecha,
@@ -447,6 +421,8 @@
             .map(fila => fila[indice])
         );
 
+        // Prima de vida =
+        // monto × tarifa diaria × duración total en días.
         primaPrincipal = monto * (tarifa * duracion);
 
       } else if (esDesgravamen) {
@@ -457,7 +433,10 @@
 
         const tem = Math.pow(1 + tea, 1 / 12) - 1;
 
-        // Cuota auxiliar para calcular las primas mensuales.
+        // Cuota auxiliar =
+        // monto / suma(
+        //   factor / (1 + TEM + tarifa)^(días acumulados / 30)
+        // ).
         const cuotaAuxiliar = monto / sumar(
           factores.map((factor, i) =>
             factor / Math.pow(
@@ -471,9 +450,13 @@
         const primasMensuales = [];
 
         for (let i = 0; i < plazo; i++) {
+          // Interés del período =
+          // saldo × ((1 + TEA)^(días / 360) - 1).
           const interesAuxiliar =
             Math.pow(1 + tea, dias[i] / 360) - 1;
 
+          // Prima del período =
+          // saldo × ((1 + tarifa)^(días / 30) - 1).
           const tasaPeriodoSeguro =
             Math.pow(1 + tarifa, dias[i] / 30) - 1;
 
@@ -489,8 +472,8 @@
           );
         }
 
-        // Se conserva el orden de cálculo del Excel:
-        // porcentaje = VNA / monto; prima = monto * porcentaje.
+        // Valor presente de primas =
+        // suma(prima_i / (1 + costo mensual)^i).
         const valorPresentePrimas = sumar(
           primasMensuales.map((prima, i) =>
             prima / Math.pow(
@@ -504,10 +487,14 @@
           monto * (valorPresentePrimas / monto);
       }
 
+      // Desempleo =
+      // (monto + prima principal) × tasa de desempleo.
       const adicionalDesempleo = redondearDos(
         (monto + primaPrincipal) * desempleo
       );
 
+      // Monto financiado =
+      // monto + prima principal + desempleo.
       const montoFinanciado =
         monto + primaPrincipal + adicionalDesempleo;
 
@@ -516,6 +503,10 @@
           ? PARAMETROS.comisionFisica
           : 0;
 
+      // Cuota base =
+      // monto financiado / suma(
+      //   factor / (1 + TEA)^(días acumulados / 360)
+      // ).
       const cuotaBase = montoFinanciado / sumar(
         factores.map((factor, i) =>
           factor / Math.pow(
@@ -561,8 +552,7 @@
           tipo: factores[i] === 2 ? "Doble" : "Simple"
         });
 
-        // Se utiliza la cuota teórica para la TCEA,
-        // tal como en el archivo de referencia.
+        // Flujos de pago utilizados para hallar la TCEA.
         flujosTcea.push(
           cuotaBase * factores[i] + comision
         );
@@ -602,6 +592,7 @@
     const formulario = document.getElementById("formulario");
     const mensaje = document.getElementById("mensaje");
     const cuerpoCronograma = document.getElementById("cronograma");
+    const tablaCronograma = document.getElementById("tablaCronograma");
 
     const valor = id =>
       document.getElementById(id).value;
@@ -611,25 +602,24 @@
 
     function leerDatos() {
       return {
-        producto: valor("producto"),
+        // Producto fijo: Prestabono / Libre Disponibilidad.
+        // Cobertura fija: Titular.
+        producto: "pp",
+        cobertura: "titular",
+
         monto: Number(valor("monto")),
         plazo: Number(valor("plazo")),
         tea: Number(valor("tea")) / 100,
         desembolso: leerFecha(valor("desembolso")),
         primerPago: leerFecha(valor("primerPago")),
         seguro: valor("seguro"),
-        cobertura: valor("cobertura"),
 
-        // Marcado: físico. Desmarcado: virtual.
         estadoCuenta: marcado("estadoCuenta")
           ? "fisico"
           : "digital",
 
-        // Marcado: doble. Desmarcado: simple.
         julio: marcado("julio") ? 2 : 1,
         diciembre: marcado("diciembre") ? 2 : 1,
-
-        // Marcado: 4%. Desmarcado: no aplica.
         desempleo: marcado("desempleo") ? 0.04 : 0
       };
     }
@@ -640,13 +630,19 @@
       });
 
       cuerpoCronograma.replaceChildren();
+      tablaCronograma.hidden = true;
     }
 
-    function actualizar() {
+    // Al modificar cualquier dato, se descarta la simulación anterior.
+    function invalidarResultados() {
       mensaje.textContent = "";
+      limpiarResultados();
+    }
+
+    function calcular() {
+      invalidarResultados();
 
       if (!formulario.checkValidity()) {
-        limpiarResultados();
         return;
       }
 
@@ -714,23 +710,22 @@
       });
 
       cuerpoCronograma.replaceChildren(fragmento);
+      tablaCronograma.hidden = false;
     }
 
+    // La simulación se ejecuta únicamente al enviar el formulario.
     formulario.addEventListener("submit", evento => {
       evento.preventDefault();
-      actualizar();
+      calcular();
     });
 
-    formulario.addEventListener("input", actualizar);
-    formulario.addEventListener("change", actualizar);
+    // Editar o limpiar solo borra los resultados; no recalcula.
+    formulario.addEventListener("input", invalidarResultados);
+    formulario.addEventListener("change", invalidarResultados);
+    formulario.addEventListener("reset", invalidarResultados);
 
-    // El reset deja los campos vacíos, las listas en su primera
-    // opción y las cuatro casillas desmarcadas.
-    formulario.addEventListener("reset", () => {
-      setTimeout(actualizar, 0);
-    });
-
-    actualizar();
+    // Al abrir la página, los resultados y el cronograma están vacíos.
+    invalidarResultados();
   </script>
 </body>
 </html>
