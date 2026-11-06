@@ -1,172 +1,420 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador PP</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulador de préstamo</title>
 </head>
 <body>
-    <h1>Simulador PP</h1>
+  <h1>Simulador de préstamo</h1>
 
-    <form id="formulario">
-        <p>
-            <label for="monto">Monto:</label><br>
-            <input type="number" id="monto" name="monto"
-                   min="0.01" step="0.01" required>
-        </p>
+  <form id="formulario">
+    <fieldset>
+      <legend>Datos del préstamo</legend>
 
-        <p>
-            <label for="plazo">Plazo (meses):</label><br>
-            <input type="number" id="plazo" name="plazo"
-                   min="1" step="1" required>
-        </p>
+      <p>
+        <label for="producto">Producto:</label>
+        <select id="producto" name="producto">
+          <option value="pp">Prestabono / Libre Disponibilidad</option>
+          <option value="convenio">Descuento por Planilla (Convenios)</option>
+        </select>
+      </p>
 
-        <p>
-            <label for="tea">TEA (%):</label><br>
-            <input type="number" id="tea" name="tea"
-                   min="0" step="any" required>
-        </p>
+      <p>
+        <label for="monto">¿Cuánto necesitas? (S/):</label>
+        <input id="monto" name="monto" type="number" min="0.01" step="any" value="8000" required>
+      </p>
 
-        <p>
-            <label for="desembolso">Fecha de desembolso:</label><br>
-            <input type="date" id="desembolso" name="desembolso" required>
-        </p>
+      <p>
+        <label for="plazo">¿En cuántos meses?</label>
+        <input id="plazo" name="plazo" type="number" min="1" max="72" step="1" value="36" required>
+      </p>
 
-        <p>
-            <label for="primer-pago">Fecha de primer pago:</label><br>
-            <input type="date" id="primer-pago" name="primer_pago" required>
-        </p>
+      <p>
+        <label for="tea">¿Qué TEA te ofrecen? (%):</label>
+        <input id="tea" name="tea" type="number" min="0" step="any" value="59.59" required>
+      </p>
 
-        <p>
-            <label for="seguro">Tipo de seguro:</label><br>
-            <select id="seguro" name="seguro">
-                <option value="vida">Vida</option>
-                <option value="desgravamen">Desgravamen</option>
-                <option value="desgravamen_devolucion">Desgravamen con Devolución</option>
-                <option value="sin_seguro">Sin Seguro</option>
-            </select>
-        </p>
+      <p>
+        <label for="desembolso">Fecha de desembolso:</label>
+        <input id="desembolso" name="desembolso" type="date" value="2026-11-05" required>
+      </p>
 
-        <fieldset>
-            <legend>Opcionales</legend>
+      <p>
+        <label for="seguro">Tipo de seguro:</label>
+        <select id="seguro" name="seguro">
+          <option value="Vida">Vida</option>
+          <option value="Desgravamen">Desgravamen</option>
+          <option value="Desgravamen con Devolución">Desgravamen con Devolución</option>
+          <option value="Exonerado">Exonerado</option>
+          <option value="Sin Seguro">Sin Seguro</option>
+        </select>
+      </p>
 
-            <label>
-                <input type="checkbox" name="estado_cuenta">
-                Estado de cuenta
-            </label><br>
+      <p>
+        <label for="cobertura">Cobertura:</label>
+        <select id="cobertura" name="cobertura">
+          <option value="titular">Titular</option>
+          <option value="conyuge">Titular + cónyuge</option>
+        </select>
+      </p>
 
-            <label>
-                <input type="checkbox" name="cuota_julio">
-                Cuota de julio
-            </label><br>
+      <p>
+        <label for="estadoCuenta">Estado de cuenta:</label>
+        <select id="estadoCuenta" name="estadoCuenta">
+          <option value="digital">Digital (S/0)</option>
+          <option value="fisico">Físico (S/11)</option>
+        </select>
+      </p>
 
-            <label>
-                <input type="checkbox" name="cuota_diciembre">
-                Cuota de diciembre
-            </label><br>
+      <p>
+        <label for="julio">Cuota de julio:</label>
+        <select id="julio" name="julio">
+          <option value="1">Simple</option>
+          <option value="2">Doble</option>
+        </select>
+      </p>
 
-            <label>
-                <input type="checkbox" name="seguro_desempleo">
-                Seguro de desempleo
-            </label>
-        </fieldset>
+      <p>
+        <label for="diciembre">Cuota de diciembre:</label>
+        <select id="diciembre" name="diciembre">
+          <option value="1">Simple</option>
+          <option value="2">Doble</option>
+        </select>
+      </p>
 
-        <p>
-            <button type="submit">Simular</button>
-            <button type="reset">Limpiar</button>
-        </p>
-    </form>
+      <p>
+        <label for="primerPago">Primer pago:</label>
+        <input id="primerPago" name="primerPago" type="date" value="2026-12-07" required>
+      </p>
 
-    <section aria-labelledby="titulo-resultados">
-        <h2 id="titulo-resultados">Resultados</h2>
-        <div id="resultados"></div>
-    </section>
+      <p>
+        <label for="desempleo">Seguro de desempleo (%):</label>
+        <input id="desempleo" name="desempleo" type="number" min="0" step="any" value="0">
+        <small>Ingresa 0 si no aplica.</small>
+      </p>
 
-    <section aria-labelledby="titulo-cronograma">
-        <h2 id="titulo-cronograma">Cronograma</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th scope="col">N°</th>
-                    <th scope="col">Fecha de pago</th>
-                    <th scope="col">Saldo inicial</th>
-                    <th scope="col">Interés</th>
-                    <th scope="col">Capital</th>
-                    <th scope="col">Comisiones</th>
-                    <th scope="col">Cuota</th>
-                    <th scope="col">Saldo final</th>
-                    <th scope="col">Tipo de Cuota</th>
-                </tr>
-            </thead>
-            <tbody id="cronograma"></tbody>
-        </table>
-    </section>
+      <button type="submit">Calcular</button>
+      <button type="reset">Restablecer</button>
+    </fieldset>
+  </form>
 
-    <script>
-        const formulario = document.getElementById("formulario");
-        const resultados = document.getElementById("resultados");
-        const cronograma = document.getElementById("cronograma");
+  <p id="mensaje" role="status" aria-live="polite"></p>
 
-        // Suma meses conservando el día de la primera fecha de pago.
-        // Si ese día no existe en el mes, usa el último día de ese mes.
-        function sumarMeses(fechaInicial, meses) {
-            const fecha = new Date(fechaInicial);
-            const diaOriginal = fecha.getUTCDate();
+  <section aria-labelledby="tituloResultados">
+    <h2 id="tituloResultados">Resultados</h2>
+    <table border="1">
+      <tbody>
+        <tr><th scope="row">Cuota estimada</th><td><output id="cuotaEstimada">—</output></td></tr>
+        <tr><th scope="row">Monto solicitado</th><td><output id="montoSolicitado">—</output></td></tr>
+        <tr><th scope="row">Primas de seguros</th><td><output id="primasSeguros">—</output></td></tr>
+        <tr><th scope="row">Monto total financiado</th><td><output id="montoFinanciado">—</output></td></tr>
+        <tr><th scope="row">Intereses estimados del préstamo</th><td><output id="intereses">—</output></td></tr>
+        <tr><th scope="row">Comisiones</th><td><output id="comisiones">—</output></td></tr>
+        <tr><th scope="row">Total a pagar</th><td><output id="totalPagar">—</output></td></tr>
+        <tr><th scope="row">TCEA estimada</th><td><output id="tcea">—</output></td></tr>
+        <tr><th scope="row">Monto adicional desempleo</th><td><output id="adicionalDesempleo">—</output></td></tr>
+      </tbody>
+    </table>
+  </section>
 
-            fecha.setUTCDate(1);
-            fecha.setUTCMonth(fecha.getUTCMonth() + meses);
+  <section aria-labelledby="tituloCronograma">
+    <h2 id="tituloCronograma">Cronograma</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th scope="col">N°</th>
+          <th scope="col">Fecha de pago</th>
+          <th scope="col">Saldo inicial</th>
+          <th scope="col">Interés</th>
+          <th scope="col">Capital</th>
+          <th scope="col">Comisiones</th>
+          <th scope="col">Cuota</th>
+          <th scope="col">Saldo final</th>
+          <th scope="col">Tipo de Cuota</th>
+        </tr>
+      </thead>
+      <tbody id="cronograma"></tbody>
+    </table>
+  </section>
 
-            const finDeMes = new Date(fecha);
-            finDeMes.setUTCMonth(finDeMes.getUTCMonth() + 1, 0);
+  <script>
+    "use strict";
 
-            fecha.setUTCDate(Math.min(diaOriginal, finDeMes.getUTCDate()));
-            return fecha;
+    // Parámetros del archivo Simulador_pp.xlsx. Las tasas se guardan
+    // como decimales: por ejemplo, 0.001995 equivale a 0.1995%.
+    const PARAMETROS = {
+      costoCapitalMensual: 0.002871,
+      comisionFisica: 11,
+      // Cada fila: [desde días, hasta días, tarifa titular, tarifa con cónyuge].
+      vida: {
+        pp: [
+          [0, 365, 0.00005930, 0.00011864],
+          [366, 1095, 0.00003410, 0.00006825],
+          [1096, 1825, 0.00003190, 0.00006387],
+          [1826, 2190, 0.00002200, 0.00004407],
+          [2191, 3650, 0.00001750, 0.00003504]
+        ],
+        convenio: [
+          [0, 365, 0.00016659, 0.00033317],
+          [366, 1095, 0.00006244, 0.00012488],
+          [1096, 1825, 0.00003032, 0.00006064],
+          [1826, 2190, 0.00002214, 0.00004429],
+          [2191, 3650, 0.00001888, 0.00003777]
+        ]
+      },
+      // Cada lista: [tarifa titular, tarifa con cónyuge].
+      desgravamen: {
+        pp: {
+          "Desgravamen": [0.001995, 0.003990],
+          "Desgravamen con Devolución": [0.002594, 0.005188]
+        },
+        convenio: {
+          "Desgravamen": [0.001832, 0.003664],
+          "Desgravamen con Devolución": [0.002342, 0.004684]
         }
+      }
+    };
 
-        // Muestra la fecha en formato dd/mm/aaaa.
-        function formatearFecha(fecha) {
-            const dia = String(fecha.getUTCDate()).padStart(2, "0");
-            const mes = String(fecha.getUTCMonth() + 1).padStart(2, "0");
-            const anio = String(fecha.getUTCFullYear()).padStart(4, "0");
+    const DIA = 86400000;
+    const formatoNumero = new Intl.NumberFormat("es-PE", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+    const sumar = valores => valores.reduce((total, valor) => total + valor, 0);
+    const numero = valor => formatoNumero.format(Math.abs(valor) < 0.005 ? 0 : valor);
+    const moneda = valor => "S/ " + numero(valor);
+    const diasEntre = (final, inicial) => Math.round((final - inicial) / DIA);
 
-            return dia + "/" + mes + "/" + anio;
+    // UTC evita que la zona horaria cambie las fechas o la cantidad de días.
+    function leerFecha(texto) {
+      return new Date(texto + "T00:00:00Z");
+    }
+
+    function mostrarFecha(fecha) {
+      const dia = String(fecha.getUTCDate()).padStart(2, "0");
+      const mes = String(fecha.getUTCMonth() + 1).padStart(2, "0");
+      return dia + "/" + mes + "/" + fecha.getUTCFullYear();
+    }
+
+    // Equivalente a FECHA.MES: siempre parte de la primera fecha original.
+    function sumarMeses(fecha, meses) {
+      const primero = new Date(Date.UTC(fecha.getUTCFullYear(), fecha.getUTCMonth() + meses, 1));
+      const ultimoDia = new Date(Date.UTC(primero.getUTCFullYear(), primero.getUTCMonth() + 1, 0)).getUTCDate();
+      return new Date(Date.UTC(primero.getUTCFullYear(), primero.getUTCMonth(), Math.min(fecha.getUTCDate(), ultimoDia)));
+    }
+
+    function ajustarDomingo(fecha) {
+      return new Date(fecha.getTime() + (fecha.getUTCDay() === 0 ? DIA : 0));
+    }
+
+    // REDONDEAR(...; 2), usado únicamente en el seguro de desempleo.
+    function redondearDos(valor) {
+      const [mantisa, exponente = "0"] = String(valor).split("e");
+      const entero = Math.round(Number(mantisa + "e" + (Number(exponente) + 2)));
+      const [mantisaFinal, exponenteFinal = "0"] = String(entero).split("e");
+      return Number(mantisaFinal + "e" + (Number(exponenteFinal) - 2));
+    }
+
+    // Equivalente numérico de TIR.NO.PER (base 365) y del ajuste
+    // (1 + TIR.NO.PER)^(360/365) - 1 que utiliza J9.
+    function calcularTcea(monto, pagos, diasAcumulados) {
+      const valorPresente = tasa => sumar(pagos.map((pago, i) =>
+        pago / Math.pow(1 + tasa, diasAcumulados[i] / 365)
+      )) - monto;
+
+      let inferior = -0.999999999;
+      let superior = 1;
+      while (valorPresente(superior) > 0 && superior < 1e16) {
+        superior = superior * 2 + 1;
+      }
+      if (valorPresente(inferior) < 0 || valorPresente(superior) > 0) return 0;
+
+      for (let i = 0; i < 120; i++) {
+        const medio = (inferior + superior) / 2;
+        if (valorPresente(medio) > 0) inferior = medio;
+        else superior = medio;
+      }
+      return Math.pow(1 + (inferior + superior) / 2, 360 / 365) - 1;
+    }
+
+    function simular(datos) {
+      const { producto, monto, plazo, tea, desembolso, primerPago,
+        seguro, cobertura, estadoCuenta, julio, diciembre, desempleo } = datos;
+
+      // O: fecha nominal. M: fecha con domingo trasladado al lunes.
+      const fechas = Array.from({ length: plazo }, (_, i) => sumarMeses(primerPago, i));
+      const fechasAjustadas = fechas.map(ajustarDomingo);
+      const dias = fechasAjustadas.map((fecha, i) =>
+        diasEntre(fecha, i === 0 ? desembolso : fechasAjustadas[i - 1])
+      );
+      const acumulados = fechasAjustadas.map(fecha => diasEntre(fecha, desembolso));
+      const factores = fechas.map(fecha => {
+        const mes = fecha.getUTCMonth() + 1;
+        return mes === 7 ? julio : mes === 12 ? diciembre : 1;
+      });
+
+      const esDesgravamen = seguro === "Desgravamen" || seguro === "Desgravamen con Devolución";
+      let primaPrincipal = 0;
+
+      if (seguro === "Vida") {
+        const duracion = acumulados[plazo - 1];
+        const indice = cobertura === "titular" ? 2 : 3;
+        const tarifa = sumar(PARAMETROS.vida[producto]
+          .filter(fila => duracion >= fila[0] && duracion <= fila[1])
+          .map(fila => fila[indice]));
+        // J2 y J3: porcentaje de prima y monto del seguro Vida.
+        primaPrincipal = monto * (tarifa * duracion);
+      } else if (esDesgravamen) {
+        const tarifa = PARAMETROS.desgravamen[producto][seguro][cobertura === "titular" ? 0 : 1];
+        const tem = Math.pow(1 + tea, 1 / 12) - 1;
+        // Q25: cuota auxiliar usada para obtener las primas mensuales.
+        const cuotaAuxiliar = monto / sumar(factores.map((factor, i) =>
+          factor / Math.pow(1 + tem + tarifa, acumulados[i] / 30)
+        ));
+
+        let saldoAuxiliar = monto;
+        const primasMensuales = [];
+        for (let i = 0; i < plazo; i++) {
+          // P: saldo inicial auxiliar. Q: prima del período.
+          const interesAuxiliar = Math.pow(1 + tea, dias[i] / 360) - 1;
+          const tasaPeriodoSeguro = Math.pow(1 + tarifa, dias[i] / 30) - 1;
+          primasMensuales.push(tasaPeriodoSeguro * saldoAuxiliar);
+          saldoAuxiliar = Math.max(0,
+            saldoAuxiliar * (1 + interesAuxiliar + tasaPeriodoSeguro) - cuotaAuxiliar * factores[i]
+          );
         }
+        // J2 = VNA(...)/monto; J3 = monto*J2. Se conserva este orden.
+        const valorPresentePrimas = sumar(primasMensuales.map((prima, i) =>
+          prima / Math.pow(1 + PARAMETROS.costoCapitalMensual, i + 1)
+        ));
+        primaPrincipal = monto * (valorPresentePrimas / monto);
+      }
 
-        formulario.addEventListener("submit", function (evento) {
-            evento.preventDefault();
+      // H17 y J4: seguro de desempleo y monto total financiado.
+      const adicionalDesempleo = redondearDos((monto + primaPrincipal) * desempleo);
+      const montoFinanciado = monto + primaPrincipal + adicionalDesempleo;
+      const comision = estadoCuenta === "fisico" ? PARAMETROS.comisionFisica : 0;
 
-            const plazo = Number(document.getElementById("plazo").value);
-            const primerPago = document.getElementById("primer-pago").valueAsDate;
-            const cuotaJulio = formulario.elements["cuota_julio"].checked;
-            const cuotaDiciembre = formulario.elements["cuota_diciembre"].checked;
+      // J6: cuota base, considerando los factores de julio y diciembre.
+      const cuotaBase = montoFinanciado / sumar(factores.map((factor, i) =>
+        factor / Math.pow(1 + tea, acumulados[i] / 360)
+      ));
 
-            // Si ambos checks están desmarcados, la cuota es Simple.
-            // Con alguno marcado, el tipo queda vacío por ahora.
-            const tipoCuota = !cuotaJulio && !cuotaDiciembre ? "Simple" : "";
-
-            cronograma.textContent = "";
-
-            for (let i = 0; i < plazo; i++) {
-                const fechaPago = sumarMeses(primerPago, i);
-                const fila = cronograma.insertRow();
-
-                fila.insertCell().textContent = i + 1;
-                fila.insertCell().textContent = formatearFecha(fechaPago);
-                fila.insertCell().textContent = "0.00"; // Saldo inicial
-                fila.insertCell().textContent = "0.00"; // Interés
-                fila.insertCell().textContent = "0.00"; // Capital
-                fila.insertCell().textContent = "0.00"; // Comisiones
-                fila.insertCell().textContent = "0.00"; // Cuota
-                fila.insertCell().textContent = "0.00"; // Saldo final
-                fila.insertCell().textContent = tipoCuota;
-            }
+      let saldo = montoFinanciado;
+      const cronograma = [];
+      const flujosTcea = [];
+      for (let i = 0; i < plazo; i++) {
+        const interes = saldo * (Math.pow(1 + tea, dias[i] / 360) - 1);
+        const pagoSinComision = Math.min(saldo + interes, cuotaBase * factores[i]);
+        const capital = Math.max(0, pagoSinComision - interes);
+        const saldoFinal = Math.max(0, saldo - capital);
+        cronograma.push({
+          numero: i + 1,
+          fecha: fechas[i],
+          saldoInicial: saldo,
+          interes,
+          capital,
+          comisiones: comision,
+          cuota: pagoSinComision + comision,
+          saldoFinal,
+          tipo: factores[i] === 2 ? "Doble" : "Simple"
         });
+        // N usa la cuota teórica, tal como en el archivo de referencia.
+        flujosTcea.push(cuotaBase * factores[i] + comision);
+        saldo = saldoFinal;
+      }
 
-        formulario.addEventListener("reset", function () {
-            resultados.textContent = "";
-            cronograma.textContent = "";
+      return {
+        cuotaEstimada: cuotaBase + comision,
+        montoSolicitado: monto,
+        primasSeguros: primaPrincipal + adicionalDesempleo,
+        montoFinanciado,
+        intereses: sumar(cronograma.map(fila => fila.interes)),
+        comisiones: sumar(cronograma.map(fila => fila.comisiones)),
+        totalPagar: sumar(cronograma.map(fila => fila.cuota)),
+        tcea: calcularTcea(monto, flujosTcea, acumulados),
+        adicionalDesempleo,
+        cronograma
+      };
+    }
+
+    const formulario = document.getElementById("formulario");
+    const mensaje = document.getElementById("mensaje");
+    const cuerpoCronograma = document.getElementById("cronograma");
+    const valor = id => document.getElementById(id).value;
+
+    function leerDatos() {
+      return {
+        producto: valor("producto"),
+        monto: Number(valor("monto")),
+        plazo: Number(valor("plazo")),
+        tea: Number(valor("tea")) / 100,
+        desembolso: leerFecha(valor("desembolso")),
+        primerPago: leerFecha(valor("primerPago")),
+        seguro: valor("seguro"),
+        cobertura: valor("cobertura"),
+        estadoCuenta: valor("estadoCuenta"),
+        julio: Number(valor("julio")),
+        diciembre: Number(valor("diciembre")),
+        desempleo: Number(valor("desempleo")) / 100
+      };
+    }
+
+    function limpiarResultados() {
+      document.querySelectorAll("output").forEach(salida => { salida.textContent = "—"; });
+      cuerpoCronograma.replaceChildren();
+    }
+
+    function actualizar() {
+      mensaje.textContent = "";
+      if (!formulario.checkValidity()) {
+        limpiarResultados();
+        return;
+      }
+      const datos = leerDatos();
+      if (datos.primerPago <= datos.desembolso) {
+        limpiarResultados();
+        mensaje.textContent = "El primer pago debe ser posterior a la fecha de desembolso.";
+        return;
+      }
+
+      const resultado = simular(datos);
+      if (Object.entries(resultado).some(([clave, dato]) => clave !== "cronograma" && !Number.isFinite(dato))) {
+        limpiarResultados();
+        mensaje.textContent = "No se pudo calcular con los valores ingresados. Revisa los datos.";
+        return;
+      }
+      Object.entries(resultado).forEach(([id, dato]) => {
+        if (id !== "cronograma") {
+          document.getElementById(id).textContent = id === "tcea" ? numero(dato * 100) + "%" : moneda(dato);
+        }
+      });
+
+      const fragmento = document.createDocumentFragment();
+      resultado.cronograma.forEach(fila => {
+        const tr = document.createElement("tr");
+        const celdas = [fila.numero, mostrarFecha(fila.fecha),
+          numero(fila.saldoInicial), numero(fila.interes), numero(fila.capital),
+          numero(fila.comisiones), numero(fila.cuota), numero(fila.saldoFinal), fila.tipo];
+        celdas.forEach(texto => {
+          const td = document.createElement("td");
+          td.textContent = texto;
+          tr.appendChild(td);
         });
-    </script>
+        fragmento.appendChild(tr);
+      });
+      cuerpoCronograma.replaceChildren(fragmento);
+    }
+
+    formulario.addEventListener("submit", evento => {
+      evento.preventDefault();
+      actualizar();
+    });
+    formulario.addEventListener("input", actualizar);
+    formulario.addEventListener("change", actualizar);
+    formulario.addEventListener("reset", () => setTimeout(actualizar, 0));
+    actualizar();
+  </script>
 </body>
 </html>
