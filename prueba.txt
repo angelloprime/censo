@@ -521,6 +521,29 @@
       .form-actions .btn { font-size:12px; }
       .form-actions i { display:none; }
     }
+    .fila-cd [data-fila] {
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      font-size: 22px;
+      line-height: 1;
+    }
+    .fila-cd [data-fila="quitar"] {
+      --bs-btn-color: var(--brand-dark);
+      --bs-btn-bg: var(--brand-soft);
+      --bs-btn-border-color: #efb6ba;
+      --bs-btn-hover-color: white;
+      --bs-btn-hover-bg: var(--brand-dark);
+      --bs-btn-disabled-color: #747b84;
+      --bs-btn-disabled-bg: #f2f3f5;
+      --bs-btn-disabled-border-color: var(--line);
+    }
+    #productoCD .form-actions .btn-brand:disabled {
+      --bs-btn-disabled-bg: var(--brand);
+      --bs-btn-disabled-border-color: var(--brand);
+      --bs-btn-disabled-color: #fff;
+      --bs-btn-disabled-opacity: 1;
+    }
   </style>
 </head>
 
@@ -858,13 +881,247 @@
       </div>
     </section>
     </div>
-    <section id="productoCD" class="panel panel-body" role="tabpanel" aria-labelledby="tabCD" tabindex="0" hidden>
-      <h2 class="panel-title"><i class="bi bi-tools section-icon" aria-hidden="true"></i>CD en construcción</h2>
-    </section>
+    <div id="productoCD" role="tabpanel" aria-labelledby="tabCD" tabindex="0" hidden>
+      <div class="row g-4">
+        <div class="col-lg-7">
+          <section class="panel" aria-labelledby="cdTituloFormulario">
+            <div class="panel-header">
+              <h2 class="panel-title" id="cdTituloFormulario"><i class="bi bi-sliders2 section-icon" aria-hidden="true"></i>Configura tu préstamo</h2>
+            </div>
+            <div class="panel-body">
+              <div class="row g-3">
+                  <div class="col-sm-6">
+                    <label class="form-label" for="cdImporte">Ingrese CD</label>
+                    <div class="input-group">
+                      <span class="input-group-text">S/</span>
+                      <input class="form-control" id="cdImporte" name="cdImporte" type="number"
+                        min="0" step="0.01" inputmode="decimal" placeholder="0.00">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="form-label" for="cdCash">Ingrese Cash</label>
+                    <div class="input-group">
+                      <span class="input-group-text">S/</span>
+                      <input class="form-control" id="cdCash" name="cdCash" type="number"
+                        min="0" step="0.01" inputmode="decimal" placeholder="0.00">
+                    </div>
+                  </div>
+              </div>
+              <div id="filasCD" class="mt-4 pt-3 border-top"></div>
+              <template id="plantillaFilaCD">
+                <div class="fila-cd row g-2 align-items-end mb-3">
+                  <label class="col-12 col-sm">
+                    <span class="form-label d-block">Importe</span>
+                    <span class="input-group">
+                      <span class="input-group-text">S/</span>
+                      <input class="form-control" type="number" min="0" step="0.01"
+                        inputmode="decimal" aria-label="Importe en soles" placeholder="0.00">
+                    </span>
+                  </label>
+                  <label class="col-6 col-sm">
+                    <span class="form-label d-block">Tipo</span>
+                    <select class="form-select" data-tipo>
+                      <option selected>PP</option><option>TC</option><option>CASH</option>
+                    </select>
+                  </label>
+                  <label class="col-6 col-sm">
+                    <span class="form-label d-block">Porcentaje</span>
+                    <select class="form-select" data-porcentaje>
+                      <option value="2" selected>2%</option><option value="4">4%</option>
+                    </select>
+                  </label>
+                  <div class="col-12 col-sm-auto d-flex gap-2">
+                    <button type="button" data-fila="agregar" class="btn btn-brand" aria-label="Agregar fila" title="Agregar fila">+</button>
+                    <button type="button" data-fila="quitar" class="btn" aria-label="Eliminar esta fila" title="Eliminar esta fila">−</button>
+                  </div>
+                </div>
+              </template>
+              <div class="row g-3 mt-3 pt-2 border-top">
+                <div class="col-sm-6">
+                  <label class="form-label" for="cdTea">TEA</label>
+                  <div class="input-group">
+                    <input
+                      class="form-control"
+                      id="cdTea"
+                      name="cdTea"
+                      type="number"
+                      min="0"
+                      step="any"
+                      placeholder="Ej. 18"
+                      required
+                    >
+                    <span class="input-group-text">%</span>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <label class="form-label" for="cdSeguro">Tipo de seguro</label>
+                  <select
+                    class="form-select"
+                    id="cdSeguro"
+                    name="cdSeguro"
+                  >
+                    <option value="Vida" selected>Vida</option>
+                    <option value="Desgravamen">Desgravamen</option>
+                    <option value="Desgravamen con Devolución">
+                      Desgravamen con devolución
+                    </option>
+                    <option value="Exonerado">Exonerado</option>
+                    <option value="Sin Seguro">Sin seguro</option>
+                  </select>
+                </div>
+
+                <div class="col-sm-6">
+                  <label class="form-label" for="cdDesembolso">
+                    Fecha de desembolso
+                  </label>
+                  <input
+                    class="form-control"
+                    id="cdDesembolso"
+                    name="cdDesembolso"
+                    type="date"
+                    required
+                  >
+                </div>
+
+                <div class="col-sm-6">
+                  <label class="form-label" for="cdPrimerPago">
+                    Fecha del primer pago
+                  </label>
+                  <input
+                    class="form-control"
+                    id="cdPrimerPago"
+                    name="cdPrimerPago"
+                    type="date"
+                    aria-describedby="cdAvisoPrimerPago"
+                    required
+                  >
+                  <div id="cdAvisoPrimerPago" class="small text-danger" role="alert"></div>
+                </div>
+              </div>
+
+              <fieldset class="options">
+                <legend>Personaliza tus pagos</legend>
+
+                <div class="row g-2">
+                  <div class="col-sm-6">
+                    <label class="option-card" for="cdJulio">
+                      <input id="cdJulio" name="cdJulio" type="checkbox">
+                      <span>
+                        <span class="option-title">Cuota doble en julio</span>
+                        <span class="option-caption">
+                          Duplica la cuota base de ese mes.
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label class="option-card" for="cdDiciembre">
+                      <input id="cdDiciembre" name="cdDiciembre" type="checkbox">
+                      <span>
+                        <span class="option-title">Cuota doble en diciembre</span>
+                        <span class="option-caption">
+                          Duplica la cuota base de ese mes.
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label class="option-card" for="cdDesempleo">
+                      <input id="cdDesempleo" name="cdDesempleo" type="checkbox">
+                      <span>
+                        <span class="option-title">Seguro de desempleo</span>
+                        <span class="option-caption">
+                          4% del importe más la prima principal.
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label class="option-card" for="cdEstadoCuenta">
+                      <input id="cdEstadoCuenta" name="cdEstadoCuenta" type="checkbox">
+                      <span>
+                        <span class="option-title">Estado de cuenta físico</span>
+                        <span class="option-caption">
+                          Añade S/ 11.00 por cuota.
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+
+              <div class="form-actions mt-4">
+                <button class="btn btn-brand flex-grow-1" type="button" disabled>
+                  <i class="bi bi-calculator me-2" aria-hidden="true"></i>
+                  Calcular préstamo
+                </button>
+
+                <button class="btn btn-neutral" type="button" disabled>
+                  <i class="bi bi-arrow-counterclockwise me-1" aria-hidden="true"></i>
+                  Limpiar
+                </button>
+                <button class="btn btn-neutral" type="button" disabled>
+                  <i class="bi bi-calendar3 me-1" aria-hidden="true"></i>
+                  <span>Ver cronograma</span>
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="col-lg-5">
+          <section class="panel summary-panel" aria-labelledby="cdTituloResumen">
+            <div class="panel-header">
+              <h2 class="panel-title" id="cdTituloResumen">
+                <i class="bi bi-pie-chart section-icon" aria-hidden="true"></i>
+                Resumen de tu préstamo
+              </h2>
+            </div>
+            <div class="panel-body"></div>
+          </section>
+        </div>
+      </div>
+    </div>
   </main>
 
   <script>
     "use strict";
+
+    const filasCD = document.getElementById("filasCD");
+    function nuevaFilaCD() {
+      return document.getElementById("plantillaFilaCD").content.firstElementChild.cloneNode(true);
+    }
+    function actualizarBotonesCD() {
+      for (const boton of filasCD.querySelectorAll('[data-fila="quitar"]')) {
+        boton.disabled = filasCD.childElementCount === 1;
+      }
+    }
+    filasCD.append(nuevaFilaCD());
+    actualizarBotonesCD();
+    filasCD.addEventListener("change", evento => {
+      const tipo = evento.target;
+      if (!tipo.matches("[data-tipo]")) return;
+      const fila = tipo.closest(".fila-cd");
+      fila.querySelector("[data-porcentaje]").disabled = tipo.value !== "PP";
+    });
+    filasCD.addEventListener("click", evento => {
+      const boton = evento.target.closest("button[data-fila]");
+      if (!boton) return;
+      const fila = boton.closest(".fila-cd");
+      if (boton.dataset.fila === "agregar") {
+        const nueva = nuevaFilaCD();
+        fila.after(nueva);
+        nueva.querySelector("input").focus();
+      } else if (filasCD.childElementCount > 1) {
+        const vecina = fila.nextElementSibling || fila.previousElementSibling;
+        fila.remove();
+        vecina.querySelector("input").focus();
+      }
+      actualizarBotonesCD();
+    });
 
     // Producto PP y cobertura titular, igual que en el formulario original.
     // Estos parámetros provienen del archivo proporcionado.
@@ -1334,32 +1591,38 @@
 
     formulario.addEventListener("input", invalidarResultados);
     formulario.addEventListener("change", invalidarResultados);
-    function proponerPrimerPago() {
-      const fecha = $("desembolso").valueAsDate;
-      if (fecha) fecha.setUTCDate(fecha.getUTCDate() + 30);
-      $("primerPago").valueAsDate = fecha;
+    function configurarFechas(desembolso, primerPago, alerta) {
+      function proponerPrimerPago() {
+        const fecha = desembolso.valueAsDate;
+        if (fecha) fecha.setUTCDate(fecha.getUTCDate() + 30);
+        primerPago.valueAsDate = fecha;
+      }
+
+      function validar() {
+        const inicio = desembolso.valueAsDate;
+        const campo = primerPago;
+        const fin = campo.valueAsDate;
+        const dias = inicio && fin ? diasEntre(fin, inicio) : null;
+        const fueraDeRango = dias !== null && (dias < 30 || dias > 60);
+        const aviso = fueraDeRango
+          ? "El primer pago debe ser entre 30 y 60 días calendario después del desembolso."
+          : "";
+        campo.setCustomValidity(aviso);
+        campo.classList.toggle("is-invalid", fueraDeRango);
+        campo.setAttribute("aria-invalid", String(fueraDeRango));
+        alerta.textContent = aviso;
+      }
+
+      desembolso.addEventListener("input", () => {
+        proponerPrimerPago();
+        validar();
+      });
+      primerPago.addEventListener("input", validar);
+      return validar;
     }
 
-    function validarFechaPrimerPago() {
-      const inicio = $("desembolso").valueAsDate;
-      const campo = $("primerPago");
-      const fin = campo.valueAsDate;
-      const dias = inicio && fin ? diasEntre(fin, inicio) : null;
-      const fueraDeRango = dias !== null && (dias < 30 || dias > 60);
-      const aviso = fueraDeRango
-        ? "El primer pago debe ser entre 30 y 60 días calendario después del desembolso."
-        : "";
-      campo.setCustomValidity(aviso);
-      campo.classList.toggle("is-invalid", fueraDeRango);
-      campo.setAttribute("aria-invalid", String(fueraDeRango));
-      $("avisoPrimerPago").textContent = aviso;
-    }
-
-    $("desembolso").addEventListener("input", () => {
-      proponerPrimerPago();
-      validarFechaPrimerPago();
-    });
-    $("primerPago").addEventListener("input", validarFechaPrimerPago);
+    const validarFechaPrimerPago = configurarFechas($("desembolso"), $("primerPago"), $("avisoPrimerPago"));
+    configurarFechas($("cdDesembolso"), $("cdPrimerPago"), $("cdAvisoPrimerPago"));
     formulario.addEventListener("reset", () => {
       invalidarResultados();
       queueMicrotask(validarFechaPrimerPago);
