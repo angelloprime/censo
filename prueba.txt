@@ -3,227 +3,896 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Simulador de préstamo</title>
+  <meta name="theme-color" content="#ec111a">
+  <title>Simulador de préstamo personal</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ce101b'/%3E%3Crect x='8' y='4' width='16' height='24' rx='3' fill='white'/%3E%3Cpath fill='%23ce101b' d='M11 8h10v5H11zM11 16h4v3h-4zM17 16h4v3h-4zM11 21h4v3h-4zM17 21h4v3h-4z'/%3E%3C/svg%3E">
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --brand: #ec111a;
+      --brand-dark: #bd0d16;
+      --brand-soft: #fff1f2;
+      --ink: #24272c;
+      --muted: #626975;
+      --line: #e5e7eb;
+      --surface: #ffffff;
+      --background: #f5f6f8;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    .app-header {
+      background: var(--surface);
+      border-top: 4px solid var(--brand);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .app-container {
+      max-width: 1240px;
+      margin: auto;
+      padding-inline: 24px;
+    }
+
+    .brand-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      background: var(--brand);
+      color: white;
+      font-size: 21px;
+    }
+
+    .brand-title {
+      font-size: 15px;
+      font-weight: 750;
+      letter-spacing: -.02em;
+    }
+
+    .brand-caption {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .quiet-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: white;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .page-intro {
+      padding-block: 32px 24px;
+    }
+
+    .eyebrow {
+      margin-bottom: 8px;
+      color: var(--brand-dark);
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(26px, 3.5vw, 36px);
+      font-weight: 750;
+      letter-spacing: -.045em;
+    }
+
+    .page-intro p {
+      margin: 0;
+      max-width: 660px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .panel {
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 4px 20px rgb(24 28 36 / 3%);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .panel-title {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 750;
+      letter-spacing: -.02em;
+    }
+
+    .section-icon {
+      margin-right: 8px;
+      color: var(--brand);
+    }
+
+    .panel-body {
+      padding: 24px;
+    }
+
+    .form-label {
+      margin-bottom: 7px;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .form-control,
+    .form-select,
+    .input-group-text {
+      min-height: 46px;
+      border-color: #d7dbe1;
+      border-radius: 9px;
+      font-size: 14px;
+    }
+
+    .form-control,
+    .form-select {
+      color: var(--ink);
+    }
+
+    .form-control::placeholder {
+      color: #8b919b;
+    }
+
+    .input-group-text {
+      color: var(--muted);
+      background: #f8f9fb;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgb(236 17 26 / 10%);
+    }
+
+    .form-text {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    fieldset {
+      min-width: 0;
+    }
+
+    .options {
+      margin-top: 25px;
+      padding-top: 23px;
+      border-top: 1px solid var(--line);
+    }
+
+    .options legend {
+      float: none;
+      width: auto;
+      margin-bottom: 14px;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .option-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      height: 100%;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+    }
+
+    .option-card:hover {
+      background: #fafafa;
+      border-color: #b9bec7;
+    }
+
+    .option-card:has(input:checked) {
+      background: var(--brand-soft);
+      border-color: #f0b5b9;
+    }
+
+    .option-card input {
+      flex-shrink: 0;
+      width: 17px;
+      height: 17px;
+      margin-top: 3px;
+      accent-color: var(--brand);
+    }
+
+    .option-title {
+      display: block;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .option-caption {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .btn {
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .btn-brand {
+      --bs-btn-color: #fff;
+      --bs-btn-bg: var(--brand);
+      --bs-btn-border-color: var(--brand);
+      --bs-btn-hover-color: #fff;
+      --bs-btn-hover-bg: var(--brand-dark);
+      --bs-btn-hover-border-color: var(--brand-dark);
+      --bs-btn-active-color: #fff;
+      --bs-btn-active-bg: var(--brand-dark);
+      --bs-btn-active-border-color: var(--brand-dark);
+      min-height: 46px;
+      padding-inline: 22px;
+    }
+
+    .btn-neutral {
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--ink);
+    }
+
+    .btn-neutral:hover {
+      background: #f2f3f5;
+      border-color: #bcc2cc;
+    }
+
+    :is(button, input, select, summary, a):focus-visible {
+      outline: 3px solid #365fa4;
+      outline-offset: 3px;
+    }
+
+    .summary-panel {
+      height: 100%;
+    }
+
+    .summary-hero {
+      padding: 26px 24px;
+      background: var(--brand-soft);
+      border-bottom: 1px solid #f5dce0;
+    }
+
+    .summary-hero label {
+      display: block;
+      margin-bottom: 8px;
+      color: #5e3439;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .main-amount {
+      display: block;
+      color: var(--brand-dark);
+      font-size: clamp(30px, 3.5vw, 43px);
+      font-weight: 750;
+      letter-spacing: -.045em;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+
+    .summary-caption:empty { display: none; }
+
+    .summary-caption {
+      margin: 12px 0 0;
+      color: #77555a;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .summary-list {
+      margin: 0;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 18px;
+      padding-block: 10px;
+    }
+
+    .summary-row dt {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .summary-row dd {
+      margin: 0;
+      text-align: right;
+      font-size: 13px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+
+    output,
+    .schedule-table {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .summary-row.subtotal {
+      margin-top: 5px;
+      padding-top: 15px;
+      border-top: 1px solid var(--line);
+    }
+
+    .summary-row.subtotal dt {
+      color: var(--ink);
+      font-weight: 650;
+    }
+
+    .total-box {
+      margin-top: 14px;
+      padding: 13px 15px;
+      border-radius: 10px;
+      background: #f5f6f8;
+    }
+
+    .total-box .summary-row {
+      padding-block: 5px;
+    }
+
+    .total-box dt,
+    .total-box dd {
+      color: var(--ink);
+      font-weight: 750;
+    }
+
+    .fine-print {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .empty-state {
+      padding: 45px 24px;
+      text-align: center;
+    }
+
+    .empty-state > i {
+      display: block;
+      margin-bottom: 13px;
+      color: #8a929f;
+      font-size: 31px;
+    }
+
+    .empty-state h3 {
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .empty-state p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .table-responsive {
+      max-height: 480px;
+      overflow: auto;
+    }
+
+    .schedule-table {
+      min-width: 950px;
+      margin: 0;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .schedule-table thead th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      padding: 14px 16px;
+      color: #59616d;
+      background: #f7f8fa;
+      border-bottom: 1px solid var(--line);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .schedule-table td {
+      padding: 13px 16px;
+      color: #404650;
+      border-color: #edf0f3;
+    }
+
+    .schedule-table :is(th, td) {
+      text-align: right;
+      vertical-align: middle;
+    }
+
+    .schedule-table :is(th, td):nth-child(-n+2),
+    .schedule-table :is(th, td):last-child {
+      text-align: left;
+    }
+
+    .schedule-table td:nth-child(7) {
+      color: var(--ink);
+      font-weight: 750;
+    }
+
+    .double-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 5px;
+      background: var(--brand-soft);
+      color: var(--brand-dark);
+      font-size: 10px;
+      font-weight: 750;
+    }
+
+    .app-footer {
+      padding-block: 23px 30px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    #mensaje:not(:empty) {
+      margin-top: 16px;
+      padding: 12px 14px;
+      border: 1px solid #efc3c7;
+      border-radius: 9px;
+      background: var(--brand-soft);
+      color: #9b1720;
+      font-size: 13px;
+    }
+
+    @media (max-width: 575.98px) {
+      .app-container {
+        padding-inline: 16px;
+      }
+
+      .panel-header,
+      .panel-body,
+      .summary-hero {
+        padding: 20px;
+      }
+
+      .page-intro {
+        padding-top: 26px;
+      }
+
+      .brand-caption {
+        font-size: 11px;
+      }
+
+      .summary-row {
+        gap: 10px;
+      }
+    }
+
+    .product-tabs { display:flex; flex:none; padding:3px; background:#f5f6f8; border:1px solid var(--line); border-radius:10px; }
+    .product-tabs button { padding:8px 14px; border:0; border-radius:7px; background:transparent; color:var(--muted); font-weight:700; }
+    .product-tabs [aria-selected="true"] { background:white; color:var(--brand-dark); box-shadow:0 1px 4px #0002; }
+    .form-actions { display:grid; grid-template-columns:1.3fr .8fr 1.2fr; gap:8px; }
+    .form-actions .btn { min-width:0; padding-inline:6px; }
+    @media (max-width:575px) {
+      .form-actions { gap:5px; }
+      .form-actions .btn { font-size:12px; }
+      .form-actions i { display:none; }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Simulador de préstamo</h1>
+  <header class="app-header">
+    <div class="app-container d-flex align-items-center justify-content-between py-3">
+      <div class="d-flex align-items-center gap-3">
+        <span class="brand-icon" aria-hidden="true">
+          <i class="bi bi-calculator"></i>
+        </span>
 
-  <form id="formulario">
-    <fieldset>
-      <legend>Datos del préstamo</legend>
+        <div>
+          <h1 class="brand-title mb-0">Simulador de préstamos</h1>
+          <div class="brand-caption">Préstamo personal · Libre disponibilidad</div>
+        </div>
+      </div>
 
-      <p>
-        <label for="monto">¿Cuánto necesitas? (S/):</label>
-        <input
-          id="monto"
-          name="monto"
-          type="number"
-          min="0.01"
-          step="any"
-          required
-        >
-      </p>
+      <div class="product-tabs" role="tablist" aria-label="Producto">
+        <button id="tabPP" type="button" role="tab" aria-selected="true" aria-controls="productoPP">PP</button>
+        <button id="tabCD" type="button" role="tab" aria-selected="false" aria-controls="productoCD" tabindex="-1">CD</button>
+      </div>
+    </div>
+  </header>
 
-      <p>
-        <label for="plazo">¿En cuántos meses?</label>
-        <input
-          id="plazo"
-          name="plazo"
-          type="number"
-          min="1"
-          max="72"
-          step="1"
-          required
-        >
-      </p>
+  <main class="app-container py-4">
+    <div id="productoPP" role="tabpanel" aria-labelledby="tabPP">
 
-      <p>
-        <label for="tea">¿Qué TEA te ofrecen? (%):</label>
-        <input
-          id="tea"
-          name="tea"
-          type="number"
-          min="0"
-          step="any"
-          required
-        >
-      </p>
+    <div class="row g-4 align-items-stretch">
+      <div class="col-lg-7" id="formPanel">
+        <section class="panel" aria-labelledby="tituloFormulario">
+          <div class="panel-header">
+            <h2 class="panel-title" id="tituloFormulario">
+              <i class="bi bi-sliders2 section-icon" aria-hidden="true"></i>
+              Configura tu préstamo
+            </h2>
+          </div>
 
-      <p>
-        <label for="desembolso">Fecha de desembolso:</label>
-        <input
-          id="desembolso"
-          name="desembolso"
-          type="date"
-          required
-        >
+          <div class="panel-body">
+            <form id="formulario">
+              <div class="row g-3">
+                <div class="col-sm-6">
+                  <label class="form-label" for="monto">
+                    ¿Cuánto necesitas?
+                  </label>
+                  <div class="input-group">
+                    <span class="input-group-text">S/</span>
+                    <input
+                      class="form-control"
+                      id="monto"
+                      name="monto"
+                      type="number"
+                      min="0.01"
+                      step="any"
+                      placeholder="Ej. 20 000"
+                      required
+                    >
+                  </div>
+                </div>
 
-        <label for="primerPago">Primer pago:</label>
-        <input
-          id="primerPago"
-          name="primerPago"
-          type="date"
-          required
-        >
-      </p>
+                <div class="col-sm-6">
+                  <label class="form-label" for="plazo">Plazo</label>
+                  <div class="input-group">
+                    <input
+                      class="form-control"
+                      id="plazo"
+                      name="plazo"
+                      type="number"
+                      min="1"
+                      max="72"
+                      step="1"
+                      placeholder="Ej. 24"
+                      required
+                    >
+                    <span class="input-group-text">meses</span>
+                  </div>
+                </div>
 
-      <p>
-        <label for="seguro">Tipo de seguro:</label>
-        <select id="seguro" name="seguro">
-          <option value="Vida" selected>Vida</option>
-          <option value="Desgravamen">Desgravamen</option>
-          <option value="Desgravamen con Devolución">
-            Desgravamen con Devolución
-          </option>
-          <option value="Exonerado">Exonerado</option>
-          <option value="Sin Seguro">Sin Seguro</option>
-        </select>
-      </p>
+                <div class="col-sm-6">
+                  <label class="form-label" for="tea">TEA</label>
+                  <div class="input-group">
+                    <input
+                      class="form-control"
+                      id="tea"
+                      name="tea"
+                      type="number"
+                      min="0"
+                      step="any"
+                      placeholder="Ej. 18"
+                      required
+                    >
+                    <span class="input-group-text">%</span>
+                  </div>
+                </div>
 
-      <p>
-        <input
-          id="estadoCuenta"
-          name="estadoCuenta"
-          type="checkbox"
-        >
-        <label for="estadoCuenta">Envío de Estado cuenta</label>
-      </p>
+                <div class="col-sm-6">
+                  <label class="form-label" for="seguro">Tipo de seguro</label>
+                  <select
+                    class="form-select"
+                    id="seguro"
+                    name="seguro"
+                  >
+                    <option value="Vida" selected>Vida</option>
+                    <option value="Desgravamen">Desgravamen</option>
+                    <option value="Desgravamen con Devolución">
+                      Desgravamen con devolución
+                    </option>
+                    <option value="Exonerado">Exonerado</option>
+                    <option value="Sin Seguro">Sin seguro</option>
+                  </select>
+                </div>
 
-      <p>
-        <input id="julio" name="julio" type="checkbox">
-        <label for="julio">Cuota doble en julio</label>
-      </p>
+                <div class="col-sm-6">
+                  <label class="form-label" for="desembolso">
+                    Fecha de desembolso
+                  </label>
+                  <input
+                    class="form-control"
+                    id="desembolso"
+                    name="desembolso"
+                    type="date"
+                    required
+                  >
+                </div>
 
-      <p>
-        <input id="diciembre" name="diciembre" type="checkbox">
-        <label for="diciembre">Cuota doble en diciembre</label>
-      </p>
+                <div class="col-sm-6">
+                  <label class="form-label" for="primerPago">
+                    Fecha del primer pago
+                  </label>
+                  <input
+                    class="form-control"
+                    id="primerPago"
+                    name="primerPago"
+                    type="date"
+                    aria-describedby="avisoPrimerPago"
+                    required
+                  >
+                  <div id="avisoPrimerPago" class="small text-danger" role="alert"></div>
+                </div>
+              </div>
 
-      <p>
-        <input id="desempleo" name="desempleo" type="checkbox">
-        <label for="desempleo">Seguro de desempleo (4%)</label>
-      </p>
+              <fieldset class="options">
+                <legend>Personaliza tus pagos</legend>
 
-      <button type="submit">Calcular</button>
-      <button type="reset">Limpiar</button>
-    </fieldset>
-  </form>
+                <div class="row g-2">
+                  <div class="col-sm-6">
+                    <label class="option-card" for="julio">
+                      <input id="julio" name="julio" type="checkbox">
+                      <span>
+                        <span class="option-title">Cuota doble en julio</span>
+                        <span class="option-caption">
+                          Duplica la cuota base de ese mes.
+                        </span>
+                      </span>
+                    </label>
+                  </div>
 
-  <p id="mensaje" role="status" aria-live="polite"></p>
+                  <div class="col-sm-6">
+                    <label class="option-card" for="diciembre">
+                      <input id="diciembre" name="diciembre" type="checkbox">
+                      <span>
+                        <span class="option-title">Cuota doble en diciembre</span>
+                        <span class="option-caption">
+                          Duplica la cuota base de ese mes.
+                        </span>
+                      </span>
+                    </label>
+                  </div>
 
-  <section aria-labelledby="tituloResultados">
-    <h2 id="tituloResultados">Resultados</h2>
+                  <div class="col-sm-6">
+                    <label class="option-card" for="desempleo">
+                      <input id="desempleo" name="desempleo" type="checkbox">
+                      <span>
+                        <span class="option-title">Seguro de desempleo</span>
+                        <span class="option-caption">
+                          4% del importe más la prima principal.
+                        </span>
+                      </span>
+                    </label>
+                  </div>
 
-    <p>
-      <strong>Cuota estimada:</strong>
-      <output id="cuotaEstimada">—</output>
-    </p>
+                  <div class="col-sm-6">
+                    <label class="option-card" for="estadoCuenta">
+                      <input id="estadoCuenta" name="estadoCuenta" type="checkbox">
+                      <span>
+                        <span class="option-title">Estado de cuenta físico</span>
+                        <span class="option-caption">
+                          Añade S/ 11.00 por cuota.
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
 
-    <p>
-      <strong>Monto solicitado:</strong>
-      <output id="montoSolicitado">—</output>
-    </p>
+              <div class="form-actions mt-4">
+                <button class="btn btn-brand flex-grow-1" type="submit">
+                  <i class="bi bi-calculator me-2" aria-hidden="true"></i>
+                  Calcular préstamo
+                </button>
 
-    <p>
-      <strong>Primas de seguros:</strong>
-      <output id="primasSeguros">—</output>
-    </p>
+                <button class="btn btn-neutral" type="reset">
+                  <i class="bi bi-arrow-counterclockwise me-1" aria-hidden="true"></i>
+                  Limpiar
+                </button>
+                <button class="btn btn-neutral" type="button" id="verCronograma" aria-controls="panelCronograma" aria-expanded="false" disabled>
+                  <i class="bi bi-calendar3 me-1" aria-hidden="true"></i>
+                  <span id="textoBoton">Ver cronograma</span>
+                </button>
+              </div>
 
-    <p>
-      <strong>Monto total financiado:</strong>
-      <output id="montoFinanciado">—</output>
-    </p>
+              <div id="mensaje" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+        </section>
+      </div>
 
-    <p>
-      <strong>Intereses estimados del préstamo:</strong>
-      <output id="intereses">—</output>
-    </p>
+      <div class="col-lg-5 results-column">
+        <section class="panel summary-panel" aria-labelledby="tituloResultados">
+          <div class="panel-header">
+            <h2 class="panel-title" id="tituloResultados">
+              <i class="bi bi-pie-chart section-icon" aria-hidden="true"></i>
+              Resumen de tu préstamo
+            </h2>
 
-    <p>
-      <strong>Comisiones:</strong>
-      <output id="comisiones">—</output>
-    </p>
+            <span class="quiet-badge" id="estadoResultado">Sin calcular</span>
+          </div>
 
-    <p>
-      <strong>Total a pagar:</strong>
-      <output id="totalPagar">—</output>
-    </p>
+          <div class="summary-hero">
+            <label for="cuotaEstimada">Cuota regular estimada</label>
+            <output class="main-amount" id="cuotaEstimada">—</output>
+            <p class="summary-caption" id="notaCuota"></p>
+          </div>
 
-    <p>
-      <strong>TCEA estimada:</strong>
-      <output id="tcea">—</output>
-    </p>
+          <div class="panel-body">
+            <dl class="summary-list">
+              <div class="summary-row">
+                <dt>Monto solicitado</dt>
+                <dd><output id="montoSolicitado">—</output></dd>
+              </div>
+              <div class="summary-row">
+                <dt>Primas de seguros</dt>
+                <dd><output id="primasSeguros">—</output></dd>
+              </div>
+              <div class="summary-row subtotal">
+                <dt>Monto total financiado</dt>
+                <dd><output id="montoFinanciado">—</output></dd>
+              </div>
+              <div class="summary-row">
+                <dt>Intereses estimados</dt>
+                <dd><output id="intereses">—</output></dd>
+              </div>
+              <div class="summary-row">
+                <dt>Comisiones totales</dt>
+                <dd><output id="comisiones">—</output></dd>
+              </div>
+            </dl>
 
-    <p>
-      <strong>Monto adicional desempleo:</strong>
-      <output id="adicionalDesempleo">—</output>
-    </p>
-  </section>
+            <div class="total-box">
+              <dl class="mb-0">
+                <div class="summary-row">
+                  <dt>Total a pagar</dt>
+                  <dd><output id="totalPagar">—</output></dd>
+                </div>
+                <div class="summary-row">
+                  <dt>TCEA estimada</dt>
+                  <dd><output id="tcea">—</output></dd>
+                </div>
+              </dl>
+            </div>
 
-  <section aria-labelledby="tituloCronograma">
-    <h2 id="tituloCronograma">Cronograma</h2>
+            <dl class="mb-0 mt-2">
+              <div class="summary-row">
+                <dt>Desempleo, incluido en seguros</dt>
+                <dd><output id="adicionalDesempleo">—</output></dd>
+              </div>
+              <div class="summary-row">
+                <dt><label for="diasPrimerPago">Días</label></dt>
+                <dd><output id="diasPrimerPago" for="desembolso primerPago">—</output></dd>
+              </div>
+            </dl>
+          </div>
+        </section>
+      </div>
+    </div>
 
-    <table id="tablaCronograma" border="1" hidden>
-      <thead>
-        <tr>
-          <th scope="col">N°</th>
-          <th scope="col">Fecha de pago</th>
-          <th scope="col">Saldo inicial</th>
-          <th scope="col">Interés</th>
-          <th scope="col">Capital</th>
-          <th scope="col">Comisiones</th>
-          <th scope="col">Cuota</th>
-          <th scope="col">Saldo final</th>
-          <th scope="col">Tipo de Cuota</th>
-        </tr>
-      </thead>
-      <tbody id="cronograma"></tbody>
-    </table>
-  </section>
+
+    <section id="panelCronograma" class="panel mt-3" aria-labelledby="tituloCronograma" hidden>
+      <div class="panel-header flex-wrap">
+        <div>
+          <h2 class="panel-title" id="tituloCronograma">
+            <i class="bi bi-calendar3 section-icon" aria-hidden="true"></i>
+            Cronograma de pagos
+          </h2>
+          <p class="form-text mb-0 mt-2" id="detalleCronograma">
+            El detalle de tus cuotas aparecerá aquí.
+          </p>
+        </div>
+
+
+      </div>
+
+      <div class="empty-state" id="vacioCronograma">
+        <i class="bi bi-calendar2-week" aria-hidden="true"></i>
+        <h3>Cada cuota, con su detalle</h3>
+        <p>Calcula tu préstamo para revisar capital, intereses y saldos.</p>
+      </div>
+
+      <div
+        class="table-responsive"
+        id="contenedorTabla"
+        role="region"
+        aria-label="Cronograma de pagos; tabla desplazable"
+        tabindex="0"
+        hidden
+      >
+        <table class="table table-hover schedule-table" id="tablaCronograma">
+          <caption class="visually-hidden">
+            Cronograma de pagos. Todos los importes están expresados en soles.
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">N.º</th>
+              <th scope="col">Fecha de pago</th>
+              <th scope="col">Saldo inicial</th>
+              <th scope="col">Interés</th>
+              <th scope="col">Capital</th>
+              <th scope="col">Comisiones</th>
+              <th scope="col">Cuota</th>
+              <th scope="col">Saldo final</th>
+              <th scope="col">Tipo</th>
+            </tr>
+          </thead>
+          <tbody id="cronograma"></tbody>
+        </table>
+      </div>
+    </section>
+    </div>
+    <section id="productoCD" class="panel panel-body" role="tabpanel" aria-labelledby="tabCD" tabindex="0" hidden>
+      <h2 class="panel-title"><i class="bi bi-tools section-icon" aria-hidden="true"></i>CD en construcción</h2>
+    </section>
+  </main>
 
   <script>
     "use strict";
 
-    // Las tasas se expresan en forma decimal:
-    // 0.001995 equivale a 0.1995%.
+    // Producto PP y cobertura titular, igual que en el formulario original.
+    // Estos parámetros provienen del archivo proporcionado.
     const PARAMETROS = {
       costoCapitalMensual: 0.002871,
       comisionFisica: 11,
 
-      // Cada fila:
-      // [desde días, hasta días, tarifa titular, tarifa con cónyuge].
-      vida: {
-        pp: [
-          [0, 365, 0.00005930, 0.00011864],
-          [366, 1095, 0.00003410, 0.00006825],
-          [1096, 1825, 0.00003190, 0.00006387],
-          [1826, 2190, 0.00002200, 0.00004407],
-          [2191, 3650, 0.00001750, 0.00003504]
-        ],
-        convenio: [
-          [0, 365, 0.00016659, 0.00033317],
-          [366, 1095, 0.00006244, 0.00012488],
-          [1096, 1825, 0.00003032, 0.00006064],
-          [1826, 2190, 0.00002214, 0.00004429],
-          [2191, 3650, 0.00001888, 0.00003777]
-        ]
-      },
+      // [Desde días, hasta días, tarifa diaria titular].
+      vida: [
+        [0, 365, 0.00005930],
+        [366, 1095, 0.00003410],
+        [1096, 1825, 0.00003190],
+        [1826, 2190, 0.00002200],
+        [2191, 3650, 0.00001750]
+      ],
 
-      // Cada lista:
-      // [tarifa titular, tarifa con cónyuge].
       desgravamen: {
-        pp: {
-          "Desgravamen": [0.001995, 0.003990],
-          "Desgravamen con Devolución": [0.002594, 0.005188]
-        },
-        convenio: {
-          "Desgravamen": [0.001832, 0.003664],
-          "Desgravamen con Devolución": [0.002342, 0.004684]
-        }
+        "Desgravamen": 0.001995,
+        "Desgravamen con Devolución": 0.002594
       }
     };
 
     const DIA = 86400000;
+    const $ = id => document.getElementById(id);
+
+    const formulario = $("formulario");
+    const mensaje = $("mensaje");
+    const cuerpoCronograma = $("cronograma");
 
     const formatoNumero = new Intl.NumberFormat("es-PE", {
       minimumFractionDigits: 2,
@@ -241,8 +910,6 @@
     const diasEntre = (final, inicial) =>
       Math.round((final - inicial) / DIA);
 
-    // UTC evita que la zona horaria cambie las fechas
-    // o la cantidad de días entre ellas.
     function leerFecha(texto) {
       return new Date(texto + "T00:00:00Z");
     }
@@ -250,27 +917,16 @@
     function mostrarFecha(fecha) {
       const dia = String(fecha.getUTCDate()).padStart(2, "0");
       const mes = String(fecha.getUTCMonth() + 1).padStart(2, "0");
-
-      return dia + "/" + mes + "/" + fecha.getUTCFullYear();
+      return `${dia}/${mes}/${fecha.getUTCFullYear()}`;
     }
 
-    // Suma meses a la fecha base y limita el día
-    // al último disponible del mes.
     function sumarMeses(fecha, meses) {
       const primero = new Date(
-        Date.UTC(
-          fecha.getUTCFullYear(),
-          fecha.getUTCMonth() + meses,
-          1
-        )
+        Date.UTC(fecha.getUTCFullYear(), fecha.getUTCMonth() + meses, 1)
       );
 
       const ultimoDia = new Date(
-        Date.UTC(
-          primero.getUTCFullYear(),
-          primero.getUTCMonth() + 1,
-          0
-        )
+        Date.UTC(primero.getUTCFullYear(), primero.getUTCMonth() + 1, 0)
       ).getUTCDate();
 
       return new Date(
@@ -282,21 +938,17 @@
       );
     }
 
-    // Si el vencimiento cae domingo, utiliza el lunes siguiente.
     function ajustarDomingo(fecha) {
       return new Date(
         fecha.getTime() + (fecha.getUTCDay() === 0 ? DIA : 0)
       );
     }
 
-    // Redondea a dos decimales el importe del seguro de desempleo.
     function redondearDos(valor) {
       const [mantisa, exponente = "0"] = String(valor).split("e");
-
       const entero = Math.round(
         Number(mantisa + "e" + (Number(exponente) + 2))
       );
-
       const [mantisaFinal, exponenteFinal = "0"] =
         String(entero).split("e");
 
@@ -305,27 +957,18 @@
       );
     }
 
-    // Busca la tasa anual r que cumple:
-    // monto = suma(pago_i / (1 + r)^(días acumulados_i / 365)).
-    // Luego la convierte a base 360: (1 + r)^(360/365) - 1.
     function calcularTcea(monto, pagos, diasAcumulados) {
       const valorPresente = tasa =>
         sumar(
           pagos.map((pago, i) =>
-            pago / Math.pow(
-              1 + tasa,
-              diasAcumulados[i] / 365
-            )
+            pago / Math.pow(1 + tasa, diasAcumulados[i] / 365)
           )
         ) - monto;
 
       let inferior = -0.999999999;
       let superior = 1;
 
-      while (
-        valorPresente(superior) > 0 &&
-        superior < 1e16
-      ) {
+      while (valorPresente(superior) > 0 && superior < 1e16) {
         superior = superior * 2 + 1;
       }
 
@@ -333,7 +976,7 @@
         valorPresente(inferior) < 0 ||
         valorPresente(superior) > 0
       ) {
-        return 0;
+        return NaN;
       }
 
       for (let i = 0; i < 120; i++) {
@@ -354,22 +997,10 @@
 
     function simular(datos) {
       const {
-        producto,
-        monto,
-        plazo,
-        tea,
-        desembolso,
-        primerPago,
-        seguro,
-        cobertura,
-        estadoCuenta,
-        julio,
-        diciembre,
-        desempleo
+        monto, plazo, tea, desembolso, primerPago,
+        seguro, estadoCuenta, julio, diciembre, desempleo
       } = datos;
 
-      // Genera las fechas mensuales y traslada los domingos
-      // al lunes para el cálculo.
       const fechas = Array.from(
         { length: plazo },
         (_, i) => sumarMeses(primerPago, i)
@@ -377,10 +1008,6 @@
 
       const fechasAjustadas = fechas.map(ajustarDomingo);
 
-      // Primer período:
-      // días = primer vencimiento ajustado - desembolso.
-      // Siguientes períodos:
-      // días = vencimiento actual - vencimiento anterior.
       const dias = fechasAjustadas.map((fecha, i) =>
         diasEntre(
           fecha,
@@ -388,55 +1015,36 @@
         )
       );
 
-      const acumulados = fechasAjustadas.map(fecha =>
-        diasEntre(fecha, desembolso)
+      const acumulados = fechasAjustadas.map(
+        fecha => diasEntre(fecha, desembolso)
       );
 
       const factores = fechas.map(fecha => {
         const mes = fecha.getUTCMonth() + 1;
-
-        return mes === 7
-          ? julio
-          : mes === 12
-            ? diciembre
-            : 1;
+        return mes === 7 ? julio : mes === 12 ? diciembre : 1;
       });
-
-      const esDesgravamen =
-        seguro === "Desgravamen" ||
-        seguro === "Desgravamen con Devolución";
 
       let primaPrincipal = 0;
 
       if (seguro === "Vida") {
         const duracion = acumulados[plazo - 1];
-        const indice = cobertura === "titular" ? 2 : 3;
-
-        const tarifa = sumar(
-          PARAMETROS.vida[producto]
-            .filter(fila =>
-              duracion >= fila[0] &&
-              duracion <= fila[1]
-            )
-            .map(fila => fila[indice])
+        const rango = PARAMETROS.vida.find(
+          fila => duracion >= fila[0] && duracion <= fila[1]
         );
 
-        // Prima de vida =
-        // monto × tarifa diaria × duración total en días.
-        primaPrincipal = monto * (tarifa * duracion);
+        if (!rango) {
+          throw new Error(
+            "La duración del préstamo queda fuera de las tarifas de vida disponibles."
+          );
+        }
 
-      } else if (esDesgravamen) {
-        const tarifa =
-          PARAMETROS.desgravamen[producto][seguro][
-            cobertura === "titular" ? 0 : 1
-          ];
-
+        primaPrincipal = monto * rango[2] * duracion;
+      } else if (
+        Object.hasOwn(PARAMETROS.desgravamen, seguro)
+      ) {
+        const tarifa = PARAMETROS.desgravamen[seguro];
         const tem = Math.pow(1 + tea, 1 / 12) - 1;
 
-        // Cuota auxiliar =
-        // monto / suma(
-        //   factor / (1 + TEM + tarifa)^(días acumulados / 30)
-        // ).
         const cuotaAuxiliar = monto / sumar(
           factores.map((factor, i) =>
             factor / Math.pow(
@@ -450,13 +1058,9 @@
         const primasMensuales = [];
 
         for (let i = 0; i < plazo; i++) {
-          // Interés del período =
-          // saldo × ((1 + TEA)^(días / 360) - 1).
           const interesAuxiliar =
             Math.pow(1 + tea, dias[i] / 360) - 1;
 
-          // Prima del período =
-          // saldo × ((1 + tarifa)^(días / 30) - 1).
           const tasaPeriodoSeguro =
             Math.pow(1 + tarifa, dias[i] / 30) - 1;
 
@@ -472,9 +1076,7 @@
           );
         }
 
-        // Valor presente de primas =
-        // suma(prima_i / (1 + costo mensual)^i).
-        const valorPresentePrimas = sumar(
+        primaPrincipal = sumar(
           primasMensuales.map((prima, i) =>
             prima / Math.pow(
               1 + PARAMETROS.costoCapitalMensual,
@@ -482,42 +1084,25 @@
             )
           )
         );
-
-        primaPrincipal =
-          monto * (valorPresentePrimas / monto);
       }
 
-      // Desempleo =
-      // (monto + prima principal) × tasa de desempleo.
       const adicionalDesempleo = redondearDos(
         (monto + primaPrincipal) * desempleo
       );
 
-      // Monto financiado =
-      // monto + prima principal + desempleo.
       const montoFinanciado =
         monto + primaPrincipal + adicionalDesempleo;
 
       const comision =
-        estadoCuenta === "fisico"
-          ? PARAMETROS.comisionFisica
-          : 0;
+        estadoCuenta ? PARAMETROS.comisionFisica : 0;
 
-      // Cuota base =
-      // monto financiado / suma(
-      //   factor / (1 + TEA)^(días acumulados / 360)
-      // ).
       const cuotaBase = montoFinanciado / sumar(
         factores.map((factor, i) =>
-          factor / Math.pow(
-            1 + tea,
-            acumulados[i] / 360
-          )
+          factor / Math.pow(1 + tea, acumulados[i] / 360)
         )
       );
 
       let saldo = montoFinanciado;
-
       const cronograma = [];
       const flujosTcea = [];
 
@@ -535,14 +1120,12 @@
           pagoSinComision - interes
         );
 
-        const saldoFinal = Math.max(
-          0,
-          saldo - capital
-        );
+        const saldoFinal = Math.max(0, saldo - capital);
 
         cronograma.push({
           numero: i + 1,
-          fecha: fechas[i],
+          // Muestra la fecha ajustada que se usa para calcular intereses.
+          fecha: fechasAjustadas[i],
           saldoInicial: saldo,
           interes,
           capital,
@@ -552,11 +1135,7 @@
           tipo: factores[i] === 2 ? "Doble" : "Simple"
         });
 
-        // Flujos de pago utilizados para hallar la TCEA.
-        flujosTcea.push(
-          cuotaBase * factores[i] + comision
-        );
-
+        flujosTcea.push(cuotaBase * factores[i] + comision);
         saldo = saldoFinal;
       }
 
@@ -565,127 +1144,65 @@
         montoSolicitado: monto,
         primasSeguros: primaPrincipal + adicionalDesempleo,
         montoFinanciado,
-
-        intereses: sumar(
-          cronograma.map(fila => fila.interes)
-        ),
-
-        comisiones: sumar(
-          cronograma.map(fila => fila.comisiones)
-        ),
-
-        totalPagar: sumar(
-          cronograma.map(fila => fila.cuota)
-        ),
-
-        tcea: calcularTcea(
-          monto,
-          flujosTcea,
-          acumulados
-        ),
-
+        intereses: sumar(cronograma.map(fila => fila.interes)),
+        comisiones: sumar(cronograma.map(fila => fila.comisiones)),
+        totalPagar: sumar(cronograma.map(fila => fila.cuota)),
+        tcea: calcularTcea(monto, flujosTcea, acumulados),
         adicionalDesempleo,
         cronograma
       };
     }
 
-    const formulario = document.getElementById("formulario");
-    const mensaje = document.getElementById("mensaje");
-    const cuerpoCronograma = document.getElementById("cronograma");
-    const tablaCronograma = document.getElementById("tablaCronograma");
-
-    const valor = id =>
-      document.getElementById(id).value;
-
-    const marcado = id =>
-      document.getElementById(id).checked;
-
     function leerDatos() {
       return {
-        // Producto fijo: Prestabono / Libre Disponibilidad.
-        // Cobertura fija: Titular.
-        producto: "pp",
-        cobertura: "titular",
-
-        monto: Number(valor("monto")),
-        plazo: Number(valor("plazo")),
-        tea: Number(valor("tea")) / 100,
-        desembolso: leerFecha(valor("desembolso")),
-        primerPago: leerFecha(valor("primerPago")),
-        seguro: valor("seguro"),
-
-        estadoCuenta: marcado("estadoCuenta")
-          ? "fisico"
-          : "digital",
-
-        julio: marcado("julio") ? 2 : 1,
-        diciembre: marcado("diciembre") ? 2 : 1,
-        desempleo: marcado("desempleo") ? 0.04 : 0
+        monto: Number($("monto").value),
+        plazo: Number($("plazo").value),
+        tea: Number($("tea").value) / 100,
+        desembolso: leerFecha($("desembolso").value),
+        primerPago: leerFecha($("primerPago").value),
+        seguro: $("seguro").value,
+        estadoCuenta: $("estadoCuenta").checked,
+        julio: $("julio").checked ? 2 : 1,
+        diciembre: $("diciembre").checked ? 2 : 1,
+        desempleo: $("desempleo").checked ? 0.04 : 0
       };
     }
 
-    function limpiarResultados() {
+    function cambiarVisibilidad(abierto) {
+      $("panelCronograma").hidden = !abierto;
+      $("verCronograma").setAttribute("aria-expanded", String(abierto));
+      $("textoBoton").textContent = abierto ? "Ocultar cronograma" : "Ver cronograma";
+    }
+
+    $("verCronograma").addEventListener("click", () => {
+      cambiarVisibilidad($("panelCronograma").hidden);
+    });
+
+    function invalidarResultados() {
+      cambiarVisibilidad(false);
+      $("verCronograma").disabled = true;
+      mensaje.textContent = "";
+
       document.querySelectorAll("output").forEach(salida => {
         salida.textContent = "—";
       });
 
       cuerpoCronograma.replaceChildren();
-      tablaCronograma.hidden = true;
+      $("contenedorTabla").hidden = true;
+      $("vacioCronograma").hidden = false;
+
+      $("estadoResultado").textContent = "Sin calcular";
+
+      $("notaCuota").textContent = "";
+
+      $("detalleCronograma").textContent =
+        "El detalle de tus cuotas aparecerá aquí.";
     }
 
-    // Al modificar cualquier dato, se descarta la simulación anterior.
-    function invalidarResultados() {
-      mensaje.textContent = "";
-      limpiarResultados();
-    }
-
-    function calcular() {
-      invalidarResultados();
-
-      if (!formulario.checkValidity()) {
-        return;
-      }
-
-      const datos = leerDatos();
-
-      if (datos.primerPago <= datos.desembolso) {
-        limpiarResultados();
-
-        mensaje.textContent =
-          "El primer pago debe ser posterior a la fecha de desembolso.";
-
-        return;
-      }
-
-      const resultado = simular(datos);
-
-      const tieneValoresInvalidos =
-        Object.entries(resultado).some(([clave, dato]) =>
-          clave !== "cronograma" &&
-          !Number.isFinite(dato)
-        );
-
-      if (tieneValoresInvalidos) {
-        limpiarResultados();
-
-        mensaje.textContent =
-          "No se pudo calcular con los valores ingresados. Revisa los datos.";
-
-        return;
-      }
-
-      Object.entries(resultado).forEach(([id, dato]) => {
-        if (id !== "cronograma") {
-          document.getElementById(id).textContent =
-            id === "tcea"
-              ? numero(dato * 100) + "%"
-              : moneda(dato);
-        }
-      });
-
+    function mostrarCronograma(filas) {
       const fragmento = document.createDocumentFragment();
 
-      resultado.cronograma.forEach(fila => {
+      filas.forEach(fila => {
         const tr = document.createElement("tr");
 
         const celdas = [
@@ -696,8 +1213,7 @@
           numero(fila.capital),
           numero(fila.comisiones),
           numero(fila.cuota),
-          numero(fila.saldoFinal),
-          fila.tipo
+          numero(fila.saldoFinal)
         ];
 
         celdas.forEach(texto => {
@@ -706,25 +1222,171 @@
           tr.appendChild(td);
         });
 
+        const tipo = document.createElement("td");
+
+        if (fila.tipo === "Doble") {
+          const badge = document.createElement("span");
+          badge.className = "double-badge";
+          badge.textContent = "Doble";
+          tipo.appendChild(badge);
+        } else {
+          tipo.textContent = "Simple";
+        }
+
+        tr.appendChild(tipo);
         fragmento.appendChild(tr);
       });
 
       cuerpoCronograma.replaceChildren(fragmento);
-      tablaCronograma.hidden = false;
+      $("contenedorTabla").hidden = false;
+      $("vacioCronograma").hidden = true;
     }
 
-    // La simulación se ejecuta únicamente al enviar el formulario.
+    function calcular() {
+      invalidarResultados();
+
+      validarFechaPrimerPago();
+      if (!formulario.reportValidity()) return;
+
+      const datos = leerDatos();
+
+      if (
+        !Number.isFinite(datos.monto) ||
+        !Number.isFinite(datos.tea) ||
+        !Number.isInteger(datos.plazo) ||
+        datos.monto <= 0 ||
+        datos.tea < 0 ||
+        datos.plazo < 1 ||
+        datos.plazo > 72 ||
+        !Number.isFinite(datos.desembolso.getTime()) ||
+        !Number.isFinite(datos.primerPago.getTime())
+      ) {
+        mensaje.textContent =
+          "Revisa los importes, el plazo y las fechas ingresadas.";
+        return;
+      }
+
+
+      try {
+        const resultado = simular(datos);
+
+        const resumenValido = Object.entries(resultado).every(
+          ([clave, dato]) =>
+            clave === "cronograma" || Number.isFinite(dato)
+        );
+
+        const cronogramaValido = resultado.cronograma.every(
+          fila => [
+            fila.saldoInicial,
+            fila.interes,
+            fila.capital,
+            fila.comisiones,
+            fila.cuota,
+            fila.saldoFinal
+          ].every(Number.isFinite)
+        );
+
+        if (!resumenValido || !cronogramaValido) {
+          throw new Error(
+            "No se pudo calcular con estos valores. Revisa los datos."
+          );
+        }
+
+        Object.entries(resultado).forEach(([id, dato]) => {
+          if (id !== "cronograma") {
+            $(id).textContent = id === "tcea"
+              ? numero(dato * 100) + "%"
+              : moneda(dato);
+          }
+        });
+
+        $("diasPrimerPago").textContent = String(diasEntre(datos.primerPago, datos.desembolso));
+        mostrarCronograma(resultado.cronograma);
+        $("verCronograma").disabled = false;
+
+        $("estadoResultado").textContent = "Calculado";
+
+
+        const hayDobles = resultado.cronograma.some(
+          fila => fila.tipo === "Doble"
+        );
+
+        $("notaCuota").textContent = hayDobles
+          ? "Las cuotas dobles figuran en el cronograma. La comisión por estado de cuenta no se duplica."
+          : "";
+
+        $("detalleCronograma").textContent =
+          `${datos.plazo} cuotas · Importes en soles · ` +
+          "Los vencimientos en domingo se trasladan al lunes.";
+
+
+      } catch (error) {
+        invalidarResultados();
+        mensaje.textContent = error.message ||
+          "Ocurrió un error al calcular. Revisa los datos.";
+      }
+    }
+
     formulario.addEventListener("submit", evento => {
       evento.preventDefault();
       calcular();
     });
 
-    // Editar o limpiar solo borra los resultados; no recalcula.
     formulario.addEventListener("input", invalidarResultados);
     formulario.addEventListener("change", invalidarResultados);
-    formulario.addEventListener("reset", invalidarResultados);
+    function proponerPrimerPago() {
+      const fecha = $("desembolso").valueAsDate;
+      if (fecha) fecha.setUTCDate(fecha.getUTCDate() + 30);
+      $("primerPago").valueAsDate = fecha;
+    }
 
-    // Al abrir la página, los resultados y el cronograma están vacíos.
+    function validarFechaPrimerPago() {
+      const inicio = $("desembolso").valueAsDate;
+      const campo = $("primerPago");
+      const fin = campo.valueAsDate;
+      const dias = inicio && fin ? diasEntre(fin, inicio) : null;
+      const fueraDeRango = dias !== null && (dias < 30 || dias > 60);
+      const aviso = fueraDeRango
+        ? "El primer pago debe ser entre 30 y 60 días calendario después del desembolso."
+        : "";
+      campo.setCustomValidity(aviso);
+      campo.classList.toggle("is-invalid", fueraDeRango);
+      campo.setAttribute("aria-invalid", String(fueraDeRango));
+      $("avisoPrimerPago").textContent = aviso;
+    }
+
+    $("desembolso").addEventListener("input", () => {
+      proponerPrimerPago();
+      validarFechaPrimerPago();
+    });
+    $("primerPago").addEventListener("input", validarFechaPrimerPago);
+    formulario.addEventListener("reset", () => {
+      invalidarResultados();
+      queueMicrotask(validarFechaPrimerPago);
+    });
+
+    const pestanas = [$("tabPP"), $("tabCD")];
+    function seleccionarPestana(activa) {
+      for (const pestana of pestanas) {
+        const seleccionada = pestana === activa;
+        pestana.setAttribute("aria-selected", String(seleccionada));
+        pestana.tabIndex = seleccionada ? 0 : -1;
+        $(pestana.getAttribute("aria-controls")).hidden = !seleccionada;
+      }
+    }
+
+    pestanas.forEach((pestana, indice) => {
+      pestana.addEventListener("click", () => seleccionarPestana(pestana));
+      pestana.addEventListener("keydown", evento => {
+        const destinos = { ArrowLeft: 1 - indice, ArrowRight: 1 - indice, Home: 0, End: 1 };
+        if (!Object.hasOwn(destinos, evento.key)) return;
+        evento.preventDefault();
+        const destino = pestanas[destinos[evento.key]];
+        seleccionarPestana(destino);
+        destino.focus();
+      });
+    });
+
     invalidarResultados();
   </script>
 </body>
