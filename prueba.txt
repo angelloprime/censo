@@ -477,7 +477,7 @@
       line-height: 1.7;
     }
 
-    #mensaje:not(:empty) {
+    :is(#mensaje, #cdMensaje):not(:empty) {
       margin-top: 16px;
       padding: 12px 14px;
       border: 1px solid #efc3c7;
@@ -538,11 +538,34 @@
       --bs-btn-disabled-bg: #f2f3f5;
       --bs-btn-disabled-border-color: var(--line);
     }
+    .cd-opciones > summary { cursor: pointer; font-size: 14px; font-weight: 700; }
+    .cd-opciones[open] > summary { margin-bottom: 14px; }
+    #cdAvisoLimite:empty { display: none; }
     #productoCD .form-actions .btn-brand:disabled {
       --bs-btn-disabled-bg: var(--brand);
       --bs-btn-disabled-border-color: var(--brand);
       --bs-btn-disabled-color: #fff;
       --bs-btn-disabled-opacity: 1;
+    }
+    main.app-container:has(#productoCD:not([hidden])) {
+      max-width: 1720px;
+    }
+    .cd-paneles {
+      display: grid;
+      gap: clamp(16px, 1.4vw, 24px);
+      align-items: start;
+    }
+    .cd-paneles > * { min-width: 0; }
+    @media (min-width: 768px) and (max-width: 1099.98px) {
+      .cd-paneles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .cd-paneles > :first-child { grid-column: 1 / -1; }
+    }
+    @media (min-width: 1100px) {
+      .cd-paneles { grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr) minmax(0, 1.12fr); }
+      .cd-paneles .panel-header { flex-wrap: wrap; gap: 8px; }
+      .cd-paneles :is(.panel-header, .panel-body, .summary-hero) {
+        padding-inline: clamp(14px, 1.25vw, 22px);
+      }
     }
   </style>
 </head>
@@ -882,13 +905,13 @@
     </section>
     </div>
     <div id="productoCD" role="tabpanel" aria-labelledby="tabCD" tabindex="0" hidden>
-      <div class="row g-4">
-        <div class="col-lg-7">
+      <div class="cd-paneles">
+        <div>
           <section class="panel" aria-labelledby="cdTituloFormulario">
             <div class="panel-header">
               <h2 class="panel-title" id="cdTituloFormulario"><i class="bi bi-sliders2 section-icon" aria-hidden="true"></i>Configura tu préstamo</h2>
             </div>
-            <div class="panel-body">
+            <form class="panel-body" id="cdFormulario">
               <div class="row g-3">
                   <div class="col-sm-6">
                     <label class="form-label" for="cdImporte">Ingrese CD</label>
@@ -911,7 +934,7 @@
               <template id="plantillaFilaCD">
                 <div class="fila-cd row g-2 align-items-end mb-3">
                   <label class="col-12 col-sm">
-                    <span class="form-label d-block">Importe</span>
+                    <span class="form-label d-block" data-etiqueta-importe>Importe 1</span>
                     <span class="input-group">
                       <span class="input-group-text">S/</span>
                       <input class="form-control" type="number" min="0" step="0.01"
@@ -937,7 +960,12 @@
                 </div>
               </template>
               <div class="row g-3 mt-3 pt-2 border-top">
-                <div class="col-sm-6">
+                <div class="col-6 col-sm-3">
+                  <label class="form-label" for="cdPlazo">Plazo (meses)</label>
+                  <input class="form-control" id="cdPlazo" name="cdPlazo"
+                    type="number" min="1" max="72" step="1" placeholder="Ej. 24" required>
+                </div>
+                <div class="col-6 col-sm-3">
                   <label class="form-label" for="cdTea">TEA</label>
                   <div class="input-group">
                     <input
@@ -1000,8 +1028,8 @@
                 </div>
               </div>
 
-              <fieldset class="options">
-                <legend>Personaliza tus pagos</legend>
+              <details class="options cd-opciones">
+                <summary>Personaliza tus pagos</summary>
 
                 <div class="row g-2">
                   <div class="col-sm-6">
@@ -1052,38 +1080,165 @@
                     </label>
                   </div>
                 </div>
-              </fieldset>
+              </details>
 
               <div class="form-actions mt-4">
-                <button class="btn btn-brand flex-grow-1" type="button" disabled>
+                <button class="btn btn-brand flex-grow-1" type="submit">
                   <i class="bi bi-calculator me-2" aria-hidden="true"></i>
                   Calcular préstamo
                 </button>
 
-                <button class="btn btn-neutral" type="button" disabled>
+                <button class="btn btn-neutral" type="reset">
                   <i class="bi bi-arrow-counterclockwise me-1" aria-hidden="true"></i>
                   Limpiar
                 </button>
-                <button class="btn btn-neutral" type="button" disabled>
+                <button class="btn btn-neutral" type="button" id="cdVerCronograma" aria-controls="cdPanelCronograma" aria-expanded="false" disabled>
                   <i class="bi bi-calendar3 me-1" aria-hidden="true"></i>
-                  <span>Ver cronograma</span>
+                  <span id="cdTextoBoton">Ver cronograma</span>
                 </button>
               </div>
-            </div>
+              <div id="cdMensaje" role="status" aria-live="polite"></div>
+            </form>
           </section>
         </div>
-        <div class="col-lg-5">
+        <div>
           <section class="panel summary-panel" aria-labelledby="cdTituloResumen">
             <div class="panel-header">
               <h2 class="panel-title" id="cdTituloResumen">
                 <i class="bi bi-pie-chart section-icon" aria-hidden="true"></i>
-                Resumen de tu préstamo
+                Resumen de importes
               </h2>
             </div>
-            <div class="panel-body"></div>
+            <div class="panel-body" id="cdResumenImportes" hidden>
+              <div id="cdDetalleImportes"></div>
+              <dl class="total-box mb-0">
+                <div class="summary-row"><dt>Total PP + TC</dt><dd id="cdTotalDeuda"></dd></div>
+                <div class="summary-row"><dt>Total CASH</dt><dd id="cdTotalCash"></dd></div>
+                <div class="summary-row subtotal"><dt>Total general</dt><dd id="cdTotalGeneral"></dd></div>
+              </dl>
+              <p class="form-text mt-3 mb-0">Disponible en CD: <span id="cdDisponible">—</span></p>
+              <p id="cdAvisoLimite" class="mt-3 mb-0 small" role="status"></p>
+            </div>
           </section>
         </div>
+        <div>
+          <section class="panel summary-panel" aria-labelledby="cdTituloResultados">
+          <div class="panel-header">
+            <h2 class="panel-title" id="cdTituloResultados">
+              <i class="bi bi-pie-chart section-icon" aria-hidden="true"></i>
+              Resumen de tu préstamo
+            </h2>
+
+            <span class="quiet-badge" id="cdEstadoResultado">Sin calcular</span>
+          </div>
+
+          <div class="summary-hero">
+            <label for="cdCuotaEstimada">Cuota regular estimada</label>
+            <output class="main-amount" id="cdCuotaEstimada">—</output>
+            <p class="summary-caption" id="cdNotaCuota"></p>
+          </div>
+
+          <div class="panel-body">
+            <dl class="summary-list">
+              <div class="summary-row">
+                <dt>Monto solicitado</dt>
+                <dd><output id="cdMontoSolicitado">—</output></dd>
+              </div>
+              <div class="summary-row">
+                <dt>Primas de seguros</dt>
+                <dd><output id="cdPrimasSeguros">—</output></dd>
+              </div>
+              <div class="summary-row subtotal">
+                <dt>Monto total financiado</dt>
+                <dd><output id="cdMontoFinanciado">—</output></dd>
+              </div>
+              <div class="summary-row">
+                <dt>Intereses estimados</dt>
+                <dd><output id="cdIntereses">—</output></dd>
+              </div>
+              <div class="summary-row">
+                <dt>Comisiones totales</dt>
+                <dd><output id="cdComisiones">—</output></dd>
+              </div>
+            </dl>
+
+            <div class="total-box">
+              <dl class="mb-0">
+                <div class="summary-row">
+                  <dt>Total a pagar</dt>
+                  <dd><output id="cdTotalPagar">—</output></dd>
+                </div>
+                <div class="summary-row">
+                  <dt>TCEA estimada</dt>
+                  <dd><output id="cdTcea">—</output></dd>
+                </div>
+              </dl>
+            </div>
+
+            <dl class="mb-0 mt-2">
+              <div class="summary-row">
+                <dt>Desempleo, incluido en seguros</dt>
+                <dd><output id="cdAdicionalDesempleo">—</output></dd>
+              </div>
+              <div class="summary-row">
+                <dt><label for="cdDiasPrimerPago">Días</label></dt>
+                <dd><output id="cdDiasPrimerPago" for="cdDesembolso cdPrimerPago">—</output></dd>
+              </div>
+            </dl>
+          </div>
+        </section>
+        </div>
       </div>
+      <section id="cdPanelCronograma" class="panel mt-3" aria-labelledby="cdTituloCronograma" hidden>
+      <div class="panel-header flex-wrap">
+        <div>
+          <h2 class="panel-title" id="cdTituloCronograma">
+            <i class="bi bi-calendar3 section-icon" aria-hidden="true"></i>
+            Cronograma de pagos
+          </h2>
+          <p class="form-text mb-0 mt-2" id="cdDetalleCronograma">
+            El detalle de tus cuotas aparecerá aquí.
+          </p>
+        </div>
+
+
+      </div>
+
+      <div class="empty-state" id="cdVacioCronograma">
+        <i class="bi bi-calendar2-week" aria-hidden="true"></i>
+        <h3>Cada cuota, con su detalle</h3>
+        <p>Calcula tu préstamo para revisar capital, intereses y saldos.</p>
+      </div>
+
+      <div
+        class="table-responsive"
+        id="cdContenedorTabla"
+        role="region"
+        aria-label="Cronograma de pagos; tabla desplazable"
+        tabindex="0"
+        hidden
+      >
+        <table class="table table-hover schedule-table" id="cdTablaCronograma">
+          <caption class="visually-hidden">
+            Cronograma de pagos. Todos los importes están expresados en soles.
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">N.º</th>
+              <th scope="col">Fecha de pago</th>
+              <th scope="col">Saldo inicial</th>
+              <th scope="col">Interés</th>
+              <th scope="col">Capital</th>
+              <th scope="col">Comisiones</th>
+              <th scope="col">Cuota</th>
+              <th scope="col">Saldo final</th>
+              <th scope="col">Tipo</th>
+            </tr>
+          </thead>
+          <tbody id="cdCronograma"></tbody>
+        </table>
+      </div>
+    </section>
     </div>
   </main>
 
@@ -1094,13 +1249,16 @@
     function nuevaFilaCD() {
       return document.getElementById("plantillaFilaCD").content.firstElementChild.cloneNode(true);
     }
-    function actualizarBotonesCD() {
-      for (const boton of filasCD.querySelectorAll('[data-fila="quitar"]')) {
-        boton.disabled = filasCD.childElementCount === 1;
-      }
+    function actualizarFilasCD() {
+      Array.from(filasCD.children).forEach((fila, indice) => {
+        const etiqueta = "Importe " + (indice + 1);
+        fila.querySelector("[data-etiqueta-importe]").textContent = etiqueta;
+        fila.querySelector("input").setAttribute("aria-label", etiqueta + " en soles");
+        fila.querySelector('[data-fila="quitar"]').disabled = filasCD.childElementCount === 1;
+      });
     }
     filasCD.append(nuevaFilaCD());
-    actualizarBotonesCD();
+    actualizarFilasCD();
     filasCD.addEventListener("change", evento => {
       const tipo = evento.target;
       if (!tipo.matches("[data-tipo]")) return;
@@ -1120,7 +1278,8 @@
         fila.remove();
         vecina.querySelector("input").focus();
       }
-      actualizarBotonesCD();
+      actualizarFilasCD();
+      filasCD.dispatchEvent(new Event("input", { bubbles: true }));
     });
 
     // Producto PP y cobertura titular, igual que en el formulario original.
@@ -1147,9 +1306,7 @@
     const DIA = 86400000;
     const $ = id => document.getElementById(id);
 
-    const formulario = $("formulario");
-    const mensaje = $("mensaje");
-    const cuerpoCronograma = $("cronograma");
+
 
     const formatoNumero = new Intl.NumberFormat("es-PE", {
       minimumFractionDigits: 2,
@@ -1163,6 +1320,101 @@
       formatoNumero.format(Math.abs(valor) < 0.005 ? 0 : valor);
 
     const moneda = valor => "S/ " + numero(valor);
+
+    // Los importes de CD se suman en céntimos para que el total coincida con el detalle.
+    function calcularLineaCD(importe, tipo, porcentaje, incluirPorcentaje, hayCash) {
+      if (tipo === "TC") return { base: importe, cargo: 0, total: importe, incluido: false };
+      const cargo = Math.round(importe * porcentaje / 100);
+      if (incluirPorcentaje) {
+        if (hayCash) {
+          const factor = 100 + porcentaje;
+          // Mayor base en céntimos cuyo total truncado no supera el importe.
+          const base = Math.floor(((importe + 1) * 100 - 1) / factor);
+          const total = Math.floor(base * factor / 100);
+          return { base, cargo: total - base, total, incluido: true };
+        }
+        const base = Math.round(importe * 100 / (100 + porcentaje));
+        return { base, cargo: importe - base, total: importe, incluido: true };
+      }
+      return { base: importe, cargo, total: importe + cargo, incluido: false };
+    }
+
+    function actualizarResumenCD() {
+      const campoLimite = document.getElementById("cdImporte");
+      const campoCash = document.getElementById("cdCash");
+      const hayCash = campoCash.validity.valid && campoCash.valueAsNumber > 0;
+      const limite = campoLimite.validity.valid && campoLimite.value !== ""
+        ? Math.round(campoLimite.valueAsNumber * 100) : null;
+      const detalle = document.createDocumentFragment();
+      let total = 0;
+      let cantidad = 0;
+      let totalCash = 0;
+      const importes = [];
+      let totalConPorcentajes = 0;
+      Array.from(filasCD.children).forEach((fila, indice) => {
+        const tipo = fila.querySelector("[data-tipo]").value;
+        const campo = fila.querySelector("input");
+        if (!campo.validity.valid || !(campo.valueAsNumber > 0)) return;
+        const importe = Math.round(campo.valueAsNumber * 100);
+        if (tipo === "CASH") {
+          totalCash += importe;
+          return;
+        }
+        const porcentaje = Number(fila.querySelector("[data-porcentaje]").value);
+        const propuesta = calcularLineaCD(importe, tipo, porcentaje, false, hayCash);
+        totalConPorcentajes += propuesta.total;
+        importes.push({ indice, importe, tipo, porcentaje, propuesta });
+      });
+      const reajustar = limite !== null && totalConPorcentajes > limite;
+      importes.forEach(({ indice, importe, tipo, porcentaje, propuesta }) => {
+        const linea = reajustar && tipo === "PP"
+          ? calcularLineaCD(importe, tipo, porcentaje, true, hayCash)
+          : propuesta;
+        total += linea.total;
+        cantidad++;
+        const bloque = document.createElement("div");
+        bloque.className = "pb-2 mb-2 border-bottom";
+        const cabecera = document.createElement("div");
+        cabecera.className = "d-flex justify-content-between gap-2 fw-semibold";
+        const titulo = document.createElement("span");
+        titulo.textContent = "Importe " + (indice + 1) + " · " + tipo;
+        const valor = document.createElement("span");
+        valor.textContent = moneda(linea.total / 100);
+        cabecera.append(titulo, valor);
+        bloque.append(cabecera);
+        if (tipo === "PP") {
+          const desglose = document.createElement("div");
+          desglose.className = "form-text";
+          desglose.textContent = "Base " + moneda(linea.base / 100) + " + " +
+            porcentaje + "% (" + moneda(linea.cargo / 100) + ")";
+          bloque.append(desglose);
+          if (linea.total < importe) {
+            const nota = document.createElement("div");
+            nota.className = "form-text";
+            nota.textContent = "Con una base de dos decimales, el total queda S/ 0.01 por debajo del importe ingresado.";
+            bloque.append(nota);
+          }
+        }
+        detalle.append(bloque);
+      });
+      document.getElementById("cdDetalleImportes").replaceChildren(detalle);
+      document.getElementById("cdResumenImportes").hidden = cantidad === 0 && totalCash === 0;
+      document.getElementById("cdTotalCash").textContent = moneda(totalCash / 100);
+      document.getElementById("cdTotalGeneral").textContent = moneda((total + totalCash) / 100);
+      document.getElementById("cdTotalDeuda").textContent = moneda(total / 100);
+      document.getElementById("cdDisponible").textContent = limite === null ? "—" : moneda(Math.max(0, limite - total) / 100);
+      const aviso = document.getElementById("cdAvisoLimite");
+      aviso.classList.toggle("text-danger", limite !== null && total > limite);
+      if (limite === null && cantidad > 0) aviso.textContent = "Ingresa el límite de CD para comparar el total.";
+      else if (total > limite) aviso.textContent = "El total supera el límite de CD por " + moneda((total - limite) / 100) + ".";
+      else aviso.textContent = "";
+      return (total + totalCash) / 100;
+    }
+
+    filasCD.addEventListener("input", actualizarResumenCD);
+    filasCD.addEventListener("change", actualizarResumenCD);
+    document.getElementById("cdImporte").addEventListener("input", actualizarResumenCD);
+    document.getElementById("cdCash").addEventListener("input", actualizarResumenCD);
 
     const diasEntre = (final, inicial) =>
       Math.round((final - inicial) / DIA);
@@ -1410,223 +1662,238 @@
       };
     }
 
-    function leerDatos() {
-      return {
-        monto: Number($("monto").value),
-        plazo: Number($("plazo").value),
-        tea: Number($("tea").value) / 100,
-        desembolso: leerFecha($("desembolso").value),
-        primerPago: leerFecha($("primerPago").value),
-        seguro: $("seguro").value,
-        estadoCuenta: $("estadoCuenta").checked,
-        julio: $("julio").checked ? 2 : 1,
-        diciembre: $("diciembre").checked ? 2 : 1,
-        desempleo: $("desempleo").checked ? 0.04 : 0
-      };
-    }
-
-    function cambiarVisibilidad(abierto) {
-      $("panelCronograma").hidden = !abierto;
-      $("verCronograma").setAttribute("aria-expanded", String(abierto));
-      $("textoBoton").textContent = abierto ? "Ocultar cronograma" : "Ver cronograma";
-    }
-
-    $("verCronograma").addEventListener("click", () => {
-      cambiarVisibilidad($("panelCronograma").hidden);
-    });
-
-    function invalidarResultados() {
-      cambiarVisibilidad(false);
-      $("verCronograma").disabled = true;
-      mensaje.textContent = "";
-
-      document.querySelectorAll("output").forEach(salida => {
-        salida.textContent = "—";
-      });
-
-      cuerpoCronograma.replaceChildren();
-      $("contenedorTabla").hidden = true;
-      $("vacioCronograma").hidden = false;
-
-      $("estadoResultado").textContent = "Sin calcular";
-
-      $("notaCuota").textContent = "";
-
-      $("detalleCronograma").textContent =
-        "El detalle de tus cuotas aparecerá aquí.";
-    }
-
-    function mostrarCronograma(filas) {
-      const fragmento = document.createDocumentFragment();
-
-      filas.forEach(fila => {
-        const tr = document.createElement("tr");
-
-        const celdas = [
-          fila.numero,
-          mostrarFecha(fila.fecha),
-          numero(fila.saldoInicial),
-          numero(fila.interes),
-          numero(fila.capital),
-          numero(fila.comisiones),
-          numero(fila.cuota),
-          numero(fila.saldoFinal)
-        ];
-
-        celdas.forEach(texto => {
-          const td = document.createElement("td");
-          td.textContent = texto;
-          tr.appendChild(td);
-        });
-
-        const tipo = document.createElement("td");
-
-        if (fila.tipo === "Doble") {
-          const badge = document.createElement("span");
-          badge.className = "double-badge";
-          badge.textContent = "Doble";
-          tipo.appendChild(badge);
-        } else {
-          tipo.textContent = "Simple";
-        }
-
-        tr.appendChild(tipo);
-        fragmento.appendChild(tr);
-      });
-
-      cuerpoCronograma.replaceChildren(fragmento);
-      $("contenedorTabla").hidden = false;
-      $("vacioCronograma").hidden = true;
-    }
-
-    function calcular() {
-      invalidarResultados();
-
-      validarFechaPrimerPago();
-      if (!formulario.reportValidity()) return;
-
-      const datos = leerDatos();
-
-      if (
-        !Number.isFinite(datos.monto) ||
-        !Number.isFinite(datos.tea) ||
-        !Number.isInteger(datos.plazo) ||
-        datos.monto <= 0 ||
-        datos.tea < 0 ||
-        datos.plazo < 1 ||
-        datos.plazo > 72 ||
-        !Number.isFinite(datos.desembolso.getTime()) ||
-        !Number.isFinite(datos.primerPago.getTime())
-      ) {
-        mensaje.textContent =
-          "Revisa los importes, el plazo y las fechas ingresadas.";
-        return;
+    function conectarSimulador(panel, buscar, obtenerMonto) {
+      const $ = buscar;
+      const formulario = $("formulario");
+      const mensaje = $("mensaje");
+      const cuerpoCronograma = $("cronograma");
+      function leerDatos() {
+        return {
+          monto: obtenerMonto(),
+          plazo: Number($("plazo").value),
+          tea: Number($("tea").value) / 100,
+          desembolso: leerFecha($("desembolso").value),
+          primerPago: leerFecha($("primerPago").value),
+          seguro: $("seguro").value,
+          estadoCuenta: $("estadoCuenta").checked,
+          julio: $("julio").checked ? 2 : 1,
+          diciembre: $("diciembre").checked ? 2 : 1,
+          desempleo: $("desempleo").checked ? 0.04 : 0
+        };
       }
 
+      function cambiarVisibilidad(abierto) {
+        $("panelCronograma").hidden = !abierto;
+        $("verCronograma").setAttribute("aria-expanded", String(abierto));
+        $("textoBoton").textContent = abierto ? "Ocultar cronograma" : "Ver cronograma";
+      }
 
-      try {
-        const resultado = simular(datos);
+      $("verCronograma").addEventListener("click", () => {
+        cambiarVisibilidad($("panelCronograma").hidden);
+      });
 
-        const resumenValido = Object.entries(resultado).every(
-          ([clave, dato]) =>
-            clave === "cronograma" || Number.isFinite(dato)
-        );
+      function invalidarResultados() {
+        cambiarVisibilidad(false);
+        $("verCronograma").disabled = true;
+        mensaje.textContent = "";
 
-        const cronogramaValido = resultado.cronograma.every(
-          fila => [
-            fila.saldoInicial,
-            fila.interes,
-            fila.capital,
-            fila.comisiones,
-            fila.cuota,
-            fila.saldoFinal
-          ].every(Number.isFinite)
-        );
-
-        if (!resumenValido || !cronogramaValido) {
-          throw new Error(
-            "No se pudo calcular con estos valores. Revisa los datos."
-          );
-        }
-
-        Object.entries(resultado).forEach(([id, dato]) => {
-          if (id !== "cronograma") {
-            $(id).textContent = id === "tcea"
-              ? numero(dato * 100) + "%"
-              : moneda(dato);
-          }
+        panel.querySelectorAll("output").forEach(salida => {
+          salida.textContent = "—";
         });
 
-        $("diasPrimerPago").textContent = String(diasEntre(datos.primerPago, datos.desembolso));
-        mostrarCronograma(resultado.cronograma);
-        $("verCronograma").disabled = false;
+        cuerpoCronograma.replaceChildren();
+        $("contenedorTabla").hidden = true;
+        $("vacioCronograma").hidden = false;
 
-        $("estadoResultado").textContent = "Calculado";
+        $("estadoResultado").textContent = "Sin calcular";
 
-
-        const hayDobles = resultado.cronograma.some(
-          fila => fila.tipo === "Doble"
-        );
-
-        $("notaCuota").textContent = hayDobles
-          ? "Las cuotas dobles figuran en el cronograma. La comisión por estado de cuenta no se duplica."
-          : "";
+        $("notaCuota").textContent = "";
 
         $("detalleCronograma").textContent =
-          `${datos.plazo} cuotas · Importes en soles · ` +
-          "Los vencimientos en domingo se trasladan al lunes.";
+          "El detalle de tus cuotas aparecerá aquí.";
+      }
 
+      function mostrarCronograma(filas) {
+        const fragmento = document.createDocumentFragment();
 
-      } catch (error) {
+        filas.forEach(fila => {
+          const tr = document.createElement("tr");
+
+          const celdas = [
+            fila.numero,
+            mostrarFecha(fila.fecha),
+            numero(fila.saldoInicial),
+            numero(fila.interes),
+            numero(fila.capital),
+            numero(fila.comisiones),
+            numero(fila.cuota),
+            numero(fila.saldoFinal)
+          ];
+
+          celdas.forEach(texto => {
+            const td = document.createElement("td");
+            td.textContent = texto;
+            tr.appendChild(td);
+          });
+
+          const tipo = document.createElement("td");
+
+          if (fila.tipo === "Doble") {
+            const badge = document.createElement("span");
+            badge.className = "double-badge";
+            badge.textContent = "Doble";
+            tipo.appendChild(badge);
+          } else {
+            tipo.textContent = "Simple";
+          }
+
+          tr.appendChild(tipo);
+          fragmento.appendChild(tr);
+        });
+
+        cuerpoCronograma.replaceChildren(fragmento);
+        $("contenedorTabla").hidden = false;
+        $("vacioCronograma").hidden = true;
+      }
+
+      function calcular() {
         invalidarResultados();
-        mensaje.textContent = error.message ||
-          "Ocurrió un error al calcular. Revisa los datos.";
+
+        validarFechaPrimerPago();
+        if (!formulario.reportValidity()) return;
+
+        const datos = leerDatos();
+
+        if (
+          !Number.isFinite(datos.monto) ||
+          !Number.isFinite(datos.tea) ||
+          !Number.isInteger(datos.plazo) ||
+          datos.monto <= 0 ||
+          datos.tea < 0 ||
+          datos.plazo < 1 ||
+          datos.plazo > 72 ||
+          !Number.isFinite(datos.desembolso.getTime()) ||
+          !Number.isFinite(datos.primerPago.getTime())
+        ) {
+          mensaje.textContent =
+            "Revisa los importes, el plazo y las fechas ingresadas.";
+          return;
+        }
+
+
+        try {
+          const resultado = simular(datos);
+
+          const resumenValido = Object.entries(resultado).every(
+            ([clave, dato]) =>
+              clave === "cronograma" || Number.isFinite(dato)
+          );
+
+          const cronogramaValido = resultado.cronograma.every(
+            fila => [
+              fila.saldoInicial,
+              fila.interes,
+              fila.capital,
+              fila.comisiones,
+              fila.cuota,
+              fila.saldoFinal
+            ].every(Number.isFinite)
+          );
+
+          if (!resumenValido || !cronogramaValido) {
+            throw new Error(
+              "No se pudo calcular con estos valores. Revisa los datos."
+            );
+          }
+
+          Object.entries(resultado).forEach(([id, dato]) => {
+            if (id !== "cronograma") {
+              $(id).textContent = id === "tcea"
+                ? numero(dato * 100) + "%"
+                : moneda(dato);
+            }
+          });
+
+          $("diasPrimerPago").textContent = String(diasEntre(datos.primerPago, datos.desembolso));
+          mostrarCronograma(resultado.cronograma);
+          $("verCronograma").disabled = false;
+
+          $("estadoResultado").textContent = "Calculado";
+
+
+          const hayDobles = resultado.cronograma.some(
+            fila => fila.tipo === "Doble"
+          );
+
+          $("notaCuota").textContent = hayDobles
+            ? "Las cuotas dobles figuran en el cronograma. La comisión por estado de cuenta no se duplica."
+            : "";
+
+          $("detalleCronograma").textContent =
+            `${datos.plazo} cuotas · Importes en soles · ` +
+            "Los vencimientos en domingo se trasladan al lunes.";
+
+
+        } catch (error) {
+          invalidarResultados();
+          mensaje.textContent = error.message ||
+            "Ocurrió un error al calcular. Revisa los datos.";
+        }
       }
-    }
 
-    formulario.addEventListener("submit", evento => {
-      evento.preventDefault();
-      calcular();
-    });
-
-    formulario.addEventListener("input", invalidarResultados);
-    formulario.addEventListener("change", invalidarResultados);
-    function configurarFechas(desembolso, primerPago, alerta) {
-      function proponerPrimerPago() {
-        const fecha = desembolso.valueAsDate;
-        if (fecha) fecha.setUTCDate(fecha.getUTCDate() + 30);
-        primerPago.valueAsDate = fecha;
-      }
-
-      function validar() {
-        const inicio = desembolso.valueAsDate;
-        const campo = primerPago;
-        const fin = campo.valueAsDate;
-        const dias = inicio && fin ? diasEntre(fin, inicio) : null;
-        const fueraDeRango = dias !== null && (dias < 30 || dias > 60);
-        const aviso = fueraDeRango
-          ? "El primer pago debe ser entre 30 y 60 días calendario después del desembolso."
-          : "";
-        campo.setCustomValidity(aviso);
-        campo.classList.toggle("is-invalid", fueraDeRango);
-        campo.setAttribute("aria-invalid", String(fueraDeRango));
-        alerta.textContent = aviso;
-      }
-
-      desembolso.addEventListener("input", () => {
-        proponerPrimerPago();
-        validar();
+      formulario.addEventListener("submit", evento => {
+        evento.preventDefault();
+        calcular();
       });
-      primerPago.addEventListener("input", validar);
-      return validar;
+
+      formulario.addEventListener("input", invalidarResultados);
+      formulario.addEventListener("change", invalidarResultados);
+      function configurarFechas(desembolso, primerPago, alerta) {
+        function proponerPrimerPago() {
+          const fecha = desembolso.valueAsDate;
+          if (fecha) fecha.setUTCDate(fecha.getUTCDate() + 30);
+          primerPago.valueAsDate = fecha;
+        }
+
+        function validar() {
+          const inicio = desembolso.valueAsDate;
+          const campo = primerPago;
+          const fin = campo.valueAsDate;
+          const dias = inicio && fin ? diasEntre(fin, inicio) : null;
+          const fueraDeRango = dias !== null && (dias < 30 || dias > 60);
+          const aviso = fueraDeRango
+            ? "El primer pago debe ser entre 30 y 60 días calendario después del desembolso."
+            : "";
+          campo.setCustomValidity(aviso);
+          campo.classList.toggle("is-invalid", fueraDeRango);
+          campo.setAttribute("aria-invalid", String(fueraDeRango));
+          alerta.textContent = aviso;
+        }
+
+        desembolso.addEventListener("input", () => {
+          proponerPrimerPago();
+          validar();
+        });
+        primerPago.addEventListener("input", validar);
+        return validar;
+      }
+
+      const validarFechaPrimerPago = configurarFechas($("desembolso"), $("primerPago"), $("avisoPrimerPago"));
+      formulario.addEventListener("reset", () => {
+        invalidarResultados();
+        queueMicrotask(validarFechaPrimerPago);
+      });
+      invalidarResultados();
     }
 
-    const validarFechaPrimerPago = configurarFechas($("desembolso"), $("primerPago"), $("avisoPrimerPago"));
-    configurarFechas($("cdDesembolso"), $("cdPrimerPago"), $("cdAvisoPrimerPago"));
-    formulario.addEventListener("reset", () => {
-      invalidarResultados();
-      queueMicrotask(validarFechaPrimerPago);
-    });
+    conectarSimulador($("productoPP"), $, () => Number($("monto").value));
+    const buscarCD = id => $("cd" + id[0].toUpperCase() + id.slice(1));
+    conectarSimulador($("productoCD"), buscarCD, actualizarResumenCD);
+    $("cdFormulario").addEventListener("reset", () => queueMicrotask(() => {
+      filasCD.replaceChildren(nuevaFilaCD());
+      actualizarFilasCD();
+      actualizarResumenCD();
+    }));
 
     const pestanas = [$("tabPP"), $("tabCD")];
     function seleccionarPestana(activa) {
@@ -1650,7 +1917,6 @@
       });
     });
 
-    invalidarResultados();
   </script>
 </body>
 </html>
