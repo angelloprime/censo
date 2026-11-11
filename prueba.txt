@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#cb102b">
-  <title>Simulador de crédito XL</title>
+  <title>Simulador Deepening</title>
   <link rel="icon" href="data:,">
   <!-- Bootstrap está incorporado para poder abrir el archivo sin conexión. -->
   <style id="bootstrap-css">
@@ -49,49 +49,27 @@ body { min-height: 100vh; margin: 0; font-size: 15px; }
   outline-offset: 3px;
 }
 
-/* Barra y portada. La ilustración es decorativa y se dibuja con CSS. */
-.barra { background: #fff; border-bottom: 1px solid var(--linea); }
+/* El control del cronograma sigue a la vista cuando se recorre la tabla. */
+.barra { position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid var(--linea); }
 .barra-interior { display: flex; align-items: center; justify-content: space-between; min-height: 68px; gap: 14px; }
-.marca, .enlace-cronograma { display: inline-flex; align-items: center; color: var(--tinta); text-decoration: none; }
-.marca { gap: 11px; font-size: 20px; font-weight: 690; letter-spacing: -.8px; }
+.titulo-aplicacion { margin: 0; min-width: 0; font-size: inherit; }
+.marca { display: inline-flex; align-items: center; gap: 11px; font-size: 20px; line-height: 1.2; font-weight: 690; letter-spacing: -.8px; color: var(--tinta); text-decoration: none; }
 .marca b { color: var(--rojo); font-weight: 760; }
 .marca-simbolo { display: grid; place-items: center; width: 35px; height: 35px; border-radius: 10px; background: var(--rojo); color: #fff; }
 .marca-simbolo .bi { width: 21px; height: 21px; }
-.enlace-cronograma { min-height: 44px; gap: 8px; font-size: .84rem; font-weight: 600; }
-.enlace-cronograma .bi { color: var(--rojo); width: 14px; height: 14px; }
-.enlace-cronograma:hover { color: var(--rojo); text-decoration: underline; text-underline-offset: 4px; }
+.boton-cronograma {
+  --bs-btn-color: var(--rojo-oscuro); --bs-btn-bg: #fff; --bs-btn-border-color: #e0b4be;
+  --bs-btn-hover-color: var(--rojo-oscuro); --bs-btn-hover-bg: var(--rosa); --bs-btn-hover-border-color: var(--rojo);
+  --bs-btn-active-color: var(--rojo-oscuro); --bs-btn-active-bg: #fbe5eb; --bs-btn-active-border-color: var(--rojo);
+  --bs-btn-focus-shadow-rgb: 200,16,46;
+  display: inline-flex; align-items: center; flex: none; gap: 8px; min-height: 42px;
+  padding-inline: 13px; border-radius: 8px; white-space: nowrap; font-size: .84rem; font-weight: 600;
+}
+.boton-cronograma .bi { width: 15px; height: 15px; }
 .contenido { padding-block: 26px 42px; }
-.portada {
-  position: relative; isolation: isolate; overflow: hidden; display: flex; align-items: center;
-  min-height: 171px; border-radius: 18px; color: #fff;
-  background: linear-gradient(108deg, #a20b26 0%, #c30d2c 48%, #e92540 100%);
-}
-.portada-texto { position: relative; z-index: 1; width: 68%; padding: 34px 40px; }
-.portada h1 { margin: 0; font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.06; font-weight: 680; letter-spacing: -.055em; text-wrap: balance; }
-.portada p { max-width: 62ch; margin: 13px 0 0; color: #fff1f3; font-size: .94rem; line-height: 1.55; }
-.ilustracion { position: absolute; inset: 0 0 0 auto; width: 37%; overflow: hidden; pointer-events: none; mask-image: linear-gradient(to right, transparent, #000 14%); }
-.orbitas {
-  position: absolute; right: -24%; top: -74%; width: 142%; height: 278%; transform: rotate(36deg);
-  background: repeating-radial-gradient(ellipse at 67% 52%, transparent 0 16px, #ffd6df40 16.5px 17.5px, transparent 18px 24px);
-}
-.tarjeta { position: absolute; width: clamp(150px, 15vw, 202px); aspect-ratio: 1.63; border-radius: 14px; border: 1px solid #fff8; }
-.tarjeta-fondo { right: 18%; top: 11%; background: linear-gradient(135deg, #ff8d9d99, #ee3c5e66); transform: rotate(9deg); }
-.tarjeta-frente {
-  right: 27%; top: 25%; transform: rotate(-11deg); color: #fff2ed;
-  background: linear-gradient(112deg, #ec546c 0%, #dc3451 53%, #be1839 100%);
-  box-shadow: 0 12px 24px -11px #69051ea6, inset 0 1px #ffc3ce66;
-}
-.chip { position: absolute; left: 10%; top: 22%; width: 16%; height: 18%; border-radius: 4px; border: 1px solid #fff4edbf; background: linear-gradient(90deg, transparent 30%, #fff8 30% 34%, transparent 34% 68%, #fff8 68% 72%, transparent 72%), linear-gradient(0deg, #ffaf9d 47%, #fff3 48% 54%, #ffc6af 55%); }
-.antena { position: absolute; right: 10%; top: 16%; width: 12%; height: 20%; transform: rotate(90deg); }
-.linea-tarjeta, .linea-corta { position: absolute; left: 10%; height: 3%; border-radius: 20px; background: #ffe7ebc4; }
-.linea-tarjeta { width: 39%; bottom: 31%; }
-.linea-corta { width: 24%; bottom: 21%; opacity: .6; }
-.aros-tarjeta, .aros-tarjeta::after { width: 12%; aspect-ratio: 1; border: 1px solid #ffe5ebcc; border-radius: 50%; }
-.aros-tarjeta { position: absolute; right: 15%; bottom: 15%; }
-.aros-tarjeta::after { content: ""; position: absolute; width: 100%; left: 55%; top: -1px; }
 
 /* Formulario y resultados. */
-.paneles { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 22px; margin-block: 22px; }
+.paneles { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 22px; }
 .panel { min-width: 0; background: #fff; border: 1px solid var(--linea); border-radius: 16px; box-shadow: 0 3px 12px -8px #22243729; }
 .panel-formulario, .panel-resultados { padding: 24px 27px; }
 .encabezado-panel { display: flex; align-items: center; gap: 12px; }
@@ -132,7 +110,6 @@ input[type="date"] { display: block; width: 100%; text-align: left; }
 .etiqueta-cuota { margin: 0; color: #84223a; font-weight: 620; font-size: .82rem; }
 .importe-cuota { margin: 5px 0 3px; color: #a50e2a; font-size: clamp(1.8rem, 3.1vw, 2.5rem); font-weight: 675; line-height: 1.15; letter-spacing: -.055em; overflow-wrap: anywhere; }
 .moneda { font-size: .59em; letter-spacing: -.04em; }
-.pie-cuota { margin: 0; font-size: .79rem; color: #754c57; }
 .tasas { display: flex; flex: 1; flex-direction: column; justify-content: space-evenly; margin: 0; }
 .tasas > div { flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 9px; border-bottom: 1px solid #e9e9ee; }
 .tasas > div:last-child { border: 0; padding-bottom: 0; }
@@ -143,7 +120,8 @@ input[type="date"] { display: block; width: 100%; text-align: left; }
 .tasas dd.no-calculable { font-size: .82rem; color: var(--secundario); }
 
 /* Cronograma. Una sola tabla contiene ambas vistas. */
-.panel-cronograma { scroll-margin-top: 14px; }
+.panel-cronograma { margin-top: 22px; scroll-margin-top: 80px; }
+#formulario { scroll-margin-top: 80px; }
 .cabecera-cronograma { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; padding: 20px 27px; }
 .periodo { margin: 3px 0 0; font-size: .77rem; color: var(--secundario); }
 .selector-vista { display: inline-flex; margin: 0; padding: 3px; border: 1px solid #e1e2e7; border-radius: 9px; background: #f3f3f6; }
@@ -178,37 +156,22 @@ input[type="date"] { display: block; width: 100%; text-align: left; }
   .paneles { gap: 16px; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
   .panel-formulario, .panel-resultados { padding: 20px; }
   .campos { --bs-gutter-x: 14px; }
-  .portada-texto { padding: 29px; }
-  .tarjeta-frente { right: 18%; }
-  .tarjeta-fondo { right: 7%; }
 }
 @media (max-width: 767.98px) {
-  .paneles { grid-template-columns: minmax(0, 1fr); margin-block: 16px; }
-  .portada { min-height: 158px; }
-  .portada-texto { width: 72%; }
-  .tarjeta { width: 127px; }
-  .tarjeta-frente { top: 34%; right: 14%; }
-  .tarjeta-fondo { top: 20%; right: 6%; }
+  .paneles { grid-template-columns: minmax(0, 1fr); }
+  .panel-cronograma { margin-top: 16px; }
   .tasas > div { min-height: 50px; }
   .cabecera-cronograma { padding: 18px 20px; }
 }
 @media (max-width: 575.98px) {
   .marco { width: calc(100% - 28px); }
-  .barra-interior { min-height: 57px; }
-  .marca { font-size: 18px; gap: 8px; }
+  .barra-interior { min-height: 57px; gap: 8px; }
+  .marca { font-size: 17px; gap: 7px; }
   .marca-simbolo { width: 31px; height: 31px; border-radius: 9px; }
-  .enlace-cronograma { font-size: .77rem; }
+  .boton-cronograma { font-size: .77rem; padding-inline: 9px; gap: 6px; }
   .contenido { padding-block: 14px 24px; }
-  .portada { min-height: 167px; border-radius: 13px; }
-  .portada-texto { width: 70%; padding: 20px 0 20px 18px; }
-  .portada h1 { font-size: clamp(1.65rem, 7.1vw, 2.1rem); line-height: 1.05; letter-spacing: -.045em; }
-  .portada p { margin-top: 9px; font-size: .80rem; line-height: 1.45; }
-  .ilustracion { width: 29%; }
-  .tarjeta { width: 98px; border-radius: 8px; }
-  .tarjeta-fondo { right: -27%; top: 30%; }
-  .tarjeta-frente { right: -12%; top: 40%; }
-  .orbitas { right: -75%; width: 140%; }
-  .paneles { gap: 14px; margin-block: 14px; }
+  .paneles { gap: 14px; }
+  .panel-cronograma { margin-top: 14px; scroll-margin-top: 66px; }
   .panel { border-radius: 13px; }
   .panel-formulario, .panel-resultados { padding: 17px; }
   .encabezado-panel { gap: 10px; }
@@ -224,14 +187,18 @@ input[type="date"] { display: block; width: 100%; text-align: left; }
   .tabla-cuotas > :not(caption) > * > * { padding-inline: 12px; }
   .estado-vacio { min-height: 72px; font-size: .78rem; }
 }
+@media (max-width: 419.98px) {
+  .boton-cronograma .bi { display: none; }
+}
+@media (max-width: 359.98px) {
+  .marca-simbolo { display: none; }
+}
 @media print {
   body { background: #fff; }
-  .barra, .ilustracion, .acciones, .selector-vista, .nota-tabla, .saltar { display: none !important; }
+  .boton-cronograma, .acciones, .selector-vista, .nota-tabla, .saltar { display: none !important; }
+  .barra { position: static; }
   .marco { width: 100%; }
   .contenido { padding: 0; }
-  .portada { min-height: auto; color: #000; background: #fff; }
-  .portada-texto { width: 100%; padding: 0 0 10px; }
-  .portada p { color: var(--secundario); }
   .paneles { display: block; }
   .panel { box-shadow: none; margin-bottom: 10px; }
   .panel-formulario, .panel-resultados { break-inside: avoid; }
@@ -275,49 +242,26 @@ input[type="date"] { display: block; width: 100%; text-align: left; }
       <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/>
       <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/>
     </symbol>
-    <symbol id="bi-arrow-down-right" viewBox="0 0 16 16">
-      <path fill-rule="evenodd" d="M14 13.5a.5.5 0 0 1-.5.5h-6a.5.5 0 0 1 0-1h4.793L2.146 2.854a.5.5 0 1 1 .708-.708L13 12.293V7.5a.5.5 0 0 1 1 0z"/>
-    </symbol>
-    <symbol id="bi-wifi" viewBox="0 0 16 16">
-      <path d="M15.384 6.115a.485.485 0 0 0-.047-.736A12.44 12.44 0 0 0 8 3C5.259 3 2.723 3.882.663 5.379a.485.485 0 0 0-.048.736.52.52 0 0 0 .668.05A11.45 11.45 0 0 1 8 4c2.507 0 4.827.802 6.716 2.164.205.148.49.13.668-.049"/>
-      <path d="M13.229 8.271a.482.482 0 0 0-.063-.745A9.46 9.46 0 0 0 8 6c-1.905 0-3.68.56-5.166 1.526a.48.48 0 0 0-.063.745.525.525 0 0 0 .652.065A8.46 8.46 0 0 1 8 7a8.46 8.46 0 0 1 4.576 1.336c.206.132.48.108.653-.065m-2.183 2.183c.226-.226.185-.605-.1-.75A6.5 6.5 0 0 0 8 9c-1.06 0-2.062.254-2.946.704-.285.145-.326.524-.1.75l.015.015c.16.16.407.19.611.09A5.5 5.5 0 0 1 8 10c.868 0 1.69.201 2.42.56.203.1.45.07.61-.091zM9.06 12.44c.196-.196.198-.52-.04-.66A2 2 0 0 0 8 11.5a2 2 0 0 0-1.02.28c-.238.14-.236.464-.04.66l.706.706a.5.5 0 0 0 .707 0l.707-.707z"/>
-    </symbol>
   </svg>
   <a class="saltar" href="#formulario">Ir a los datos del préstamo</a>
 
   <header class="barra">
     <div class="marco barra-interior">
-      <a class="marca" href="#inicio" aria-label="Crédito XL, inicio">
-        <span class="marca-simbolo"><svg class="bi" aria-hidden="true"><use href="#bi-credit-card-2-front"/></svg></span>
-        <span>Crédito <b>XL</b></span>
-      </a>
-      <nav aria-label="Navegación principal">
-        <a class="enlace-cronograma" href="#cronograma">
-          Ver cronograma
-          <svg class="bi" aria-hidden="true"><use href="#bi-arrow-down-right"/></svg>
+      <h1 class="titulo-aplicacion">
+        <a class="marca" href="#inicio">
+          <span class="marca-simbolo"><svg class="bi" aria-hidden="true"><use href="#bi-credit-card-2-front"/></svg></span>
+          <span>Simulador <b>Deepening</b></span>
         </a>
-      </nav>
+      </h1>
+      <button type="button" class="btn boton-cronograma" id="alternar-cronograma"
+              aria-expanded="false" aria-controls="cronograma">
+        <svg class="bi" aria-hidden="true"><use href="#bi-calendar3"/></svg>
+        <span>Ver cronograma</span>
+      </button>
     </div>
   </header>
 
   <main class="marco contenido">
-    <section class="portada" aria-labelledby="titulo">
-      <div class="portada-texto">
-        <h1 id="titulo">Simulador de crédito XL</h1>
-        <p>Consulta el capital, el interés y el seguro de cada cuota en soles.</p>
-      </div>
-      <div class="ilustracion" aria-hidden="true">
-        <i class="orbitas"></i>
-        <div class="tarjeta tarjeta-fondo"></div>
-        <div class="tarjeta tarjeta-frente">
-          <span class="chip"></span>
-          <svg class="bi antena"><use href="#bi-wifi"/></svg>
-          <span class="linea-tarjeta"></span><span class="linea-corta"></span>
-          <span class="aros-tarjeta"></span>
-        </div>
-      </div>
-    </section>
-
     <div class="paneles">
       <section class="panel panel-formulario" aria-labelledby="titulo-datos">
         <div class="encabezado-panel">
@@ -348,17 +292,17 @@ input[type="date"] { display: block; width: 100%; text-align: left; }
             <div class="col-12 col-sm-6 campo">
               <label for="ciclo" class="form-label">Ciclo de facturación</label>
               <select id="ciclo" class="form-select">
-                <option value="4" selected>Día 4</option>
-                <option value="6">Día 6</option>
-                <option value="9">Día 9</option>
-                <option value="11">Día 11</option>
-                <option value="13">Día 13</option>
-                <option value="16">Día 16</option>
-                <option value="18">Día 18</option>
-                <option value="20">Día 20</option>
-                <option value="22">Día 22</option>
-                <option value="24">Día 24</option>
-                <option value="26">Día 26</option>
+                <option value="4" selected>4</option>
+                <option value="6">6</option>
+                <option value="9">9</option>
+                <option value="11">11</option>
+                <option value="13">13</option>
+                <option value="16">16</option>
+                <option value="18">18</option>
+                <option value="20">20</option>
+                <option value="22">22</option>
+                <option value="24">24</option>
+                <option value="26">26</option>
               </select>
             </div>
             <div class="col-12 col-sm-6 campo">
@@ -400,11 +344,14 @@ input[type="date"] { display: block; width: 100%; text-align: left; }
           <h2 id="titulo-resultados">Resultados</h2>
         </div>
         <div class="destacado">
-          <p class="etiqueta-cuota">Primera cuota con seguro</p>
-          <p class="importe-cuota"><span class="moneda">S/</span> <span id="primera-cuota">—</span></p>
-          <p class="pie-cuota" id="primer-vencimiento">Completa los datos y pulsa Simular.</p>
+          <p class="etiqueta-cuota">Cuota sin seguro</p>
+          <p class="importe-cuota"><span class="moneda">S/</span> <span id="cuota-sin-seguro">—</span></p>
         </div>
         <dl class="tasas">
+          <div>
+            <dt><b>Fecha del primer pago</b></dt>
+            <dd id="fecha-primer-pago">—</dd>
+          </div>
           <div>
             <dt><b>TEM</b><span>Tasa efectiva mensual</span></dt>
             <dd id="resultado-tem">—</dd>
@@ -421,7 +368,7 @@ input[type="date"] { display: block; width: 100%; text-align: left; }
       </section>
     </div>
 
-    <section class="panel panel-cronograma" id="cronograma" data-vista="pagos"
+    <section class="panel panel-cronograma" id="cronograma" data-vista="pagos" hidden
              aria-labelledby="titulo-cronograma" tabindex="-1">
       <div class="cabecera-cronograma">
         <div class="encabezado-panel">
@@ -441,7 +388,7 @@ input[type="date"] { display: block; width: 100%; text-align: left; }
       </div>
       <div class="envoltura-tabla" id="contenedor-tabla" role="region" aria-label="Tabla de cuotas, desplazamiento horizontal y vertical" tabindex="0">
         <table class="table tabla-cuotas" id="tabla-cuotas">
-          <caption class="visually-hidden">Cronograma del crédito XL. Importes en soles y fechas en día, mes y año.</caption>
+          <caption class="visually-hidden">Cronograma de pagos. Importes en soles y fechas en día, mes y año.</caption>
           <thead>
             <tr>
               <th scope="col" data-campo="numero" data-formato="entero" class="col-numero">N.° de cuota</th>
@@ -640,7 +587,9 @@ input[type="date"] { display: block; width: 100%; text-align: left; }
 
   // Presentación. Ambas vistas muestran valores del mismo cronograma.
   const formulario = document.getElementById('formulario');
+  const campoFecha = formulario.elements.fecha;
   const seccionCronograma = document.getElementById('cronograma');
+  const botonCronograma = document.getElementById('alternar-cronograma');
   const tabla = document.getElementById('tabla-cuotas');
   const cuerpoTabla = document.getElementById('cuotas');
   const contenedorTabla = document.getElementById('contenedor-tabla');
@@ -648,8 +597,8 @@ input[type="date"] { display: block; width: 100%; text-align: left; }
   const vacio = document.getElementById('cronograma-vacio');
   const aviso = document.getElementById('aviso');
   const notaTabla = document.getElementById('nota-tabla');
-  const primeraCuota = document.getElementById('primera-cuota');
-  const primerVencimiento = document.getElementById('primer-vencimiento');
+  const cuotaSinSeguro = document.getElementById('cuota-sin-seguro');
+  const fechaPrimerPago = document.getElementById('fecha-primer-pago');
   const tasas = ['tem', 'tcea', 'tcem'];
   const formatoSoles = new Intl.NumberFormat('es-PE', {
     minimumFractionDigits: 2, maximumFractionDigits: 2
@@ -668,9 +617,34 @@ input[type="date"] { display: block; width: 100%; text-align: left; }
   const controles = Array.from(formulario.querySelectorAll('input[required]'));
   let hayResultados = false;
 
-  function actualizarNotaTabla() {
-    notaTabla.hidden = !hayResultados || contenedorTabla.scrollWidth <= contenedorTabla.clientWidth + 1;
+  // La fecha sugerida usa el calendario de Lima, también si el equipo está en otra zona horaria.
+  const calendarioPeru = new Intl.DateTimeFormat('es-PE', {
+    timeZone: 'America/Lima', year: 'numeric', month: '2-digit', day: '2-digit'
+  });
+  function hoyEnPeru(instante = new Date()) {
+    const partes = calendarioPeru.formatToParts(instante);
+    const { year, month, day } = Object.fromEntries(partes.map(({ type, value }) => [type, value]));
+    return [year, month, day].join('-');
   }
+  campoFecha.defaultValue = hoyEnPeru();
+
+  function actualizarNotaTabla() {
+    notaTabla.hidden = !hayResultados || seccionCronograma.hidden ||
+      contenedorTabla.scrollWidth <= contenedorTabla.clientWidth + 1;
+  }
+
+  function mostrarCronograma(visible) {
+    seccionCronograma.hidden = !visible;
+    botonCronograma.setAttribute('aria-expanded', String(visible));
+    botonCronograma.querySelector('span').textContent = visible ? 'Ocultar cronograma' : 'Ver cronograma';
+    actualizarNotaTabla();
+  }
+
+  botonCronograma.addEventListener('click', function () {
+    const abrir = seccionCronograma.hidden;
+    mostrarCronograma(abrir);
+    if (abrir) seccionCronograma.scrollIntoView({ block: 'start' });
+  });
 
   function mostrarFilas(cronograma) {
     const fragmento = document.createDocumentFragment();
@@ -696,8 +670,8 @@ input[type="date"] { display: block; width: 100%; text-align: left; }
     const primera = cronograma[0];
     const ultima = cronograma[cronograma.length - 1];
     const cantidad = cronograma.length === 1 ? '1 cuota' : cronograma.length + ' cuotas';
-    primeraCuota.textContent = formatoSoles.format(primera.cuotaConSeguro);
-    primerVencimiento.textContent = 'Vence el ' + formatearFecha(primera.fechaVencim);
+    cuotaSinSeguro.textContent = formatoSoles.format(primera.cuota);
+    fechaPrimerPago.textContent = formatearFecha(primera.fechaVencim);
     for (const tasa of tasas) {
       const salida = document.getElementById('resultado-' + tasa);
       salida.textContent = formatearPorcentaje(simulacion[tasa]);
@@ -710,15 +684,15 @@ input[type="date"] { display: block; width: 100%; text-align: left; }
     hayResultados = true;
     seccionCronograma.classList.add('con-cuotas');
     actualizarNotaTabla();
-    aviso.textContent = 'Simulación calculada. ' + cantidad + '. Primera cuota con seguro de ' +
-      primeraCuota.textContent + ' soles.';
+    aviso.textContent = 'Simulación calculada. Cuota sin seguro de ' + cuotaSinSeguro.textContent +
+      ' soles. Fecha del primer pago, ' + fechaPrimerPago.textContent + '.';
   }
 
   function limpiarResultados() {
     hayResultados = false;
     cuerpoTabla.replaceChildren();
-    primeraCuota.textContent = '—';
-    primerVencimiento.textContent = 'Completa los datos y pulsa Simular.';
+    cuotaSinSeguro.textContent = '—';
+    fechaPrimerPago.textContent = '—';
     for (const tasa of tasas) {
       const salida = document.getElementById('resultado-' + tasa);
       salida.textContent = '—';
@@ -773,8 +747,10 @@ input[type="date"] { display: block; width: 100%; text-align: left; }
   formulario.addEventListener('change', alEditar);
 
   formulario.addEventListener('reset', function () {
+    campoFecha.defaultValue = hoyEnPeru();
     for (const control of controles) marcarError(control, false);
     limpiarResultados();
+    mostrarCronograma(false);
     document.getElementById('vista-pagos').checked = true;
     seccionCronograma.dataset.vista = 'pagos';
     contenedorTabla.scrollLeft = 0;
